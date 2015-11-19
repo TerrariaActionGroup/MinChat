@@ -48,16 +48,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Form_Chat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Chat.Designer.cs">
+      <DependentUpon>Form_Chat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Form_login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Form_login.Designer.cs">
       <DependentUpon>Form_login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Form_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_main.Designer.cs">
+      <DependentUpon>Form_main.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Form_login.resx">
       <DependentUpon>Form_login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_main.resx">
+      <DependentUpon>Form_main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -93,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Forms_Img\1_100.gif" />
+    <Content Include="Resources\Forms_Img\background.png" />
     <Content Include="Resources\Forms_Img\Btn_exit_down.png" />
     <Content Include="Resources\Forms_Img\Btn_exit_hover.png" />
     <Content Include="Resources\Forms_Img\Btn_exit_normal.png" />

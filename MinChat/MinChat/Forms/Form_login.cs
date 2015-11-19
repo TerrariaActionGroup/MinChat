@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CCWin;
+using CCWin.SkinClass;
+using CCWin.SkinControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,55 +14,46 @@ using System.IO;
 using System.Drawing.Drawing2D;
 namespace MinChat.Forms
 {
-    public partial class Form_login : Form
+    public partial class Form_login : CCSkinMain
     {
         public Form_login()
         {
             InitializeComponent();
         }
-
-        private void Btn_exit_Click(object sender, EventArgs e)
+        #region 变量
+        /// <summary>
+        /// 主窗体
+        /// </summary>
+        Form_login main;
+        #endregion
+        #region 托盘菜单事件
+        /// <summary>
+        /// 托盘图标双击显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolShowLogin_Click(object sender, EventArgs e)
         {
-            System.Environment.Exit(0);
-        }
-
-        private void Btn_Minimized_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;  //最小化窗体
-        }
-
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Minimized)
+            if (main != null)
             {
-                this.WindowState = FormWindowState.Normal;  //还原窗体
+                main.Show();
             }
             else
             {
-                this.WindowState = FormWindowState.Minimized;  //最小化窗体
+                this.Show();
             }
         }
 
-
-        private Point offset;
-
-        private void Form_login_MouseDown(object sender, MouseEventArgs e)
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolExit_Click(object sender, EventArgs e)
         {
-            if (MouseButtons.Left != e.Button) return;
-
-            Point cur = this.PointToScreen(e.Location);
-            offset = new Point(cur.X - this.Left, cur.Y - this.Top);
+            this.Close();
         }
-
-        private void Form_login_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (MouseButtons.Left != e.Button) return;
-
-            Point cur = MousePosition;
-            this.Location = new Point(cur.X - offset.X, cur.Y - offset.Y);
-        }
-
-
+        #endregion
 
     }
 }
