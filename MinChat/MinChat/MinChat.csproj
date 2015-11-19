@@ -32,8 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSkin">
+      <HintPath>Forms\CSkin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Form_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_login.Designer.cs">
+      <DependentUpon>Form_login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Form_login.resx">
+      <DependentUpon>Form_login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -54,6 +67,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -70,11 +84,35 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Communications\" />
-    <Folder Include="Forms\" />
     <Folder Include="Libs\" />
-    <Folder Include="Resources\" />
     <Folder Include="Settings\" />
     <Folder Include="Works\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Forms_Img\1_100.gif" />
+    <Content Include="Resources\Forms_Img\Btn_exit_down.png" />
+    <Content Include="Resources\Forms_Img\Btn_exit_hover.png" />
+    <Content Include="Resources\Forms_Img\Btn_exit_normal.png" />
+    <Content Include="Resources\Forms_Img\Btn_login_Down.png" />
+    <Content Include="Resources\Forms_Img\Btn_login_Hover.png" />
+    <Content Include="Resources\Forms_Img\Btn_login_Normal.png" />
+    <Content Include="Resources\Forms_Img\Btn_min_down.png" />
+    <Content Include="Resources\Forms_Img\Btn_min_hover.png" />
+    <Content Include="Resources\Forms_Img\Btn_min_normal.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_checked_down.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_checked_hover.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_checked_normal.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_Uncheck_Down.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_Uncheck_hover.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_Uncheck_normal.png" />
+    <Content Include="Resources\Forms_Img\crab.ico" />
+    <Content Include="Resources\Forms_Img\TBox_Down_Hover.png" />
+    <Content Include="Resources\Forms_Img\TBox_Down_normal.png" />
+    <Content Include="Resources\Forms_Img\TBox_Up_Hover.png" />
+    <Content Include="Resources\Forms_Img\TBox_Up_Normal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
