@@ -35,6 +35,15 @@
     <Reference Include="CSkin">
       <HintPath>Forms\CSkin.dll</HintPath>
     </Reference>
+    <Reference Include="ESBasic">
+      <HintPath>Libs\dlls\ESBasic.dll</HintPath>
+    </Reference>
+    <Reference Include="ESFramework">
+      <HintPath>Libs\dlls\ESFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="ESFramework.Boost">
+      <HintPath>Libs\dlls\ESFramework.Boost.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -48,26 +57,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Form_Chat.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Communications\LoginHandler.cs" />
+    <Compile Include="Communications\MsgHandler.cs" />
+    <Compile Include="Forms\Form_Chat.cs" />
     <Compile Include="Forms\Form_Chat.Designer.cs">
       <DependentUpon>Form_Chat.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_login.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Form_login.cs" />
     <Compile Include="Forms\Form_login.Designer.cs">
       <DependentUpon>Form_login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_main.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Forms\Form_main.cs" />
     <Compile Include="Forms\Form_main.Designer.cs">
       <DependentUpon>Form_main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\Constant.cs" />
     <EmbeddedResource Include="Forms\Form_login.resx">
       <DependentUpon>Form_login.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,9 +104,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Communications\" />
     <Folder Include="Libs\" />
-    <Folder Include="Settings\" />
     <Folder Include="Works\" />
   </ItemGroup>
   <ItemGroup>
