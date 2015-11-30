@@ -58,7 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communications\LoginHandler.cs" />
+    <Compile Include="Communications\MBaseFileController .cs" />
+    <Compile Include="Communications\MBasicOutter.cs" />
     <Compile Include="Communications\MsgHandler.cs" />
+    <Compile Include="Communications\MsgOutter.cs" />
     <Compile Include="Forms\Form_Chat.cs" />
     <Compile Include="Forms\Form_Chat.Designer.cs">
       <DependentUpon>Form_Chat.cs</DependentUpon>
