@@ -30,13 +30,22 @@
         {
             CCWin.SkinControl.Animation animation1 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_main));
+            CCWin.SkinControl.ChatListItem chatListItem1 = new CCWin.SkinControl.ChatListItem();
+            CCWin.SkinControl.ChatListItem chatListItem2 = new CCWin.SkinControl.ChatListItem();
+            CCWin.SkinControl.ChatListItem chatListItem3 = new CCWin.SkinControl.ChatListItem();
+            CCWin.SkinControl.ChatListItem chatListItem4 = new CCWin.SkinControl.ChatListItem();
+            CCWin.SkinControl.ChatListItem chatListItem5 = new CCWin.SkinControl.ChatListItem();
+            CCWin.SkinControl.ChatListItem chatListItem6 = new CCWin.SkinControl.ChatListItem();
             this.chatListBox1 = new CCWin.SkinControl.ChatListBox();
             this.skinTabControl1 = new CCWin.SkinControl.SkinTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
+            this.chatListBox2 = new CCWin.SkinControl.ChatListBox();
+            this.chatListBox3 = new CCWin.SkinControl.ChatListBox();
             this.skinTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // chatListBox1
@@ -69,7 +78,7 @@
             animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
             animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
             animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            animation1.Padding = new System.Windows.Forms.Padding(0);
             animation1.RotateCoeff = 0F;
             animation1.RotateLimit = 0F;
             animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
@@ -82,8 +91,10 @@
             this.skinTabControl1.Controls.Add(this.tabPage1);
             this.skinTabControl1.Controls.Add(this.tabPage2);
             this.skinTabControl1.HeadBack = null;
+            this.skinTabControl1.ImgSize = new System.Drawing.Size(22, 22);
             this.skinTabControl1.ImgTxtOffset = new System.Drawing.Point(0, 0);
-            this.skinTabControl1.ItemSize = new System.Drawing.Size(70, 36);
+            this.skinTabControl1.ItemSize = new System.Drawing.Size(137, 36);
+            this.skinTabControl1.ItemStretch = true;
             this.skinTabControl1.Location = new System.Drawing.Point(0, 85);
             this.skinTabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.skinTabControl1.Name = "skinTabControl1";
@@ -102,6 +113,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chatListBox2);
             this.tabPage1.Controls.Add(this.chatListBox1);
             this.tabPage1.Location = new System.Drawing.Point(0, 36);
             this.tabPage1.Name = "tabPage1";
@@ -113,10 +125,11 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.chatListBox3);
             this.tabPage2.Location = new System.Drawing.Point(0, 36);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(272, 64);
+            this.tabPage2.Size = new System.Drawing.Size(278, 264);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -134,6 +147,82 @@
             this.skinPanel1.NormlBack = null;
             this.skinPanel1.Size = new System.Drawing.Size(278, 23);
             this.skinPanel1.TabIndex = 1;
+            // 
+            // chatListBox2
+            // 
+            this.chatListBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.chatListBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chatListBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatListBox2.ForeColor = System.Drawing.Color.Black;
+            this.chatListBox2.FriendsMobile = true;
+            chatListItem1.Bounds = new System.Drawing.Rectangle(0, 1, 272, 25);
+            chatListItem1.IsTwinkleHide = false;
+            chatListItem1.OwnerChatListBox = this.chatListBox2;
+            chatListItem1.Tag = null;
+            chatListItem1.Text = "Item";
+            chatListItem1.TwinkleSubItemNumber = 0;
+            chatListItem2.Bounds = new System.Drawing.Rectangle(0, 27, 272, 25);
+            chatListItem2.IsTwinkleHide = false;
+            chatListItem2.OwnerChatListBox = this.chatListBox2;
+            chatListItem2.Tag = null;
+            chatListItem2.Text = "Item";
+            chatListItem2.TwinkleSubItemNumber = 0;
+            chatListItem3.Bounds = new System.Drawing.Rectangle(0, 53, 272, 25);
+            chatListItem3.IsTwinkleHide = false;
+            chatListItem3.OwnerChatListBox = this.chatListBox2;
+            chatListItem3.Tag = null;
+            chatListItem3.Text = "Item";
+            chatListItem3.TwinkleSubItemNumber = 0;
+            this.chatListBox2.Items.AddRange(new CCWin.SkinControl.ChatListItem[] {
+            chatListItem1,
+            chatListItem2,
+            chatListItem3});
+            this.chatListBox2.ListSubItemMenu = null;
+            this.chatListBox2.Location = new System.Drawing.Point(3, 3);
+            this.chatListBox2.Name = "chatListBox2";
+            this.chatListBox2.SelectSubItem = null;
+            this.chatListBox2.Size = new System.Drawing.Size(272, 258);
+            this.chatListBox2.SubItemMenu = null;
+            this.chatListBox2.TabIndex = 1;
+            this.chatListBox2.Text = "chatListBox2";
+            // 
+            // chatListBox3
+            // 
+            this.chatListBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.chatListBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chatListBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatListBox3.ForeColor = System.Drawing.Color.Black;
+            this.chatListBox3.FriendsMobile = true;
+            chatListItem4.Bounds = new System.Drawing.Rectangle(0, 1, 272, 25);
+            chatListItem4.IsTwinkleHide = false;
+            chatListItem4.OwnerChatListBox = this.chatListBox3;
+            chatListItem4.Tag = null;
+            chatListItem4.Text = "Item";
+            chatListItem4.TwinkleSubItemNumber = 0;
+            chatListItem5.Bounds = new System.Drawing.Rectangle(0, 27, 272, 25);
+            chatListItem5.IsTwinkleHide = false;
+            chatListItem5.OwnerChatListBox = this.chatListBox3;
+            chatListItem5.Tag = null;
+            chatListItem5.Text = "Item";
+            chatListItem5.TwinkleSubItemNumber = 0;
+            chatListItem6.Bounds = new System.Drawing.Rectangle(0, 53, 272, 25);
+            chatListItem6.IsTwinkleHide = false;
+            chatListItem6.OwnerChatListBox = this.chatListBox3;
+            chatListItem6.Tag = null;
+            chatListItem6.Text = "Item";
+            chatListItem6.TwinkleSubItemNumber = 0;
+            this.chatListBox3.Items.AddRange(new CCWin.SkinControl.ChatListItem[] {
+            chatListItem4,
+            chatListItem5,
+            chatListItem6});
+            this.chatListBox3.ListSubItemMenu = null;
+            this.chatListBox3.Location = new System.Drawing.Point(3, 3);
+            this.chatListBox3.Name = "chatListBox3";
+            this.chatListBox3.SelectSubItem = null;
+            this.chatListBox3.Size = new System.Drawing.Size(272, 258);
+            this.chatListBox3.SubItemMenu = null;
+            this.chatListBox3.TabIndex = 0;
+            this.chatListBox3.Text = "chatListBox3";
             // 
             // Form_main
             // 
@@ -176,6 +265,7 @@
             this.TopMost = true;
             this.skinTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -187,5 +277,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private CCWin.SkinControl.SkinPanel skinPanel1;
+        private CCWin.SkinControl.ChatListBox chatListBox2;
+        private CCWin.SkinControl.ChatListBox chatListBox3;
     }
 }

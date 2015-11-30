@@ -30,7 +30,6 @@ $RECYCLE.BIN/
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -63,7 +62,6 @@ $RECYCLE.BIN/
 *.lo
 
 # Shared objects (inc. Windows DLLs)
-*.dll
 *.so
 *.so.*
 *.dylib
