@@ -85,6 +85,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constant.cs" />
+    <EmbeddedResource Include="Forms\Form_Chat.resx">
+      <DependentUpon>Form_Chat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_login.resx">
       <DependentUpon>Form_login.cs</DependentUpon>
     </EmbeddedResource>
