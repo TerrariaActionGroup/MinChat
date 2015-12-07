@@ -9,6 +9,6 @@ namespace MinChat.Settings
     class Constant
     {
         public static string serverIP = "127.0.0.1";
-        public static int serverPort = 1000;
+        public static int serverPort = 4530;
     }
 }

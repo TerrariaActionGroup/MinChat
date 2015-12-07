@@ -27,7 +27,7 @@ namespace MinChat.Forms
         /// <param name="sourceUserID">发出信息的用户ID。如果为null，表示信息来自服务端。</param>
         /// <param name="informationType">自定义信息类型</param>
         /// <param name="info">信息</param>
-        void HandleInformation(string sourceUserID, int informationType, byte[] info) { }
+        public void HandleInformation(string sourceUserID, int informationType, byte[] info) { }
 
         /// <summary>
         /// 处理接收到的请求并返回应答信息。
@@ -36,7 +36,7 @@ namespace MinChat.Forms
         /// <param name="informationType">自定义请求信息的类型</param>  
         /// <param name="info">请求信息</param>
         /// <returns>应答信息</returns>
-        byte[] HandleQuery(string sourceUserID, int informationType, byte[] info) { return new byte[1]; }
+        public byte[] HandleQuery(string sourceUserID, int informationType, byte[] info) { return new byte[1]; }
 
 
     }

@@ -23,7 +23,7 @@ namespace MinChat
             Form_main mainForm = new Form_main();
             Form_login loginForm = new Form_login(rapidPassiveEngine, mainForm); //在LoginForm中初始化客户端引擎RapidPassiveEngine
 
-            Application.Run(new Form_login(rapidPassiveEngine, mainForm));
+            Application.Run(loginForm);
         }
     }
 }
