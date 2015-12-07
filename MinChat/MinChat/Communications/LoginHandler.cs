@@ -28,9 +28,13 @@ namespace MinChat.Communications
             this.rapidPassiveEngine = engine;
             this.customizeHandler = handler;
         }
-
-        /*登录的方法
-         *参数：经过检验的账号，密码*/
+        /// <summary>
+        /// /*登录的方法
+        /// /*参数：经过检验的账号，密码*/
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="pwd"></param>
+        
         public LogonResult login(string userID, string pwd)
         {
             //一个枚举类型，登录的标志，数字类型

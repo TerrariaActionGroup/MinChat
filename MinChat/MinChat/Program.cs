@@ -1,4 +1,5 @@
-﻿using MinChat.Forms;
+﻿using ESPlus.Rapid;
+using MinChat.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,12 @@ namespace MinChat
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_login());
+
+            IRapidPassiveEngine rapidPassiveEngine = ESPlus.Rapid.RapidEngineFactory.CreatePassiveEngine();
+            Form_main mainForm = new Form_main();
+            Form_login loginForm = new Form_login(rapidPassiveEngine, mainForm); //在LoginForm中初始化客户端引擎RapidPassiveEngine
+
+            Application.Run(new Form_login(rapidPassiveEngine, mainForm));
         }
     }
 }

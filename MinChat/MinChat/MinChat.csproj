@@ -61,14 +61,6 @@
   <ItemGroup>
     <Compile Include="Communications\Initialize.cs" />
     <Compile Include="Communications\LoginHandler.cs" />
-    <Compile Include="Communications\MBaseFileController .cs" />
-    <Compile Include="Communications\MBasicOutter.cs" />
-    <Compile Include="Communications\MFileOutter.cs" />
-    <Compile Include="Communications\MFriendsOutter.cs" />
-    <Compile Include="Communications\MGroupOutter.cs" />
-    <Compile Include="Communications\MP2PController.cs" />
-    <Compile Include="Communications\MsgHandler.cs" />
-    <Compile Include="Communications\MsgOutter.cs" />
     <Compile Include="Forms\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>

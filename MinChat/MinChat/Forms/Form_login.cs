@@ -12,19 +12,55 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
+using MinChat.Communications;
+using ESPlus.Rapid;
+using ESPlus.Application.CustomizeInfo;
+using ESPlus.Application.Basic;
+
 namespace MinChat.Forms
 {
     public partial class Form_login : CCSkinMain
-    {
-        public Form_login()
-        {
-            InitializeComponent();
-        }
+    {   
         #region 变量
         /// <summary>
         /// 主窗体
         /// </summary>
         Form_login main;
+
+        /// <summary>
+        /// 登陆处理器
+        /// </summary>
+        LoginHandler lghandler;
+        #endregion     
+        
+        public Form_login(IRapidPassiveEngine rapidPassiveEngine, ICustomizeHandler customizeHandler)
+        {
+            lghandler = new LoginHandler(rapidPassiveEngine, customizeHandler);
+            InitializeComponent();
+        }   
+        #region 登陆事件
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLogin_MouseClick(object sender, MouseEventArgs e)
+        {
+            LogonResult logonResult;
+            logonResult=lghandler.login(this.txtId.Text, this.txtPwd.Text);
+
+            if (logonResult == LogonResult.Failed)
+            {
+                //MessageBox.Show("用户名或密码错误！");
+                return;
+            }
+
+            if (logonResult == LogonResult.HadLoggedOn)
+            {
+                //MessageBox.Show("已经在其它地方登陆！");
+                return;
+            }
+        }
         #endregion
         #region 托盘菜单事件
         /// <summary>
@@ -54,6 +90,8 @@ namespace MinChat.Forms
             this.Close();
         }
         #endregion
+
+
 
     }
 }
