@@ -18,77 +18,22 @@ namespace MinChat.Communications
 {
     class MsgHandler : ICustomizeHandler
     {
-        private string userID;
-        private IRapidPassiveEngine rapidPassiveEngine;
-
-
-        #region ICustomizeHandler 实现 -- 处理接收到的自定义信息
         /// <summary>
-        ///  处理消息,如果sourceUserID为null， 则表示是服务端发送过来的消息；如果sourceUserID不为null， 则表示是其他客户端发送过来的消息
-        /// </summary>       
-        public void HandleInformation(string sourceUserID, int informationType, byte[] info)
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new CbGeneric<string, int, byte[]>(this.HandleInformation), sourceUserID, informationType, info);
-            }
-            else
-            {
-                if (sourceUserID != null)
-                {
-                    if (informationType == InformationTypes.Chat)
-                    {
-                        ChatForm form = this.chatFormManager.GetForm(sourceUserID);
-                        if (form == null)
-                        {
-                            form = new ChatForm(this.userID, sourceUserID, this.rapidPassiveEngine.CustomizeOutter, this.rapidPassiveEngine.FileOutter);
-                            this.chatFormManager.Add(form);
-                            form.Show();
-                        }
+        /// 处理接收到的信息（包括大数据块信息）。
+        /// </summary>
+        /// <param name="sourceUserID">发出信息的用户ID。如果为null，表示信息来自服务端。</param>
+        /// <param name="informationType">自定义信息类型</param>
+        /// <param name="info">信息</param>
+        void HandleInformation(string sourceUserID, int informationType, byte[] info);
 
-                        form.Focus();
-
-                        form.ShowOtherTextChat(sourceUserID, System.Text.Encoding.UTF8.GetString(info));
-                    }
-                    if (informationType == InformationTypes.SendBlob)
-                    {
-                        string msg = System.Text.Encoding.UTF8.GetString(info);
-                        this.ShowMessage(msg);
-                    }
-                }
-                else
-                {
-                    if (informationType == InformationTypes.ServerSendToClient)
-                    {
-                        string msg = System.Text.Encoding.UTF8.GetString(info);
-                        MessageBox.Show(string.Format("收到服务端的消息：{0}", msg));
-                    }
-                }
-            }
-        }
-
-        public byte[] HandleQuery(string sourceUserID, int informationType, byte[] info)
-        {
-            if (sourceUserID != null)//客户端同步调用
-            {
-                if (informationType == InformationTypes.ClientCallClient)
-                {
-                    this.ShowMessage(string.Format("收到好友{0}的同步调用请求，立即回复", sourceUserID));
-                    return System.Text.Encoding.UTF8.GetBytes(this.userID + "已经收到你的同步调用请求！");
-                }
-            }
-            else//服务端同步调用
-            {
-                if (informationType == InformationTypes.ServerCallClient)
-                {
-                    this.ShowMessage("收到服务端的同步调用请求，立即回复");
-                    return System.Text.Encoding.UTF8.GetBytes(this.userID + "已经收到来自服务端的同步调用请求！");
-                }
-            }
-            return null;
-        }
-
-        #endregion
+        /// <summary>
+        /// 处理接收到的请求并返回应答信息。
+        /// </summary>
+        /// <param name="sourceUserID">发送请求信息的用户ID。如果为null，表示信息来自服务端。</param>     
+        /// <param name="informationType">自定义请求信息的类型</param>  
+        /// <param name="info">请求信息</param>
+        /// <returns>应答信息</returns>
+        byte[] HandleQuery(string sourceUserID, int informationType, byte[] info);
     }
 
 }
