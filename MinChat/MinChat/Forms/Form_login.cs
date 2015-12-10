@@ -25,8 +25,8 @@ namespace MinChat.Forms
         /// <summary>
         /// 主窗体
         /// </summary>
-        Form_login main;
-
+        Form_login login;
+        Form_main main;
         /// <summary>
         /// 登陆处理器
         /// </summary>
@@ -60,7 +60,7 @@ namespace MinChat.Forms
                 MessageBox.Show("已经在其它地方登陆！");
                 return;
             }
-            MessageBox.Show("已经在其它地方登陆！");
+            this.DialogResult = DialogResult.OK; 
         }
         #endregion
         #region 托盘菜单事件
@@ -71,9 +71,9 @@ namespace MinChat.Forms
         /// <param name="e"></param>
         private void toolShowLogin_Click(object sender, EventArgs e)
         {
-            if (main != null)
+            if (login != null)
             {
-                main.Show();
+                login.Show();
             }
             else
             {

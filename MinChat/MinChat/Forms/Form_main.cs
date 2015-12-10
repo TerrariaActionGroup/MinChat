@@ -1,6 +1,7 @@
 ﻿using CCWin;
 using CCWin.SkinClass;
 using CCWin.SkinControl;
+using CCWin.Win32;
 using ESPlus.Application;
 using ESPlus.Application.CustomizeInfo;
 using System;
@@ -16,11 +17,19 @@ using System.Windows.Forms;
 namespace MinChat.Forms
 {
     public partial class Form_main : CCSkinMain,ICustomizeHandler
-    {
+    {        
+        #region 变量
+        /// <summary>
+        /// ID
+        /// </summary>
+        string ID;//用户的ID
+        Form_main main;
+        #endregion     
         public Form_main()
         {
             InitializeComponent();
         }
+        #region 引擎接口实现
         /// <summary>
         /// 处理接收到的信息（包括大数据块信息）。
         /// </summary>
@@ -37,6 +46,35 @@ namespace MinChat.Forms
         /// <param name="info">请求信息</param>
         /// <returns>应答信息</returns>
         public byte[] HandleQuery(string sourceUserID, int informationType, byte[] info) { return new byte[1]; }
+        #endregion
+
+        #region 双击好友弹窗对话框
+        private void chatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
+        {
+            if (es.Button == MouseButtons.Right)
+            {
+                return;
+            }
+            ChatListSubItem item = e.SelectSubItem;
+            item.IsTwinkle = false;
+
+            //bool isFormexist;
+            string windowsName = "与 " + item.NicName + " 对话中";
+            IntPtr handle = NativeMethods.FindWindow(null, windowsName);
+            if (handle != IntPtr.Zero)
+            {
+                Form frm = (Form)Form.FromHandle(handle);
+                frm.Activate();
+            }
+            else
+            {
+                //ipSend为从列表中取出，要发送的对象的IP
+                Form_Chat fChat = new Form_Chat(item);
+                fChat.Text = "与 " + item.NicName + " 对话中";
+                fChat.Show();
+            }
+        }
+        #endregion
 
 
     }

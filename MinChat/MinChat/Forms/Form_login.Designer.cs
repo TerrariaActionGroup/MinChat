@@ -69,7 +69,8 @@
             this.txtId.IconMouseState = CCWin.SkinClass.ControlState.Normal;
             this.txtId.IsPasswordChat = '\0';
             this.txtId.IsSystemPasswordChar = false;
-            this.txtId.Lines = new string[0];
+            this.txtId.Lines = new string[] {
+        "aa01"};
             this.txtId.Location = new System.Drawing.Point(134, 195);
             this.txtId.Margin = new System.Windows.Forms.Padding(0);
             this.txtId.MaxLength = 32767;
@@ -94,9 +95,11 @@
             this.txtId.SkinTxt.Name = "BaseText";
             this.txtId.SkinTxt.Size = new System.Drawing.Size(184, 20);
             this.txtId.SkinTxt.TabIndex = 0;
+            this.txtId.SkinTxt.Text = "aa01";
             this.txtId.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.SkinTxt.WaterText = "QQ号码/手机/邮箱";
             this.txtId.TabIndex = 9;
+            this.txtId.Text = "aa01";
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.WaterText = "QQ号码/手机/邮箱";
@@ -124,7 +127,8 @@
             this.txtPwd.IconMouseState = CCWin.SkinClass.ControlState.Normal;
             this.txtPwd.IsPasswordChat = '\0';
             this.txtPwd.IsSystemPasswordChar = false;
-            this.txtPwd.Lines = new string[0];
+            this.txtPwd.Lines = new string[] {
+        "10000"};
             this.txtPwd.Location = new System.Drawing.Point(134, 225);
             this.txtPwd.Margin = new System.Windows.Forms.Padding(0);
             this.txtPwd.MaxLength = 32767;
@@ -149,9 +153,11 @@
             this.txtPwd.SkinTxt.Name = "BaseText";
             this.txtPwd.SkinTxt.Size = new System.Drawing.Size(184, 20);
             this.txtPwd.SkinTxt.TabIndex = 0;
+            this.txtPwd.SkinTxt.Text = "10000";
             this.txtPwd.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.SkinTxt.WaterText = "密码";
             this.txtPwd.TabIndex = 1;
+            this.txtPwd.Text = "10000";
             this.txtPwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtPwd.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.WaterText = "密码";
@@ -187,7 +193,7 @@
             this.pnlImgTx.Margin = new System.Windows.Forms.Padding(0);
             this.pnlImgTx.MouseBack = null;
             this.pnlImgTx.Name = "pnlImgTx";
-            this.pnlImgTx.NormlBack = null;
+            this.pnlImgTx.NormlBack = ((System.Drawing.Image)(resources.GetObject("pnlImgTx.NormlBack")));
             this.pnlImgTx.Radius = 4;
             this.pnlImgTx.RoundStyle = CCWin.SkinClass.RoundStyle.All;
             this.pnlImgTx.Size = new System.Drawing.Size(80, 80);
@@ -221,17 +227,17 @@
             this.ckAuto.BackColor = System.Drawing.Color.Transparent;
             this.ckAuto.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.ckAuto.DefaultCheckButtonWidth = 13;
-            this.ckAuto.DownBack = null;
+            this.ckAuto.DownBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.DownBack")));
             this.ckAuto.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ckAuto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(101)))), ((int)(((byte)(101)))));
             this.ckAuto.LightEffect = false;
             this.ckAuto.Location = new System.Drawing.Point(254, 261);
-            this.ckAuto.MouseBack = null;
+            this.ckAuto.MouseBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.MouseBack")));
             this.ckAuto.Name = "ckAuto";
-            this.ckAuto.NormlBack = null;
-            this.ckAuto.SelectedDownBack = null;
-            this.ckAuto.SelectedMouseBack = null;
-            this.ckAuto.SelectedNormlBack = null;
+            this.ckAuto.NormlBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.NormlBack")));
+            this.ckAuto.SelectedDownBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.SelectedDownBack")));
+            this.ckAuto.SelectedMouseBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.SelectedMouseBack")));
+            this.ckAuto.SelectedNormlBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.SelectedNormlBack")));
             this.ckAuto.Size = new System.Drawing.Size(75, 21);
             this.ckAuto.TabIndex = 15;
             this.ckAuto.Text = "自动登录";
@@ -243,17 +249,17 @@
             this.ckMen.BackColor = System.Drawing.Color.Transparent;
             this.ckMen.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.ckMen.DefaultCheckButtonWidth = 13;
-            this.ckMen.DownBack = null;
+            this.ckMen.DownBack = ((System.Drawing.Image)(resources.GetObject("ckMen.DownBack")));
             this.ckMen.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ckMen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(101)))), ((int)(((byte)(101)))));
             this.ckMen.LightEffect = false;
             this.ckMen.Location = new System.Drawing.Point(134, 261);
-            this.ckMen.MouseBack = null;
+            this.ckMen.MouseBack = ((System.Drawing.Image)(resources.GetObject("ckMen.MouseBack")));
             this.ckMen.Name = "ckMen";
-            this.ckMen.NormlBack = null;
-            this.ckMen.SelectedDownBack = null;
-            this.ckMen.SelectedMouseBack = null;
-            this.ckMen.SelectedNormlBack = null;
+            this.ckMen.NormlBack = ((System.Drawing.Image)(resources.GetObject("ckMen.NormlBack")));
+            this.ckMen.SelectedDownBack = ((System.Drawing.Image)(resources.GetObject("ckMen.SelectedDownBack")));
+            this.ckMen.SelectedMouseBack = ((System.Drawing.Image)(resources.GetObject("ckMen.SelectedMouseBack")));
+            this.ckMen.SelectedNormlBack = ((System.Drawing.Image)(resources.GetObject("ckMen.SelectedNormlBack")));
             this.ckMen.Size = new System.Drawing.Size(75, 21);
             this.ckMen.TabIndex = 16;
             this.ckMen.Text = "记住密码";
@@ -464,6 +470,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_login";
+            this.TopMost = true;
             this.txtId.ResumeLayout(false);
             this.txtId.PerformLayout();
             this.pnlImgTx.ResumeLayout(false);
