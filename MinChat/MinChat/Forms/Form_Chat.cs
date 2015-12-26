@@ -1,6 +1,7 @@
 ﻿using CCWin;
 using CCWin.SkinClass;
 using CCWin.SkinControl;
+using ESPlus.Rapid;
 using MinChat.Communications;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,22 @@ namespace MinChat.Forms
         /// 文本格式
         /// </summary>
         private Font messageFont = new Font("微软雅黑", 9);
+        
+        /// <summary>
+        /// 对象信息
+        /// </summary>
+        ChatListSubItem QQUser;
+
+        /// <summary>
+        /// 客户端引擎
+        /// </summary>
+        IRapidPassiveEngine rapidPassiveEngine;
 
         #endregion
-        public Form_Chat(ChatListSubItem QQUser)
+        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine,ChatListSubItem QQUser)
         {
+            this.QQUser = QQUser;
+            this.rapidPassiveEngine = rapidPassiveEngine;
             InitializeComponent();
         }
         #region 发送消息封装
@@ -112,7 +125,8 @@ namespace MinChat.Forms
         {
             ChatBoxContent content = this.chatBoxSend.GetContent();
             //将内容更新到上方面板
-            this.AppendChatBoxContent("学霸hu", null, content, Color.SeaGreen, false);
+            this.AppendChatBoxContent("sb学霸hu", null, content, Color.SeaGreen, false);
+            this.rapidPassiveEngine.CustomizeOutter.Send(this.QQUser.ID.ToString(), 1, System.Text.Encoding.ASCII.GetBytes(content.Text));
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
             this.chatBoxSend.Focus();

@@ -23,11 +23,6 @@ namespace MinChat.Forms
     {   
         #region 变量
         /// <summary>
-        /// 主窗体
-        /// </summary>
-        Form_login login;
-        Form_main main;
-        /// <summary>
         /// 登陆处理器
         /// </summary>
         LoginHandler lghandler;
@@ -71,14 +66,7 @@ namespace MinChat.Forms
         /// <param name="e"></param>
         private void toolShowLogin_Click(object sender, EventArgs e)
         {
-            if (login != null)
-            {
-                login.Show();
-            }
-            else
-            {
-                this.Show();
-            }
+            this.Show();
         }
 
         /// <summary>
@@ -88,11 +76,10 @@ namespace MinChat.Forms
         /// <param name="e"></param>
         private void toolExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
+            this.DialogResult = DialogResult.Abort; 
+
         }
         #endregion
-
-
-
     }
 }

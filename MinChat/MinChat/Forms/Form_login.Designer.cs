@@ -467,7 +467,6 @@
             this.Radius = 2;
             this.ShowBorder = false;
             this.ShowDrawIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "Form_login";
             this.TopMost = true;
             this.txtId.ResumeLayout(false);

@@ -21,12 +21,17 @@ namespace MinChat
 
             IRapidPassiveEngine rapidPassiveEngine = ESPlus.Rapid.RapidEngineFactory.CreatePassiveEngine();
             Form_main mainForm = new Form_main();
+
             Form_login loginForm = new Form_login(rapidPassiveEngine, mainForm); //在LoginForm中初始化客户端引擎RapidPassiveEngine
-            if(loginForm.ShowDialog() != DialogResult.OK)
+            mainForm.InitMain(rapidPassiveEngine);
+            if (loginForm.ShowDialog() != DialogResult.OK)
             {
-                return;
+
             }
-            Application.Run(mainForm);
+            else
+            {
+                Application.Run(mainForm);
+            }
         }
     }
 }
