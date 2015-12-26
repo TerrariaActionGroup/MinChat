@@ -19,7 +19,7 @@ using ESPlus.Application.Basic;
 
 namespace MinChat.Forms
 {
-    public partial class Form_login : CCSkinMain
+    public partial class Form_login : Skin_Mac
     {   
         #region 变量
         /// <summary>

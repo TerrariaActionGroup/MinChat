@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace MinChat.Forms
 {
-    public partial class Form_Chat : CCSkinMain
+    public partial class Form_Chat : Skin_Mac
     {
         #region 变量
         /// <summary>

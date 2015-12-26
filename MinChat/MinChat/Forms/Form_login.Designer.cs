@@ -71,7 +71,7 @@
             this.txtId.IsSystemPasswordChar = false;
             this.txtId.Lines = new string[] {
         "aa01"};
-            this.txtId.Location = new System.Drawing.Point(134, 195);
+            this.txtId.Location = new System.Drawing.Point(69, 174);
             this.txtId.Margin = new System.Windows.Forms.Padding(0);
             this.txtId.MaxLength = 32767;
             this.txtId.MinimumSize = new System.Drawing.Size(28, 28);
@@ -129,7 +129,7 @@
             this.txtPwd.IsSystemPasswordChar = false;
             this.txtPwd.Lines = new string[] {
         "10000"};
-            this.txtPwd.Location = new System.Drawing.Point(134, 225);
+            this.txtPwd.Location = new System.Drawing.Point(69, 204);
             this.txtPwd.Margin = new System.Windows.Forms.Padding(0);
             this.txtPwd.MaxLength = 32767;
             this.txtPwd.MinimumSize = new System.Drawing.Size(28, 28);
@@ -172,7 +172,7 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(135, 288);
+            this.btnLogin.Location = new System.Drawing.Point(70, 267);
             this.btnLogin.MouseBack = ((System.Drawing.Image)(resources.GetObject("btnLogin.MouseBack")));
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.NormlBack = ((System.Drawing.Image)(resources.GetObject("btnLogin.NormlBack")));
@@ -189,7 +189,7 @@
             this.pnlImgTx.Controls.Add(this.btnState);
             this.pnlImgTx.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.pnlImgTx.DownBack = null;
-            this.pnlImgTx.Location = new System.Drawing.Point(44, 195);
+            this.pnlImgTx.Location = new System.Drawing.Point(122, 58);
             this.pnlImgTx.Margin = new System.Windows.Forms.Padding(0);
             this.pnlImgTx.MouseBack = null;
             this.pnlImgTx.Name = "pnlImgTx";
@@ -231,7 +231,7 @@
             this.ckAuto.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ckAuto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(101)))), ((int)(((byte)(101)))));
             this.ckAuto.LightEffect = false;
-            this.ckAuto.Location = new System.Drawing.Point(254, 261);
+            this.ckAuto.Location = new System.Drawing.Point(189, 236);
             this.ckAuto.MouseBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.MouseBack")));
             this.ckAuto.Name = "ckAuto";
             this.ckAuto.NormlBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.NormlBack")));
@@ -253,7 +253,7 @@
             this.ckMen.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ckMen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(101)))), ((int)(((byte)(101)))));
             this.ckMen.LightEffect = false;
-            this.ckMen.Location = new System.Drawing.Point(134, 261);
+            this.ckMen.Location = new System.Drawing.Point(69, 236);
             this.ckMen.MouseBack = ((System.Drawing.Image)(resources.GetObject("ckMen.MouseBack")));
             this.ckMen.Name = "ckMen";
             this.ckMen.NormlBack = ((System.Drawing.Image)(resources.GetObject("ckMen.NormlBack")));
@@ -434,19 +434,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Back = ((System.Drawing.Image)(resources.GetObject("$this.Back")));
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(178)))), ((int)(((byte)(213)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.BackShade = false;
             this.BackToColor = false;
             this.BorderColor = System.Drawing.Color.Transparent;
             this.CanResize = false;
-            this.CaptionHeight = 30;
-            this.ClientSize = new System.Drawing.Size(430, 330);
+            this.CaptionHeight = 26;
+            this.ClientSize = new System.Drawing.Size(330, 330);
             this.CloseBoxSize = new System.Drawing.Size(30, 30);
             this.CloseDownBack = ((System.Drawing.Image)(resources.GetObject("$this.CloseDownBack")));
             this.CloseMouseBack = ((System.Drawing.Image)(resources.GetObject("$this.CloseMouseBack")));
             this.CloseNormlBack = ((System.Drawing.Image)(resources.GetObject("$this.CloseNormlBack")));
             this.ControlBoxOffset = new System.Drawing.Point(0, 0);
+            this.ControlBoxSpace = 0;
             this.Controls.Add(this.ckMen);
             this.Controls.Add(this.ckAuto);
             this.Controls.Add(this.pnlImgTx);
@@ -468,7 +468,6 @@
             this.ShowBorder = false;
             this.ShowDrawIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_login";
             this.TopMost = true;
             this.txtId.ResumeLayout(false);
