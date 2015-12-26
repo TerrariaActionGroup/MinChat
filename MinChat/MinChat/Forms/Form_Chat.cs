@@ -118,5 +118,11 @@ namespace MinChat.Forms
             this.chatBoxSend.Focus();
         }
         #endregion
+
+        private void chatBox_history_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -67,6 +67,7 @@
             this.chatBox_history.Size = new System.Drawing.Size(540, 290);
             this.chatBox_history.TabIndex = 2;
             this.chatBox_history.Text = "";
+            this.chatBox_history.TextChanged += new System.EventHandler(this.chatBox_history_TextChanged);
             // 
             // btnSend
             // 
