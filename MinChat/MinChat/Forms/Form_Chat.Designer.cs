@@ -46,7 +46,7 @@
             this.chatBoxSend.Location = new System.Drawing.Point(7, 392);
             this.chatBoxSend.Name = "chatBoxSend";
             this.chatBoxSend.PopoutImageWhenDoubleClick = false;
-            this.chatBoxSend.Size = new System.Drawing.Size(540, 75);
+            this.chatBoxSend.Size = new System.Drawing.Size(554, 75);
             this.chatBoxSend.TabIndex = 1;
             this.chatBoxSend.Text = "";
             // 
@@ -64,7 +64,7 @@
             this.chatBox_history.Name = "chatBox_history";
             this.chatBox_history.PopoutImageWhenDoubleClick = false;
             this.chatBox_history.ReadOnly = true;
-            this.chatBox_history.Size = new System.Drawing.Size(540, 290);
+            this.chatBox_history.Size = new System.Drawing.Size(554, 290);
             this.chatBox_history.TabIndex = 2;
             this.chatBox_history.Text = "";
             this.chatBox_history.TextChanged += new System.EventHandler(this.chatBox_history_TextChanged);
@@ -76,8 +76,9 @@
             this.btnSend.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(159)))), ((int)(((byte)(215)))));
             this.btnSend.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnSend.DownBack = ((System.Drawing.Image)(resources.GetObject("btnSend.DownBack")));
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSend.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSend.Location = new System.Drawing.Point(485, 476);
+            this.btnSend.Location = new System.Drawing.Point(497, 478);
             this.btnSend.Margin = new System.Windows.Forms.Padding(0);
             this.btnSend.MouseBack = ((System.Drawing.Image)(resources.GetObject("btnSend.MouseBack")));
             this.btnSend.Name = "btnSend";
@@ -95,12 +96,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(158)))), ((int)(((byte)(225)))));
-            this.ClientSize = new System.Drawing.Size(685, 510);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.ClientSize = new System.Drawing.Size(568, 510);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.chatBox_history);
             this.Controls.Add(this.chatBoxSend);
             this.Name = "Form_Chat";
+            this.ShowDrawIcon = false;
             this.Text = "Form_Chat";
             this.ResumeLayout(false);
 
