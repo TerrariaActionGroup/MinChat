@@ -43,12 +43,14 @@
             this.chatBoxSend.ContextMenuMode = CCWin.SkinControl.ChatBoxContextMenuMode.None;
             this.chatBoxSend.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.chatBoxSend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.chatBoxSend.ImeMode = System.Windows.Forms.ImeMode.On;
             this.chatBoxSend.Location = new System.Drawing.Point(7, 392);
             this.chatBoxSend.Name = "chatBoxSend";
             this.chatBoxSend.PopoutImageWhenDoubleClick = false;
             this.chatBoxSend.Size = new System.Drawing.Size(554, 75);
             this.chatBoxSend.TabIndex = 1;
             this.chatBoxSend.Text = "";
+            this.chatBoxSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.chatBoxSend_KeyPress);
             // 
             // chatBox_history
             // 
@@ -97,6 +99,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ClientSize = new System.Drawing.Size(568, 510);
+            this.ControlBoxSpace = 0;
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.chatBox_history);
             this.Controls.Add(this.chatBoxSend);

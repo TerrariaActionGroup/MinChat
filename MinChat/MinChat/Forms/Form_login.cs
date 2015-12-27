@@ -78,7 +78,6 @@ namespace MinChat.Forms
         {
             //this.Close();
             this.DialogResult = DialogResult.Abort; 
-
         }
         #endregion
     }

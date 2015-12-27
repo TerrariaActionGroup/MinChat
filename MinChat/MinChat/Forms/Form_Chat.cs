@@ -121,7 +121,7 @@ namespace MinChat.Forms
         }
         #endregion
         #region 发送信息
-        private void btnSend_Click(object sender, EventArgs e)
+        private void send()
         {
             ChatBoxContent content = this.chatBoxSend.GetContent();
             //将内容更新到上方面板
@@ -131,6 +131,22 @@ namespace MinChat.Forms
             this.chatBoxSend.Text = string.Empty;
             this.chatBoxSend.Focus();
         }
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            send();
+        }
         #endregion
+
+        private void chatBoxSend_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                send();
+            }
+        }
+
+
+
+
     }
 }
