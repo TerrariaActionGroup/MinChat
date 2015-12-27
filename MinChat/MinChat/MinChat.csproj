@@ -59,8 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communications\Initialize.cs" />
-    <Compile Include="Communications\LoginHandler.cs" />
+    <Compile Include="Communications\Msg.cs" />
+    <Compile Include="Communications\Session.cs" />
     <Compile Include="Forms\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>
