@@ -21,40 +21,43 @@ namespace MinChat.Forms
     public partial class Form_main : Skin_Mac,ICustomizeHandler
     {        
         #region 变量
-        /// <summary>
-        /// 用户的ID
-        /// </summary>
-        string ID;//用户的ID
-        /// <summary>
-        /// 用户的昵称
-        /// </summary>
-        string name;
-        /// <summary>
-        /// 用户的状态
-        /// </summary>
-        string status;
-        /// <summary>
-        /// 客户端引擎
-        /// </summary>
-        IRapidPassiveEngine rapidPassiveEngine;
+        //ChatListSubItem UserItem { get; set; }//好友列表
+        public ChatListSubItem myInfo;//客户端用户的个人信息
+        IRapidPassiveEngine rapidPassiveEngine;// 客户端引擎
         #endregion     
+        #region 窗口构造函数
         public Form_main()
         {
-            
             InitializeComponent();
-            //InitMain();
         }
+        #endregion
+        #region 初始化窗口时
         public void InitMain(IRapidPassiveEngine rapidPassiveEngine)
         {
+            if(this.myInfo==null)
+            {
+                this.myInfo = new ChatListSubItem();
+            }
             this.rapidPassiveEngine = rapidPassiveEngine;
+            this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
             //加载分组
-            //ChatListItem gp = new ChatListItem();//new一个分组
-            //chatListBox.Items.Add(gp);//添加到list中
+            ChatListItem gp = new ChatListItem();//new一个分组
+            gp.Text = "TestList";
+            ChatListSubItem people = new ChatListSubItem();
+            people.ID = 10086;//ID
+            people.NicName = "ID3055";//昵称
+            people.DisplayName = "X";//备注名
+            people.PersonalMsg = "买买买买买";
+            gp.SubItems.Add(people);
+            //chatListBox_contacts.GetSubItemsById();//按照ID查找listbox中的用户
+
+            chatListBox_contacts.Items.Add(gp);//添加到listBox中
+
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
         }
 
-
+        #endregion
         #region 处理广播消息
         void GroupOutter_BroadcastReceived(string broadcastID, string groupID, int broadcastType, byte[] broadcastContent)
         {
@@ -79,7 +82,8 @@ namespace MinChat.Forms
         { 
             if(sourceUserID!=null)
             {
-                MessageBox.Show("收到消息");
+                //MessageBox.Show("收到消息");
+                twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));
             }
         }
 
@@ -102,7 +106,7 @@ namespace MinChat.Forms
             ChatListSubItem item = e.SelectSubItem;//获取选中的好友
 
             item.IsTwinkle = false; //取消头像闪烁状态
-            string windowsName = "与 " + item.NicName + " 对话中";//聊天窗口的标题
+            string windowsName = item.NicName + ' ' + item.ID;//聊天窗口的标题
             IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
             if (handle != IntPtr.Zero)//窗口已存在，激活
             {
@@ -111,13 +115,93 @@ namespace MinChat.Forms
             }
             else//窗口不存在，new
             {
-                Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine,item);
-                fChat.Text = "与 " + item.NicName + " 对话中";
+                Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine,item,this.myInfo.NicName);
+                fChat.Text =item.NicName+' '+item.ID;
                 fChat.Show();
             }
         }
         #endregion
+        #region 处理接收消息
+        //头像闪烁
+        private void twinkle(ChatListBox listBox,uint id)
+        {
+            ChatListSubItem[] items=listBox.GetSubItemsById(id);//按照ID查找listbox中的用户
+            items[0].IsTwinkle = true;//开启闪烁
+        }
 
+        #endregion
+        //#region 好友列表悬浮头像时
+        //private Form_userInfo userInfo;
+        //private void chatShow_MouseEnterHead(object sender, ChatListEventArgs e)
+        //{
+        //    if (userInfo == null || userInfo.IsDisposed)//不存在就new一个
+        //    {
+        //        userInfo = new Form_userInfo();
+        //    }
+        //    //定位
+        //    int top = this.Top + this.chatTab.Top + this.chatTab.ItemSize.Height + (e.MouseOnSubItem.HeadRect.Y - this.chatListBox_contacts.chatVScroll.Value);
+        //    int left = this.Left - 279 - 5;
+        //    int ph = Screen.GetWorkingArea(this).Height;
 
+        //    if (top + 181 > ph)
+        //    {
+        //        top = ph - 181 - 5;
+        //    }
+
+        //    if (left < 0)
+        //    {
+        //        left = this.Right + 5;
+        //    }
+        //    userInfo.IsFMove = false;
+        //    this.userInfo.Item = e.MouseOnSubItem;
+        //    this.userInfo.SetUserData(e.MouseOnSubItem, new Point(left, top));
+        //    this.userInfo.Show();
+        //}
+        //#endregion
+        //#region 好友列表离开头像时
+        //private void chatShow_MouseLeaveHead(object sender, ChatListEventArgs e)
+        //{
+        //    if (userInfo != null && !userInfo.IsDisposed)
+        //    {
+        //        userInfo.IsFMove = true;
+        //    }
+        //}
+        //#endregion
+        //#region Q名悬浮离开时信息框
+        ////悬浮时
+        //private void lblName_MouseHover(object sender, EventArgs e)
+        //{
+        //    if (userInfo == null || userInfo.IsDisposed)
+        //    {
+        //        userInfo = new Form_userInfo();
+        //    }
+        //    int top = this.Top + lbl_userName.Top;
+        //    int left = this.Left - 279 - 5;
+        //    int ph = Screen.GetWorkingArea(this).Height;
+
+        //    if (top + 181 > ph)
+        //    {
+        //        top = ph - 181 - 5;
+        //    }
+
+        //    if (left < 0)
+        //    {
+        //        left = this.Right + 5;
+        //    }
+        //    userInfo.IsFMove = false;
+        //    this.userInfo.Item = UserItem;
+        //    this.userInfo.SetUserData(UserItem, new Point(left, top));
+        //    this.userInfo.Show();
+        //}
+
+        ////离开时
+        //private void lblName_MouseLeave(object sender, EventArgs e)
+        //{
+        //    if (userInfo != null && !userInfo.IsDisposed)
+        //    {
+        //        userInfo.IsFMove = true;
+        //    }
+        //}
+        //#endregion
     }
 }

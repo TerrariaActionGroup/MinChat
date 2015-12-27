@@ -33,14 +33,15 @@ namespace MinChat.Forms
         /// </summary>
         Form_main _main;
         #endregion     
-        
+        #region 窗口构造函数
         public Form_login(IRapidPassiveEngine rapidPassiveEngine,Form_main formMain)
         {
             this.engine = rapidPassiveEngine;
             this._main = formMain;
 
             InitializeComponent();
-        }   
+        }
+        #endregion
         #region 登陆事件
         /// <summary>
         /// 登陆
@@ -88,7 +89,6 @@ namespace MinChat.Forms
             this.DialogResult = DialogResult.Abort; 
         }
         #endregion
-
         #region 登录方法
         /// <summary>
         /// </summary>

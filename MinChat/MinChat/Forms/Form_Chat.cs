@@ -29,17 +29,25 @@ namespace MinChat.Forms
         ChatListSubItem QQUser;
 
         /// <summary>
+        /// 用户userName
+        /// </summary>
+        string userName;
+
+        /// <summary>
         /// 客户端引擎
         /// </summary>
         IRapidPassiveEngine rapidPassiveEngine;
 
         #endregion
-        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine,ChatListSubItem QQUser)
+        #region 窗口构造函数
+        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine,ChatListSubItem QQUser,string userName)
         {
+            this.userName = userName;
             this.QQUser = QQUser;
             this.rapidPassiveEngine = rapidPassiveEngine;
             InitializeComponent();
         }
+        #endregion
         #region 发送消息封装
         /// <summary>
         /// 发送信息文本到内容框
@@ -124,20 +132,18 @@ namespace MinChat.Forms
         private void send()
         {
             ChatBoxContent content = this.chatBoxSend.GetContent();
-            //将内容更新到上方面板
-            this.AppendChatBoxContent("sb学霸hu", null, content, Color.SeaGreen, false);
-            this.rapidPassiveEngine.CustomizeOutter.Send("aa02", 1, System.Text.Encoding.ASCII.GetBytes(content.Text));
+            if (content.Text != "" && content.Text != "\n")
+            {
+                //将内容更新到上方面板
+                this.AppendChatBoxContent(userName, null, content, Color.SeaGreen, false);
+                //发送信息
+                this.rapidPassiveEngine.CustomizeOutter.Send("aa02", 1, System.Text.Encoding.ASCII.GetBytes(content.Text));
+            }
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
             this.chatBoxSend.Focus();
+            
         }
-        private void btnSend_Click(object sender, EventArgs e)
-        {
-            send();
-        }
-        #endregion
-
-<<<<<<< HEAD
         private void chatBoxSend_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Keys)e.KeyChar == Keys.Enter)
@@ -145,15 +151,10 @@ namespace MinChat.Forms
                 send();
             }
         }
-
-
-
-=======
-        private void chatBox_history_TextChanged(object sender, EventArgs e)
+        private void btnSend_Click(object sender, EventArgs e)
         {
-
+            send();
         }
->>>>>>> 2e7ebb01c3da006db8cbed36fb65c91a63d41c42
-
+        #endregion
     }
 }

@@ -70,7 +70,7 @@
             this.txtId.IsPasswordChat = '\0';
             this.txtId.IsSystemPasswordChar = false;
             this.txtId.Lines = new string[] {
-        "aa01"};
+        "305562393"};
             this.txtId.Location = new System.Drawing.Point(69, 174);
             this.txtId.Margin = new System.Windows.Forms.Padding(0);
             this.txtId.MaxLength = 32767;
@@ -95,11 +95,11 @@
             this.txtId.SkinTxt.Name = "BaseText";
             this.txtId.SkinTxt.Size = new System.Drawing.Size(184, 20);
             this.txtId.SkinTxt.TabIndex = 0;
-            this.txtId.SkinTxt.Text = "aa01";
+            this.txtId.SkinTxt.Text = "305562393";
             this.txtId.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.SkinTxt.WaterText = "QQ号码/手机/邮箱";
             this.txtId.TabIndex = 9;
-            this.txtId.Text = "aa01";
+            this.txtId.Text = "305562393";
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.WaterText = "QQ号码/手机/邮箱";

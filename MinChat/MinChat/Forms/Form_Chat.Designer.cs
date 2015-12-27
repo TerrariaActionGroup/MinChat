@@ -69,7 +69,6 @@
             this.chatBox_history.Size = new System.Drawing.Size(554, 290);
             this.chatBox_history.TabIndex = 2;
             this.chatBox_history.Text = "";
-            this.chatBox_history.TextChanged += new System.EventHandler(this.chatBox_history_TextChanged);
             // 
             // btnSend
             // 
@@ -108,7 +107,6 @@
             this.ShowDrawIcon = false;
             this.Text = "Form_Chat";
             this.ResumeLayout(false);
-
         }
 
         #endregion
