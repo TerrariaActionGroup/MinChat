@@ -126,7 +126,7 @@ namespace MinChat.Forms
             ChatBoxContent content = this.chatBoxSend.GetContent();
             //将内容更新到上方面板
             this.AppendChatBoxContent("sb学霸hu", null, content, Color.SeaGreen, false);
-            this.rapidPassiveEngine.CustomizeOutter.Send(this.QQUser.ID.ToString(), 1, System.Text.Encoding.ASCII.GetBytes(content.Text));
+            this.rapidPassiveEngine.CustomizeOutter.Send("aa02", 1, System.Text.Encoding.ASCII.GetBytes(content.Text));
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
             this.chatBoxSend.Focus();

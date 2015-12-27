@@ -50,10 +50,8 @@ namespace MinChat.Forms
             //加载分组
             //ChatListItem gp = new ChatListItem();//new一个分组
             //chatListBox.Items.Add(gp);//添加到list中
-
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
-        
         
         }
 
@@ -73,13 +71,6 @@ namespace MinChat.Forms
         #endregion
 
 
-
-
-
-
-
-
-
         #region 引擎接口实现
         /// <summary>
         /// 处理接收到的信息（包括大数据块信息）。
@@ -91,7 +82,7 @@ namespace MinChat.Forms
         { 
             if(sourceUserID!=null)
             {
-                //chatListBox.Items.
+                MessageBox.Show("收到消息");
             }
         }
 
