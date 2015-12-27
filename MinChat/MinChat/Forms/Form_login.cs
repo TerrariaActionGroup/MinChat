@@ -16,6 +16,7 @@ using MinChat.Communications;
 using ESPlus.Rapid;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Application.Basic;
+using MinChat.Settings;
 
 namespace MinChat.Forms
 {
@@ -23,14 +24,21 @@ namespace MinChat.Forms
     {   
         #region 变量
         /// <summary>
-        /// 登陆处理器
+        /// 客户端引擎
         /// </summary>
-        LoginHandler lghandler;
+        IRapidPassiveEngine engine;
+
+        /// <summary>
+        /// 自定义消息处理器
+        /// </summary>
+        Form_main _main;
         #endregion     
         
-        public Form_login(IRapidPassiveEngine rapidPassiveEngine, ICustomizeHandler customizeHandler)
+        public Form_login(IRapidPassiveEngine rapidPassiveEngine,Form_main formMain)
         {
-            lghandler = new LoginHandler(rapidPassiveEngine, customizeHandler);
+            this.engine = rapidPassiveEngine;
+            this._main = formMain;
+
             InitializeComponent();
         }   
         #region 登陆事件
@@ -42,7 +50,7 @@ namespace MinChat.Forms
         private void btnLogin_MouseClick(object sender, MouseEventArgs e)
         {
             LogonResult logonResult;
-            logonResult=lghandler.login(this.txtId.Text, this.txtPwd.Text);
+            logonResult=login(this.txtId.Text, this.txtPwd.Text);
 
             if (logonResult == LogonResult.Failed)
             {
@@ -80,5 +88,40 @@ namespace MinChat.Forms
             this.DialogResult = DialogResult.Abort; 
         }
         #endregion
+
+        #region 登录方法
+        /// <summary>
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="pwd"></param>
+        public LogonResult login(string userID, string pwd)
+        {
+            //一个枚举类型，登录的标志，数字类型
+            LogonResult logonResult = LogonResult.Succeed;
+
+            try
+            {
+                //系统标志。引擎在初始化时会提交给服务器验证客户端是否是正确的系统
+                this.engine.SystemToken = "";
+
+                /*初始化引擎并登录，返回登录结果。如果登陆成功，引擎将与当前用户绑定,如果连接失败，则抛出异常
+                 *完成客户端引擎的初始化，与服务器建立TCP连接，连接成功后立即验证用户密码。。
+                 *参数1：当前登录的用户ID
+                 *参数2：用户登陆密码
+                 *参数3：服务器的IP地址
+                 *参数4：服务器的端口       
+                 *参数5：自定义处理器customizeHandler，用于处理服务器或其它用户发送过来的消息*/
+                logonResult = this.engine.Initialize(userID, pwd, Constant.serverIP, Constant.serverPort, this._main).LogonResult;
+            }
+            catch (Exception ee)
+            {
+                //MessageBox.Show(string.Format("连接服务器失败。{0}", ee.Message));
+                //return;
+            }
+            return logonResult;
+        }
+        #endregion
     }
 }
+
+
