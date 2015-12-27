@@ -6,6 +6,8 @@ using ESBasic;
 using ESPlus.Application;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Rapid;
+using MinChat.Communications;
+using MinChat.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -82,7 +84,13 @@ namespace MinChat.Forms
         { 
             if(sourceUserID!=null)
             {
-                //MessageBox.Show("收到消息");
+                //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                string message = System.Text.Encoding.UTF8.GetString(info);
+                //得到含有5个元素的数组
+                string[] msgs = message.Split(Constant.SPLIT);
+                Msg msg = new Msg(msgs, 1, 0);
+               
+
                 twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));
             }
         }
