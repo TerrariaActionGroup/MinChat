@@ -6,6 +6,8 @@ using ESBasic;
 using ESPlus.Application;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Rapid;
+using MinChat.Communications;
+using MinChat.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -82,6 +84,7 @@ namespace MinChat.Forms
         { 
             if(sourceUserID!=null)
             {
+<<<<<<< HEAD
                 //MessageBox.Show("收到消息");
                 ChatListSubItem[] items=chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的用户
                 string windowsName = items[0].NicName + ' ' + items[0].ID;//聊天窗口的标题
@@ -98,6 +101,16 @@ namespace MinChat.Forms
                     twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));
                 }
                 
+=======
+                //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                string message = System.Text.Encoding.UTF8.GetString(info);
+                //得到含有5个元素的数组
+                string[] msgs = message.Split(Constant.SPLIT);
+                Msg msg = new Msg(msgs, 1, 0);
+               
+
+                twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));
+>>>>>>> 25f1bd1a7bf558886a9142a0a79aaddab2cba91a
             }
         }
 
