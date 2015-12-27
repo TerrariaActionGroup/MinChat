@@ -24,9 +24,9 @@ namespace MinChat.Forms
         private Font messageFont = new Font("微软雅黑", 9);
         
         /// <summary>
-        /// 对象信息
+        /// 聊天对象信息
         /// </summary>
-        ChatListSubItem QQUser;
+        ChatListSubItem item;
 
         /// <summary>
         /// 用户userName
@@ -40,10 +40,11 @@ namespace MinChat.Forms
 
         #endregion
         #region 窗口构造函数
-        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine,ChatListSubItem QQUser,string userName)
+        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine, ChatListSubItem item, string userName, Form_main main)
         {
+            main.Receive += new Form_main.ReceiveEventHandler(ChatHandleReceive);//注册收到信息时的事件处理程序ChatHandleReceive
             this.userName = userName;
-            this.QQUser = QQUser;
+            this.item = item;
             this.rapidPassiveEngine = rapidPassiveEngine;
             InitializeComponent();
         }
@@ -156,5 +157,11 @@ namespace MinChat.Forms
             send();
         }
         #endregion
+        void ChatHandleReceive(object sender, EventArgs e, string str)//处理事件的程序
+        {
+            ChatBoxContent content = new ChatBoxContent();
+            content.Text = str;
+            this.AppendChatBoxContent(item.NicName, null, content, Color.SeaGreen, false);
+        }
     }
 }

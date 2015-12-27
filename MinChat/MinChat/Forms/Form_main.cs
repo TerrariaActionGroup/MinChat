@@ -83,7 +83,21 @@ namespace MinChat.Forms
             if(sourceUserID!=null)
             {
                 //MessageBox.Show("收到消息");
-                twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));
+                ChatListSubItem[] items=chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的用户
+                string windowsName = items[0].NicName + ' ' + items[0].ID;//聊天窗口的标题
+                IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
+                if (handle != IntPtr.Zero)//如果聊天窗口已存在
+                {
+                    Form frm = (Form)Form.FromHandle(handle);//激活
+                    frm.Activate();
+
+                    this.OnReceive("aaa");//传送消息
+                }
+                else//聊天窗口不存在
+                {
+                    twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));
+                }
+                
             }
         }
 
@@ -115,7 +129,7 @@ namespace MinChat.Forms
             }
             else//窗口不存在，new
             {
-                Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine,item,this.myInfo.NicName);
+                Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine,item,this.myInfo.NicName,this);
                 fChat.Text =item.NicName+' '+item.ID;
                 fChat.Show();
             }
@@ -128,8 +142,19 @@ namespace MinChat.Forms
             ChatListSubItem[] items=listBox.GetSubItemsById(id);//按照ID查找listbox中的用户
             items[0].IsTwinkle = true;//开启闪烁
         }
-
         #endregion
+        public delegate void ReceiveEventHandler(object sender, EventArgs e, string str);//声明关于事件的委托
+        public event ReceiveEventHandler Receive;//声明事件
+        //引发事件的函数；
+        public void OnReceive(string str)
+        {
+            if (this.Receive != null)
+            {
+                //MessageBox.Show("发出信号");
+                this.Receive(this, new EventArgs(), str);
+            }
+        }
+
         //#region 好友列表悬浮头像时
         //private Form_userInfo userInfo;
         //private void chatShow_MouseEnterHead(object sender, ChatListEventArgs e)
