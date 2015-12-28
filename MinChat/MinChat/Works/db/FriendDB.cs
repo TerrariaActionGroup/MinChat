@@ -35,15 +35,15 @@ address varchar(100), time date, mGroupId integer);";
         }
         public bool addFriend(Friend fr){
             string cmdString = "INSERT TO friend VALUES("+
-                fr.userId+","+
-                fr.userName+","+
-                fr.sex+","+
-                fr.age+","+
-                fr.birthday+","+
-                fr.remark+","+
-                fr.address+","+
-                fr.time+","+
-                fr.mGroupId+");";
+                fr.UserId+","+
+                fr.UserName+","+
+                fr.Sex+","+
+                fr.Age+","+
+                fr.Birthday+","+
+                fr.Remark+","+
+                fr.Address+","+
+                fr.Time+","+
+                fr.MGroupId+");";
             SQLiteCommand cmdAddFriend = new SQLiteCommand(cmdString, conn);
             cmdAddFriend.ExecuteNonQuery();
             cmdAddFriend.Dispose();
