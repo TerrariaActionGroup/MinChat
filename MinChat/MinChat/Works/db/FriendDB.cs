@@ -9,6 +9,7 @@ namespace MinChat.Works.db
 {
     class FriendDB
     {
+        protected string userId;
         protected SQLiteConnection conn;
         protected static FriendDB uniqueInstance;
         public static FriendDB OpenDB(string userId)
@@ -21,6 +22,8 @@ namespace MinChat.Works.db
         }
         public FriendDB(string userId)
         {
+            this.userId = userId; 
+
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/friend.db";
             conn = new SQLiteConnection(dbPath);
             string cmdString = "CREATE TABLE IF NOT EXISTS friend(userId varchar(20), userName varchar(40), sex integer, age integer, birthday date, remark varchar(40), address varchar(100), time date, mGroupId integer);";

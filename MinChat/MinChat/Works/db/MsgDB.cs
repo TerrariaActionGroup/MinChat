@@ -10,6 +10,7 @@ namespace MinChat.Works.db
 {
     class MsgDB
     {
+        protected string userId;
         protected SQLiteConnection conn;
         protected static MsgDB uniqueInstance;
         #region 获取数据库
@@ -34,7 +35,8 @@ namespace MinChat.Works.db
         /// <param name="userId">用户ID</param>
         private MsgDB(string userId)
         {
-            string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/group.db";
+            this.userId = userId; 
+            string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/msg.db";
             conn = new SQLiteConnection(dbPath);
             string cmdString = @"CREATE TABLE IF NOT EXISTS msg(msgId integer,sessionId integer, senderId varchar(20), receiverId varchar(20), senderName varchar(40), type integer,
 content text, isComing integer, date time, isRead integer, bak1 text, bak2 text, bak3 text, bak4 text, bak5 text, bak6 text);";
@@ -112,7 +114,7 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
             sqlInsertMsg.Dispose();
             return true;
         }
-        public bool deleteMsg(int senderId)
+        public bool deleteMsg(string senderId)
         {
             string cmdString = "DELETE FROM msg WHERE senderId = " + senderId + ");";
             SQLiteCommand sqlInsertMsg = new SQLiteCommand(cmdString, conn);

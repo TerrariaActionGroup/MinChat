@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using MinChat.Communications;
+using MinChat.Works.db;
 
 namespace MinChat.Works.db
 {
     class SessionDB
     {
-
+        protected string userId;
         protected SQLiteConnection conn;
         protected static SessionDB uniqueInstance;
         public static SessionDB OpenSessionDB(string userId)
@@ -23,10 +24,11 @@ namespace MinChat.Works.db
         }
         public SessionDB(string userId)
         {
-            string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/group.db";
+            this.userId = userId; 
+            string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/session.db";
             conn = new SQLiteConnection(dbPath);
-            string cmdString = @"CREATE TABLE IF NOT EXISTS session(sessionId integer, senderId varchar(20), senderName varchar(40), type varchar(40),
-content text, date time, notReadCount integer,receiverId varchar(20),isDispose integer);";
+            string cmdString = @"CREATE TABLE IF NOT EXISTS session(sessionId integer, senderId varchar(20), senderName varchar(40), type integer,
+content text, date time, notReadMsg text,receiverId varchar(20),isDispose integer);";
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
@@ -37,10 +39,10 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
                 ss.getId() + "," +
                 ss.getFrom() + "," +
                 ss.getFrom_user() + "," +
-                ss.getType() + "," +
+                ss.type + "," +
                 ss.getContent() + "," +
                 ss.date + "," +
-                ss.getNotReadCount() + "," +
+                ss.notReadMsg + "," +
                 ss.getTo() + "," +
                 ss.getIsdispose() + "," +
                 ");";
@@ -60,11 +62,16 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
             return true;
         }
         #endregion
-        //public bool readMsg(int sessionId)
-        //{
+        #region 标记会话消息为已读
+        public bool readSessionMsg(int sessionId)
+        {
+            MsgDB msgdb = MsgDB.OpenMsgDB(userId);
+            msgdb.readMsg(sessionId);
+            msgdb.Close();
 
-        //    return true;
-        //}
+            return true;
+        }
+        #endregion
         public void Close()
         {
             if (null != conn)

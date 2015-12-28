@@ -11,7 +11,17 @@ namespace MinChat.Communications
         private String id;
         private String from;		//发送人
         private String from_user;   //发送人可识别名字
-        private String type;		//消息类型
+        public int type		//消息类型
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
         private String time;		//接收时间
         private String content;		//发送内容
         public String date
@@ -25,7 +35,17 @@ namespace MinChat.Communications
                 date = value;
             }
         }
-        private String notReadCount;//未读记录
+        public String notReadMsg//未读记录
+        {
+            get
+            {
+                return notReadMsg;
+            }
+            set
+            {
+                notReadMsg = value;
+            }
+        }
         private String to;		    //接收人
         private String isdispose;//是否已处理 0未处理，1已处理
 
@@ -44,14 +64,6 @@ namespace MinChat.Communications
         public void setFrom(String from)
         {
             this.from = from;
-        }
-        public String getType()
-        {
-            return type;
-        }
-        public void setType(String type)
-        {
-            this.type = type;
         }
         public String getTime()
         {

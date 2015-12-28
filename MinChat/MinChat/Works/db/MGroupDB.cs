@@ -9,6 +9,7 @@ namespace MinChat.Works.db
 {
     class MGroupDB
     {
+        protected string userId;
         protected SQLiteConnection conn;
         protected static MGroupDB uniqueInstance;
         public static MGroupDB OpenDB(string userId)
@@ -21,6 +22,8 @@ namespace MinChat.Works.db
         }
         public MGroupDB(string userId)
         {
+            this.userId = userId; 
+
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/mgroup.db";
             conn = new SQLiteConnection(dbPath);
             string cmdString = "CREATE TABLE IF NOT EXISTS mgroup(mGroupId integer, mGroupName varchar(40), num integer);";
