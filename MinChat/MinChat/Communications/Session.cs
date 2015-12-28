@@ -14,6 +14,17 @@ namespace MinChat.Communications
         private String type;		//消息类型
         private String time;		//接收时间
         private String content;		//发送内容
+        public String date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+            }
+        }
         private String notReadCount;//未读记录
         private String to;		    //接收人
         private String isdispose;//是否已处理 0未处理，1已处理

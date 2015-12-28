@@ -91,6 +91,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constant.cs" />
+    <Compile Include="Works\db\AvatorDB.cs" />
     <Compile Include="Works\db\FriendDB.cs" />
     <Compile Include="Works\db\GroupDB.cs" />
     <Compile Include="Works\db\MGroupDB.cs" />

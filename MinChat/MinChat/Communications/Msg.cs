@@ -9,6 +9,17 @@ namespace MinChat.Communications
     public class Msg
     {
         private int msgId;             //id
+        public int sessionId           //sid
+        {
+            get
+            {
+                return sessionId;
+            }
+            set
+            {
+                sessionId = value;
+            }
+        }
         private String fromUser;       //发送者Id
         private String toUser;         //接收者Id
         private String fromUserName;   //发送者名字

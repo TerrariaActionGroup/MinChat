@@ -28,7 +28,7 @@ namespace MinChat.Works.db
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
         }
-        public bool addFriend(string friendId){
+        public bool addFriend(User u){
             //getUser();
             return true;
         }
