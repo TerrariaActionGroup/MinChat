@@ -49,8 +49,16 @@ namespace MinChat.Forms
         /// <param name="e"></param>
         private void btnLogin_MouseClick(object sender, MouseEventArgs e)
         {
+            login();
+        }
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            login();
+        }
+        private void login()
+        {
             LogonResult logonResult;
-            logonResult=login(this.txtId.Text, this.txtPwd.Text);
+            logonResult = login(this.txtId.Text, this.txtPwd.Text);
 
             if (logonResult == LogonResult.Failed)
             {
@@ -120,6 +128,8 @@ namespace MinChat.Forms
             return logonResult;
         }
         #endregion
+
+
     }
 }
 

@@ -107,6 +107,7 @@
             this.ShowDrawIcon = false;
             this.Text = "Form_Chat";
             this.ResumeLayout(false);
+
         }
 
         #endregion

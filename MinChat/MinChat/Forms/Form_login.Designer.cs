@@ -98,12 +98,13 @@
             this.txtId.SkinTxt.Text = "305562393";
             this.txtId.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.SkinTxt.WaterText = "QQ号码/手机/邮箱";
+            this.txtId.SkinTxt.WordWrap = false;
             this.txtId.TabIndex = 9;
             this.txtId.Text = "305562393";
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.WaterText = "QQ号码/手机/邮箱";
-            this.txtId.WordWrap = true;
+            this.txtId.WordWrap = false;
             // 
             // skinAlphaWaterTextBox1
             // 
@@ -156,12 +157,13 @@
             this.txtPwd.SkinTxt.Text = "10000";
             this.txtPwd.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.SkinTxt.WaterText = "密码";
+            this.txtPwd.SkinTxt.WordWrap = false;
             this.txtPwd.TabIndex = 1;
             this.txtPwd.Text = "10000";
             this.txtPwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtPwd.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.WaterText = "密码";
-            this.txtPwd.WordWrap = true;
+            this.txtPwd.WordWrap = false;
             // 
             // btnLogin
             // 
@@ -180,6 +182,7 @@
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "登 陆";
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             this.btnLogin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLogin_MouseClick);
             // 
             // pnlImgTx
@@ -432,6 +435,7 @@
             // 
             // Form_login
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));

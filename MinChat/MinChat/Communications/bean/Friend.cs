@@ -8,10 +8,17 @@ namespace MinChat.Communications.bean
 {
     class Friend
     {
-        
-
+        private string userId;
+        private string userName;
+        private int sex;
+        private int age;
+        private string birthday;
+        private string remark;
+        private string address;
+        private string time;
+        private int mGroupId;
         #region
-        public string userId             //用户账号
+        public string UserId             //用户账号
         {             
             get{
                 return userId;
@@ -21,7 +28,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public string userName           //用户昵称
+        public string UserName           //用户昵称
         {          
             get
             {
@@ -32,7 +39,7 @@ namespace MinChat.Communications.bean
                 userName = value;
             }
         }
-        public int sex
+        public int Sex
         {
             get
             {
@@ -43,7 +50,7 @@ namespace MinChat.Communications.bean
                 sex = value;
             }
         }
-        public int age
+        public int Age
         {
             get
             {
@@ -54,7 +61,7 @@ namespace MinChat.Communications.bean
                 age = value;
             }
         }
-        public string birthday
+        public string Birthday
         {
             get
             {
@@ -65,7 +72,7 @@ namespace MinChat.Communications.bean
                 birthday = value;
             }
         }
-        public string remark
+        public string Remark
         {
             get
             {
@@ -76,7 +83,7 @@ namespace MinChat.Communications.bean
                 remark = value;
             }
         }
-        public string address
+        public string Address
         {
             get
             {
@@ -87,7 +94,7 @@ namespace MinChat.Communications.bean
                 address = value;
             }
         }
-        public string time              //用户建立好友时间
+        public string Time              //用户建立好友时间
         {
             get
             {
@@ -98,7 +105,7 @@ namespace MinChat.Communications.bean
                 time = value;
             }
         }
-        public int mGroupId             //好友分组Id
+        public int MGroupId             //好友分组Id
         {
             get
             {

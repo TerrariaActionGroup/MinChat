@@ -77,22 +77,22 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
         public bool addMsg(Msg m)
         {
             string cmdString = @"INSERT TO msg VALUES (" +
-                m.msgId + "," +
-                m.sessionId + "," +
-                m.fromUser + "," +
-                m.toUser + "," +
-                m.fromUserName + "," +
-                m.type + "," +
-                m.content + "," +
-                m.isComing + "," +
-                m.date + "," + "," +
-                m.isReaded + "," +
-                m.bak1 + "," +
-                m.bak2 + "," +
-                m.bak3 + "," +
-                m.bak4 + "," +
-                m.bak5 + "," +
-                m.bak6 + "," +
+                m.MsgId + "," +
+                m.SessionId + "," +
+                m.FromUser + "," +
+                m.ToUser + "," +
+                m.FromUserName + "," +
+                m.Type + "," +
+                m.Content + "," +
+                m.IsComing + "," +
+                m.Date + "," + "," +
+                m.IsReaded + "," +
+                m.Bak1 + "," +
+                m.Bak2 + "," +
+                m.Bak3 + "," +
+                m.Bak4 + "," +
+                m.Bak5 + "," +
+                m.Bak6 + "," +
                 ");";
             SQLiteCommand sqlAddMsg = new SQLiteCommand(cmdString, conn);
             sqlAddMsg.ExecuteNonQuery();

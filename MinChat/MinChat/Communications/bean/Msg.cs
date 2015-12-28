@@ -8,7 +8,23 @@ namespace MinChat.Communications
 {
     public class Msg
     {
-        public int msgId             //id
+        private int msgId;
+        private int sessionId;
+        private String fromUser;
+        private String toUser;
+        private String fromUserName;
+        private int type;
+        private String content;
+        private int isComing;
+        private String date;
+        private int isReaded;
+        private String bak1;
+        private String bak2;
+        private String bak3;
+        private String bak4;
+        private String bak5;
+        private String bak6;
+        public int MsgId             //id
         {
             get
             {
@@ -19,8 +35,7 @@ namespace MinChat.Communications
                 msgId = value;
             }
         }
-    
-        public int sessionId           //sid
+        public int SessionId           //sid
         {
             get
             {
@@ -31,7 +46,7 @@ namespace MinChat.Communications
                 sessionId = value;
             }
         }
-        public String fromUser       //发送者Id
+        public String FromUser       //发送者Id
         {
             get
             {
@@ -42,7 +57,7 @@ namespace MinChat.Communications
                 fromUser = value;
             }
         }
-        public String toUser         //接收者Id
+        public String ToUser         //接收者Id
         {
             get
             {
@@ -53,7 +68,7 @@ namespace MinChat.Communications
                 toUser = value;
             }
         }
-        public String fromUserName   //发送者名字
+        public String FromUserName   //发送者名字
         {
             get
             {
@@ -64,7 +79,7 @@ namespace MinChat.Communications
                 fromUserName = value;
             }
         }
-        public int type              //信息类型
+        public int Type              //信息类型
         {
             get
             {
@@ -75,7 +90,7 @@ namespace MinChat.Communications
                 type = value;
             }
         }
-        public String content        //信息内容
+        public String Content        //信息内容
         {
             get
             {
@@ -86,7 +101,7 @@ namespace MinChat.Communications
                 content = value;
             }
         }
-        public int isComing          //0表接收的消息，1表发送的消息
+        public int IsComing          //0表接收的消息，1表发送的消息
         {
             get
             {
@@ -97,7 +112,7 @@ namespace MinChat.Communications
                 isComing = value;
             }
         }
-        public String date           //时间
+        public String Date           //时间
         {
             get
             {
@@ -108,7 +123,7 @@ namespace MinChat.Communications
                 date = value;
             }
         }
-        public int isReaded          //是否已读 0为未读，1为已读
+        public int IsReaded          //是否已读 0为未读，1为已读
         {
             get
             {
@@ -119,8 +134,7 @@ namespace MinChat.Communications
                 isReaded = value;
             }
         }
-
-        public String bak1//扩展1
+        public String Bak1//扩展1
         {
             get
             {
@@ -131,7 +145,7 @@ namespace MinChat.Communications
                 bak1 = value;
             }
         }
-        public String bak2//扩展2
+        public String Bak2//扩展2
         {
             get
             {
@@ -142,7 +156,7 @@ namespace MinChat.Communications
                 bak2 = value;
             }
         }
-        public String bak3//扩展3
+        public String Bak3//扩展3
         {
             get
             {
@@ -153,7 +167,7 @@ namespace MinChat.Communications
                 bak3 = value;
             }
         }
-        public String bak4//扩展4
+        public String Bak4//扩展4
         {
             get
             {
@@ -164,7 +178,7 @@ namespace MinChat.Communications
                 bak4 = value;
             }
         }
-        public String bak5//扩展5
+        public String Bak5//扩展5
         {
             get
             {
@@ -175,7 +189,7 @@ namespace MinChat.Communications
                 bak5 = value;
             }
         }
-        public String bak6//扩展6
+        public String Bak6//扩展6
         {
             get
             {

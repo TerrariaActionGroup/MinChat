@@ -8,7 +8,17 @@ namespace MinChat.Communications
 {
     class Session
     {
-        public String id
+        private String id;
+        private String from;
+        private String from_user;
+        private int type;
+        private String time;
+        private String content;
+        private String date;
+        private int notReadCount;
+        private String to;
+        private int isdispose;
+        public String Id
         {
             get{
                 return id;
@@ -18,7 +28,7 @@ namespace MinChat.Communications
                 id = value;
             }
         }
-        public String from		    //发送人
+        public String From		    //发送人
         {
             get
             {
@@ -29,7 +39,7 @@ namespace MinChat.Communications
                 from = value;
             }
         }
-        public String from_user    //发送人可识别名字
+        public String From_user    //发送人可识别名字
         {
             get
             {
@@ -40,7 +50,7 @@ namespace MinChat.Communications
                 from_user = value;
             }
         }
-        public int type		        //消息类型
+        public int Type		        //消息类型
         {
             get
             {
@@ -51,7 +61,7 @@ namespace MinChat.Communications
                 type = value;
             }
         }
-        public String time		    //接收时间
+        public String Time		    //接收时间
         {
             get
             {
@@ -62,7 +72,7 @@ namespace MinChat.Communications
                 time = value;
             }
         }
-        public String content		//发送内容
+        public String Content		//发送内容
         {
             get
             {
@@ -74,7 +84,7 @@ namespace MinChat.Communications
             }
         }
 
-        public String date
+        public String Date
         {
             get
             {
@@ -85,7 +95,7 @@ namespace MinChat.Communications
                 date = value;
             }
         }
-        public int notReadCount    //未读记录
+        public int NotReadCount    //未读记录
         {
             get
             {
@@ -96,7 +106,7 @@ namespace MinChat.Communications
                 notReadCount = value;
             }
         }
-        public String to		    //接收人
+        public String To		    //接收人
         {
             get
             {
@@ -107,7 +117,7 @@ namespace MinChat.Communications
                 to = value;
             }
         }
-        public int isdispose      //是否已处理 0未处理，1已处理
+        public int Isdispose      //是否已处理 0未处理，1已处理
         {
             get
             {

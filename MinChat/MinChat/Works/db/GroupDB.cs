@@ -35,12 +35,12 @@ namespace MinChat.Works.db
         public bool addGroup(Group gr)
         {
             string cmdString = @"INSERT TO group VALUES (" +
-                gr.groupId + "," +
-                gr.groupName + "," +
-                gr.num + "," +
-                gr.time + "," +
-                gr.notice + "," +
-                gr.type + "," + ");";
+                gr.GroupId + "," +
+                gr.GroupName + "," +
+                gr.Num + "," +
+                gr.Time + "," +
+                gr.Notice + "," +
+                gr.Type + "," + ");";
             SQLiteCommand sqlAddGroup = new SQLiteCommand(cmdString, conn);
             sqlAddGroup.ExecuteNonQuery();
             sqlAddGroup.Dispose();
