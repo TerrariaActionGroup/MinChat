@@ -36,15 +36,15 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
         #region 添加会话
         public bool addSession(Session ss){
             string cmdString = @"INSERT TO session VALUES (" +
-                ss.id + "," +
-                ss.from + "," +
-                ss.from_user + "," +
-                ss.type + "," +
-                ss.content + "," +
-                ss.date + "," +
-                ss.notReadCount + "," +
-                ss.to + "," +
-                ss.isdispose + "," +
+                ss.Id + "," +
+                ss.From + "," +
+                ss.From_user + "," +
+                ss.Type + "," +
+                ss.Content + "," +
+                ss.Date + "," +
+                ss.NotReadCount + "," +
+                ss.To + "," +
+                ss.Isdispose + "," +
                 ");";
             SQLiteCommand sqlAddSession = new SQLiteCommand(cmdString, conn);
             sqlAddSession.ExecuteNonQuery();

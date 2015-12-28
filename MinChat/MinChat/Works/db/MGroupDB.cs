@@ -34,9 +34,9 @@ namespace MinChat.Works.db
         }
         public bool addMGroup(MGroup mg){
             string cmdString = "INSERT TO mgroup VALUES(" +
-                mg.mGroupId + "," +
-                mg.mGroupName + "," +
-                mg.num + "," + ");";
+                mg.MGroupId + "," +
+                mg.MGroupName + "," +
+                mg.Num + "," + ");";
             SQLiteCommand cmdAddMGroup = new SQLiteCommand(cmdString, conn);
             cmdAddMGroup.ExecuteNonQuery();
             cmdAddMGroup.Dispose();
