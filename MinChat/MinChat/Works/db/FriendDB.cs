@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 
-namespace MinChat.Works
+namespace MinChat.Works.db
 {
     class FriendDB
     {
@@ -28,7 +28,7 @@ namespace MinChat.Works
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
         }
-        public bool addFriend(string friendId){
+        public bool addFriend(User u){
             //getUser();
             return true;
         }

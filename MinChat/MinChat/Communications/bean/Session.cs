@@ -14,7 +14,19 @@ namespace MinChat.Communications
         private int type;		    //消息类型
         private String time;		//接收时间
         private String content;		//发送内容
-        private String notReadMsg;  //未读记录
+
+        public String date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+            }
+        }
+        private int notReadCount;//未读记录
         private String to;		    //接收人
         private int isdispose;      //是否已处理 0未处理，1已处理
 
@@ -32,7 +44,6 @@ namespace MinChat.Communications
             this.type = type;
             this.time = sessions[2];
             this.content = sessions[3];
-            this.notReadMsg = sessions[4];
             this.to = sessions[5];
             this.isdispose = isDispose;
         }
@@ -77,13 +88,13 @@ namespace MinChat.Communications
         {
             this.content = content;
         }
-        public String getNotReadMsg()
+        public int getNotReadCount()
         {
-            return notReadMsg;
+            return notReadCount;
         }
-        public void setNotReadMsg(String notReadCount)
+        public void setNotReadCount(int notReadCount)
         {
-            this.notReadMsg = notReadCount;
+            this.notReadCount = notReadCount;
         }
         public String getTo()
         {
