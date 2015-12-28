@@ -166,11 +166,16 @@ namespace MinChat.Forms
             send();
         }
         #endregion
+        #region 处理事件的程序
         void ChatHandleReceive(object sender, EventArgs e, Msg msg)//处理事件的程序
         {
-            ChatBoxContent content = new ChatBoxContent();
-            content.Text = msg.getContent();
-            this.AppendChatBoxContent(item.NicName, null, content, Color.SeaGreen, false);
+            if (Convert.ToUInt32(msg.getFromUser()) == item.ID)
+            {
+                ChatBoxContent content = new ChatBoxContent();
+                content.Text = msg.getContent();
+                this.AppendChatBoxContent(item.NicName, null, content, Color.SeaGreen, false);
+            }
         }
+        #endregion
     }
 }

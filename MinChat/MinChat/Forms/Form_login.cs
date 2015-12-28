@@ -49,8 +49,19 @@ namespace MinChat.Forms
         /// <param name="e"></param>
         private void btnLogin_MouseClick(object sender, MouseEventArgs e)
         {
+            login();
+        }
+        private void Form_login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                login();
+            }
+        }
+        private void login()
+        {
             LogonResult logonResult;
-            logonResult=login(this.txtId.Text, this.txtPwd.Text);
+            logonResult = login(this.txtId.Text, this.txtPwd.Text);
 
             if (logonResult == LogonResult.Failed)
             {

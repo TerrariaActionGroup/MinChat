@@ -22,6 +22,7 @@ namespace MinChat.Forms
         #region 窗口构造函数
         public Form_main()
         {
+            CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
         }
         #endregion
@@ -90,25 +91,24 @@ namespace MinChat.Forms
         { 
             if(sourceUserID!=null)
             {
-                //MessageBox.Show("收到消息");
-                //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                //取出收到的消息,接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                 string message = System.Text.Encoding.UTF8.GetString(info);
-                //得到含有5个元素的数组
-                string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);
-                Msg msg = new Msg(msgs, 1, 0);
+                
+                string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);//得到含有5个元素的数组
+                Msg msg = new Msg(msgs, 1, 0);//消息存在msg对象中
 
                 ChatListSubItem[] items=chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的用户
                 string windowsName = items[0].NicName + ' ' + items[0].ID;//聊天窗口的标题
                 IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
                 if (handle != IntPtr.Zero)//如果聊天窗口已存在
                 {
-                    Form frm = (Form)Form.FromHandle(handle);//激活
-                    frm.Activate();
-                    this.OnReceive(msg);//传送消息
+                    Form frm = (Form)Form.FromHandle(handle);
+                    frm.Activate();//激活
+                    this.OnReceive(msg);//传送消息到聊天窗口
                 }
                 else//聊天窗口不存在
                 {
-                    twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));
+                    twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));//头像闪烁
                 }
             }
         }
@@ -125,21 +125,16 @@ namespace MinChat.Forms
         #region 双击好友弹窗对话框
         private void chatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
-            //if (es.Button == MouseButtons.Right)
-            //{
-            //    return;
-            //}
             ChatListSubItem item = e.SelectSubItem;//获取选中的好友
-
             item.IsTwinkle = false; //取消头像闪烁状态
             string windowsName = item.NicName + ' ' + item.ID;//聊天窗口的标题
             IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
-            if (handle != IntPtr.Zero)//窗口已存在，激活
+            if (handle != IntPtr.Zero)//窗口已存在
             {
                 Form frm = (Form)Form.FromHandle(handle);
-                frm.Activate();
+                frm.Activate();//激活
             }
-            else//窗口不存在，new
+            else//窗口不存在
             {
                 Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine,item,this.myInfo,this);
                 fChat.Text =item.NicName+' '+item.ID;
@@ -155,6 +150,7 @@ namespace MinChat.Forms
             items[0].IsTwinkle = true;//开启闪烁
         }
         #endregion
+        #region 接收传送消息到chat的委托
         public delegate void ReceiveEventHandler(object sender, EventArgs e, Msg msg);//声明关于事件的委托
         public event ReceiveEventHandler Receive;//声明事件
         //引发事件的函数；
@@ -166,7 +162,7 @@ namespace MinChat.Forms
                 this.Receive(this, new EventArgs(), msg);
             }
         }
-
+        #endregion
         //#region 好友列表悬浮头像时
         //private Form_userInfo userInfo;
         //private void chatShow_MouseEnterHead(object sender, ChatListEventArgs e)

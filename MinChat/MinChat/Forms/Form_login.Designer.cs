@@ -77,7 +77,7 @@
             this.txtId.MinimumSize = new System.Drawing.Size(28, 28);
             this.txtId.MouseBack = null;
             this.txtId.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.txtId.Multiline = true;
+            this.txtId.Multiline = false;
             this.txtId.Name = "txtId";
             this.txtId.NormlBack = null;
             this.txtId.Padding = new System.Windows.Forms.Padding(5);
@@ -103,7 +103,7 @@
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.WaterText = "QQ号码/手机/邮箱";
-            this.txtId.WordWrap = true;
+            this.txtId.WordWrap = false;
             // 
             // skinAlphaWaterTextBox1
             // 
@@ -135,7 +135,7 @@
             this.txtPwd.MinimumSize = new System.Drawing.Size(28, 28);
             this.txtPwd.MouseBack = null;
             this.txtPwd.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.txtPwd.Multiline = true;
+            this.txtPwd.Multiline = false;
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.NormlBack = null;
             this.txtPwd.Padding = new System.Windows.Forms.Padding(5);
@@ -161,7 +161,7 @@
             this.txtPwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtPwd.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.WaterText = "密码";
-            this.txtPwd.WordWrap = true;
+            this.txtPwd.WordWrap = false;
             // 
             // btnLogin
             // 
@@ -469,6 +469,7 @@
             this.ShowDrawIcon = false;
             this.Text = "Form_login";
             this.TopMost = true;
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form_login_KeyPress);
             this.txtId.ResumeLayout(false);
             this.txtId.PerformLayout();
             this.pnlImgTx.ResumeLayout(false);
