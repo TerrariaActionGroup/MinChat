@@ -3,6 +3,7 @@ using CCWin.SkinClass;
 using CCWin.SkinControl;
 using ESPlus.Rapid;
 using MinChat.Communications;
+using MinChat.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,14 +25,14 @@ namespace MinChat.Forms
         private Font messageFont = new Font("微软雅黑", 9);
         
         /// <summary>
-        /// 对象信息
+        /// 聊天对象信息
         /// </summary>
-        ChatListSubItem QQUser;
+        ChatListSubItem item;
 
         /// <summary>
-        /// 用户userName
+        /// 用户user
         /// </summary>
-        string userName;
+        ChatListSubItem userItem;
 
         /// <summary>
         /// 客户端引擎
@@ -40,10 +41,11 @@ namespace MinChat.Forms
 
         #endregion
         #region 窗口构造函数
-        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine,ChatListSubItem QQUser,string userName)
+        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine, ChatListSubItem item, ChatListSubItem userItem, Form_main main)
         {
-            this.userName = userName;
-            this.QQUser = QQUser;
+            main.Receive += new Form_main.ReceiveEventHandler(ChatHandleReceive);//注册收到信息时的事件处理程序ChatHandleReceive
+            this.userItem = userItem;
+            this.item = item;
             this.rapidPassiveEngine = rapidPassiveEngine;
             InitializeComponent();
         }
@@ -135,9 +137,17 @@ namespace MinChat.Forms
             if (content.Text != "" && content.Text != "\n")
             {
                 //将内容更新到上方面板
-                this.AppendChatBoxContent(userName, null, content, Color.SeaGreen, false);
+                this.AppendChatBoxContent(userItem.NicName, null, content, Color.SeaGreen, false);
                 //发送信息
-                this.rapidPassiveEngine.CustomizeOutter.Send("aa02", 1, System.Text.Encoding.ASCII.GetBytes(content.Text));
+                //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                string split = "卍";
+                string receiveId = item.ID.ToString();
+                string sendId = userItem.ID.ToString();
+                string msgText = content.Text;
+                string date = DateTime.Now.ToString();
+                string sendName = userItem.NicName;
+                string msg = receiveId + split + receiveId + split + sendId + split + msgText + split + date + split + sendName;
+                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.ASCII.GetBytes(msg));
             }
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
@@ -156,5 +166,11 @@ namespace MinChat.Forms
             send();
         }
         #endregion
+        void ChatHandleReceive(object sender, EventArgs e, Msg msg)//处理事件的程序
+        {
+            ChatBoxContent content = new ChatBoxContent();
+            content.Text = msg.getContent();
+            this.AppendChatBoxContent(item.NicName, null, content, Color.SeaGreen, false);
+        }
     }
 }

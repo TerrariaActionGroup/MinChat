@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
-using MinChat.Communications;
 using ESPlus.Rapid;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Application.Basic;
