@@ -60,7 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="db\bean\Group.cs" />
+    <Compile Include="db\bean\User.cs" />
     <Compile Include="db\DBcolumns.cs" />
+    <Compile Include="db\minterface\DBHelper.cs" />
+    <Compile Include="db\minterface\GroupUtil.cs" />
+    <Compile Include="db\minterface\UserUtil.cs" />
     <Compile Include="es\BasicHandler.cs" />
     <Compile Include="es\CustomizeHandler.cs" />
     <Compile Include="es\FriendsManager.cs" />
