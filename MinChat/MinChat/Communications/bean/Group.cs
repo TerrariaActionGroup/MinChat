@@ -9,9 +9,14 @@ namespace MinChat.Communications.bean
     class Group
     {
         //groupId integer, groupName varchar(40), num integer, time date, notice text, type varchar(20)
-
+        private int groupId;
+        private string groupName;
+        private int num;
+        private string time;
+        private string notice;
+        private string type;
         #region
-        public int groupId
+        public int GroupId
         {
             get
             {
@@ -23,7 +28,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public string groupName
+        public string GroupName
         {
             get
             {
@@ -35,7 +40,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public int num
+        public int Num
         {
             get
             {
@@ -47,7 +52,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public string time
+        public string Time
         {
             get
             {
@@ -59,7 +64,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public string notice
+        public string Notice
         {
             get
             {
@@ -71,7 +76,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public string type
+        public string Type
         {
             get
             {

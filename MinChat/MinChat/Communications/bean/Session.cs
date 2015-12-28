@@ -9,14 +9,125 @@ namespace MinChat.Communications
     class Session
     {
         private String id;
-        private String from;		//发送人
-        private String from_user;   //发送人可识别名字
-        private int type;		    //消息类型
-        private String time;		//接收时间
-        private String content;		//发送内容
-        private String notReadMsg;  //未读记录
-        private String to;		    //接收人
-        private int isdispose;      //是否已处理 0未处理，1已处理
+        private String from;
+        private String from_user;
+        private int type;
+        private String time;
+        private String content;
+        private String date;
+        private int notReadCount;
+        private String to;
+        private int isdispose;
+        public String Id
+        {
+            get{
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+        public String From		    //发送人
+        {
+            get
+            {
+                return from;
+            }
+            set
+            {
+                from = value;
+            }
+        }
+        public String From_user    //发送人可识别名字
+        {
+            get
+            {
+                return from_user;
+            }
+            set
+            {
+                from_user = value;
+            }
+        }
+        public int Type		        //消息类型
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
+        public String Time		    //接收时间
+        {
+            get
+            {
+                return time;
+            }
+            set
+            {
+                time = value;
+            }
+        }
+        public String Content		//发送内容
+        {
+            get
+            {
+                return content;
+            }
+            set
+            {
+                content = value;
+            }
+        }
+
+        public String Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+            }
+        }
+        public int NotReadCount    //未读记录
+        {
+            get
+            {
+                return notReadCount;
+            }
+            set
+            {
+                notReadCount = value;
+            }
+        }
+        public String To		    //接收人
+        {
+            get
+            {
+                return to;
+            }
+            set
+            {
+                to = value;
+            }
+        }
+        public int Isdispose      //是否已处理 0未处理，1已处理
+        {
+            get
+            {
+                return isdispose;
+            }
+            set
+            {
+                isdispose = value;
+            }
+        }
 
         /// <summary>
         /// 创建会话对象
@@ -32,84 +143,8 @@ namespace MinChat.Communications
             this.type = type;
             this.time = sessions[2];
             this.content = sessions[3];
-            this.notReadMsg = sessions[4];
             this.to = sessions[5];
             this.isdispose = isDispose;
-        }
-
-        public String getId()
-        {
-            return id;
-        }
-        public void setId(String id)
-        {
-            this.id = id;
-        }
-        public String getFrom()
-        {
-            return from;
-        }
-        public void setFrom(String from)
-        {
-            this.from = from;
-        }
-        public int getType()
-        {
-            return type;
-        }
-        public void setType(int type)
-        {
-            this.type = type;
-        }
-        public String getTime()
-        {
-            return time;
-        }
-        public void setTime(String time)
-        {
-            this.time = time;
-        }
-        public String getContent()
-        {
-            return content;
-        }
-        public void setContent(String content)
-        {
-            this.content = content;
-        }
-        public String getNotReadMsg()
-        {
-            return notReadMsg;
-        }
-        public void setNotReadMsg(String notReadCount)
-        {
-            this.notReadMsg = notReadCount;
-        }
-        public String getTo()
-        {
-            return to;
-        }
-        public void setTo(String to)
-        {
-            this.to = to;
-        }
-        public int getIsdispose()
-        {
-            return isdispose;
-        }
-        public void setIsdispose(int isdispose)
-        {
-            this.isdispose = isdispose;
-        }
-
-        public String getFrom_user()
-        {
-            return from_user;
-        }
-
-        public void setFrom_user(String from_user)
-        {
-            this.from_user = from_user;
         }
     }
 }

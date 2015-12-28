@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace MinChat.Communications.bean
 {
-    class Mgroup
+    class MGroup
     {
+        private int mGroupId;
+        private string mGroupName;
+        private int num;
         #region
-        public int mGroupId
+        public int MGroupId
         {
             get
             {
@@ -21,7 +24,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public string mGroupName
+        public string MGroupName
         {
             get
             {
@@ -33,7 +36,7 @@ namespace MinChat.Communications.bean
             }
         }
 
-        public int num
+        public int Num
         {
             get
             {
