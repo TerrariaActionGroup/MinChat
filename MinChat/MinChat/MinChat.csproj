@@ -62,8 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communications\Msg.cs" />
-    <Compile Include="Communications\Session.cs" />
+    <Compile Include="Communications\bean\Group.cs" />
+    <Compile Include="Communications\bean\Msg.cs" />
+    <Compile Include="Communications\bean\Session.cs" />
+    <Compile Include="Communications\bean\Friend.cs" />
+    <Compile Include="Communications\bean\Mgroup.cs" />
     <Compile Include="Forms\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>

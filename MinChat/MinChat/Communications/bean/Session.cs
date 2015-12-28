@@ -11,12 +11,31 @@ namespace MinChat.Communications
         private String id;
         private String from;		//发送人
         private String from_user;   //发送人可识别名字
-        private String type;		//消息类型
+        private int type;		    //消息类型
         private String time;		//接收时间
         private String content;		//发送内容
-        private String notReadCount;//未读记录
+        private String notReadMsg;  //未读记录
         private String to;		    //接收人
-        private String isdispose;//是否已处理 0未处理，1已处理
+        private int isdispose;      //是否已处理 0未处理，1已处理
+
+        /// <summary>
+        /// 创建会话对象
+        /// </summary>
+        /// <param name="msgs">由消息组装来的数组</param>
+        /// <param name="isDispose">是否处理。1，已处理。0，未处理</param>
+        /// <param name="type">消息类型</param>
+        public Session(string[] sessions, int isDispose, int type)
+        {
+            //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+            this.from = sessions[0];
+            this.from_user = sessions[1];
+            this.type = type;
+            this.time = sessions[2];
+            this.content = sessions[3];
+            this.notReadMsg = sessions[4];
+            this.to = sessions[5];
+            this.isdispose = isDispose;
+        }
 
         public String getId()
         {
@@ -34,11 +53,11 @@ namespace MinChat.Communications
         {
             this.from = from;
         }
-        public String getType()
+        public int getType()
         {
             return type;
         }
-        public void setType(String type)
+        public void setType(int type)
         {
             this.type = type;
         }
@@ -58,13 +77,13 @@ namespace MinChat.Communications
         {
             this.content = content;
         }
-        public String getNotReadCount()
+        public String getNotReadMsg()
         {
-            return notReadCount;
+            return notReadMsg;
         }
-        public void setNotReadCount(String notReadCount)
+        public void setNotReadMsg(String notReadCount)
         {
-            this.notReadCount = notReadCount;
+            this.notReadMsg = notReadCount;
         }
         public String getTo()
         {
@@ -74,11 +93,11 @@ namespace MinChat.Communications
         {
             this.to = to;
         }
-        public String getIsdispose()
+        public int getIsdispose()
         {
             return isdispose;
         }
-        public void setIsdispose(String isdispose)
+        public void setIsdispose(int isdispose)
         {
             this.isdispose = isdispose;
         }
