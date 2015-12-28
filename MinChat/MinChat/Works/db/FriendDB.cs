@@ -74,7 +74,6 @@ address varchar(100), time date, mGroupId integer);";
             sqlChangeMGroup.ExecuteNonQuery();
             sqlChangeMGroup.Dispose();
             return true;
-            return true;
         }
         public void Close()
         {

@@ -169,7 +169,7 @@ namespace MinChat.Forms
         void ChatHandleReceive(object sender, EventArgs e, Msg msg)//处理事件的程序
         {
             ChatBoxContent content = new ChatBoxContent();
-            content.Text = msg.getContent();
+            content.Text = msg.content;
             this.AppendChatBoxContent(item.NicName, null, content, Color.SeaGreen, false);
         }
     }

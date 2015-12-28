@@ -8,7 +8,18 @@ namespace MinChat.Communications
 {
     public class Msg
     {
-        private int msgId;             //id
+        public int msgId             //id
+        {
+            get
+            {
+                return msgId;
+            }
+            set
+            {
+                msgId = value;
+            }
+        }
+    
         public int sessionId           //sid
         {
             get
@@ -20,21 +31,161 @@ namespace MinChat.Communications
                 sessionId = value;
             }
         }
-        private String fromUser;       //发送者Id
-        private String toUser;         //接收者Id
-        private String fromUserName;   //发送者名字
-        private int type;              //信息类型
-        private String content;        //信息内容
-        private int isComing;          //0表接收的消息，1表发送的消息
-        private String date;           //时间
-        private int isReaded;          //是否已读 0为未读，1为已读
+        public String fromUser       //发送者Id
+        {
+            get
+            {
+                return fromUser;
+            }
+            set
+            {
+                fromUser = value;
+            }
+        }
+        public String toUser         //接收者Id
+        {
+            get
+            {
+                return toUser;
+            }
+            set
+            {
+                toUser = value;
+            }
+        }
+        public String fromUserName   //发送者名字
+        {
+            get
+            {
+                return fromUserName;
+            }
+            set
+            {
+                fromUserName = value;
+            }
+        }
+        public int type              //信息类型
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
+        public String content        //信息内容
+        {
+            get
+            {
+                return content;
+            }
+            set
+            {
+                content = value;
+            }
+        }
+        public int isComing          //0表接收的消息，1表发送的消息
+        {
+            get
+            {
+                return isComing;
+            }
+            set
+            {
+                isComing = value;
+            }
+        }
+        public String date           //时间
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+            }
+        }
+        public int isReaded          //是否已读 0为未读，1为已读
+        {
+            get
+            {
+                return isReaded;
+            }
+            set
+            {
+                isReaded = value;
+            }
+        }
 
-        private String bak1;//扩展1
-        private String bak2;//扩展2
-        private String bak3;//扩展3
-        private String bak4;//扩展4
-        private String bak5;//扩展5
-        private String bak6;//扩展6
+        public String bak1//扩展1
+        {
+            get
+            {
+                return bak1;
+            }
+            set
+            {
+                bak1 = value;
+            }
+        }
+        public String bak2//扩展2
+        {
+            get
+            {
+                return bak2;
+            }
+            set
+            {
+                bak2 = value;
+            }
+        }
+        public String bak3//扩展3
+        {
+            get
+            {
+                return bak3;
+            }
+            set
+            {
+                bak3 = value;
+            }
+        }
+        public String bak4//扩展4
+        {
+            get
+            {
+                return bak4;
+            }
+            set
+            {
+                bak4 = value;
+            }
+        }
+        public String bak5//扩展5
+        {
+            get
+            {
+                return bak5;
+            }
+            set
+            {
+                bak5 = value;
+            }
+        }
+        public String bak6//扩展6
+        {
+            get
+            {
+                return bak6;
+            }
+            set
+            {
+                bak6 = value;
+            }
+        }
 
         #region
         /// <summary>
@@ -57,132 +208,5 @@ namespace MinChat.Communications
         }
         #endregion
 
-        #region
-        public int getMsgId()
-        {
-            return msgId;
-        }
-        public void setMsgId(int msgId)
-        {
-            this.msgId = msgId;
-        }
-        public String getFromUser()
-        {
-            return fromUser;
-        }
-        public void setFromUser(String fromUser)
-        {
-            this.fromUser = fromUser;
-        }
-
-        public String getFromUserName()
-        {
-            return fromUserName;
-        }
-
-        public void setFromUserName(String fromUserName)
-        {
-            this.fromUserName = fromUserName;
-        }
-
-        public String getToUser()
-        {
-            return toUser;
-        }
-        public void setToUser(String toUser)
-        {
-            this.toUser = toUser;
-        }
-        public int getType()
-        {
-            return type;
-        }
-        public void setType(int type)
-        {
-            this.type = type;
-        }
-        public String getContent()
-        {
-            return content;
-        }
-        public void setContent(String content)
-        {
-            this.content = content;
-        }
-
-        public int getIsComing()
-        {
-            return isComing;
-        }
-        public void setIsComing(int isComing)
-        {
-            this.isComing = isComing;
-        }
-
-        public String getDate()
-        {
-            return date;
-        }
-        public void setDate(String date)
-        {
-            this.date = date;
-        }
-        public String getBak1()
-        {
-            return bak1;
-        }
-        public void setBak1(String bak1)
-        {
-            this.bak1 = bak1;
-        }
-        public String getBak2()
-        {
-            return bak2;
-        }
-        public void setBak2(String bak2)
-        {
-            this.bak2 = bak2;
-        }
-        public String getBak3()
-        {
-            return bak3;
-        }
-        public void setBak3(String bak3)
-        {
-            this.bak3 = bak3;
-        }
-        public String getBak4()
-        {
-            return bak4;
-        }
-        public void setBak4(String bak4)
-        {
-            this.bak4 = bak4;
-        }
-        public String getBak5()
-        {
-            return bak5;
-        }
-        public void setBak5(String bak5)
-        {
-            this.bak5 = bak5;
-        }
-        public String getBak6()
-        {
-            return bak6;
-        }
-        public void setBak6(String bak6)
-        {
-            this.bak6 = bak6;
-        }
-        public int getIsReaded()
-        {
-            return isReaded;
-        }
-        public void setIsReaded(int isReaded)
-        {
-            this.isReaded = isReaded;
-        }
-        #endregion
     }
 }
