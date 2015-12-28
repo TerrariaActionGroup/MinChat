@@ -47,10 +47,7 @@ namespace MinChat.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnLogin_MouseClick(object sender, MouseEventArgs e)
-        {
-            login();
-        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             login();
@@ -128,8 +125,6 @@ namespace MinChat.Forms
             return logonResult;
         }
         #endregion
-
-
     }
 }
 

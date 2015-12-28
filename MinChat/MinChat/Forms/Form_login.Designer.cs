@@ -183,7 +183,6 @@
             this.btnLogin.Text = "登 陆";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            this.btnLogin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLogin_MouseClick);
             // 
             // pnlImgTx
             // 
