@@ -9,12 +9,12 @@ namespace MinChat.Communications.bean
     class Group
     {
         //groupId integer, groupName varchar(40), num integer, time date, notice text, type varchar(20)
-        public int groupId;
-        public string groupName;
-        public int num;
-        public string time;
-        public string notice;
-        public string type;
+        private int groupId;
+        private string groupName;
+        private int num;
+        private string time;
+        private string notice;
+        private string type;
         #region
         public int GroupId
         {
