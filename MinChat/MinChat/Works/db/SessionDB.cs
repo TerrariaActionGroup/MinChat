@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using MinChat.Communications;
 
-namespace MinChat.Works
+namespace MinChat.Works.db
 {
     class SessionDB
     {
