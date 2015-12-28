@@ -28,7 +28,7 @@ namespace MinChat.Works.db
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/session.db";
             conn = new SQLiteConnection(dbPath);
             string cmdString = @"CREATE TABLE IF NOT EXISTS session(sessionId integer, senderId varchar(20), senderName varchar(40), type integer,
-content text, date time, notReadMsg text,receiverId varchar(20),isDispose integer);";
+content text, date time, notReadCount integer,receiverId varchar(20),isDispose integer);";
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
@@ -42,7 +42,7 @@ content text, date time, notReadMsg text,receiverId varchar(20),isDispose intege
                 ss.type + "," +
                 ss.getContent() + "," +
                 ss.date + "," +
-                ss.notReadMsg + "," +
+                ss.getNotReadCount() + "," +
                 ss.getTo() + "," +
                 ss.getIsdispose() + "," +
                 ");";

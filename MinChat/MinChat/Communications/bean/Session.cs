@@ -24,6 +24,7 @@ namespace MinChat.Communications
         }
         private String time;		//接收时间
         private String content;		//发送内容
+
         public String date
         {
             get
@@ -35,19 +36,27 @@ namespace MinChat.Communications
                 date = value;
             }
         }
-        public String notReadMsg//未读记录
-        {
-            get
-            {
-                return notReadMsg;
-            }
-            set
-            {
-                notReadMsg = value;
-            }
-        }
+        private int notReadCount;//未读记录
         private String to;		    //接收人
-        private String isdispose;//是否已处理 0未处理，1已处理
+        private int isdispose;      //是否已处理 0未处理，1已处理
+
+        /// <summary>
+        /// 创建会话对象
+        /// </summary>
+        /// <param name="msgs">由消息组装来的数组</param>
+        /// <param name="isDispose">是否处理。1，已处理。0，未处理</param>
+        /// <param name="type">消息类型</param>
+        public Session(string[] sessions, int isDispose, int type)
+        {
+            //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+            this.from = sessions[0];
+            this.from_user = sessions[1];
+            this.type = type;
+            this.time = sessions[2];
+            this.content = sessions[3];
+            this.to = sessions[5];
+            this.isdispose = isDispose;
+        }
 
         public String getId()
         {
@@ -81,11 +90,11 @@ namespace MinChat.Communications
         {
             this.content = content;
         }
-        public String getNotReadCount()
+        public int getNotReadCount()
         {
             return notReadCount;
         }
-        public void setNotReadCount(String notReadCount)
+        public void setNotReadCount(int notReadCount)
         {
             this.notReadCount = notReadCount;
         }
@@ -97,11 +106,11 @@ namespace MinChat.Communications
         {
             this.to = to;
         }
-        public String getIsdispose()
+        public int getIsdispose()
         {
             return isdispose;
         }
-        public void setIsdispose(String isdispose)
+        public void setIsdispose(int isdispose)
         {
             this.isdispose = isdispose;
         }
