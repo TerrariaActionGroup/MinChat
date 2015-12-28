@@ -219,7 +219,6 @@ namespace MinChat.Communications
             this.isComing = isComing;
             this.date = msgs[3];
             this.isReaded = isRead;
-            }
         }
         #endregion
 
