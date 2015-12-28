@@ -6,6 +6,7 @@ using ESPlus.Application.CustomizeInfo;
 using ESPlus.Rapid;
 using MinChat.Communications;
 using MinChat.Settings;
+using MinChat.Works.db;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -111,6 +112,8 @@ namespace MinChat.Forms
                         }
                         else//聊天窗口不存在
                         {
+                            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+                            db.addMsg(msg);
                             twinkle(chatListBox_contacts, Convert.ToUInt32(sourceUserID));//头像闪烁
                         }
                         break;

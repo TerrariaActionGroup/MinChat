@@ -196,7 +196,9 @@ namespace MinChat.Communications
         /// <param name="isComing">接收还是发送。1，发送。0，接收</param>
         public Msg(string[] msgs, int isRead, int isComing)
         {
-            //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+            try
+            {
+                //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
             this.fromUser = msgs[1];
             this.toUser = msgs[0];
             this.fromUserName = msgs[4];
@@ -205,6 +207,12 @@ namespace MinChat.Communications
             this.isComing = isComing;
             this.date = msgs[3];
             this.isReaded = isRead;
+            }
+            catch (Exception e)
+            {
+
+            }
+            
         }
         #endregion
 
