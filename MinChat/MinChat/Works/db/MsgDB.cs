@@ -18,7 +18,7 @@ namespace MinChat.Works.db
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <returns>数据库引用</returns>
-        public static MsgDB OpenDB(string userId)
+        public static MsgDB OpenMsgDB(string userId)
         {
             if (null == uniqueInstance)
             {

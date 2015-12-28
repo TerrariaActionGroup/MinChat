@@ -13,7 +13,7 @@ namespace MinChat.Works.db
 
         protected SQLiteConnection conn;
         protected static SessionDB uniqueInstance;
-        public static SessionDB OpenDB(string userId)
+        public static SessionDB OpenSessionDB(string userId)
         {
             if (null == uniqueInstance)
             {
