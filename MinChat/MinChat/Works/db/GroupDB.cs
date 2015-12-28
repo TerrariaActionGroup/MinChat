@@ -10,6 +10,15 @@ namespace MinChat.Works
     class GroupDB
     {
         protected SQLiteConnection conn;
+        protected static GroupDB uniqueInstance;
+        public static GroupDB OpenDB(string userId)
+        {
+            if (null == uniqueInstance)
+            {
+                uniqueInstance = new GroupDB(userId);
+            }
+            return uniqueInstance;
+        }
         public GroupDB(string userId)
         {
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/group.db";
@@ -18,10 +27,6 @@ namespace MinChat.Works
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
-        }
-        public ~GroupDB()
-        {
-            conn.Close();
         }
         public bool addGroup(string groupId)
         {
@@ -42,6 +47,14 @@ namespace MinChat.Works
         public bool changeType(string groupId, string newType)
         {
             return true;
+        }
+        public void Close()
+        {
+            if (null != conn)
+            {
+                conn.Close();
+                conn = null;
+            }
         }
     }
 }

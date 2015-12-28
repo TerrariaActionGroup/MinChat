@@ -10,7 +10,17 @@ namespace MinChat.Works
 {
     class SessionDB
     {
+
         protected SQLiteConnection conn;
+        protected static SessionDB uniqueInstance;
+        public static SessionDB OpenDB(string userId)
+        {
+            if (null == uniqueInstance)
+            {
+                uniqueInstance = new SessionDB(userId);
+            }
+            return uniqueInstance;
+        }
         public SessionDB(string userId)
         {
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/group.db";
@@ -20,10 +30,6 @@ content text, date date, time time, notReadCount integer,receiverId varchar(20),
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
-        }
-        public ~SessionDB()
-        {
-            conn.Close();
         }
         public bool addSession(Session ss){
             return true;
@@ -35,6 +41,14 @@ content text, date date, time time, notReadCount integer,receiverId varchar(20),
         public bool readMsg()
         {
             return true;
+        }
+        public void Close()
+        {
+            if (null != conn)
+            {
+                conn.Close();
+                conn = null;
+            }
         }
     }
 }

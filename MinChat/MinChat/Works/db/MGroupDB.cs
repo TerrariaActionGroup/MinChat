@@ -10,6 +10,15 @@ namespace MinChat.Works
     class MGroupDB
     {
         protected SQLiteConnection conn;
+        protected static MGroupDB uniqueInstance;
+        public static MGroupDB OpenDB(string userId)
+        {
+            if (null == uniqueInstance)
+            {
+                uniqueInstance = new MGroupDB(userId);
+            }
+            return uniqueInstance;
+        }
         public MGroupDB(string userId)
         {
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/mgroup.db";
@@ -19,10 +28,6 @@ namespace MinChat.Works
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
         }
-        public ~MGroupDB()
-        {
-            conn.Close();
-        }
         public bool addMGroup(string mGroupName){
             return true;
         }
@@ -30,6 +35,13 @@ namespace MinChat.Works
         {
             return true;
         }
-
+        public void Close()
+        {
+            if (null != conn)
+            {
+                conn.Close();
+                conn = null;
+            }
+        }
     }
 }
