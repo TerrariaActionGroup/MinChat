@@ -36,15 +36,15 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
         #region 添加会话
         public bool addSession(Session ss){
             string cmdString = @"INSERT TO session VALUES (" +
-                ss.getId() + "," +
-                ss.getFrom() + "," +
-                ss.getFrom_user() + "," +
+                ss.id + "," +
+                ss.from + "," +
+                ss.from_user + "," +
                 ss.type + "," +
-                ss.getContent() + "," +
+                ss.content + "," +
                 ss.date + "," +
-                ss.getNotReadCount() + "," +
-                ss.getTo() + "," +
-                ss.getIsdispose() + "," +
+                ss.notReadCount + "," +
+                ss.to + "," +
+                ss.isdispose + "," +
                 ");";
             SQLiteCommand sqlAddSession = new SQLiteCommand(cmdString, conn);
             sqlAddSession.ExecuteNonQuery();
@@ -55,7 +55,7 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
         #region 删除会话
         public bool deleteSession(int sessionId)
         {
-            string cmdString = "DELETE FROM session WHERE sessionId = " + sessionId + ");";
+            string cmdString = "DELETE FROM session WHERE sessionId = " + sessionId + ";";
             SQLiteCommand sqlDeleteSession = new SQLiteCommand(cmdString, conn);
             sqlDeleteSession.ExecuteNonQuery();
             sqlDeleteSession.Dispose();

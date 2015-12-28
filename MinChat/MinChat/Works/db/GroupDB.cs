@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using MinChat.Communications.bean;
 
 namespace MinChat.Works.db
 {
@@ -31,24 +32,54 @@ namespace MinChat.Works.db
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
         }
-        public bool addGroup(string groupId)
+        public bool addGroup(Group gr)
         {
+            string cmdString = @"INSERT TO group VALUES (" +
+                gr.groupId + "," +
+                gr.groupName + "," +
+                gr.num + "," +
+                gr.time + "," +
+                gr.notice + "," +
+                gr.type + "," + ");";
+            SQLiteCommand sqlAddGroup = new SQLiteCommand(cmdString, conn);
+            sqlAddGroup.ExecuteNonQuery();
+            sqlAddGroup.Dispose();
             return true;
         }
         public bool quitGroup(string groupId)
         {
+            string cmdString = "DELETE FROM group WHERE groupId = " + groupId + ";";
+            SQLiteCommand sqlDeleteGroup = new SQLiteCommand(cmdString, conn);
+            sqlDeleteGroup.ExecuteNonQuery();
+            sqlDeleteGroup.Dispose();
             return true;
         }
         public bool changeNotice(string groupId, string newNotice)
         {
+            string cmdString = "UPDATE group SET notice =" +
+                newNotice + "WHERE groupId = " + groupId + ";";
+            SQLiteCommand sqlChangeNotice = new SQLiteCommand(cmdString, conn);
+            sqlChangeNotice.ExecuteNonQuery();
+            sqlChangeNotice.Dispose();
             return true;
         }
         public bool changeName(string groupId, string newName)
         {
+            string cmdString = "UPDATE group SET groupName =" +
+                newName + "WHERE groupId = " + groupId + ";";
+            SQLiteCommand sqlChangeName = new SQLiteCommand(cmdString, conn);
+            sqlChangeName.ExecuteNonQuery();
+            sqlChangeName.Dispose();
             return true;
         }
         public bool changeType(string groupId, string newType)
         {
+            string cmdString = "UPDATE group SET type =" +
+                newType + "WHERE groupId = " + groupId + ";";
+            SQLiteCommand sqlChangeType = new SQLiteCommand(cmdString, conn);
+            sqlChangeType.ExecuteNonQuery();
+            sqlChangeType.Dispose();
+            return true;
             return true;
         }
         public void Close()

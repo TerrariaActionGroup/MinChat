@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MinChat.Communications.bean
 {
-    class Mgroup
+    class MGroup
     {
         #region
         public int mGroupId

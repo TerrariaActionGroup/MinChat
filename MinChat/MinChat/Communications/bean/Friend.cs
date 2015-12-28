@@ -8,7 +8,7 @@ namespace MinChat.Communications.bean
 {
     class Friend
     {
-        #endregion
+        
 
         #region
         public string userId             //用户账号

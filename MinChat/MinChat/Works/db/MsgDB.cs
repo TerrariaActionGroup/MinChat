@@ -54,17 +54,17 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
         public bool readMsg(int sessionId)
         {
             string cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND sessionId = " + sessionId + ");";
-            SQLiteCommand sqlInsertMsg = new SQLiteCommand(cmdString, conn);
-            sqlInsertMsg.ExecuteNonQuery();
-            sqlInsertMsg.Dispose();
+            SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
+            sqlReadMsg.ExecuteNonQuery();
+            sqlReadMsg.Dispose();
             return true;
         }
         public bool readMsg(string senderId)
         {
             string cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
-            SQLiteCommand sqlInsertMsg = new SQLiteCommand(cmdString, conn);
-            sqlInsertMsg.ExecuteNonQuery();
-            sqlInsertMsg.Dispose();
+            SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
+            sqlReadMsg.ExecuteNonQuery();
+            sqlReadMsg.Dispose();
             return true;
         }
         #endregion
@@ -77,26 +77,26 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
         public bool addMsg(Msg m)
         {
             string cmdString = @"INSERT TO msg VALUES (" +
-                m.getMsgId() + "," +
+                m.msgId + "," +
                 m.sessionId + "," +
-                m.getFromUser() + "," +
-                m.getToUser() + "," +
-                m.getFromUserName() + "," +
-                m.getType() + "," +
-                m.getContent() + "," +
-                m.getIsComing() + "," +
-                m.getDate() + "," + "," +
-                m.getIsReaded() + "," +
-                m.getBak1() + "," +
-                m.getBak2() + "," +
-                m.getBak3() + "," +
-                m.getBak4() + "," +
-                m.getBak5() + "," +
-                m.getBak6() + "," +
+                m.fromUser + "," +
+                m.toUser + "," +
+                m.fromUserName + "," +
+                m.type + "," +
+                m.content + "," +
+                m.isComing + "," +
+                m.date + "," + "," +
+                m.isReaded + "," +
+                m.bak1 + "," +
+                m.bak2 + "," +
+                m.bak3 + "," +
+                m.bak4 + "," +
+                m.bak5 + "," +
+                m.bak6 + "," +
                 ");";
-            SQLiteCommand sqlInsertMsg = new SQLiteCommand(cmdString, conn);
-            sqlInsertMsg.ExecuteNonQuery();
-            sqlInsertMsg.Dispose();
+            SQLiteCommand sqlAddMsg = new SQLiteCommand(cmdString, conn);
+            sqlAddMsg.ExecuteNonQuery();
+            sqlAddMsg.Dispose();
             return true;
         }
         #endregion
@@ -109,17 +109,17 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
         public bool deleteMsg(int sessionId)
         {
             string cmdString = "DELETE FROM msg WHERE sessionId = " + sessionId + ");";
-            SQLiteCommand sqlInsertMsg = new SQLiteCommand(cmdString, conn);
-            sqlInsertMsg.ExecuteNonQuery();
-            sqlInsertMsg.Dispose();
+            SQLiteCommand sqlDeleteMsg = new SQLiteCommand(cmdString, conn);
+            sqlDeleteMsg.ExecuteNonQuery();
+            sqlDeleteMsg.Dispose();
             return true;
         }
         public bool deleteMsg(string senderId)
         {
             string cmdString = "DELETE FROM msg WHERE senderId = " + senderId + ");";
-            SQLiteCommand sqlInsertMsg = new SQLiteCommand(cmdString, conn);
-            sqlInsertMsg.ExecuteNonQuery();
-            sqlInsertMsg.Dispose();
+            SQLiteCommand sqlDeleteMsg = new SQLiteCommand(cmdString, conn);
+            sqlDeleteMsg.ExecuteNonQuery();
+            sqlDeleteMsg.Dispose();
             return true;
         }
         #endregion

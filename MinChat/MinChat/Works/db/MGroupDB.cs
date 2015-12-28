@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using MinChat.Communications.bean;
 
 namespace MinChat.Works.db
 {
@@ -31,11 +32,22 @@ namespace MinChat.Works.db
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
         }
-        public bool addMGroup(string mGroupName){
+        public bool addMGroup(MGroup mg){
+            string cmdString = "INSERT TO mgroup VALUES(" +
+                mg.mGroupId + "," +
+                mg.mGroupName + "," +
+                mg.num + "," + ");";
+            SQLiteCommand cmdAddMGroup = new SQLiteCommand(cmdString, conn);
+            cmdAddMGroup.ExecuteNonQuery();
+            cmdAddMGroup.Dispose();
             return true;
         }
         public bool deleteMGroup(string mGroupName)
         {
+            string cmdString = "DELETE FROM mgroup WHERE mGroupName =" + mGroupName + ";";
+            SQLiteCommand sqlDeleteMGroup = new SQLiteCommand(cmdString, conn);
+            sqlDeleteMGroup.ExecuteNonQuery();
+            sqlDeleteMGroup.Dispose();
             return true;
         }
         public void Close()
