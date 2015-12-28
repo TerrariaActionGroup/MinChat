@@ -80,7 +80,6 @@ namespace MinChat.Works.db
             sqlChangeType.ExecuteNonQuery();
             sqlChangeType.Dispose();
             return true;
-            return true;
         }
         public void Close()
         {
