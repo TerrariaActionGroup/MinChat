@@ -91,25 +91,34 @@ namespace MinChat.Forms
         { 
             if(sourceUserID!=null)
             {
-                //取出收到的消息,接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
-                string message = System.Text.Encoding.UTF8.GetString(info);
-                
-                string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);//得到含有5个元素的数组
-                Msg msg = new Msg(msgs, 1, 0);//消息存在msg对象中
+                switch (informationType)
+                {
+                    case 1://普通文本消息
+                        //取出收到的消息,接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                        string message = System.Text.Encoding.UTF8.GetString(info);
 
-                ChatListSubItem[] items=chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的用户
-                string windowsName = items[0].NicName + ' ' + items[0].ID;//聊天窗口的标题
-                IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
-                if (handle != IntPtr.Zero)//如果聊天窗口已存在
-                {
-                    Form frm = (Form)Form.FromHandle(handle);
-                    frm.Activate();//激活
-                    this.OnReceive(msg);//传送消息到聊天窗口
+                        string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);//得到含有5个元素的数组
+                        Msg msg = new Msg(msgs, 1, 0);//消息存在msg对象中
+
+                        ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的用户
+                        string windowsName = items[0].NicName + ' ' + items[0].ID;//聊天窗口的标题
+                        IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
+                        if (handle != IntPtr.Zero)//如果聊天窗口已存在
+                        {
+                            Form frm = (Form)Form.FromHandle(handle);
+                            frm.Activate();//激活
+                            this.OnReceive(msg);//传送消息到聊天窗口
+                        }
+                        else//聊天窗口不存在
+                        {
+                            twinkle(chatListBox_contacts, Convert.ToUInt32(sourceUserID));//头像闪烁
+                        }
+                        break;
+                    case 2:
+                        break;
                 }
-                else//聊天窗口不存在
-                {
-                    twinkle(chatListBox_contacts,Convert.ToUInt32(sourceUserID));//头像闪烁
-                }
+                
+               
             }
         }
 

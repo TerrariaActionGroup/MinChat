@@ -51,93 +51,35 @@ namespace MinChat.Forms
         }
         #endregion
         #region 发送消息封装
-        /// <summary>
-        /// 发送信息文本到内容框
-        /// </summary>
-        /// <param name="userName">名字</param>
-        /// <param name="originTime">时间</param>
-        /// <param name="content">发送内容</param>
-        /// <param name="color">字体颜色</param>
-        /// <param name="followingWords">是否有用户名</param>
-        private void AppendChatBoxContent(string userName, DateTime? originTime, ChatBoxContent content, Color color, bool followingWords)
+        private void AppendChatBoxContent(string NicName,ChatBoxContent content)
         {
-            this.AppendChatBoxContent(userName, originTime, content, color, followingWords, originTime != null);
-        }
+            Color NicNameColor = Color.SeaGreen;
+            Color textColor = Color.Black;
+            string showTime = DateTime.Now.ToString();
 
-        /// <summary>
-        /// 发送信息文本到内容框
-        /// </summary>
-        /// <param name="userName">名字</param>
-        /// <param name="originTime">时间</param>
-        /// <param name="content">发送内容</param>
-        /// <param name="color">字体颜色</param>
-        /// <param name="followingWords">是否有用户名</param>
-        /// <param name="offlineMessage">是否在线消息</param>
-        private void AppendChatBoxContent(string userName, DateTime? originTime, ChatBoxContent content, Color color, bool followingWords, bool offlineMessage)
-        {
-            if (!followingWords)
-            {
-                string showTime = DateTime.Now.ToLongTimeString();
-                if (!offlineMessage && originTime != null)
-                {
-                    showTime = originTime.Value.ToString();
-                }
-                this.chatBox_history.AppendRichText(string.Format("{0}  {1}\n", userName, showTime), new Font(this.messageFont, FontStyle.Regular), color);
-                if (originTime != null && offlineMessage)
-                {
-                    this.chatBox_history.AppendText(string.Format("    [{0} 离线消息] ", originTime.Value.ToString()));
-                }
-                else
-                {
-                    this.chatBox_history.AppendText("    ");
-                }
-            }
-            else
-            {
-                this.chatBox_history.AppendText("   .");
-            }
+            this.chatBox_history.AppendRichText(string.Format("\n{0}  {1}\n", NicName, showTime), new Font(this.messageFont, FontStyle.Regular), NicNameColor);
+            this.chatBox_history.AppendRichText(string.Format("{0}", content.Text), content.Font, textColor);
 
-            this.chatBox_history.AppendChatBoxContent(content);
-            this.chatBox_history.AppendText("\n");
-            this.chatBox_history.Select(this.chatBox_history.Text.Length, 0);
-            this.chatBox_history.ScrollToCaret();
-        }
-
-        /// <summary>
-        /// 发送信息文本到内容框
-        /// </summary>
-        /// <param name="userName">名称</param>
-        /// <param name="color">字体颜色</param>
-        /// <param name="msg">信息</param>
-        private void AppendMessage(string userName, Color color, string msg)
-        {
-            DateTime showTime = DateTime.Now;
-            this.chatBox_history.AppendRichText(string.Format("{0}  {1}\n", userName, showTime.ToLongTimeString()), new Font(this.messageFont, FontStyle.Regular), color);
-            this.chatBox_history.AppendText("    ");
-
-            this.chatBox_history.AppendText(msg);
-            this.chatBox_history.Select(this.chatBox_history.Text.Length, 0);
-            this.chatBox_history.ScrollToCaret();
-        }
-
-        /// <summary>
-        /// 发送系统消息
-        /// </summary>
-        /// <param name="msg">信息</param>
-        public void AppendSysMessage(string msg)
-        {
-            this.AppendMessage("系统", Color.Gray, msg);
-            this.chatBox_history.AppendText("\n");
+            //chatBox_history//GoToLineAndColumn(chatBox_history, chatBox_history.Lines.Length, 0);
+            chatBox_history.SelectionStart = chatBox_history.TextLength;
+            chatBox_history.ScrollToCaret();
         }
         #endregion
         #region 发送信息
         private void send()
-        {
+        {   
+            chatBoxSend.Text = chatBoxSend.Text.TrimEnd('\n');
             ChatBoxContent content = this.chatBoxSend.GetContent();
             if (content.Text != "" && content.Text != "\n")
             {
+                //
+                //chatBoxSend.Text = chatBoxSend.Text.Remove(chatBoxSend.Text.Length - 1);
+                //if(chatBoxSend.Text[chatBoxSend.Text.Length-1]=='\n')
+                //{
+                //    chatBoxSend.Text = chatBoxSend.Text.Remove(chatBoxSend.Text.Length - 2);
+                //}
                 //将内容更新到上方面板
-                this.AppendChatBoxContent(userItem.NicName, null, content, Color.SeaGreen, false);
+                this.AppendChatBoxContent(userItem.NicName, content);
                 //发送信息
                 //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                 string split = Constant.SPLIT;
@@ -173,7 +115,7 @@ namespace MinChat.Forms
             {
                 ChatBoxContent content = new ChatBoxContent();
                 content.Text = msg.getContent();
-                this.AppendChatBoxContent(item.NicName, null, content, Color.SeaGreen, false);
+                this.AppendChatBoxContent(item.NicName,content);
             }
         }
         #endregion

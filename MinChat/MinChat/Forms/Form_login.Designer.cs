@@ -77,7 +77,7 @@
             this.txtId.MinimumSize = new System.Drawing.Size(28, 28);
             this.txtId.MouseBack = null;
             this.txtId.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.txtId.Multiline = false;
+            this.txtId.Multiline = true;
             this.txtId.Name = "txtId";
             this.txtId.NormlBack = null;
             this.txtId.Padding = new System.Windows.Forms.Padding(5);
@@ -98,6 +98,7 @@
             this.txtId.SkinTxt.Text = "305562393";
             this.txtId.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.SkinTxt.WaterText = "QQ号码/手机/邮箱";
+            this.txtId.SkinTxt.WordWrap = false;
             this.txtId.TabIndex = 9;
             this.txtId.Text = "305562393";
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -135,7 +136,7 @@
             this.txtPwd.MinimumSize = new System.Drawing.Size(28, 28);
             this.txtPwd.MouseBack = null;
             this.txtPwd.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.txtPwd.Multiline = false;
+            this.txtPwd.Multiline = true;
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.NormlBack = null;
             this.txtPwd.Padding = new System.Windows.Forms.Padding(5);
@@ -156,6 +157,7 @@
             this.txtPwd.SkinTxt.Text = "10000";
             this.txtPwd.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.SkinTxt.WaterText = "密码";
+            this.txtPwd.SkinTxt.WordWrap = false;
             this.txtPwd.TabIndex = 1;
             this.txtPwd.Text = "10000";
             this.txtPwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -180,6 +182,7 @@
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "登 陆";
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             this.btnLogin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLogin_MouseClick);
             // 
             // pnlImgTx
@@ -432,6 +435,7 @@
             // 
             // Form_login
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -469,7 +473,6 @@
             this.ShowDrawIcon = false;
             this.Text = "Form_login";
             this.TopMost = true;
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form_login_KeyPress);
             this.txtId.ResumeLayout(false);
             this.txtId.PerformLayout();
             this.pnlImgTx.ResumeLayout(false);

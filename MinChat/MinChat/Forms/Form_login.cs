@@ -51,12 +51,9 @@ namespace MinChat.Forms
         {
             login();
         }
-        private void Form_login_KeyPress(object sender, KeyPressEventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            if ((Keys)e.KeyChar == Keys.Enter)
-            {
-                login();
-            }
+            login();
         }
         private void login()
         {
@@ -131,6 +128,8 @@ namespace MinChat.Forms
             return logonResult;
         }
         #endregion
+
+
     }
 }
 
