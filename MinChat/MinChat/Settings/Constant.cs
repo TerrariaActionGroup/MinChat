@@ -12,6 +12,6 @@ namespace MinChat.Settings
         public static string serverIP = "127.0.0.1";
         public static int serverPort = 4530;
 
-        public static char[] SPLIT = new char[1] { '卍'};
+        public static string SPLIT = "卍";
     }
 }

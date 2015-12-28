@@ -140,14 +140,14 @@ namespace MinChat.Forms
                 this.AppendChatBoxContent(userItem.NicName, null, content, Color.SeaGreen, false);
                 //发送信息
                 //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
-                string split = "卍";
+                string split = Constant.SPLIT;
                 string receiveId = item.ID.ToString();
                 string sendId = userItem.ID.ToString();
                 string msgText = content.Text;
                 string date = DateTime.Now.ToString();
                 string sendName = userItem.NicName;
-                string msg = receiveId + split + receiveId + split + sendId + split + msgText + split + date + split + sendName;
-                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.ASCII.GetBytes(msg));
+                string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
+                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.UTF8.GetBytes(msg));
             }
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
