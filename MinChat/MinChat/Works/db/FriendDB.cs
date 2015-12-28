@@ -10,6 +10,15 @@ namespace MinChat.Works
     class FriendDB
     {
         protected SQLiteConnection conn;
+        protected static FriendDB uniqueInstance;
+        public static FriendDB OpenDB(string userId)
+        {
+            if (null == uniqueInstance)
+            {
+                uniqueInstance = new FriendDB(userId);
+            }
+            return uniqueInstance;
+        }
         public FriendDB(string userId)
         {
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/friend.db";
@@ -18,10 +27,6 @@ namespace MinChat.Works
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
-        }
-        public ~FriendDB()
-        {
-            conn.Close();
         }
         public bool addFriend(string friendId){
             //getUser();
@@ -38,6 +43,14 @@ namespace MinChat.Works
         public bool changeMGroup(string friendId, string newMGroupName)
         {
             return true;
+        }
+        public void Close()
+        {
+            if (null != conn)
+            {
+                conn.Close();
+                conn = null;
+            }
         }
     }
 }

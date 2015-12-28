@@ -11,7 +11,16 @@ namespace MinChat.Works
     class MsgDB
     {
         protected SQLiteConnection conn;
-        public MsgDB(string userId)
+        protected static MsgDB uniqueInstance;
+        public static MsgDB OpenDB(string userId)
+        {
+            if (null == uniqueInstance)
+            {
+                uniqueInstance = new MsgDB(userId);
+            }
+            return uniqueInstance;
+        }
+        private MsgDB(string userId)
         {
             string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/group.db";
             conn = new SQLiteConnection(dbPath);
@@ -20,10 +29,6 @@ content text, isComing integer, date date, time time, isRead integer, bak1 text,
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
-        }
-        public ~MsgDB()
-        {
-            conn.Close();
         }
         public bool readMsg()
         {
@@ -37,6 +42,13 @@ content text, isComing integer, date date, time time, isRead integer, bak1 text,
         {
             return true;
         }
-
+        public void Close()
+        {
+            if (null != conn)
+            {
+                conn.Close();
+                conn = null;
+            }
+        }
     }
 }
