@@ -30,38 +30,38 @@ namespace MinChat.Forms
         #region 初始化窗口时
         public void InitMain(IRapidPassiveEngine rapidPassiveEngine)
         {
-            //if(this.myInfo==null)
-            //{
-            //    this.myInfo = new ChatListSubItem();
-            //}
+            if (this.myInfo == null)
+            {
+                this.myInfo = new ChatListSubItem();
+            }
             this.rapidPassiveEngine = rapidPassiveEngine;
-            //this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
-            
-            ////加载分组
-            //ChatListItem gp = new ChatListItem();//new一个分组
-            //gp.Text = "TestList";
-            //ChatListSubItem people = new ChatListSubItem();
+            this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
 
-            //if (myInfo.ID == 10010)
-            //{
-            //    lbl_userName.Text = "联通";
-            //    people.ID = 10086;//ID
-            //    people.NicName = "移动";//昵称
-            //    people.DisplayName = "X";//备注名
-            //    people.PersonalMsg = "买买买买买";
-            //}
-            //else if(myInfo.ID==10086)
-            //{
-            //    lbl_userName.Text = "移动";
-            //    people.ID = 10010;//ID
-            //    people.NicName = "联通";//昵称
-            //    people.DisplayName = "X";//备注名
-            //    people.PersonalMsg = "买买买买买";
-            //}
-            //gp.SubItems.Add(people);
-            ////chatListBox_contacts.GetSubItemsById();//按照ID查找listbox中的用户
+            //加载分组
+            ChatListItem gp = new ChatListItem();//new一个分组
+            gp.Text = "TestList";
+            ChatListSubItem people = new ChatListSubItem();
 
-            //chatListBox_contacts.Items.Add(gp);//添加到listBox中
+            if (myInfo.ID == 10010)
+            {
+                lbl_userName.Text = "联通";
+                people.ID = 10086;//ID
+                people.NicName = "移动";//昵称
+                people.DisplayName = "X";//备注名
+                people.PersonalMsg = "买买买买买";
+            }
+            else if (myInfo.ID == 10086)
+            {
+                lbl_userName.Text = "移动";
+                people.ID = 10010;//ID
+                people.NicName = "联通";//昵称
+                people.DisplayName = "X";//备注名
+                people.PersonalMsg = "买买买买买";
+            }
+            gp.SubItems.Add(people);
+            //chatListBox_contacts.GetSubItemsById();//按照ID查找listbox中的用户
+
+            chatListBox_contacts.Items.Add(gp);//添加到listBox中
 
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
@@ -70,7 +70,6 @@ namespace MinChat.Forms
         }
 
         #endregion
-
         #region 处理掉线
         void rapidPassiveEngine_ConnectionInterrupted()
         {
@@ -78,7 +77,6 @@ namespace MinChat.Forms
 
         }
         #endregion
-
         #region 处理广播消息
         void GroupOutter_BroadcastReceived(string broadcastID, string groupID, int broadcastType, byte[] broadcastContent)
         {
@@ -132,8 +130,6 @@ namespace MinChat.Forms
                     case 2:
                         break;
                 }
-
-
             }
         }
 
