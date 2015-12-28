@@ -91,11 +91,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constant.cs" />
-    <Compile Include="Works\FriendDB.cs" />
-    <Compile Include="Works\GroupDB.cs" />
-    <Compile Include="Works\MGroupDB.cs" />
-    <Compile Include="Works\MsgDB.cs" />
-    <Compile Include="Works\SessionDB.cs" />
+    <Compile Include="Works\db\FriendDB.cs" />
+    <Compile Include="Works\db\GroupDB.cs" />
+    <Compile Include="Works\db\MGroupDB.cs" />
+    <Compile Include="Works\db\MsgDB.cs" />
+    <Compile Include="Works\db\SessionDB.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
       <DependentUpon>Form_Chat.cs</DependentUpon>
     </EmbeddedResource>
