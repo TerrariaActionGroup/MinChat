@@ -111,10 +111,10 @@ namespace MinChat.Forms
         #region 处理事件的程序
         void ChatHandleReceive(object sender, EventArgs e, Msg msg)//处理事件的程序
         {
-            if (Convert.ToUInt32(msg.getFromUser()) == item.ID)
+            if (Convert.ToUInt32(msg.fromUser) == item.ID)
             {
                 ChatBoxContent content = new ChatBoxContent();
-                content.Text = msg.getContent();
+                content.Text = msg.content;
                 this.AppendChatBoxContent(item.NicName,content);
             }
         }

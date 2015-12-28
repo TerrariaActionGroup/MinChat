@@ -48,6 +48,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Libs\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,8 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communications\Msg.cs" />
-    <Compile Include="Communications\Session.cs" />
+    <Compile Include="Communications\bean\Group.cs" />
+    <Compile Include="Communications\bean\Msg.cs" />
+    <Compile Include="Communications\bean\Session.cs" />
+    <Compile Include="Communications\bean\Friend.cs" />
+    <Compile Include="Communications\bean\Mgroup.cs" />
     <Compile Include="Forms\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constant.cs" />
+    <Compile Include="Works\db\AvatorDB.cs" />
+    <Compile Include="Works\db\FriendDB.cs" />
+    <Compile Include="Works\db\GroupDB.cs" />
+    <Compile Include="Works\db\MGroupDB.cs" />
+    <Compile Include="Works\db\MsgDB.cs" />
+    <Compile Include="Works\db\SessionDB.cs" />
+    <Compile Include="Works\utils\ImageHelper.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
       <DependentUpon>Form_Chat.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Libs\" />
-    <Folder Include="Works\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
