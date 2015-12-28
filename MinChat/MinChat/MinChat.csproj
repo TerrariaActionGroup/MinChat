@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MinChat</RootNamespace>
     <AssemblyName>MinChat</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,8 +33,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSkin, Version=15.3.10.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\CSkin\CSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="ESBasic">
+      <HintPath>Libs\ES\ESBasic.dll</HintPath>
+    </Reference>
+    <Reference Include="ESFramework">
+      <HintPath>Libs\ES\ESFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="ESFramework.Boost">
+      <HintPath>Libs\ES\ESFramework.Boost.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +59,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communications\Msg.cs" />
+    <Compile Include="Communications\Session.cs" />
+    <Compile Include="Forms\Form_Chat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Chat.Designer.cs">
+      <DependentUpon>Form_Chat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_login.Designer.cs">
+      <DependentUpon>Form_login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_main.Designer.cs">
+      <DependentUpon>Form_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_userInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_userInfo.Designer.cs">
+      <DependentUpon>Form_userInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\Constant.cs" />
+    <EmbeddedResource Include="Forms\Form_Chat.resx">
+      <DependentUpon>Form_Chat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_login.resx">
+      <DependentUpon>Form_login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_main.resx">
+      <DependentUpon>Form_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_userInfo.resx">
+      <DependentUpon>Form_userInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -54,6 +108,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -69,12 +124,35 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Communications\" />
-    <Folder Include="Forms\" />
     <Folder Include="Libs\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Settings\" />
     <Folder Include="Works\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Forms_Img\1_100.gif" />
+    <Content Include="Resources\Forms_Img\background.png" />
+    <Content Include="Resources\Forms_Img\Btn_exit_down.png" />
+    <Content Include="Resources\Forms_Img\Btn_exit_hover.png" />
+    <Content Include="Resources\Forms_Img\Btn_exit_normal.png" />
+    <Content Include="Resources\Forms_Img\Btn_login_Down.png" />
+    <Content Include="Resources\Forms_Img\Btn_login_Hover.png" />
+    <Content Include="Resources\Forms_Img\Btn_login_Normal.png" />
+    <Content Include="Resources\Forms_Img\Btn_min_down.png" />
+    <Content Include="Resources\Forms_Img\Btn_min_hover.png" />
+    <Content Include="Resources\Forms_Img\Btn_min_normal.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_checked_down.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_checked_hover.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_checked_normal.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_Uncheck_Down.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_Uncheck_hover.png" />
+    <Content Include="Resources\Forms_Img\Checkbox_Uncheck_normal.png" />
+    <Content Include="Resources\Forms_Img\crab.ico" />
+    <Content Include="Resources\Forms_Img\TBox_Down_Hover.png" />
+    <Content Include="Resources\Forms_Img\TBox_Down_normal.png" />
+    <Content Include="Resources\Forms_Img\TBox_Up_Hover.png" />
+    <Content Include="Resources\Forms_Img\TBox_Up_Normal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
