@@ -322,7 +322,6 @@
             this.Radius = 2;
             this.ShadowWidth = 5;
             this.ShowDrawIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "Form_main";
             this.chatTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

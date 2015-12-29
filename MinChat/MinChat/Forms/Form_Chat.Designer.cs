@@ -106,6 +106,7 @@
             this.Name = "Form_Chat";
             this.ShowDrawIcon = false;
             this.Text = "Form_Chat";
+            this.Load += new System.EventHandler(this.Form_Chat_Load);
             this.ResumeLayout(false);
 
         }

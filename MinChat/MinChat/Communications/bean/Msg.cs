@@ -46,7 +46,7 @@ namespace MinChat.Communications
                 sessionId = value;
             }
         }
-        public String FromUser       //发送者Id
+        public String FromUserId       //发送者Id
         {
             get
             {
@@ -57,7 +57,7 @@ namespace MinChat.Communications
                 fromUser = value;
             }
         }
-        public String ToUser         //接收者Id
+        public String ToUserId         //接收者Id
         {
             get
             {

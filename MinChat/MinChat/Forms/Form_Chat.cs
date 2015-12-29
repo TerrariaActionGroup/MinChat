@@ -4,6 +4,7 @@ using CCWin.SkinControl;
 using ESPlus.Rapid;
 using MinChat.Communications;
 using MinChat.Settings;
+using MinChat.Works.db;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,12 +28,12 @@ namespace MinChat.Forms
         /// <summary>
         /// 聊天对象信息
         /// </summary>
-        ChatListSubItem item;
+        ChatListSubItem contactInfo;
 
         /// <summary>
         /// 用户user
         /// </summary>
-        ChatListSubItem userItem;
+        ChatListSubItem myInfo;
 
         /// <summary>
         /// 客户端引擎
@@ -41,26 +42,37 @@ namespace MinChat.Forms
 
         #endregion
         #region 窗口构造函数
-        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine, ChatListSubItem item, ChatListSubItem userItem, Form_main main)
+        public Form_Chat(IRapidPassiveEngine rapidPassiveEngine, ChatListSubItem contactInfo, ChatListSubItem myInfo, Form_main main)
         {
             main.Receive += new Form_main.ReceiveEventHandler(ChatHandleReceive);//注册收到信息时的事件处理程序ChatHandleReceive
-            this.userItem = userItem;
-            this.item = item;
+            this.contactInfo = contactInfo;
+            this.myInfo = myInfo;
             this.rapidPassiveEngine = rapidPassiveEngine;
             InitializeComponent();
         }
         #endregion
-        #region 发送消息封装
-        private void AppendChatBoxContent(string NicName,ChatBoxContent content)
+        #region 载入窗口时
+        private void Form_Chat_Load(object sender, EventArgs e)
+        {
+            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+            List<Msg> msgs = db.readMsg(contactInfo.ID.ToString(), myInfo.ID.ToString());
+            ChatBoxContent content = new ChatBoxContent();
+            foreach (Msg msg in msgs)
+            {
+                AppendChatBoxContent(msg);
+            }
+        }
+        #endregion
+        #region 显示消息封装
+        private void AppendChatBoxContent(Msg msg)
         {
             Color NicNameColor = Color.SeaGreen;
             Color textColor = Color.Black;
             string showTime = DateTime.Now.ToString();
 
-            this.chatBox_history.AppendRichText(string.Format("\n{0}  {1}\n", NicName, showTime), new Font(this.messageFont, FontStyle.Regular), NicNameColor);
-            this.chatBox_history.AppendRichText(string.Format("{0}", content.Text), content.Font, textColor);
+            this.chatBox_history.AppendRichText(string.Format("\n{0}  {1}\n", msg.FromUserName, msg.Date), new Font(this.messageFont, FontStyle.Regular), NicNameColor);
+            this.chatBox_history.AppendRichText(string.Format("{0}", msg.Content), messageFont, textColor);
 
-            //chatBox_history//GoToLineAndColumn(chatBox_history, chatBox_history.Lines.Length, 0);
             chatBox_history.SelectionStart = chatBox_history.TextLength;
             chatBox_history.ScrollToCaret();
         }
@@ -72,26 +84,29 @@ namespace MinChat.Forms
             ChatBoxContent content = this.chatBoxSend.GetContent();
             if (content.Text != "" && content.Text != "\n")
             {
-                //
-                //chatBoxSend.Text = chatBoxSend.Text.Remove(chatBoxSend.Text.Length - 1);
-                //if(chatBoxSend.Text[chatBoxSend.Text.Length-1]=='\n')
-                //{
-                //    chatBoxSend.Text = chatBoxSend.Text.Remove(chatBoxSend.Text.Length - 2);
-                //}
-                //将内容更新到上方面板
-                this.AppendChatBoxContent(userItem.NicName, content);
                 //发送信息
                 //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                 string split = Constant.SPLIT;
-                string receiveId = item.ID.ToString();
-                string sendId = userItem.ID.ToString();
+                string receiveId = contactInfo.ID.ToString();
+                string sendId = myInfo.ID.ToString();
                 string msgText = content.Text;
                 string date = DateTime.Now.ToString();
-                string sendName = userItem.NicName;
+                string sendName = myInfo.NicName;
                 string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
                 string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
                 Msg aMsg = new Msg(msgs,1,1);
                 this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.UTF8.GetBytes(msg));
+                
+                string[] msgs = new string[] { receiveId, sendId, msgText, date, sendName };
+                Msg aMsg = new Msg(msgs, 1, 1);
+
+                //将内容更新到上方面板
+                this.AppendChatBoxContent(aMsg);
+
+                MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+                db.addMsg(aMsg);
+
+                
             }
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
@@ -107,17 +122,34 @@ namespace MinChat.Forms
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < chatBoxSend.TextLength; i++)
+            {
+                chatBoxSend.Select(i, 1);
+                RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;
+                MessageBox.Show(rt.ToString());
+                if (rt == RichTextBoxSelectionTypes.Object)
+                {
+                    //当然也可能是其它的类型
+                    //MessageBox.Show("这是一个图片");
+                    chatBoxSend.Copy();
+                    Image img = Clipboard.GetImage();
+                    if (img != null)
+                    {
+                        img.Save(i.ToString() + ".bmp");
+                        img.Dispose();
+                    }
+                }
+            }
             send();
+            
         }
         #endregion
         #region 处理事件的程序
         void ChatHandleReceive(object sender, EventArgs e, Msg msg)//处理事件的程序
         {
-            if (Convert.ToUInt32(msg.FromUser) == item.ID)
+            if (Convert.ToUInt32(msg.FromUserId) == contactInfo.ID)
             {
-                ChatBoxContent content = new ChatBoxContent();
-                content.Text = msg.Content;
-                this.AppendChatBoxContent(item.NicName,content);
+                this.AppendChatBoxContent(msg);
             }
         }
         #endregion
