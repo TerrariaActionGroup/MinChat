@@ -63,6 +63,9 @@
     <Compile Include="db\bean\Constant.cs" />
     <Compile Include="db\bean\Group.cs" />
     <Compile Include="db\bean\User.cs" />
+    <Compile Include="db\dao\DBManager.cs" />
+    <Compile Include="db\dao\GroupDBManager.cs" />
+    <Compile Include="db\dao\UserDBManager.cs" />
     <Compile Include="db\DBcolumns.cs" />
     <Compile Include="db\FileHelper.cs" />
     <Compile Include="db\minterface\DBHelper.cs" />
