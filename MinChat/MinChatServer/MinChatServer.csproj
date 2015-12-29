@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="db\bean\Constant.cs" />
     <Compile Include="db\bean\Group.cs" />
     <Compile Include="db\bean\User.cs" />
     <Compile Include="db\dao\DBManager.cs" />

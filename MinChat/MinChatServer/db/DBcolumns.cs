@@ -18,7 +18,7 @@ namespace MinChatServer.db
         public static String USER_NAME = "userName";
         public static String USER_SEX = "userSex";
         public static String USER_AGE = "userAge";
-        public static String USER_BIRTHDAY = "userBithday";
+        public static String USER_BIRTHDAY = "userBirthday";
         public static String USER_ADDRESS = "userAddr";
         public static String USER_TIME = "userTime";               //注册时间 
 
@@ -50,7 +50,6 @@ namespace MinChatServer.db
          */
         public static String TABLE_MSG = "table_msg";
         public static String MSG_ID = "msg_id";
-        public static String MSG_FROM = "msg_from";           
         public static String MSG_TO = "msg_to";
         public static String MSG_CONTENT = "msg_content";
 
@@ -60,14 +59,14 @@ namespace MinChatServer.db
         public static String TABLE_RELATION = "table_relation";
         public static String RELATION_ID = "relationId";
         public static String RELATION_USER_ID = "relation_user_id";    //对方
-        public static String MGROUP_ID = "mgroup_id";                  //用户自定义分组
+        public static String FGROUP_ID = "fgroup_id";                  //用户自定义分组
         public static String RELATION_TIME = "relationTime";           //添加好友时间            
 
 
         /**
          *  用户好友分组表，每个用户一张
          */
-        public static String TABLE_USER = "table_mgroup";
+        public static String TABLE_MGROUP = "table_mgroup";
         public static String MGROUP_ID = "mgroup_Id";
         public static String MGROUP_NAME = "mgroup_Name";
         public static String MGROUP_NUM = "mgroup_num";
