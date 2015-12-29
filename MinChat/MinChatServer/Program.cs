@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MinChatServer.db.dao;
+using MinChatServer.db.bean;
 
 namespace MinChatServer
 {
@@ -20,6 +22,10 @@ namespace MinChatServer
         [STAThread]
         static void Main()
         {
+            UserDBManager dm = new UserDBManager();
+
+            User ret = dm.queryUser("10001");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

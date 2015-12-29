@@ -28,7 +28,7 @@ namespace MinChatServer.db.minterface
         /// </summary>
         /// <param name="groupId"></param>
         /// <returns></returns>
-        string queryGroup(int groupId);
+        Group queryGroup(int groupId);
 
         /// <summary>
         /// 用户加入群组

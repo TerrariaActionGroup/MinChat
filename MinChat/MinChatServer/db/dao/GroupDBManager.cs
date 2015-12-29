@@ -9,11 +9,11 @@ using System.Data.SQLite;
 
 namespace MinChatServer.db.dao
 {
-    class GroupDBManager:GroupUtil
+    public class GroupDBManager:GroupUtil
     {
         private static void ExecuteNonQuery(string cmdString, string dbPath)
         {
-            SQLiteConnection conn = new SQLiteConnection(dbPath);
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + dbPath);
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             cmd.ExecuteNonQuery();
@@ -35,7 +35,7 @@ namespace MinChatServer.db.dao
                 group.Time + "\',\'" +
                 group.Notice + "\',\'" +
                 group.Type + "\')";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath);
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
             return true;
         }
 
@@ -49,7 +49,7 @@ namespace MinChatServer.db.dao
             string cmdString = "DELETE FROM " +
                 DBcolumns.TABLE_GROUP + " WHERE " +
                 DBcolumns.GROUP_ID + " = " + groupId;
-            ExecuteNonQuery(cmdString, Constant.globalDbPath);
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
             return true;
         }
 
@@ -58,21 +58,30 @@ namespace MinChatServer.db.dao
         /// </summary>
         /// <param name="groupId"></param>
         /// <returns></returns>
-        public string queryGroup(int groupId)
+        public Group queryGroup(int groupId)
         {
-            StringBuilder group = new StringBuilder();
-            string cmdString = "SELETE * FROM "+
+            string cmdString = "SELECT * FROM "+
                 DBcolumns.TABLE_GROUP+" WHERE " +
                 DBcolumns.GROUP_ID + " = " + groupId;
-            SQLiteConnection conn = new SQLiteConnection(Constant.globalDbPath);
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + Constant.globalDbPath + "user.db");
+            conn.Open();
             SQLiteCommand  cmd = new SQLiteCommand(cmdString,conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            int count = dr.FieldCount;
+            if (dr.Read())
             {
-                group.Append(dr.GetString(1));
+                Group gr = new Group();
+                gr.GroupId = dr.GetInt32(0);
+                gr.GroupName = dr.GetString(1);
+                gr.Num = dr.GetInt32(2);
+                gr.Time = dr.GetString(3) ;
+                gr.Notice = dr.GetString(4);
+                gr.Type = dr.GetString(5);
+                conn.Close();
+                return gr;
             }
             conn.Close();
-            return group.ToString();
+            return null;
         }
 
         /// <summary>
@@ -84,11 +93,11 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool userIntoGroup(string userId, int groupId, int type)
         {
-            string cmdString = "INSERT INTO "+
+            string cmdString = "INSERT INTO group"+
                 groupId + " VALUES(\'"+
                 userId + "\',\'"+
-                DateTime.Now.ToString()+", 2)";
-            ExecuteNonQuery(cmdString, Constant.groupDbPath + "\\" + groupId + ".db");
+                DateTime.Now.ToString()+"\', 2)";
+            ExecuteNonQuery(cmdString, Constant.groupDbPath  + "groupPerson.db");
             return true;
         }
 
@@ -100,10 +109,11 @@ namespace MinChatServer.db.dao
         public List<string> queryGroupMates(int groupId)
         {
             List<string> groupmates = new List<string>();
-            string cmdString = "SELETE" +
-                DBcolumns.GROUP_USER_ID + " FROM " +
+            string cmdString = "SELECT " +
+                DBcolumns.GROUP_USER_ID + " FROM group" +
                 groupId;
-            SQLiteConnection conn = new SQLiteConnection(Constant.groupDbPath);
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.groupDbPath + "groupPerson.db");
+            conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
             

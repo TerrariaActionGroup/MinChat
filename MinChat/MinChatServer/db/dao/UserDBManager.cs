@@ -14,7 +14,7 @@ namespace MinChatServer.db.dao
     {
         private static void ExecuteNonQuery(string cmdString, string dbPath)
         {
-            SQLiteConnection conn = new SQLiteConnection(dbPath);
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + dbPath);
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             cmd.ExecuteNonQuery();
@@ -28,10 +28,11 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool checkOneUser(string id)
         {
-            string cmdString = "SELETE * FROM " +
-                DBcolumns.TABLE_USER + "WHERE " +
+            string cmdString = "SELECT * FROM " +
+                DBcolumns.TABLE_USER + " WHERE " +
                 DBcolumns.USER_ID + " = \'" + id + "\'";
-            SQLiteConnection conn = new SQLiteConnection(Constant.groupDbPath);
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "user.db");
+            conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
 
@@ -52,13 +53,14 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool varifyUser(string userId, string pwd)
         {
-            string cmdString = "SELETE * FROM " +
-                DBcolumns.TABLE_USER + "WHERE " +
+            string cmdString = "SELECT * FROM " +
+                DBcolumns.TABLE_USER + " WHERE " +
                 DBcolumns.USER_ID + " = \'" +
-                userId + "\' AND "+
-                DBcolumns.USER_PWD + " = \'"+
-                pwd;
-            SQLiteConnection conn = new SQLiteConnection(Constant.groupDbPath);
+                userId + "\' AND " +
+                DBcolumns.USER_PWD + " = \'" +
+                pwd + "\'";
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "user.db");
+            conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
 
@@ -88,7 +90,7 @@ namespace MinChatServer.db.dao
                 aUser.Birthday+"\',\'"+
                 aUser.Address+"\',\'"+
                 aUser.Time+"\')";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath);
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
             return true;
         }
 
@@ -102,7 +104,7 @@ namespace MinChatServer.db.dao
             string cmdString = "DELETE FROM " +
                 DBcolumns.TABLE_USER + " WHERE " +
                 DBcolumns.USER_ID + " = \'" + userId + "\'";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath);
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
             return true;
         }
 
@@ -111,22 +113,32 @@ namespace MinChatServer.db.dao
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public List<string> queryUser(string userId)
+        public User queryUser(string userId)
         {
-            List<string> userdata = new List<string>();
-            string cmdString = "SELETE * FROM " +
-                DBcolumns.TABLE_USER;
-            SQLiteConnection conn = new SQLiteConnection(Constant.globalDbPath);
+            string cmdString = "SELECT * FROM " +
+                DBcolumns.TABLE_USER + " WHERE "+
+                DBcolumns.USER_ID + " =\'" + userId + "\'"; ;
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "user.db");
+            conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
 
-            while (dr.Read())
+            if (dr.Read())
             {
-                for(int i = 0;i < 8;i++)
-                userdata.Add(dr.GetString(i));
+                User u = new User();
+                u.UserId = dr.GetString(0);
+                u.UserPwd = "";
+                u.UserName = dr.GetString(2);
+                u.Sex = dr.GetInt32(3);
+                u.Age = dr.GetInt32(4);
+                u.Birthday = dr.GetString(5);
+                u.Address = dr.GetString(6);
+                u.Time = dr.GetString(7);
+                conn.Close();
+                return u;
             }
             conn.Close();
-            return userdata;
+            return null;
         }
 
         /// <summary>
@@ -143,7 +155,7 @@ namespace MinChatServer.db.dao
                 userId + "\',\'" +
                 0 + "\',\'" +
                 DateTime.Now.ToString() + "\')";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath);
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
             return true;
         }
 

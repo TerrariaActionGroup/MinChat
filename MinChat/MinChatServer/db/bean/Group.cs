@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MinChatServer.db.bean
 {
-    class Group
+    public class Group
     {
         //groupId integer, groupName varchar(40), num integer, time date, notice text, type varchar(20)
         private int groupId;

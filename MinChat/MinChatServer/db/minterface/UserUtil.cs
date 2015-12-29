@@ -43,7 +43,7 @@ namespace MinChatServer.db.minterface
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        List<string> queryUser(string userId);
+       User queryUser(string userId);
 
         /// <summary>
         /// 添加好友
