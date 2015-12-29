@@ -129,30 +129,30 @@ namespace MinChat.Forms
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
-            //缓存剪贴板中现有内容
-            RichTextBox clipboardTmp = new RichTextBox();
-            clipboardTmp.Paste();
+            ////缓存剪贴板中现有内容
+            //RichTextBox clipboardTmp = new RichTextBox();
+            //clipboardTmp.Paste();
 
-            for (int i = 0; i < chatBoxSend.TextLength; i++)
-            {
+            //for (int i = 0; i < chatBoxSend.TextLength; i++)
+            //{
 
-                chatBoxSend.Select(i, 1);
-                RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;
-                //MessageBox.Show(rt.ToString());
-                if (rt == RichTextBoxSelectionTypes.Object)
-                {
-                    //当然也可能是其它的类型
-                    //MessageBox.Show("这是一个图片");
-                    chatBoxSend.Copy();
-                    Image img = Clipboard.GetImage();
-                    if (img != null)
-                    {
-                        img.Save(i.ToString() + ".bmp");
-                        img.Dispose();
-                    }
-                }
-            }
-            //send();
+            //    chatBoxSend.Select(i, 1);
+            //    RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;
+            //    //MessageBox.Show(rt.ToString());
+            //    if (rt == RichTextBoxSelectionTypes.Object)
+            //    {
+            //        //当然也可能是其它的类型
+            //        //MessageBox.Show("这是一个图片");
+            //        chatBoxSend.Copy();
+            //        Image img = Clipboard.GetImage();
+            //        if (img != null)
+            //        {
+            //            img.Save(i.ToString() + ".bmp");
+            //            img.Dispose();
+            //        }
+            //    }
+            //}
+            send();
         }
         #endregion
         #region 处理事件的程序

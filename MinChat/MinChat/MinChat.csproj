@@ -100,6 +100,7 @@
     <Compile Include="Works\db\MGroupDB.cs" />
     <Compile Include="Works\db\MsgDB.cs" />
     <Compile Include="Works\db\SessionDB.cs" />
+    <Compile Include="Works\util\ImageHelper.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
       <DependentUpon>Form_Chat.cs</DependentUpon>
     </EmbeddedResource>

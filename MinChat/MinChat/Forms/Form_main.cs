@@ -8,6 +8,7 @@ using MinChat.Communications;
 using MinChat.Settings;
 using MinChat.Works.db;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -40,6 +41,19 @@ namespace MinChat.Forms
             //加载分组
             ChatListItem gp = new ChatListItem();//new一个分组
             gp.Text = "TestList";
+
+            List<string> list=rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
+            foreach(string friendId in list)
+            {
+                if (friendId != myInfo.ID.ToString() && chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId)).Length==0)
+                {
+                    ChatListSubItem contact = new ChatListSubItem();
+                    contact.ID = Convert.ToUInt32(friendId);
+                    contact.NicName = friendId;
+                    gp.SubItems.Add(contact);
+                }
+
+            }
             ChatListSubItem people = new ChatListSubItem();
 
             if (myInfo.ID == 10010)
@@ -69,8 +83,23 @@ namespace MinChat.Forms
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
             //预订断线事件
             this.rapidPassiveEngine.ConnectionInterrupted += new CbGeneric(rapidPassiveEngine_ConnectionInterrupted); 
+            //好友下线事件
+            this.rapidPassiveEngine.FriendsOutter.FriendOffline += new CbGeneric<string>(FriendOffline);
+            //好友上线事件
+            this.rapidPassiveEngine.FriendsOutter.FriendConnected += new CbGeneric<string>(FriendConnected);
+
         }
 
+        #endregion
+        #region 处理好友上下线
+        void FriendOffline(string friendId)
+        {
+            chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.OffLine;
+        }
+        void FriendConnected(string friendId)
+        {
+            chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.Online;
+        }
         #endregion
         #region 处理掉线
         void rapidPassiveEngine_ConnectionInterrupted()
