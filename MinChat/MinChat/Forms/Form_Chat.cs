@@ -69,27 +69,36 @@ namespace MinChat.Forms
             Color NicNameColor = Color.SeaGreen;
             Color textColor = Color.Black;
             string showTime = DateTime.Now.ToString();
-
-            this.chatBox_history.AppendRichText(string.Format("\n{0}  {1}\n", msg.FromUserName, msg.Date), new Font(this.messageFont, FontStyle.Regular), NicNameColor);
-            this.chatBox_history.AppendRichText(string.Format("{0}", msg.Content), messageFont, textColor);
+            appendTextBox(chatBox_history, string.Format("\n{0}  {1}\n", msg.FromUserName, msg.Date), NicNameColor, messageFont);
+            appendTextBox(chatBox_history, string.Format("{0}", msg.Content), textColor, messageFont);
+            //this.chatBox_history.AppendText(string.Format("\n{0}  {1}\n", msg.FromUserName, msg.Date));
+            //this.chatBox_history.AppendText(string.Format("{0}", msg.Content));
 
             chatBox_history.SelectionStart = chatBox_history.TextLength;
             chatBox_history.ScrollToCaret();
+        }
+        public void appendTextBox(RichTextBox textBox, string strInput, Color fontColor, Font fontType)
+        {
+            int p1 = textBox.TextLength;            //取出未添加时的字符串长度 
+            textBox.AppendText(strInput);           //保留每行的所有颜色
+            int p2 = strInput.Length;               //取出要添加的文本的长度 
+            textBox.Select(p1, p2);                 //选中要添加的文本 
+            textBox.SelectionColor = fontColor;     //设置要添加的文本的字体色 
+            textBox.SelectionFont = fontType;       //设置要添加的文本的字体
         }
         #endregion
         #region 发送信息
         private void send()
         {   
             chatBoxSend.Text = chatBoxSend.Text.TrimEnd('\n');
-            ChatBoxContent content = this.chatBoxSend.GetContent();
-            if (content.Text != "" && content.Text != "\n")
+            if (chatBoxSend.Text != "" && chatBoxSend.Text != "\n")
             {
                 //发送信息
                 //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                 string split = Constant.SPLIT;
                 string receiveId = contactInfo.ID.ToString();
                 string sendId = myInfo.ID.ToString();
-                string msgText = content.Text;
+                string msgText = chatBoxSend.Text;
                 string date = DateTime.Now.ToString();
                 string sendName = myInfo.NicName;
                 string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
@@ -120,11 +129,16 @@ namespace MinChat.Forms
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
+            //缓存剪贴板中现有内容
+            RichTextBox clipboardTmp = new RichTextBox();
+            clipboardTmp.Paste();
+
             for (int i = 0; i < chatBoxSend.TextLength; i++)
             {
+
                 chatBoxSend.Select(i, 1);
                 RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;
-                MessageBox.Show(rt.ToString());
+                //MessageBox.Show(rt.ToString());
                 if (rt == RichTextBoxSelectionTypes.Object)
                 {
                     //当然也可能是其它的类型
@@ -138,8 +152,7 @@ namespace MinChat.Forms
                     }
                 }
             }
-            send();
-            
+            //send();
         }
         #endregion
         #region 处理事件的程序
