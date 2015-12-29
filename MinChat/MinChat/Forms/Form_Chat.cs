@@ -89,6 +89,8 @@ namespace MinChat.Forms
                 string date = DateTime.Now.ToString();
                 string sendName = userItem.NicName;
                 string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
+                string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
+                Msg aMsg = new Msg(msgs,1,1);
                 this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.UTF8.GetBytes(msg));
             }
             //清空发送输入框
