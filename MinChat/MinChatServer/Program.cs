@@ -1,4 +1,5 @@
 ﻿using ESFramework.Server.UserManagement;
+using MinChatServer.db;
 using MinChatServer.es;
 using MinChatServer.form;
 using System;
@@ -25,6 +26,11 @@ namespace MinChatServer
 
             //如果是其它类型的授权用户，请使用下面的语句设定正确的授权用户ID和密码。              
             ESPlus.GlobalUtil.SetAuthorizedUser("FreeUser", "");
+
+            //创建数据库目录
+            FileHelper fileHelper = new FileHelper();
+            fileHelper.createDbDirectory();
+            fileHelper = null;
 
             //设置好友管理器
             FriendsManager friendManager = new FriendsManager();

@@ -1,5 +1,6 @@
 ﻿using ESFramework.Server.UserManagement;
 using ESPlus.Application.Group.Server;
+using MinChatServer.db.dao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,8 @@ namespace MinChatServer.es
         /// </summary>        
         public List<string> GetGroupMembers(string groupID)
         {
-            return null;
+            GroupDBManager manager = GroupDBManager.getInstance();
+            return manager.queryGroupMates(int.Parse(groupID));
         }
     }
 }

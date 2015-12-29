@@ -1,5 +1,6 @@
 ﻿using ESFramework.Server.UserManagement;
 using ESPlus.Application.Friends.Server;
+using MinChatServer.db.dao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,8 @@ namespace MinChatServer.es
         /// <returns>好友列表</returns>
         public List<string> GetFriendsList(string ownerID, string tag)
         {
-            return null;
+            UserDBManager manager = UserDBManager.getInstance();
+            return manager.queryFriends(ownerID);
         }
     }
 }

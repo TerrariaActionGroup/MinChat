@@ -9,7 +9,7 @@ namespace MinChatServer.db
 {
     class FileHelper
     {
-        bool createDbDirectory()
+        public bool createDbDirectory()
         {
             bool result = true;
             try
@@ -17,9 +17,9 @@ namespace MinChatServer.db
                 string basePath = Environment.CurrentDirectory + "\\";
                 createDirectory(basePath + "data");
                 basePath += "data\\";
-                createDirectory(basePath + "global");
-                createDirectory(basePath + "group");
-                createDirectory(basePath + "user");
+                createDirectory(basePath + "globalDb");
+                createDirectory(basePath + "groupDb");
+                createDirectory(basePath + "userDb");
             }
             catch (Exception e)
             {
@@ -33,7 +33,7 @@ namespace MinChatServer.db
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        void createDirectory(string path)
+        public void createDirectory(string path)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace MinChatServer.db
         /// </summary>
         /// <param name="path">文件名或者带路径的文件名</param>
         /// <returns></returns>
-        void createFile(string path)
+        public void createFile(string path)
         {
             try
             {
