@@ -10,9 +10,11 @@ namespace MinChat.Works.db
 {
     class MsgDB
     {
+        #region 变量
         protected string userId;
         protected SQLiteConnection conn;
         protected static MsgDB uniqueInstance;
+        #endregion
         #region 获取数据库
         /// <summary>
         /// 获取数据库，单例
@@ -35,11 +37,22 @@ namespace MinChat.Works.db
         /// <param name="userId">用户ID</param>
         private MsgDB(string userId)
         {
-            this.userId = userId; 
-            string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/msg.db";
-            conn = new SQLiteConnection(dbPath);
-            string cmdString = @"CREATE TABLE IF NOT EXISTS msg(msgId integer,sessionId integer, senderId varchar(20), receiverId varchar(20), senderName varchar(40), type integer,
-content text, isComing integer, date time, isRead integer, bak1 text, bak2 text, bak3 text, bak4 text, bak5 text, bak6 text);";
+            this.userId = userId;
+            string path = Environment.CurrentDirectory + "\\db\\" + userId;
+            string dbPath = path+"\\msg.db";
+            if(System.IO.Directory.Exists(path)==false)//不存在目录则创建
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            
+            if (System.IO.File.Exists(dbPath)==false)
+            {
+                SQLiteConnection.CreateFile(dbPath);
+            }
+
+            conn = new SQLiteConnection("Data Source="+dbPath);
+            conn.Open();
+            string cmdString = "CREATE TABLE IF NOT EXISTS msg(msgId integer PRIMARY KEY AUTOINCREMENT,sessionId integer, senderId varchar(20), receiverId varchar(20), senderName varchar(40), type integer,content text, isComing integer, date time, isRead integer, bak1 text, bak2 text, bak3 text, bak4 text, bak5 text, bak6 text);";
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
@@ -59,14 +72,26 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
             sqlReadMsg.Dispose();
             return true;
         }
-        public bool readMsg(string senderId)
+        public List<Msg> readMsg(string senderId, string receiverId)//读取两者之间的所有消息
         {
-            string cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
+            string cmdString = "SELECT * FROM msg where senderId =" + senderId + " and receiverId=" + receiverId + " or senderId = " + receiverId + " and receiverId=" + senderId + ";";
             SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
-            sqlReadMsg.ExecuteNonQuery();
+            SQLiteDataReader result = sqlReadMsg.ExecuteReader();
+            List<Msg> a = new List<Msg>();
+            while(result.Read())
+            {
+                string[] msgs = new string[] { result[3].ToString(), result[2].ToString(), result[6].ToString(), result[8].ToString(), result[4].ToString() };
+                Msg aMsg = new Msg(msgs, 1, 1);
+                a.Add(aMsg);
+            }
+            result.Close();
+
+            //cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
+            //sqlReadMsg.ExecuteNonQuery();
             sqlReadMsg.Dispose();
-            return true;
+            return a;
         }
+
         #endregion
         #region 添加消息
         /// <summary>
@@ -76,23 +101,23 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
         /// <returns>是否成功</returns>
         public bool addMsg(Msg m)
         {
-            string cmdString = @"INSERT TO msg VALUES (" +
-                m.MsgId + "," +
+            string cmdString = @"INSERT INTO msg (sessionId, senderId, receiverId, senderName, type, content, isComing,date, isRead, bak1, bak2, bak3, bak4, bak5, bak6)" +
+                    " VALUES (" +
                 m.SessionId + "," +
-                m.FromUser + "," +
-                m.ToUser + "," +
-                m.FromUserName + "," +
+                m.FromUserId + "," +
+                m.ToUserId + "," +
+                "'" + m.FromUserName + "'" + "," +
                 m.Type + "," +
-                m.Content + "," +
+                "'" + m.Content + "'" + "," +
                 m.IsComing + "," +
-                m.Date + "," + "," +
+                "'" + m.Date + "'" + "," +
                 m.IsReaded + "," +
-                m.Bak1 + "," +
-                m.Bak2 + "," +
-                m.Bak3 + "," +
-                m.Bak4 + "," +
-                m.Bak5 + "," +
-                m.Bak6 + "," +
+                "'" + m.Bak1 + "'" + "," +
+                "'" + m.Bak2 + "'" + "," +
+                "'" + m.Bak3 + "'" + "," +
+                "'" + m.Bak4 + "'" + "," +
+                "'" + m.Bak5 + "'" + "," +
+                "'" + m.Bak6 + "'" +
                 ");";
             SQLiteCommand sqlAddMsg = new SQLiteCommand(cmdString, conn);
             sqlAddMsg.ExecuteNonQuery();
@@ -129,11 +154,13 @@ content text, isComing integer, date time, isRead integer, bak1 text, bak2 text,
         /// </summary>
         public void Close()
         {
-            if (null != conn)
+            if (null != uniqueInstance && null != conn)
             {
                 conn.Close();
                 conn = null;
+                uniqueInstance = null;
             }
+           
         }
         #endregion
     }
