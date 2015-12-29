@@ -16,7 +16,7 @@ namespace MinChat.Forms
     public partial class Form_main : Skin_Mac,ICustomizeHandler
     {        
         #region 变量
-        //ChatListSubItem UserItem { get; set; }//好友列表
+        //ChatListSubItem contactInfo { get; set; }//好友列表
         public ChatListSubItem myInfo;//客户端用户的个人信息
         IRapidPassiveEngine rapidPassiveEngine;// 客户端引擎
         #endregion     
@@ -44,6 +44,7 @@ namespace MinChat.Forms
 
             if (myInfo.ID == 10010)
             {
+                myInfo.NicName = "联通";
                 lbl_userName.Text = "联通";
                 people.ID = 10086;//ID
                 people.NicName = "移动";//昵称
@@ -52,6 +53,7 @@ namespace MinChat.Forms
             }
             else if (myInfo.ID == 10086)
             {
+                myInfo.NicName = "移动";
                 lbl_userName.Text = "移动";
                 people.ID = 10010;//ID
                 people.NicName = "联通";//昵称
@@ -99,7 +101,6 @@ namespace MinChat.Forms
         /// <param name="info">信息</param>
         public void HandleInformation(string sourceUserID, int informationType, byte[] info) 
         {
-            MessageBox.Show("xxxxx");
             if (sourceUserID != null)
             {
                 switch (informationType)
@@ -109,23 +110,25 @@ namespace MinChat.Forms
                         string message = System.Text.Encoding.UTF8.GetString(info);
 
                         string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);//得到含有5个元素的数组
-                        Msg msg = new Msg(msgs, 1, 0);//消息存在msg对象中
+                        Msg msg = new Msg(msgs, 0, 0);//消息存在msg对象中
 
                         ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的用户
                         string windowsName = items[0].NicName + ' ' + items[0].ID;//聊天窗口的标题
                         IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
                         if (handle != IntPtr.Zero)//如果聊天窗口已存在
                         {
+                            msg.IsReaded = 1;
                             Form frm = (Form)Form.FromHandle(handle);
                             frm.Activate();//激活
                             this.OnReceive(msg);//传送消息到聊天窗口
                         }
                         else//聊天窗口不存在
                         {
-                            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
-                            //db.addMsg(msg);
                             twinkle(chatListBox_contacts, Convert.ToUInt32(sourceUserID));//头像闪烁
                         }
+                        //把msg存入数据库
+                        MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+                        db.addMsg(msg);
                         break;
                     case 2:
                         break;
@@ -145,9 +148,9 @@ namespace MinChat.Forms
         #region 双击好友弹窗对话框
         private void chatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
-            ChatListSubItem item = e.SelectSubItem;//获取选中的好友
-            item.IsTwinkle = false; //取消头像闪烁状态
-            string windowsName = item.NicName + ' ' + item.ID;//聊天窗口的标题
+            ChatListSubItem contactInfo = e.SelectSubItem;//获取选中的好友
+            contactInfo.IsTwinkle = false; //取消头像闪烁状态
+            string windowsName = contactInfo.NicName + ' ' + contactInfo.ID;//聊天窗口的标题
             IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
             if (handle != IntPtr.Zero)//窗口已存在
             {
@@ -156,8 +159,8 @@ namespace MinChat.Forms
             }
             else//窗口不存在
             {
-                Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine,item,this.myInfo,this);
-                fChat.Text =item.NicName+' '+item.ID;
+                Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine, contactInfo, this.myInfo, this);
+                fChat.Text = contactInfo.NicName + ' ' + contactInfo.ID;
                 fChat.Show();
             }
         }
