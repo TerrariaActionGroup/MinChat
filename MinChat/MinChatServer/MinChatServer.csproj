@@ -68,6 +68,7 @@
     <Compile Include="db\dao\GroupDBManager.cs" />
     <Compile Include="db\dao\UserDBManager.cs" />
     <Compile Include="db\DBcolumns.cs" />
+    <Compile Include="db\FileHelper.cs" />
     <Compile Include="db\minterface\DBHelper.cs" />
     <Compile Include="db\minterface\GroupUtil.cs" />
     <Compile Include="db\minterface\UserUtil.cs" />

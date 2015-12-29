@@ -9,7 +9,7 @@ using System.Data.SQLite;
 
 namespace MinChatServer.db.dao
 {
-    public class DBManager : DBHelper
+    class DBManager : DBHelper
     {
 
         private static void ExecuteNonQuery(string cmdString, string dbPath)
@@ -20,6 +20,21 @@ namespace MinChatServer.db.dao
             cmd.ExecuteNonQuery();
             cmd.Dispose();
             conn.Close();
+        }
+
+        private static DBManager dbManager = null;
+
+        /// <summary>
+        /// 获得单例DBManager对象
+        /// </summary>
+        /// <returns></returns>
+        public static DBHelper getInstance()
+        {
+            if (dbManager == null)
+            {
+                dbManager = new DBManager();
+            }
+            return dbManager;
         }
 
         #region

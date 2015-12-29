@@ -1,4 +1,5 @@
 ﻿using ESPlus.Application.Basic.Server;
+using MinChatServer.db.dao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace MinChatServer.es
         /// </summary>  
         public bool VerifyUser(string systemToken, string userID, string password, out string failureCause)
         {
+            UserDBManager userDBManager = UserDBManager.getInstance();
+            if (userDBManager.varifyUser(userID, password) == false)
+            {
+                failureCause = "账号或密码错误";
+                return false;
+            }
             failureCause = "";
             return true;
         }

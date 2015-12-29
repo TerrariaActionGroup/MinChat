@@ -21,6 +21,21 @@ namespace MinChatServer.db.dao
             cmd.Dispose();
             conn.Close();
         }
+        private static UserDBManager manager = null;
+
+        /// <summary>
+        /// 获得单例UserDBManager对象
+        /// </summary>
+        /// <returns></returns>
+        public static UserDBManager getInstance()
+        {
+            if (manager == null)
+            {
+                manager = new UserDBManager();
+            }
+            return manager;
+        }
+
         /// <summary>
         /// 检查某用户是否在数据库中
         /// </summary>

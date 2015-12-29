@@ -35,8 +35,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 372);
+            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Name = "FormMain";
-            this.Text = "FormMain";
+            this.Text = "MinChat服务端";
             this.ResumeLayout(false);
 
         }

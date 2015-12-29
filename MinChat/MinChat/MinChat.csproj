@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communications\bean\Group.cs" />
+    <Compile Include="Communications\bean\ImgText.cs" />
     <Compile Include="Communications\bean\Msg.cs" />
     <Compile Include="Communications\bean\Session.cs" />
     <Compile Include="Communications\bean\Friend.cs" />
@@ -95,11 +96,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constant.cs" />
+    <Compile Include="Settings\SystemSettings.cs" />
     <Compile Include="Works\db\FriendDB.cs" />
     <Compile Include="Works\db\GroupDB.cs" />
     <Compile Include="Works\db\MGroupDB.cs" />
     <Compile Include="Works\db\MsgDB.cs" />
     <Compile Include="Works\db\SessionDB.cs" />
+    <Compile Include="Works\util\ImageHelper.cs" />
+    <Compile Include="Works\util\ImgTextParser.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
       <DependentUpon>Form_Chat.cs</DependentUpon>
     </EmbeddedResource>

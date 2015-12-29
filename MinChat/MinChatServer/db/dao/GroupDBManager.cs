@@ -9,7 +9,7 @@ using System.Data.SQLite;
 
 namespace MinChatServer.db.dao
 {
-    public class GroupDBManager:GroupUtil
+    class GroupDBManager:GroupUtil
     {
         private static void ExecuteNonQuery(string cmdString, string dbPath)
         {
@@ -20,6 +20,21 @@ namespace MinChatServer.db.dao
             cmd.Dispose();
             conn.Close();
         }
+        private static GroupDBManager manager = null;
+
+        /// <summary>
+        /// 获得单例GroupDBManager对象
+        /// </summary>
+        /// <returns></returns>
+        public static GroupDBManager getInstance()
+        {
+            if (manager == null)
+            {
+                manager = new GroupDBManager();
+            }
+            return manager;
+        }
+
         /// <summary>
         /// 添加一个群,个人分组也是
         /// </summary>
