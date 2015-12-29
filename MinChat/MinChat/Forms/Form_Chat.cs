@@ -84,7 +84,6 @@ namespace MinChat.Forms
             ChatBoxContent content = this.chatBoxSend.GetContent();
             if (content.Text != "" && content.Text != "\n")
             {
-                
                 //发送信息
                 //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                 string split = Constant.SPLIT;
@@ -104,6 +103,8 @@ namespace MinChat.Forms
 
                 MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
                 db.addMsg(aMsg);
+
+                
             }
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
@@ -119,7 +120,26 @@ namespace MinChat.Forms
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < chatBoxSend.TextLength; i++)
+            {
+                chatBoxSend.Select(i, 1);
+                RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;
+                MessageBox.Show(rt.ToString());
+                if (rt == RichTextBoxSelectionTypes.Object)
+                {
+                    //当然也可能是其它的类型
+                    //MessageBox.Show("这是一个图片");
+                    chatBoxSend.Copy();
+                    Image img = Clipboard.GetImage();
+                    if (img != null)
+                    {
+                        img.Save(i.ToString() + ".bmp");
+                        img.Dispose();
+                    }
+                }
+            }
             send();
+            
         }
         #endregion
         #region 处理事件的程序

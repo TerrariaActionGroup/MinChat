@@ -89,7 +89,6 @@ namespace MinChat.Works.db
             //cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
             //sqlReadMsg.ExecuteNonQuery();
             sqlReadMsg.Dispose();
-
             return a;
         }
 
