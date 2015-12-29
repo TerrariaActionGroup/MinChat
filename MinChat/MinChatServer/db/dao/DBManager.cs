@@ -9,6 +9,21 @@ namespace MinChatServer.db.dao
 {
     class DBManager : DBHelper
     {
+        private static DBManager dbManager = null;
+
+        /// <summary>
+        /// 获得单例DBManager对象
+        /// </summary>
+        /// <returns></returns>
+        public static DBHelper getInstance()
+        {
+            if (dbManager == null)
+            {
+                dbManager = new DBManager();
+            }
+            return dbManager;
+        }
+
         #region
         /// <summary>
         /// 创建全局数据库

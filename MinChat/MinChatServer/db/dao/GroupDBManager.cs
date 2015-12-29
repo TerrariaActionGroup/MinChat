@@ -10,6 +10,21 @@ namespace MinChatServer.db.dao
 {
     class GroupDBManager:GroupUtil
     {
+        private static GroupDBManager manager = null;
+
+        /// <summary>
+        /// 获得单例GroupDBManager对象
+        /// </summary>
+        /// <returns></returns>
+        public static GroupDBManager getInstance()
+        {
+            if (manager == null)
+            {
+                manager = new GroupDBManager();
+            }
+            return manager;
+        }
+
         /// <summary>
         /// 添加一个群,个人分组也是
         /// </summary>

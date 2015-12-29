@@ -60,14 +60,14 @@ namespace MinChatServer.db
         public static String TABLE_RELATION = "table_relation";
         public static String RELATION_ID = "relationId";
         public static String RELATION_USER_ID = "relation_user_id";    //对方
-        public static String MGROUP_ID = "mgroup_id";                  //用户自定义分组
+        public static String FGROUP_ID = "fgroup_id";                  //用户自定义分组
         public static String RELATION_TIME = "relationTime";           //添加好友时间            
 
 
         /**
          *  用户好友分组表，每个用户一张
          */
-        public static String TABLE_USER = "table_mgroup";
+        public static String TABLE_MGROUP = "table_mgroup";
         public static String MGROUP_ID = "mgroup_Id";
         public static String MGROUP_NAME = "mgroup_Name";
         public static String MGROUP_NUM = "mgroup_num";
