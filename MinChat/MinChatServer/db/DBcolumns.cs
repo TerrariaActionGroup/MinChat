@@ -50,15 +50,9 @@ namespace MinChatServer.db
          */
         public static String TABLE_MSG = "table_msg";
         public static String MSG_ID = "msg_id";
-        public static String MSG_FROM = "msg_from";                
-        public static String MSG_FROM_USER = "msg_from_user";
+        public static String MSG_FROM = "msg_from";           
         public static String MSG_TO = "msg_to";
-        public static String MSG_TYPE = "msg_type";
         public static String MSG_CONTENT = "msg_content";
-        public static String MSG_DATE = "msg_date";
-        public static String MSG_BAK1 = "msg_bak1";
-        public static String MSG_BAK2 = "msg_bak2";
-        public static String MSG_BAK3 = "msg_bak3"; 
 
         /**
          *  好友关系表,每个用户一张
