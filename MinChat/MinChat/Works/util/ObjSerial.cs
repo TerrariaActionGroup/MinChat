@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MinChat.Works.util
 {
-    class ImgTextParser
+    class ObjSerial
     {
         /// <summary>
         /// 序列化对象
@@ -21,9 +21,9 @@ namespace MinChat.Works.util
             return data;
         }
 
-        public static List<ImgText> deserializeBytes(byte[] info)
+        public static List<MsgImg> deserializeBytes(byte[] info)
         {
-            return (List<ImgText>)ESBasic.Helpers.SerializeHelper.DeserializeBytes(info, 0, info.Length);
+            return (List<MsgImg>)ESBasic.Helpers.SerializeHelper.DeserializeBytes(info, 0, info.Length);
         }
     }
 }

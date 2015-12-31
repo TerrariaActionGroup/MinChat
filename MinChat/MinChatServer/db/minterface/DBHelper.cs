@@ -33,7 +33,7 @@ namespace MinChatServer.db.minterface
         /// 创建用于存储群成员表的数据库
         /// </summary>
         /// <returns></returns>
-        bool creatGroupDb();
+        bool createGroupDb();
 
         /// <summary>
         /// 创建每个群群成员信息表
@@ -54,20 +54,22 @@ namespace MinChatServer.db.minterface
         /// <summary>
         /// 创建未读消息数据表
         /// </summary>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        bool createMsgTable();
+        bool createMsgTable(string userId);
         
         /// <summary>
         /// 创建好友关系数据表
         /// </summary>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        bool createRelationTable();
-
+        bool createRelationTable(string userId);
         /// <summary>
         /// 创建个人分组数据表
         /// </summary>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        bool createMgroupTable();
+        bool createMgroupTable(string userId);
         #endregion
     }
 }

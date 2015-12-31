@@ -18,7 +18,7 @@ namespace MinChatServer.db
         public static String USER_NAME = "userName";
         public static String USER_SEX = "userSex";
         public static String USER_AGE = "userAge";
-        public static String USER_BIRTHDAY = "userBithday";
+        public static String USER_BIRTHDAY = "userBirthday";
         public static String USER_ADDRESS = "userAddr";
         public static String USER_TIME = "userTime";               //注册时间 
 
@@ -50,7 +50,6 @@ namespace MinChatServer.db
          */
         public static String TABLE_MSG = "table_msg";
         public static String MSG_ID = "msg_id";
-        public static String MSG_FROM = "msg_from";           
         public static String MSG_TO = "msg_to";
         public static String MSG_CONTENT = "msg_content";
 
