@@ -43,8 +43,13 @@ namespace MinChatServer.db.dao
         public bool addGroup(Group group)
         {
             string cmdString = "INSERT INTO " +
-                DBcolumns.TABLE_GROUP + " VALUES(" +
-                group.GroupId + ",\'" +
+                DBcolumns.TABLE_GROUP + "("+
+                DBcolumns.GROUP_NAME+","+
+                DBcolumns.GROUP_NUM + ","+
+                DBcolumns.GROUP_TIME+","+
+                DBcolumns.GROUP_NOTICE+","+
+                DBcolumns.GROUP_TYPE+") VALUES(\'" +
+                //group.GroupId + ",\'" +
                 group.GroupName + "\'," +
                 group.Num + ",\'" +
                 group.Time + "\',\'" +
@@ -108,10 +113,11 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool userIntoGroup(string userId, int groupId, int type)
         {
-            string cmdString = "INSERT INTO group"+
-                groupId + " VALUES(\'"+
-                userId + "\',\'"+
-                DateTime.Now.ToString()+"\', 2)";
+            string cmdString = "INSERT INTO group" +
+                groupId + " VALUES(\'" +
+                userId + "\',\'" +
+                DateTime.Now.ToString() + "\', " +
+                type + ")";
             ExecuteNonQuery(cmdString, Constant.groupDbPath  + "groupPerson.db");
             return true;
         }
