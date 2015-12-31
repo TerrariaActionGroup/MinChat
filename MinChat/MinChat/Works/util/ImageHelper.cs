@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinChat.Communications.bean;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -11,7 +12,6 @@ namespace MinChat.Works.utils
 {
     class ImageHelper
     {
-        #region
         /// <summary>
         /// 从文件获取Image对象
         /// </summary>
@@ -21,9 +21,8 @@ namespace MinChat.Works.utils
         {
             return Image.FromFile(file);
         }
-        #endregion
 
-        #region
+
         /// <summary>
         /// 从文件获取Bitmap对象
         /// </summary>
@@ -33,9 +32,8 @@ namespace MinChat.Works.utils
         {
             return new Bitmap(file);
         }
-        #endregion
 
-        #region
+
         /// <summary>
         /// Convert Image to Byte[]
         /// </summary>
@@ -73,9 +71,8 @@ namespace MinChat.Works.utils
                 return buffer;
             }
         }
-        #endregion
 
-        #region
+
         /// <summary>
         /// Convert Byte[] to Image
         /// </summary>
@@ -87,9 +84,8 @@ namespace MinChat.Works.utils
             Image image = System.Drawing.Image.FromStream(ms);
             return image;
         }
-        #endregion
 
-        #region
+ 
         /// <summary>
         /// Convert Byte[] to a picture and Store it in file
         /// </summary>
@@ -126,6 +122,87 @@ namespace MinChat.Works.utils
             File.WriteAllBytes(file, buffer);
             return file;
         }
-        #endregion
+
+
+        /// <summary>
+        /// Store image in file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        public static string CreateImageFromBytes(string fileName, Image image)
+        {
+            string file = fileName;
+            ImageFormat format = image.RawFormat;
+            if (format.Equals(ImageFormat.Jpeg))
+            {
+                file += ".jpeg";
+            }
+            else if (format.Equals(ImageFormat.Png))
+            {
+                file += ".png";
+            }
+            else if (format.Equals(ImageFormat.Bmp))
+            {
+                file += ".bmp";
+            }
+            else if (format.Equals(ImageFormat.Gif))
+            {
+                file += ".gif";
+            }
+            else if (format.Equals(ImageFormat.Icon))
+            {
+                file += ".icon";
+            }
+            System.IO.FileInfo info = new System.IO.FileInfo(file);
+            System.IO.Directory.CreateDirectory(info.Directory.FullName);
+
+            File.WriteAllBytes(file, ImageToBytes(image));
+            return file;
+        }
+
+
+        /// <summary>
+        /// 根据id与图片对象生成byte数组
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="img"></param>
+        /// <returns>拼装后字节数组大小</returns>
+        public static byte[] customizeImg(string id, Image img)
+        {
+            byte[] idBytes = System.Text.Encoding.UTF8.GetBytes(id);
+            byte[] imgBytes = ImageToBytes(img);
+
+            byte[] result = new byte[idBytes.Length + imgBytes.Length];
+            idBytes.CopyTo(result, 0);
+            imgBytes.CopyTo(result, idBytes.Length);
+            
+            return result;
+        }
+
+        /// <summary>
+        /// 图片字节数组得到图片id和图片对象
+        /// </summary>
+        /// <param name="mImg"></param>
+        /// <returns></returns>
+        public static MsgImg bytesToIdImg(byte[] mImg)
+        {
+            //解析id
+            byte[] id = new byte[11];
+            Array.Copy(mImg, 0, id, 0, 11);
+            string idStr = System.Text.Encoding.UTF8.GetString(id);
+
+            //解析图片
+            byte[] img = new byte[mImg.Length - 11];
+            Array.Copy(mImg, 11, img, 0, mImg.Length - 11);
+            Image image = BytesToImage(img);
+
+            MsgImg msgImg = new MsgImg();
+            msgImg.Id = idStr;
+            msgImg.Img = image;
+
+            return msgImg;
+        }
+
     }
 }

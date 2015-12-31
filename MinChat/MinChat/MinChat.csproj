@@ -64,11 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communications\bean\Group.cs" />
-    <Compile Include="Communications\bean\ImgText.cs" />
+    <Compile Include="Communications\bean\MsgImg.cs" />
     <Compile Include="Communications\bean\Msg.cs" />
     <Compile Include="Communications\bean\Session.cs" />
     <Compile Include="Communications\bean\Friend.cs" />
     <Compile Include="Communications\bean\Mgroup.cs" />
+    <Compile Include="Forms\DerivedClass\ChatListSubItemSex.cs" />
     <Compile Include="Forms\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,12 +88,6 @@
     <Compile Include="Forms\Form_main.Designer.cs">
       <DependentUpon>Form_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_userInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Form_userInfo.Designer.cs">
-      <DependentUpon>Form_userInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Constant.cs" />
@@ -103,7 +98,8 @@
     <Compile Include="Works\db\MsgDB.cs" />
     <Compile Include="Works\db\SessionDB.cs" />
     <Compile Include="Works\util\ImageHelper.cs" />
-    <Compile Include="Works\util\ImgTextParser.cs" />
+    <Compile Include="Works\util\timeUtil.cs" />
+    <Compile Include="Works\util\ObjSerial.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
       <DependentUpon>Form_Chat.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,9 +108,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_main.resx">
       <DependentUpon>Form_main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form_userInfo.resx">
-      <DependentUpon>Form_userInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

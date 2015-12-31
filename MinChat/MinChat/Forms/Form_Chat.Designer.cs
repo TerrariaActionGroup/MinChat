@@ -29,46 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Chat));
-            this.chatBoxSend = new CCWin.SkinControl.SkinChatRichTextBox();
-            this.chatBox_history = new CCWin.SkinControl.SkinChatRichTextBox();
             this.btnSend = new CCWin.SkinControl.SkinButton();
+            this.chatBox_history = new System.Windows.Forms.RichTextBox();
+            this.chatBoxSend = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // chatBoxSend
-            // 
-            this.chatBoxSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chatBoxSend.BackColor = System.Drawing.Color.White;
-            this.chatBoxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBoxSend.ContextMenuMode = CCWin.SkinControl.ChatBoxContextMenuMode.None;
-            this.chatBoxSend.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.chatBoxSend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.chatBoxSend.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.chatBoxSend.Location = new System.Drawing.Point(7, 392);
-            this.chatBoxSend.Name = "chatBoxSend";
-            this.chatBoxSend.PopoutImageWhenDoubleClick = false;
-            this.chatBoxSend.Size = new System.Drawing.Size(554, 75);
-            this.chatBoxSend.TabIndex = 1;
-            this.chatBoxSend.Text = "";
-            this.chatBoxSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.chatBoxSend_KeyPress);
-            // 
-            // chatBox_history
-            // 
-            this.chatBox_history.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chatBox_history.BackColor = System.Drawing.Color.White;
-            this.chatBox_history.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBox_history.ContextMenuMode = CCWin.SkinControl.ChatBoxContextMenuMode.None;
-            this.chatBox_history.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.chatBox_history.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.chatBox_history.Location = new System.Drawing.Point(7, 66);
-            this.chatBox_history.Name = "chatBox_history";
-            this.chatBox_history.PopoutImageWhenDoubleClick = false;
-            this.chatBox_history.ReadOnly = true;
-            this.chatBox_history.Size = new System.Drawing.Size(554, 290);
-            this.chatBox_history.TabIndex = 2;
-            this.chatBox_history.Text = "";
             // 
             // btnSend
             // 
@@ -93,6 +57,28 @@
             this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
+            // chatBox_history
+            // 
+            this.chatBox_history.BackColor = System.Drawing.Color.White;
+            this.chatBox_history.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.chatBox_history.Location = new System.Drawing.Point(7, 35);
+            this.chatBox_history.Name = "chatBox_history";
+            this.chatBox_history.ReadOnly = true;
+            this.chatBox_history.Size = new System.Drawing.Size(551, 303);
+            this.chatBox_history.TabIndex = 137;
+            this.chatBox_history.Text = "";
+            // 
+            // chatBoxSend
+            // 
+            this.chatBoxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.chatBoxSend.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatBoxSend.Location = new System.Drawing.Point(7, 369);
+            this.chatBoxSend.Name = "chatBoxSend";
+            this.chatBoxSend.Size = new System.Drawing.Size(551, 106);
+            this.chatBoxSend.TabIndex = 138;
+            this.chatBoxSend.Text = "";
+            this.chatBoxSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.chatBoxSend_KeyPress);
+            // 
             // Form_Chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -100,9 +86,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ClientSize = new System.Drawing.Size(568, 510);
             this.ControlBoxSpace = 0;
-            this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.chatBox_history);
             this.Controls.Add(this.chatBoxSend);
+            this.Controls.Add(this.chatBox_history);
+            this.Controls.Add(this.btnSend);
             this.Name = "Form_Chat";
             this.ShowDrawIcon = false;
             this.Text = "Form_Chat";
@@ -113,8 +99,8 @@
 
         #endregion
 
-        public CCWin.SkinControl.SkinChatRichTextBox chatBoxSend;
-        private CCWin.SkinControl.SkinChatRichTextBox chatBox_history;
         private CCWin.SkinControl.SkinButton btnSend;
+        private System.Windows.Forms.RichTextBox chatBox_history;
+        private System.Windows.Forms.RichTextBox chatBoxSend;
     }
 }
