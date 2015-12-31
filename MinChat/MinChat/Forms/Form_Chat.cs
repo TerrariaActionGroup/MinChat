@@ -7,6 +7,7 @@ using MinChat.Communications;
 using MinChat.Settings;
 using MinChat.Works.db;
 using MinChat.Works.util;
+using MinChat.Works.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -89,7 +90,10 @@ namespace MinChat.Forms
         }
         #endregion
         #region 发送信息
-        private void send()
+        /// <summary>
+        /// 发送文本消息
+        /// </summary>
+        private void sendText()
         {   
             chatBoxSend.Text = chatBoxSend.Text.TrimEnd('\n');
             if (chatBoxSend.Text != "" && chatBoxSend.Text != "\n")
@@ -112,17 +116,30 @@ namespace MinChat.Forms
 
                 MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
                 db.addMsg(aMsg);
-
-                
             }
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;
             this.chatBoxSend.Focus();
-            
         }
-
-
-        void imgProcessing()//处理图片
+        /// <summary>
+        /// 发送图片消息
+        /// </summary>
+        public void SendImage(Image img, string destUserID)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            img.Save(memoryStream, img.RawFormat);
+            byte[] blob = memoryStream.ToArray();
+            memoryStream.Close();
+            CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);
+            cb.BeginInvoke(blob, destUserID, null, null);
+        }
+        private void SendBlobThread(byte[] blob, string destUserID)
+        {
+            this.rapidPassiveEngine.CustomizeOutter.SendBlob(destUserID, 101, blob, 2048);
+        }
+        #endregion
+        #region 处理并发送图片
+        void imgProcessing()//发送前处理图片
         {
             string stamp = timeUtil.GetTimeStamp();
             int imgNum=0;//图片序号
@@ -140,10 +157,12 @@ namespace MinChat.Forms
                     Image img = Clipboard.GetImage();                       //从剪贴板中建立Img对象
                     if (img != null)
                     {
-                        img.Save(stamp+imgNum+".BMP");
+                        //ImageUtil.ImgSave(stamp + imgNum, img);
+                        img.Save(stamp + imgNum + ".png");
+                        SendImage(img, contactInfo.ID.ToString());
                         img.Dispose();
                     }
-                    chatBoxSend.SelectedText = stamp;
+                    chatBoxSend.SelectedText = "<img>"+stamp + imgNum+"</img>";
                     imgNum++;
                 }
             }
@@ -151,30 +170,20 @@ namespace MinChat.Forms
             clipboardTmp.SelectAll();
             clipboardTmp.Copy();
         }
-        public void SendImage(Image img, string destUserID)
-        {
-            MemoryStream memoryStream = new MemoryStream();
-            img.Save(memoryStream, img.RawFormat);
-            byte[] blob = memoryStream.ToArray();
-            memoryStream.Close();
-            CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);
-            cb.BeginInvoke(blob, destUserID, null, null);
-        }
-        private void SendBlobThread(byte[] blob, string destUserID)
-        {
-            this.rapidPassiveEngine.CustomizeOutter.SendBlob(destUserID, 101, blob, 2048);
-        }
+        #endregion
+        #region 发送事件
         private void chatBoxSend_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Keys)e.KeyChar == Keys.Enter)
             {
-                send();
+                imgProcessing();
+                sendText();
             }
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
             imgProcessing();
-            //send();
+            sendText();
         }
         #endregion
         #region 处理事件的程序
