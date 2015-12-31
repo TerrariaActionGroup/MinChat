@@ -55,7 +55,7 @@ namespace MinChatServer.db.dao
                 group.Time + "\',\'" +
                 group.Notice + "\',\'" +
                 group.Type + "\')";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
 
@@ -69,7 +69,7 @@ namespace MinChatServer.db.dao
             string cmdString = "DELETE FROM " +
                 DBcolumns.TABLE_GROUP + " WHERE " +
                 DBcolumns.GROUP_ID + " = " + groupId;
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
 
@@ -83,7 +83,7 @@ namespace MinChatServer.db.dao
             string cmdString = "SELECT * FROM "+
                 DBcolumns.TABLE_GROUP+" WHERE " +
                 DBcolumns.GROUP_ID + " = " + groupId;
-            SQLiteConnection conn = new SQLiteConnection("Data Source=" + Constant.globalDbPath + "user.db");
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + Constant.globalDbPath + "global.db");
             conn.Open();
             SQLiteCommand  cmd = new SQLiteCommand(cmdString,conn);
             SQLiteDataReader dr = cmd.ExecuteReader();

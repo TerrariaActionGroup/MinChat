@@ -44,9 +44,9 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool createGlobalDb()
         {
-            if (!System.IO.File.Exists(Constant.globalDbPath + "user.db")) 
+            if (!System.IO.File.Exists(Constant.globalDbPath + "global.db")) 
             {
-                SQLiteConnection.CreateFile(Constant.globalDbPath+"user.db");
+                SQLiteConnection.CreateFile(Constant.globalDbPath+"global.db");
             }
             return true;
         }
@@ -68,7 +68,7 @@ namespace MinChatServer.db.dao
                 DBcolumns.USER_BIRTHDAY + " date," +
                 DBcolumns.USER_ADDRESS + " varchar(100)," +
                 DBcolumns.USER_TIME + " date)";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
         /// <summary>
@@ -85,7 +85,7 @@ namespace MinChatServer.db.dao
                 DBcolumns.GROUP_TIME + " date NOT NULL," +
                 DBcolumns.GROUP_NOTICE + " text," +
                 DBcolumns.GROUP_TYPE + " varchar(20))";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
         #endregion
