@@ -1,15 +1,18 @@
 ﻿using CCWin;
 using CCWin.SkinClass;
 using CCWin.SkinControl;
+using ESBasic;
 using ESPlus.Rapid;
 using MinChat.Communications;
 using MinChat.Settings;
 using MinChat.Works.db;
+using MinChat.Works.util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,8 +74,6 @@ namespace MinChat.Forms
             string showTime = DateTime.Now.ToString();
             appendTextBox(chatBox_history, string.Format("\n{0}  {1}\n", msg.FromUserName, msg.Date), NicNameColor, messageFont);
             appendTextBox(chatBox_history, string.Format("{0}", msg.Content), textColor, messageFont);
-            //this.chatBox_history.AppendText(string.Format("\n{0}  {1}\n", msg.FromUserName, msg.Date));
-            //this.chatBox_history.AppendText(string.Format("{0}", msg.Content));
 
             chatBox_history.SelectionStart = chatBox_history.TextLength;
             chatBox_history.ScrollToCaret();
@@ -105,9 +106,6 @@ namespace MinChat.Forms
                 string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
                 Msg aMsg = new Msg(msgs,1,1);
                 this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.UTF8.GetBytes(msg));
-                
-                string[] msgs = new string[] { receiveId, sendId, msgText, date, sendName };
-                Msg aMsg = new Msg(msgs, 1, 1);
 
                 //将内容更新到上方面板
                 this.AppendChatBoxContent(aMsg);
@@ -122,6 +120,50 @@ namespace MinChat.Forms
             this.chatBoxSend.Focus();
             
         }
+
+
+        void imgProcessing()//处理图片
+        {
+            string stamp = timeUtil.GetTimeStamp();
+            int imgNum=0;//图片序号
+            //缓存剪贴板中现有内容
+            RichTextBox clipboardTmp = new RichTextBox();
+            clipboardTmp.Paste();
+
+            for (int i = 0; i < chatBoxSend.TextLength; i++)
+            {
+                chatBoxSend.Select(i, 1);                                   //一个一个选中
+                RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;   //获取当前选中 内容的类型
+                if (rt == RichTextBoxSelectionTypes.Object)                 //图片是object
+                {
+                    chatBoxSend.Copy();                                     //复制到剪贴板
+                    Image img = Clipboard.GetImage();                       //从剪贴板中建立Img对象
+                    if (img != null)
+                    {
+                        img.Save(stamp+imgNum+".BMP");
+                        img.Dispose();
+                    }
+                    chatBoxSend.SelectedText = stamp;
+                    imgNum++;
+                }
+            }
+            //将原来剪贴板中的内容放回去
+            clipboardTmp.SelectAll();
+            clipboardTmp.Copy();
+        }
+        public void SendImage(Image img, string destUserID)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            img.Save(memoryStream, img.RawFormat);
+            byte[] blob = memoryStream.ToArray();
+            memoryStream.Close();
+            CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);
+            cb.BeginInvoke(blob, destUserID, null, null);
+        }
+        private void SendBlobThread(byte[] blob, string destUserID)
+        {
+            this.rapidPassiveEngine.CustomizeOutter.SendBlob(destUserID, 101, blob, 2048);
+        }
         private void chatBoxSend_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((Keys)e.KeyChar == Keys.Enter)
@@ -131,30 +173,8 @@ namespace MinChat.Forms
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
-            ////缓存剪贴板中现有内容
-            //RichTextBox clipboardTmp = new RichTextBox();
-            //clipboardTmp.Paste();
-
-            //for (int i = 0; i < chatBoxSend.TextLength; i++)
-            //{
-
-            //    chatBoxSend.Select(i, 1);
-            //    RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;
-            //    //MessageBox.Show(rt.ToString());
-            //    if (rt == RichTextBoxSelectionTypes.Object)
-            //    {
-            //        //当然也可能是其它的类型
-            //        //MessageBox.Show("这是一个图片");
-            //        chatBoxSend.Copy();
-            //        Image img = Clipboard.GetImage();
-            //        if (img != null)
-            //        {
-            //            img.Save(i.ToString() + ".bmp");
-            //            img.Dispose();
-            //        }
-            //    }
-            //}
-            send();
+            imgProcessing();
+            //send();
         }
         #endregion
         #region 处理事件的程序

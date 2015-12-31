@@ -59,9 +59,11 @@
             // 
             // chatBox_history
             // 
+            this.chatBox_history.BackColor = System.Drawing.Color.White;
             this.chatBox_history.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chatBox_history.Location = new System.Drawing.Point(7, 35);
             this.chatBox_history.Name = "chatBox_history";
+            this.chatBox_history.ReadOnly = true;
             this.chatBox_history.Size = new System.Drawing.Size(551, 303);
             this.chatBox_history.TabIndex = 137;
             this.chatBox_history.Text = "";
@@ -69,11 +71,13 @@
             // chatBoxSend
             // 
             this.chatBoxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBoxSend.Location = new System.Drawing.Point(7, 344);
+            this.chatBoxSend.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatBoxSend.Location = new System.Drawing.Point(7, 369);
             this.chatBoxSend.Name = "chatBoxSend";
-            this.chatBoxSend.Size = new System.Drawing.Size(551, 131);
+            this.chatBoxSend.Size = new System.Drawing.Size(551, 106);
             this.chatBoxSend.TabIndex = 138;
             this.chatBoxSend.Text = "";
+            this.chatBoxSend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.chatBoxSend_KeyPress);
             // 
             // Form_Chat
             // 

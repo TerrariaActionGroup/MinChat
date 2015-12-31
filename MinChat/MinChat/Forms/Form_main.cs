@@ -5,10 +5,12 @@ using ESBasic;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Rapid;
 using MinChat.Communications;
+using MinChat.Forms.DerivedClass;
 using MinChat.Settings;
 using MinChat.Works.db;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -17,7 +19,6 @@ namespace MinChat.Forms
     public partial class Form_main : Skin_Mac,ICustomizeHandler
     {        
         #region 变量
-        //ChatListSubItem contactInfo { get; set; }//好友列表
         public ChatListSubItem myInfo;//客户端用户的个人信息
         IRapidPassiveEngine rapidPassiveEngine;// 客户端引擎
         #endregion     
@@ -47,9 +48,10 @@ namespace MinChat.Forms
             {
                 if (friendId != myInfo.ID.ToString() && chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId)).Length==0)
                 {
-                    ChatListSubItem contact = new ChatListSubItem();
+                    ChatListSubItemSex contact = new ChatListSubItemSex();
                     contact.ID = Convert.ToUInt32(friendId);
                     contact.NicName = friendId;
+                    //contact.Sex = ChatListSubItemSex.UserSex.Man;//性别
                     gp.SubItems.Add(contact);
                 }
 
@@ -215,80 +217,5 @@ namespace MinChat.Forms
             }
         }
         #endregion
-        //#region 好友列表悬浮头像时
-        //private Form_userInfo userInfo;
-        //private void chatShow_MouseEnterHead(object sender, ChatListEventArgs e)
-        //{
-        //    if (userInfo == null || userInfo.IsDisposed)//不存在就new一个
-        //    {
-        //        userInfo = new Form_userInfo();
-        //    }
-        //    //定位
-        //    int top = this.Top + this.chatTab.Top + this.chatTab.ItemSize.Height + (e.MouseOnSubItem.HeadRect.Y - this.chatListBox_contacts.chatVScroll.Value);
-        //    int left = this.Left - 279 - 5;
-        //    int ph = Screen.GetWorkingArea(this).Height;
-
-        //    if (top + 181 > ph)
-        //    {
-        //        top = ph - 181 - 5;
-        //    }
-
-        //    if (left < 0)
-        //    {
-        //        left = this.Right + 5;
-        //    }
-        //    userInfo.IsFMove = false;
-        //    this.userInfo.Item = e.MouseOnSubItem;
-        //    this.userInfo.SetUserData(e.MouseOnSubItem, new Point(left, top));
-        //    this.userInfo.Show();
-        //}
-        //#endregion
-        //#region 好友列表离开头像时
-        //private void chatShow_MouseLeaveHead(object sender, ChatListEventArgs e)
-        //{
-        //    if (userInfo != null && !userInfo.IsDisposed)
-        //    {
-        //        userInfo.IsFMove = true;
-        //    }
-        //}
-        //#endregion
-        //#region Q名悬浮离开时信息框
-        ////悬浮时
-        //private void lblName_MouseHover(object sender, EventArgs e)
-        //{
-        //    if (userInfo == null || userInfo.IsDisposed)
-        //    {
-        //        userInfo = new Form_userInfo();
-        //    }
-        //    int top = this.Top + lbl_userName.Top;
-        //    int left = this.Left - 279 - 5;
-        //    int ph = Screen.GetWorkingArea(this).Height;
-
-        //    if (top + 181 > ph)
-        //    {
-        //        top = ph - 181 - 5;
-        //    }
-
-        //    if (left < 0)
-        //    {
-        //        left = this.Right + 5;
-        //    }
-        //    userInfo.IsFMove = false;
-        //    this.userInfo.Item = UserItem;
-        //    this.userInfo.SetUserData(UserItem, new Point(left, top));
-        //    this.userInfo.Show();
-        //}
-
-        ////离开时
-        //private void lblName_MouseLeave(object sender, EventArgs e)
-        //{
-        //    if (userInfo != null && !userInfo.IsDisposed)
-        //    {
-        //        userInfo.IsFMove = true;
-        //    }
-        //}
-        //#endregion
-
-        
     }
 }
