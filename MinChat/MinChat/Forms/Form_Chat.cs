@@ -96,9 +96,6 @@ namespace MinChat.Forms
                 string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
                 Msg aMsg = new Msg(msgs,1,1);
                 this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.UTF8.GetBytes(msg));
-                
-                string[] msgs = new string[] { receiveId, sendId, msgText, date, sendName };
-                Msg aMsg = new Msg(msgs, 1, 1);
 
                 //将内容更新到上方面板
                 this.AppendChatBoxContent(aMsg);
