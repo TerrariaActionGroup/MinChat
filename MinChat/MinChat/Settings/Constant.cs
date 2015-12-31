@@ -23,5 +23,12 @@ namespace MinChat.Settings
         public static int MSGTEXT = 1;
         public static int MSGIMG = 2;
         #endregion
+
+        //用户数据文件夹,相应路径为
+        //DATABASE_PATH + userId + 相应类型路径
+        public static string DATABASE_PATH = "data//";
+        public static string IMAGE_PATH = "//Image//";
+        public static string FILE_PATH = "//FileRecv//";
+        public static string DB_PATH = "//db//";
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MinChat.Works.utils
 {
-    class ImageHelper
+    class ImageUtil
     {
         /// <summary>
         /// 从文件获取Image对象
@@ -130,7 +130,7 @@ namespace MinChat.Works.utils
         /// <param name="fileName"></param>
         /// <param name="buffer"></param>
         /// <returns></returns>
-        public static string CreateImageFromBytes(string fileName, Image image)
+        public static string ImgSave(string fileName, Image image)
         {
             string file = fileName;
             ImageFormat format = image.RawFormat;
@@ -154,10 +154,11 @@ namespace MinChat.Works.utils
             {
                 file += ".icon";
             }
-            System.IO.FileInfo info = new System.IO.FileInfo(file);
-            System.IO.Directory.CreateDirectory(info.Directory.FullName);
+            //System.IO.FileInfo info = new System.IO.FileInfo(file);
+            //System.IO.Directory.CreateDirectory(info.Directory.FullName);
 
-            File.WriteAllBytes(file, ImageToBytes(image));
+            //File.WriteAllBytes(file, ImageToBytes(image));
+            image.Save(file);
             return file;
         }
 
