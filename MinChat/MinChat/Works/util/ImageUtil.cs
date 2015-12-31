@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MinChat.Works.utils
 {
-    class ImageHelper
+    class ImageUtil
     {
         /// <summary>
         /// 从文件获取Image对象
