@@ -34,6 +34,17 @@ namespace MinChatServer
             fileHelper.createDbDirectory();
             fileHelper = null;
 
+            //创建全局数据库
+            DBManager dbManager = DBManager.getInstance();
+            dbManager.createGlobalDb();
+            dbManager.createGroupTable();
+            dbManager.createUserTable();
+            dbManager.createGroupDb();
+
+            //测试使用
+            dbManager.createUserDb("2928851885");
+            dbManager.createRelationTable("2928851885");
+
             //设置好友管理器
             FriendsManager friendManager = new FriendsManager();
             RapidServerEngine.FriendsManager = friendManager;

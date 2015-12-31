@@ -74,7 +74,7 @@ namespace MinChatServer.db.dao
                 userId + "\' AND " +
                 DBcolumns.USER_PWD + " = \'" +
                 pwd + "\'";
-            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "user.db");
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "global.db");
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();

@@ -28,7 +28,7 @@ namespace MinChatServer.db.dao
         /// 获得单例DBManager对象
         /// </summary>
         /// <returns></returns>
-        public static DBHelper getInstance()
+        public static DBManager getInstance()
         {
             if (dbManager == null)
             {
@@ -44,9 +44,9 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool createGlobalDb()
         {
-            if (!System.IO.File.Exists(Constant.globalDbPath + "user.db")) 
+            if (!System.IO.File.Exists(Constant.globalDbPath + "global.db")) 
             {
-                SQLiteConnection.CreateFile(Constant.globalDbPath+"user.db");
+                SQLiteConnection.CreateFile(Constant.globalDbPath + "global.db");
             }
             return true;
         }
@@ -68,7 +68,7 @@ namespace MinChatServer.db.dao
                 DBcolumns.USER_BIRTHDAY + " date," +
                 DBcolumns.USER_ADDRESS + " varchar(100)," +
                 DBcolumns.USER_TIME + " date)";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
         /// <summary>
@@ -85,7 +85,7 @@ namespace MinChatServer.db.dao
                 DBcolumns.GROUP_TIME + " date NOT NULL," +
                 DBcolumns.GROUP_NOTICE + " text," +
                 DBcolumns.GROUP_TYPE + " varchar(20))";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
         #endregion
@@ -164,7 +164,7 @@ namespace MinChatServer.db.dao
             
             string cmdString = "CREATE TABLE IF NOT EXISTS " +
                 DBcolumns.TABLE_RELATION + "(" +
-                DBcolumns.RELATION_ID + " integer PRIMARY KEY AUTO INCREMENT," +
+                DBcolumns.RELATION_ID + " integer PRIMARY KEY AUTOINCREMENT," +
                 DBcolumns.RELATION_USER_ID + " varchar(20)," +
                 DBcolumns.FGROUP_ID + " integer," +
                 DBcolumns.RELATION_TIME + " date)";
