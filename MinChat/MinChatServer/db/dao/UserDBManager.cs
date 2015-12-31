@@ -46,7 +46,7 @@ namespace MinChatServer.db.dao
             string cmdString = "SELECT * FROM " +
                 DBcolumns.TABLE_USER + " WHERE " +
                 DBcolumns.USER_ID + " = \'" + id + "\'";
-            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "user.db");
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "global.db");
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
@@ -105,7 +105,7 @@ namespace MinChatServer.db.dao
                 aUser.Birthday+"\',\'"+
                 aUser.Address+"\',\'"+
                 aUser.Time+"\')";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
 
@@ -119,7 +119,7 @@ namespace MinChatServer.db.dao
             string cmdString = "DELETE FROM " +
                 DBcolumns.TABLE_USER + " WHERE " +
                 DBcolumns.USER_ID + " = \'" + userId + "\'";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
 
@@ -133,7 +133,7 @@ namespace MinChatServer.db.dao
             string cmdString = "SELECT * FROM " +
                 DBcolumns.TABLE_USER + " WHERE "+
                 DBcolumns.USER_ID + " =\'" + userId + "\'"; ;
-            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "user.db");
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.globalDbPath + "global.db");
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
