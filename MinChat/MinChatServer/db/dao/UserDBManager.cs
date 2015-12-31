@@ -165,12 +165,14 @@ namespace MinChatServer.db.dao
         public bool addFriend(string masterId, string userId)
         {
             string cmdString = "INSERT INTO " +
-                DBcolumns.TABLE_RELATION + " VALUES(\'" +
-                masterId + "\',\'" +
+                DBcolumns.TABLE_RELATION + "("+
+                DBcolumns.RELATION_USER_ID+","+
+                DBcolumns.FGROUP_ID+","+
+                DBcolumns.RELATION_TIME + ") VALUES(\'" +
                 userId + "\',\'" +
                 0 + "\',\'" +
                 DateTime.Now.ToString() + "\')";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "user.db");
+            ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + masterId + ".db");
             return true;
         }
 
@@ -184,9 +186,9 @@ namespace MinChatServer.db.dao
         {
             string cmdString = "DELETE FROM " +
                 DBcolumns.TABLE_RELATION + " WHERE " +
-                DBcolumns.RELATION_ID + " = \'" + masterId + "\' AND " +
+                //DBcolumns.RELATION_ID + " = \'" + masterId + "\' AND " +
                 DBcolumns.RELATION_USER_ID + " = \'" + userId + "\'";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath);
+            ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + masterId + ".db");
             return true;
         }
 
@@ -198,10 +200,11 @@ namespace MinChatServer.db.dao
         public List<string> queryFriends(string userId)
         {
             List<string> friend = new List<string>();
-            string cmdString = "SELETE "+
+            string cmdString = "SELECT "+
                 DBcolumns.RELATION_USER_ID + " FROM " +
                 DBcolumns.TABLE_RELATION;
-            SQLiteConnection conn = new SQLiteConnection(Constant.userDbPath);
+            SQLiteConnection conn = new SQLiteConnection("Data Source="+Constant.userDbPath + "user" + userId + ".db");
+            conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
 
@@ -221,18 +224,14 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool addMsg(string userId, string msg)
         {
-            string cmdString = "SELECT COUNT(*) FROM " +
-                DBcolumns.TABLE_MSG;
-            SQLiteConnection conn = new SQLiteConnection(Constant.userDbPath + "\\" + userId + ".db");
-            SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
-            SQLiteDataReader dr = cmd.ExecuteReader();
-            int msgId = dr.GetInt32(0)+1;
-            cmdString = "INSERT INTO " +
-                DBcolumns.TABLE_MSG + " VALUES(" +
-                msgId + ",\'" +
+            string cmdString = "INSERT INTO " +
+                DBcolumns.TABLE_MSG + "(" +
+                DBcolumns.MSG_TO + "," +
+                DBcolumns.MSG_CONTENT + ") VALUES(\'" +
+                //msgId + ",\'" +
                 userId + "\',\'" +
                 msg + "\')";
-            ExecuteNonQuery(cmdString, Constant.userDbPath + "\\" + userId + ".db");
+            ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
         }
 
@@ -244,9 +243,8 @@ namespace MinChatServer.db.dao
         public bool deleteMsg(string userId)
         {
             string cmdString = "DELETE FROM " +
-                DBcolumns.TABLE_MSG + " WHERE " +
-                DBcolumns.MSG_TO + " = \'" + userId + "\'";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath);
+                DBcolumns.TABLE_MSG ;
+            ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
         }
 
@@ -261,7 +259,8 @@ namespace MinChatServer.db.dao
             string cmdString = "SELECT "+
                 DBcolumns.MSG_CONTENT + " FROM " +
                 DBcolumns.TABLE_MSG;
-            SQLiteConnection conn = new SQLiteConnection(Constant.userDbPath + "\\" + userId + ".db");
+            SQLiteConnection conn = new SQLiteConnection("Data Source=" + Constant.userDbPath + "user" + userId + ".db");
+            conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
             while (dr.Read())

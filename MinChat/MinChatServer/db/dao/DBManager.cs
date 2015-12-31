@@ -164,9 +164,9 @@ namespace MinChatServer.db.dao
             
             string cmdString = "CREATE TABLE IF NOT EXISTS " +
                 DBcolumns.TABLE_RELATION + "(" +
-                DBcolumns.RELATION_ID + " varchar(20)," +
-                DBcolumns.RELATION_USER_ID + " varchar(20) PRIMARY KEY," +
-                DBcolumns.FGROUP_ID + " integer" +
+                DBcolumns.RELATION_ID + " integer PRIMARY KEY AUTO INCREMENT," +
+                DBcolumns.RELATION_USER_ID + " varchar(20)," +
+                DBcolumns.FGROUP_ID + " integer," +
                 DBcolumns.RELATION_TIME + " date)";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
