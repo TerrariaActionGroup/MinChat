@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MinChatServer.db.bean
 {
-    class User
+    class CustomizeUser
     {
         private string userId;
         private string userName;
@@ -117,7 +117,6 @@ namespace MinChatServer.db.bean
                 time = value;
             }
         }
-
         #endregion
     }
 }
