@@ -5,9 +5,11 @@ using ESBasic;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Rapid;
 using MinChat.Communications;
+using MinChat.Communications.bean;
 using MinChat.Forms.DerivedClass;
 using MinChat.Settings;
 using MinChat.Works.db;
+using MinChat.Works.utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -38,11 +40,10 @@ namespace MinChat.Forms
             }
             this.rapidPassiveEngine = rapidPassiveEngine;
             this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
-
             //加载分组
             ChatListItem gp = new ChatListItem();//new一个分组
             gp.Text = "TestList";
-
+            //获取在线用户的ID
             List<string> list=rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
             foreach(string friendId in list)
             {
@@ -54,33 +55,8 @@ namespace MinChat.Forms
                     //contact.Sex = ChatListSubItemSex.UserSex.Man;//性别
                     gp.SubItems.Add(contact);
                 }
-
             }
-            ChatListSubItem people = new ChatListSubItem();
-
-            if (myInfo.ID == 10010)
-            {
-                myInfo.NicName = "联通";
-                lbl_userName.Text = "联通";
-                people.ID = 10086;//ID
-                people.NicName = "移动";//昵称
-                people.DisplayName = "X";//备注名
-                people.PersonalMsg = "买买买买买";
-            }
-            else if (myInfo.ID == 10086)
-            {
-                myInfo.NicName = "移动";
-                lbl_userName.Text = "移动";
-                people.ID = 10010;//ID
-                people.NicName = "联通";//昵称
-                people.DisplayName = "X";//备注名
-                people.PersonalMsg = "买买买买买";
-            }
-            gp.SubItems.Add(people);
-            //chatListBox_contacts.GetSubItemsById();//按照ID查找listbox中的用户
-
             chatListBox_contacts.Items.Add(gp);//添加到listBox中
-
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
             //预订断线事件
@@ -136,7 +112,7 @@ namespace MinChat.Forms
             {
                 switch (informationType)
                 {
-                    case 1://普通文本消息
+                    case Constant.MSGTEXT://普通文本消息
                         //取出收到的消息,接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                         string message = System.Text.Encoding.UTF8.GetString(info);
 
@@ -161,7 +137,10 @@ namespace MinChat.Forms
                         MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
                         db.addMsg(msg);
                         break;
-                    case 2:
+                    case Constant.MSGIMG://图片
+                        MsgImg msgimg = ImageUtil.bytesToIdImg(info);
+                        ImageUtil.ImgSave(msgimg.Id, msgimg.Img);//存储图片
+                        //msgimg.Img.Save(msgimg.Id);
                         break;
                 }
             }

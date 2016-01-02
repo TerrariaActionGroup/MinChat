@@ -20,8 +20,8 @@ namespace MinChat.Settings
 
         //自定义消息类型
         #region
-        public static int MSGTEXT = 1;
-        public static int MSGIMG = 2;
+        public  const int MSGTEXT = 1;
+        public const int MSGIMG = 2;
         #endregion
 
         //用户数据文件夹,相应路径为

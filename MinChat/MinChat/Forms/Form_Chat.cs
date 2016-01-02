@@ -4,6 +4,7 @@ using CCWin.SkinControl;
 using ESBasic;
 using ESPlus.Rapid;
 using MinChat.Communications;
+using MinChat.Communications.bean;
 using MinChat.Settings;
 using MinChat.Works.db;
 using MinChat.Works.util;
@@ -67,6 +68,7 @@ namespace MinChat.Forms
             }
         }
         #endregion
+
         #region 显示消息封装
         private void AppendChatBoxContent(Msg msg)
         {
@@ -75,7 +77,6 @@ namespace MinChat.Forms
             string showTime = DateTime.Now.ToString();
             appendTextBox(chatBox_history, string.Format("\n{0}  {1}\n", msg.FromUserName, msg.Date), NicNameColor, messageFont);
             appendTextBox(chatBox_history, string.Format("{0}", msg.Content), textColor, messageFont);
-
             chatBox_history.SelectionStart = chatBox_history.TextLength;
             chatBox_history.ScrollToCaret();
         }
@@ -89,7 +90,26 @@ namespace MinChat.Forms
             textBox.SelectionFont = fontType;       //设置要添加的文本的字体
         }
         #endregion
-        #region 发送信息
+        #region 发送图片封装
+        /// <summary>
+        /// 发送图片消息
+        /// </summary>
+        /// <param name="img">待发送的Img对象</param>
+        /// <param name="imgId">Img对象的ID</param>
+        /// <param name="destUserID">目的ID</param>
+        public void SendImage(Image img,string imgId,string destUserID)
+        {
+            byte[] blob = ImageUtil.customizeImg(imgId, img);//根据ID和img生成byte数组
+            CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);//通过委托异步调用
+            cb.BeginInvoke(blob, destUserID, null, null);
+        }
+        private void SendBlobThread(byte[] blob, string destUserID)
+        {
+            this.rapidPassiveEngine.CustomizeOutter.SendBlob(destUserID, Constant.MSGIMG, blob, 2048);
+        }
+        #endregion
+
+        #region 发送文本
         /// <summary>
         /// 发送文本消息
         /// </summary>
@@ -109,11 +129,10 @@ namespace MinChat.Forms
                 string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
                 string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
                 Msg aMsg = new Msg(msgs,1,1);
-                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, 1, System.Text.Encoding.UTF8.GetBytes(msg));
-
+                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, Constant.MSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
                 //将内容更新到上方面板
                 this.AppendChatBoxContent(aMsg);
-
+                //存入数据库
                 MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
                 db.addMsg(aMsg);
             }
@@ -121,24 +140,8 @@ namespace MinChat.Forms
             this.chatBoxSend.Text = string.Empty;
             this.chatBoxSend.Focus();
         }
-        /// <summary>
-        /// 发送图片消息
-        /// </summary>
-        public void SendImage(Image img, string destUserID)
-        {
-            MemoryStream memoryStream = new MemoryStream();
-            img.Save(memoryStream, img.RawFormat);
-            byte[] blob = memoryStream.ToArray();
-            memoryStream.Close();
-            CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);
-            cb.BeginInvoke(blob, destUserID, null, null);
-        }
-        private void SendBlobThread(byte[] blob, string destUserID)
-        {
-            this.rapidPassiveEngine.CustomizeOutter.SendBlob(destUserID, 101, blob, 2048);
-        }
         #endregion
-        #region 处理并发送图片
+        #region 发送图片
         void imgProcessing()//发送前处理图片
         {
             string stamp = timeUtil.GetTimeStamp();
@@ -149,20 +152,20 @@ namespace MinChat.Forms
 
             for (int i = 0; i < chatBoxSend.TextLength; i++)
             {
-                chatBoxSend.Select(i, 1);                                   //一个一个选中
+                chatBoxSend.Select(i, 1);                                   //依次选中
                 RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;   //获取当前选中 内容的类型
                 if (rt == RichTextBoxSelectionTypes.Object)                 //图片是object
                 {
                     chatBoxSend.Copy();                                     //复制到剪贴板
                     Image img = Clipboard.GetImage();                       //从剪贴板中建立Img对象
+                    string serialNumber = string.Format("{0}{1:d6}", stamp,imgNum);//格式化生成图片序列号
                     if (img != null)
                     {
-                        //ImageUtil.ImgSave(stamp + imgNum, img);
-                        img.Save(stamp + imgNum + ".png");
-                        SendImage(img, contactInfo.ID.ToString());
+                        ImageUtil.ImgSave(serialNumber, img);//存储图片，并加入后缀
+                        SendImage(img, serialNumber, contactInfo.ID.ToString());//发送图片
                         img.Dispose();
                     }
-                    chatBoxSend.SelectedText = "<img>"+stamp + imgNum+"</img>";
+                    chatBoxSend.SelectedText = "<img>" + serialNumber + "</img>";
                     imgNum++;
                 }
             }
@@ -186,7 +189,7 @@ namespace MinChat.Forms
             sendText();
         }
         #endregion
-        #region 处理事件的程序
+        #region 处理接收消息事件的程序
         void ChatHandleReceive(object sender, EventArgs e, Msg msg)//处理事件的程序
         {
             if (Convert.ToUInt32(msg.FromUserId) == contactInfo.ID)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MinChat.Communications.bean
 {
-    class MsgImg
+    public class MsgImg
     {
 
         /// <summary>

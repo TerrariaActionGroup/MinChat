@@ -64,6 +64,10 @@ namespace MinChat.Works.utils
                 {
                     image.Save(ms, ImageFormat.Icon);
                 }
+                else if (format.Equals(ImageFormat.MemoryBmp))
+                {
+                    image.Save(ms, ImageFormat.Png);
+                }
                 byte[] buffer = new byte[ms.Length];
                 //Image.Save()会改变MemoryStream的Position，需要重新Seek到Begin
                 ms.Seek(0, SeekOrigin.Begin);
@@ -117,6 +121,11 @@ namespace MinChat.Works.utils
             {
                 file += ".icon";
             }
+            else if (format.Equals(ImageFormat.MemoryBmp))
+            {
+                file += ".bmp";
+            }
+
             System.IO.FileInfo info = new System.IO.FileInfo(file);
             System.IO.Directory.CreateDirectory(info.Directory.FullName);
             File.WriteAllBytes(file, buffer);
@@ -154,10 +163,10 @@ namespace MinChat.Works.utils
             {
                 file += ".icon";
             }
-            //System.IO.FileInfo info = new System.IO.FileInfo(file);
-            //System.IO.Directory.CreateDirectory(info.Directory.FullName);
-
-            //File.WriteAllBytes(file, ImageToBytes(image));
+            else if (format.Equals(ImageFormat.MemoryBmp))
+            {
+                file += ".png";
+            }
             image.Save(file);
             return file;
         }
@@ -189,13 +198,13 @@ namespace MinChat.Works.utils
         public static MsgImg bytesToIdImg(byte[] mImg)
         {
             //解析id
-            byte[] id = new byte[11];
-            Array.Copy(mImg, 0, id, 0, 11);
+            byte[] id = new byte[16];
+            Array.Copy(mImg, 0, id, 0, 16);
             string idStr = System.Text.Encoding.UTF8.GetString(id);
 
             //解析图片
-            byte[] img = new byte[mImg.Length - 11];
-            Array.Copy(mImg, 11, img, 0, mImg.Length - 11);
+            byte[] img = new byte[mImg.Length - 16];
+            Array.Copy(mImg, 16, img, 0, mImg.Length - 16);
             Image image = BytesToImage(img);
 
             MsgImg msgImg = new MsgImg();

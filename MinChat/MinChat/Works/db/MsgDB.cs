@@ -52,7 +52,7 @@ namespace MinChat.Works.db
 
             conn = new SQLiteConnection("Data Source="+dbPath);
             conn.Open();
-            string cmdString = "CREATE TABLE IF NOT EXISTS msg(msgId integer PRIMARY KEY AUTOINCREMENT,sessionId integer, senderId varchar(20), receiverId varchar(20), senderName varchar(40), type integer,content text, isComing integer, date time, isRead integer, bak1 text, bak2 text, bak3 text, bak4 text, bak5 text, bak6 text);";
+            string cmdString = "CREATE TABLE IF NOT EXISTS msg(msgId integer PRIMARY KEY AUTOINCREMENT,sessionId integer, senderId varchar(20), receiverId varchar(20), senderName varchar(40), type integer,content text, isComing integer, date varchar(40), isRead integer, bak1 text, bak2 text, bak3 text, bak4 text, bak5 text, bak6 text);";
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
