@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MinChatServer.db.minterface;
 using MinChatServer.db.bean;
 using System.Data.SQLite;
 
 namespace MinChatServer.db.dao
 {
-    class DBManager : DBHelper
+    class DBManager
     {
 
         private static void ExecuteNonQuery(string cmdString, string dbPath)
@@ -38,92 +37,7 @@ namespace MinChatServer.db.dao
         }
 
         #region
-        /// <summary>
-        /// 创建全局数据库
-        /// </summary>
-        /// <returns></returns>
-        public bool createGlobalDb()
-        {
-            if (!System.IO.File.Exists(Constant.globalDbPath + "global.db")) 
-            {
-                SQLiteConnection.CreateFile(Constant.globalDbPath + "global.db");
-            }
-            return true;
-        }
 
-        /// <summary>
-        /// 创建用户信息表
-        /// </summary>
-        /// <returns></returns>
-        public bool createUserTable()
-        {
-
-            string cmdString = "CREATE TABLE IF NOT EXISTS " +
-                DBcolumns.TABLE_USER + "(" +
-                DBcolumns.USER_ID + " varchar(20) PRIMARY KEY," +
-                DBcolumns.USER_PWD + " varchar(40) NOT NULL," +
-                DBcolumns.USER_NAME + " varchar(40) NOT NULL," +
-                DBcolumns.USER_SEX + " integer," +
-                DBcolumns.USER_AGE + " integer," +
-                DBcolumns.USER_BIRTHDAY + " date," +
-                DBcolumns.USER_ADDRESS + " varchar(100)," +
-                DBcolumns.USER_TIME + " date)";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
-            return true;
-        }
-        /// <summary>
-        /// 创建群信息表
-        /// </summary>
-        /// <returns></returns>
-        public bool createGroupTable()
-        {
-            string cmdString = "CREATE TABLE IF NOT EXISTS " +
-                DBcolumns.TABLE_GROUP + "(" +
-                DBcolumns.GROUP_ID + " integer PRIMARY KEY AUTOINCREMENT," +
-                DBcolumns.GROUP_NAME + " varchar(40) NOT NULL," +
-                DBcolumns.GROUP_NUM + " integer," +
-                DBcolumns.GROUP_TIME + " date NOT NULL," +
-                DBcolumns.GROUP_NOTICE + " text," +
-                DBcolumns.GROUP_TYPE + " varchar(20))";
-            ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
-            return true;
-        }
-        #endregion
-
-        #region
-        /// <summary>
-        /// 创建用于存储群成员表的数据库
-        /// </summary>
-        /// <returns></returns>
-        public bool createGroupDb()
-        {
-            string dbPath = Constant.groupDbPath;
-            if (!System.IO.File.Exists(dbPath + "groupPerson.db"))
-            {
-                SQLiteConnection.CreateFile(dbPath + "groupPerson.db");
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// 创建每个群群成员信息表
-        /// </summary>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
-        public bool createGroupPersonTable(string groupId)
-        {
-            
-            string cmdString = "CREATE TABLE IF NOT EXISTS " +
-                "group" + groupId + "(" +
-                DBcolumns.GROUP_USER_ID + " varchar(20) PRIMARY KEY," +
-                DBcolumns.GROUP_IN_TIME + " date NOT NULL," +
-                DBcolumns.GROUP_STATU_TYPE + " integer)";
-            ExecuteNonQuery(cmdString, Constant.groupDbPath + "groupPerson.db");
-            return true;
-        }
-        #endregion
-
-        #region
         /// <summary>
         /// 创建用户个人数据库
         /// </summary>
@@ -183,6 +97,24 @@ namespace MinChatServer.db.dao
                 DBcolumns.MGROUP_ID + " integer PRIMARY KEY," +
                 DBcolumns.MGROUP_NAME + " varchar(40) UNIQUE NOT NULL," +
                 DBcolumns.MGROUP_NUM + " integer)";
+            ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
+            return true;
+        }
+
+        /// <summary>
+        /// 创建群信息表
+        /// </summary>
+        /// <returns></returns>
+        public bool createGroupTable(string userId)
+        {
+            string cmdString = "CREATE TABLE IF NOT EXISTS " +
+                DBcolumns.TABLE_GROUP + "(" +
+                DBcolumns.GROUP_ID + " integer PRIMARY KEY AUTOINCREMENT," +
+                DBcolumns.GROUP_NAME + " varchar(40) NOT NULL," +
+                DBcolumns.GROUP_NUM + " integer," +
+                DBcolumns.GROUP_TIME + " date NOT NULL," +
+                DBcolumns.GROUP_NOTICE + " text," +
+                DBcolumns.GROUP_TYPE + " varchar(20))";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
         }

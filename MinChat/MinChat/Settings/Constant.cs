@@ -20,7 +20,8 @@ namespace MinChat.Settings
 
         //自定义消息类型
         #region
-        public  const int MSGTEXT = 1;
+        public const int MSGREGISTER = 0;
+        public const int MSGTEXT = 1;
         public const int MSGIMG = 2;
         #endregion
 
