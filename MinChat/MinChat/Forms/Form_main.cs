@@ -72,11 +72,11 @@ namespace MinChat.Forms
         #region 处理好友上下线
         void FriendOffline(string friendId)
         {
-            chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.OffLine;
+            //chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.OffLine;
         }
         void FriendConnected(string friendId)
         {
-            chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.Online;
+            //chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.Online;
         }
         #endregion
         #region 处理掉线
@@ -140,7 +140,7 @@ namespace MinChat.Forms
                     case Constant.MSGIMG://图片
                         MsgImg msgimg = ImageUtil.bytesToIdImg(info);
                         ImageUtil.ImgSave(msgimg.Id, msgimg.Img);//存储图片
-                        //msgimg.Img.Save(msgimg.Id);
+                        //MessageBox.Show(msgimg.Img.Tag.ToString());
                         break;
                 }
             }

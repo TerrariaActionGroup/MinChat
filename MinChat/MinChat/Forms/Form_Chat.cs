@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace MinChat.Forms
 {
@@ -65,6 +66,7 @@ namespace MinChat.Forms
             foreach (Msg msg in msgs)
             {
                 AppendChatBoxContent(msg);
+                displayPicture();
             }
         }
         #endregion
@@ -89,7 +91,36 @@ namespace MinChat.Forms
             textBox.SelectionColor = fontColor;     //设置要添加的文本的字体色 
             textBox.SelectionFont = fontType;       //设置要添加的文本的字体
         }
+        /// <summary>
+        /// 显示图片
+        /// </summary>
+        void displayPicture()
+        {
+            for (int i = 0; i < chatBox_history.TextLength; i++)
+            {
+                chatBox_history.Select(i, 5);
+                if (chatBox_history.SelectedText == "<img>")
+                {
+                    chatBox_history.Select(i + 5, 16);
+                    string serialNumber = chatBox_history.SelectedText;
+                    try 
+                    { 
+                        Image img = Image.FromFile(serialNumber + ".png"); 
+                        Clipboard.SetImage(img);
+                        chatBox_history.Select(i, 16 + 5 + 6);
+                        chatBox_history.Paste();
+                    }
+                    catch
+                    {
+
+                    };
+                    
+                    
+                }
+            }
+        }
         #endregion
+
         #region 发送图片封装
         /// <summary>
         /// 发送图片消息
@@ -162,6 +193,7 @@ namespace MinChat.Forms
                     if (img != null)
                     {
                         ImageUtil.ImgSave(serialNumber, img);//存储图片，并加入后缀
+                        img.Tag=serialNumber;
                         SendImage(img, serialNumber, contactInfo.ID.ToString());//发送图片
                         img.Dispose();
                     }
@@ -181,12 +213,14 @@ namespace MinChat.Forms
             {
                 imgProcessing();
                 sendText();
+                displayPicture();
             }
         }
         private void btnSend_Click(object sender, EventArgs e)
         {
             imgProcessing();
             sendText();
+            displayPicture();
         }
         #endregion
         #region 处理接收消息事件的程序

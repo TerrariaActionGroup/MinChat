@@ -63,7 +63,6 @@
             this.chatBox_history.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chatBox_history.Location = new System.Drawing.Point(7, 35);
             this.chatBox_history.Name = "chatBox_history";
-            this.chatBox_history.ReadOnly = true;
             this.chatBox_history.Size = new System.Drawing.Size(551, 303);
             this.chatBox_history.TabIndex = 137;
             this.chatBox_history.Text = "";
