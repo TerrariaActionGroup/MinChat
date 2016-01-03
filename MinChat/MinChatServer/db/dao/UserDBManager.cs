@@ -12,6 +12,11 @@ namespace MinChatServer.db.dao
     
     class UserDBManager:UserUtil
     {
+        /// <summary>
+        /// 私有方法，打开数据库执行除select以外的操作
+        /// </summary>
+        /// <param name="cmdString">操作串</param>
+        /// <param name="dbPath">数据库路径</param>
         private static void ExecuteNonQuery(string cmdString, string dbPath)
         {
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + dbPath);
@@ -63,9 +68,9 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 验证用户的登录
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="pwd"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <param name="pwd">密码</param>
+        /// <returns>成功？</returns>
         public bool varifyUser(string userId, string pwd)
         {
             string cmdString = "SELECT * FROM " +
@@ -91,8 +96,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 添加一个用户
         /// </summary>
-        /// <param name="aUser"></param>
-        /// <returns></returns>
+        /// <param name="aUser">用户</param>
+        /// <returns>成功？</returns>
         public bool addUser(User aUser)
         {
             string cmdString = "INSERT INTO "+
@@ -112,8 +117,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 删除一个用户
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>成功？</returns>
         public bool deleteUser(string userId)
         {
             string cmdString = "DELETE FROM " +
@@ -126,8 +131,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 查询用户信息
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>用户资料</returns>
         public User queryUser(string userId)
         {
             string cmdString = "SELECT * FROM " +
@@ -159,9 +164,9 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 添加好友
         /// </summary>
-        /// <param name="masterId"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="masterId">用户ID</param>
+        /// <param name="userId">好友ID</param>
+        /// <returns>成功？</returns>
         public bool addFriend(string masterId, string userId)
         {
             string cmdString = "INSERT INTO " +
@@ -179,9 +184,9 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 删除好友
         /// </summary>
-        /// <param name="masterId"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="masterId">用户ID</param>
+        /// <param name="userId">好友ID</param>
+        /// <returns>成功？</returns>
         public bool deleteFriend(string masterId, string userId)
         {
             string cmdString = "DELETE FROM " +
@@ -195,8 +200,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 查询每个人的所有好友
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>好友ID列表</returns>
         public List<string> queryFriends(string userId)
         {
             List<string> friend = new List<string>();
@@ -219,9 +224,9 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 添加未读消息
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <param name="msg">消息</param>
+        /// <returns>成功？</returns>
         public bool addMsg(string userId, string msg)
         {
             string cmdString = "INSERT INTO " +
@@ -238,8 +243,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 删除一个人的未读消息
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>成功？</returns>
         public bool deleteMsg(string userId)
         {
             string cmdString = "DELETE FROM " +
@@ -251,8 +256,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 得到一个人所有未读消息
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>消息列表</returns>
         public List<string> queryMsgs(string userId)
         {
             List<string> msg = new List<string>();

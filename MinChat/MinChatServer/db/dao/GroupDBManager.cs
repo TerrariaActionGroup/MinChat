@@ -11,6 +11,11 @@ namespace MinChatServer.db.dao
 {
     class GroupDBManager:GroupUtil
     {
+        /// <summary>
+        /// 私有方法，打开数据库执行除select以外的操作
+        /// </summary>
+        /// <param name="cmdString">操作串</param>
+        /// <param name="dbPath">数据库路径</param>
         private static void ExecuteNonQuery(string cmdString, string dbPath)
         {
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + dbPath);
@@ -38,8 +43,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 添加一个群,个人分组也是
         /// </summary>
-        /// <param name="group"></param>
-        /// <returns></returns>
+        /// <param name="group">群资料</param>
+        /// <returns>成功？</returns>
         public bool addGroup(Group group)
         {
             string cmdString = "INSERT INTO " +
@@ -62,8 +67,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 删除一个群组
         /// </summary>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <param name="groupId">群ID</param>
+        /// <returns>成功？</returns>
         public bool deleteGroup(int groupId)
         {
             string cmdString = "DELETE FROM " +
@@ -76,8 +81,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 查询群的资料
         /// </summary>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <param name="groupId">群ID</param>
+        /// <returns>群资料</returns>
         public Group queryGroup(int groupId)
         {
             string cmdString = "SELECT * FROM "+
@@ -107,9 +112,9 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 用户加入群组
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="groupId"></param>
-        /// <param name="type"></param>
+        /// <param name="userId">用户ID</param>
+        /// <param name="groupId">群ID</param>
+        /// <param name="type">类型，0表示群主，1管理员，2普通用户</param>
         /// <returns></returns>
         public bool userIntoGroup(string userId, int groupId, int type)
         {
@@ -125,8 +130,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 查询群组所有成员
         /// </summary>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <param name="groupId">群组ID</param>
+        /// <returns>成员ID列表</returns>
         public List<string> queryGroupMates(int groupId)
         {
             List<string> groupmates = new List<string>();
