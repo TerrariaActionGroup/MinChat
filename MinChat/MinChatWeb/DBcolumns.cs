@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace MinChatServer.db
+namespace MinChatWeb
 {
-    class DBcolumns
+    public class DBcolumns
     {
         #region
         /**
@@ -72,6 +71,5 @@ namespace MinChatServer.db
         public static String MGROUP_NUM = "mgroup_num";
 
         #endregion
-
     }
 }

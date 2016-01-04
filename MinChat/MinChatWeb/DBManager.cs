@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using MinChatServer.db.bean;
-using System.Data.SQLite;
 
-namespace MinChatServer.db.dao
+namespace MinChatWeb
 {
     class DBManager
     {
-
         private static void ExecuteNonQuery(string cmdString, string dbPath)
         {
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + dbPath);
@@ -75,7 +72,7 @@ namespace MinChatServer.db.dao
         /// <returns></returns>
         public bool createRelationTable(string userId)
         {
-            
+
             string cmdString = "CREATE TABLE IF NOT EXISTS " +
                 DBcolumns.TABLE_RELATION + "(" +
                 DBcolumns.RELATION_ID + " integer PRIMARY KEY AUTOINCREMENT," +
