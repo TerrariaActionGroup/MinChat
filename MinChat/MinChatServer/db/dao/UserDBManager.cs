@@ -236,7 +236,8 @@ namespace MinChatServer.db.dao
                 DBcolumns.MSG_CONTENT + ") VALUES(\'" +
                 //msgId + ",\'" +
                 userId + "\',\'" +
-                msg + "\')";
+                msg + "\'" +
+                type + ")";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
         }
@@ -262,8 +263,10 @@ namespace MinChatServer.db.dao
         public List<string> queryMsgs(string userId)
         {
             List<string> msg = new List<string>();
-            string cmdString = "SELECT "+
-                DBcolumns.MSG_CONTENT + " FROM " +
+            string temp;
+            string cmdString = "SELECT " +
+                DBcolumns.MSG_CONTENT + "," +
+                DBcolumns.MSG_TYPE + " FROM " +
                 DBcolumns.TABLE_MSG;
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + Constant.userDbPath + "user" + userId + ".db");
             conn.Open();
@@ -271,7 +274,10 @@ namespace MinChatServer.db.dao
             SQLiteDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                msg.Add(dr.GetString(0));
+                temp = dr.GetString(0);
+                temp += Constant.SPLIT;
+                temp += dr.GetInt32(1);
+                msg.Add(temp);
             }
             return msg;
         }

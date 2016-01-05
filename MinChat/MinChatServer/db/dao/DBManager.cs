@@ -155,7 +155,8 @@ namespace MinChatServer.db.dao
                 DBcolumns.TABLE_MSG + "(" +
                 DBcolumns.MSG_ID + " integer PRIMARY KEY AUTOINCREMENT," +
                 DBcolumns.MSG_TO + " varchar(20)," +
-                DBcolumns.MSG_CONTENT + " text)";
+                DBcolumns.MSG_CONTENT + " text," +
+                DBcolumns.MSG_TYPE + ")";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
         }
