@@ -49,11 +49,18 @@ namespace MinChatServer
             GroupManager groupManager = new GroupManager();
             RapidServerEngine.GroupManager = groupManager;
 
+            //设置基础管理器
+            BasicHandler basicHandler = new BasicHandler();
+
             //初始化服务端引擎
-            RapidServerEngine.Initialize(4530, new CustomizeHandler(), new BasicHandler());
+            RapidServerEngine.Initialize(4530, new CustomizeHandler(), basicHandler);
             //RapidServerEngine初始化成功后，其UserManager属性才可用。
             friendManager.UserManager = RapidServerEngine.UserManager; 
             groupManager.UserManager = RapidServerEngine.UserManager;
+            basicHandler.UserManager = RapidServerEngine.UserManager;
+
+            //基础功能初始化
+            basicHandler.InitBasicFunction(RapidServerEngine);
 
             //设置重登陆模式
             RapidServerEngine.UserManager.RelogonMode = RelogonMode.ReplaceOld;
