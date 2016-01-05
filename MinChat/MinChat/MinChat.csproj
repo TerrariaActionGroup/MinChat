@@ -50,7 +50,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.99.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Tool\sqlite\4.0\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\MinChatServer\lib\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
@@ -64,8 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communications\bean\Group.cs" />
-    <Compile Include="Communications\bean\MsgImg.cs" />
     <Compile Include="Communications\bean\Msg.cs" />
+    <Compile Include="Communications\bean\MsgImg.cs" />
     <Compile Include="Communications\bean\Session.cs" />
     <Compile Include="Communications\bean\Friend.cs" />
     <Compile Include="Communications\bean\Mgroup.cs" />

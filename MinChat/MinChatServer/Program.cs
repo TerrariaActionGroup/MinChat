@@ -29,9 +29,10 @@ namespace MinChatServer
             //如果是其它类型的授权用户，请使用下面的语句设定正确的授权用户ID和密码。              
             ESPlus.GlobalUtil.SetAuthorizedUser("FreeUser", "");
 
-            //创建数据库目录
+            //创建数据库目录以及存放头像文件
             FileHelper fileHelper = new FileHelper();
             fileHelper.createDbDirectory();
+            fileHelper.createAvatarDirectory();
             fileHelper = null;
 
             //创建全局数据库

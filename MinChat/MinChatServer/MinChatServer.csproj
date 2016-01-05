@@ -62,17 +62,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="db\bean\Constant.cs" />
-    <Compile Include="db\bean\Group.cs" />
-    <Compile Include="db\bean\User.cs" />
-    <Compile Include="db\dao\DBManager.cs" />
-    <Compile Include="db\dao\GroupDBManager.cs" />
-    <Compile Include="db\dao\UserDBManager.cs" />
-    <Compile Include="db\DBcolumns.cs" />
-    <Compile Include="db\FileHelper.cs" />
-    <Compile Include="db\minterface\DBHelper.cs" />
-    <Compile Include="db\minterface\GroupUtil.cs" />
-    <Compile Include="db\minterface\UserUtil.cs" />
+    <Compile Include="model\db\bean\Constant.cs" />
+    <Compile Include="model\db\bean\Group.cs" />
+    <Compile Include="model\db\bean\User.cs" />
+    <Compile Include="model\db\dao\DBManager.cs" />
+    <Compile Include="model\db\dao\GroupDBManager.cs" />
+    <Compile Include="model\db\dao\UserDBManager.cs" />
+    <Compile Include="model\db\DBcolumns.cs" />
+    <Compile Include="model\db\FileHelper.cs" />
+    <Compile Include="model\db\minterface\DBHelper.cs" />
+    <Compile Include="model\db\minterface\GroupUtil.cs" />
+    <Compile Include="model\db\minterface\UserUtil.cs" />
     <Compile Include="es\BasicHandler.cs" />
     <Compile Include="es\CustomizeHandler.cs" />
     <Compile Include="es\FriendsManager.cs" />
@@ -83,6 +83,7 @@
     <Compile Include="form\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\util\ObjSerial.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="form\FormMain.resx">

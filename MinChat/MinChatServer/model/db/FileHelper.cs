@@ -29,24 +29,40 @@ namespace MinChatServer.db
         }
 
         /// <summary>
+        /// 创建存放用户头像的文件夹
+        /// </summary>
+        /// <returns></returns>
+        public bool createAvatarDirectory()
+        {
+            string path = Environment.CurrentDirectory + "\\data\\avatar";
+            if (createDirectory(path) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// 创建一个目录
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public void createDirectory(string path)
+        public bool createDirectory(string path)
         {
             try
             {
                 if(Directory.Exists(path) == false)
                 {
                     Directory.CreateDirectory(path);
+                    return true;
                 }
                 
             }
             catch (Exception e)
             {
-                
+                return false;
             }
+            return false;
         }
 
         /// <summary>
