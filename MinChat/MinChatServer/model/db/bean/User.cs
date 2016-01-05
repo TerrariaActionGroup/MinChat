@@ -128,9 +128,9 @@ namespace MinChatServer.db.bean
         public static string UserData2String(User user)
         {
             string split = Constant.SPLIT;
-            //ID卍昵称卍性别卍年龄卍生日卍地址卍注册时间
-            string data = user.UserId + split + user.UserName + split + user.Sex + split + user.Age + 
-                            split + user.Birthday + split + user.Address + split + user.Time;
+            //ID卍昵称卍性别卍生日卍地址卍注册时间
+            string data = user.UserId + split + user.UserName + split + user.Sex + split + 
+                            user.Birthday + split + user.Address + split + user.Time;
             return data;
         }
     }

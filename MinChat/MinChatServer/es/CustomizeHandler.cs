@@ -8,6 +8,7 @@ using MinChatServer.db.bean;
 using System.Text.RegularExpressions;
 using MinChatServer.db.dao;
 using MinChat.Works.util;
+using System.Windows.Forms;
 
 namespace MinChatServer.es
 {
@@ -70,8 +71,10 @@ namespace MinChatServer.es
 
                 case Constant.MSG_QUERYUSER:   //查找好友
                     friendID = System.Text.Encoding.UTF8.GetString(info);
+                    MessageBox.Show("bbb");
                     User user = userDBManager.queryUser(friendID);
                     string userData = User.UserData2String(user);
+                    
                     List<string> data = new List<string>();
                     data.Add(userData);
                     return ObjSerial.serializeObject(data);
