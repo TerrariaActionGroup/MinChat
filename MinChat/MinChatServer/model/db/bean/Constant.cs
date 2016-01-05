@@ -12,6 +12,7 @@ namespace MinChatServer.db.bean
         public static string globalDbPath = ".\\data\\globalDb\\";
         public static string groupDbPath = ".\\data\\groupDb\\";
         public static string userDbPath = ".\\data\\userDb\\";
+        public static string userAvatarPath = ".\\data\\avatar\\";
 
         //客户端发给服务器的消息类型
         public const int MSG_ADDFRIEND = 0;       //添加好友,同步请求

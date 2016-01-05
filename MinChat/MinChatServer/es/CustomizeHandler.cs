@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MinChatServer.db.bean;
 using System.Text.RegularExpressions;
 using MinChatServer.db.dao;
+using MinChat.Works.util;
 
 namespace MinChatServer.es
 {
@@ -54,12 +55,28 @@ namespace MinChatServer.es
         /// </summary>       
         public byte[] HandleQuery(string sourceUserID, int informationType, byte[] info)
         {
+            string friendID;
             switch (informationType)
             {
                 case Constant.MSG_ADDFRIEND:    //添加好友。解析：另一方ID
+                    friendID = System.Text.Encoding.UTF8.GetString(info);
+                    userDBManager.addFriend(sourceUserID, friendID);
                     break;
+
                 case Constant.MSG_DELFRIEND:    //删除好友。解析：另一方ID
+                    friendID = System.Text.Encoding.UTF8.GetString(info);
+                    userDBManager.deleteFriend(sourceUserID, friendID);
                     break;
+
+                case Constant.MSG_QUERYUSER:   //查找好友
+                    friendID = System.Text.Encoding.UTF8.GetString(info);
+                    User user = userDBManager.queryUser(friendID);
+                    string userData = User.UserData2String(user);
+                    List<string> data = new List<string>();
+                    data.Add(userData);
+                    return ObjSerial.serializeObject(data);
+                    break;
+
                 default:
                     break;
             }

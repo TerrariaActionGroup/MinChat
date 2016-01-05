@@ -119,5 +119,19 @@ namespace MinChatServer.db.bean
         }
 
         #endregion
+
+        /// <summary>
+        /// 将用户信息拼装成字符串序列
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public static string UserData2String(User user)
+        {
+            string split = Constant.SPLIT;
+            //ID卍昵称卍性别卍年龄卍生日卍地址卍注册时间
+            string data = user.UserId + split + user.UserName + split + user.Sex + split + user.Age + 
+                            split + user.Birthday + split + user.Address + split + user.Time;
+            return data;
+        }
     }
 }
