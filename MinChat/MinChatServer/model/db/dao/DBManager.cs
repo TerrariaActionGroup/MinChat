@@ -11,7 +11,11 @@ namespace MinChatServer.db.dao
 {
     class DBManager : DBHelper
     {
-
+        /// <summary>
+        /// 私有方法，打开数据库执行除select以外的操作
+        /// </summary>
+        /// <param name="cmdString">操作串</param>
+        /// <param name="dbPath">数据库路径</param>
         private static void ExecuteNonQuery(string cmdString, string dbPath)
         {
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + dbPath);
@@ -41,7 +45,7 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建全局数据库
         /// </summary>
-        /// <returns></returns>
+        /// <returns>成功？</returns>
         public bool createGlobalDb()
         {
             if (!System.IO.File.Exists(Constant.globalDbPath + "global.db")) 
@@ -54,7 +58,7 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建用户信息表
         /// </summary>
-        /// <returns></returns>
+        /// <returns>成功？</returns>
         public bool createUserTable()
         {
 
@@ -74,7 +78,7 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建群信息表
         /// </summary>
-        /// <returns></returns>
+        /// <returns>成功？</returns>
         public bool createGroupTable()
         {
             string cmdString = "CREATE TABLE IF NOT EXISTS " +
@@ -94,7 +98,7 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建用于存储群成员表的数据库
         /// </summary>
-        /// <returns></returns>
+        /// <returns>成功？</returns>
         public bool createGroupDb()
         {
             string dbPath = Constant.groupDbPath;
@@ -108,8 +112,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建每个群群成员信息表
         /// </summary>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <param name="groupId">群ID</param>
+        /// <returns>成功？</returns>
         public bool createGroupPersonTable(string groupId)
         {
             
@@ -127,8 +131,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建用户个人数据库
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>成功？</returns>
         public bool createUserDb(string userId)
         {
             string dbPath = Constant.userDbPath + "user" + userId + ".db";
@@ -142,7 +146,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建未读消息数据表
         /// </summary>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>成功？</returns>
         public bool createMsgTable(string userId)
         {
 
@@ -150,7 +155,8 @@ namespace MinChatServer.db.dao
                 DBcolumns.TABLE_MSG + "(" +
                 DBcolumns.MSG_ID + " integer PRIMARY KEY AUTOINCREMENT," +
                 DBcolumns.MSG_TO + " varchar(20)," +
-                DBcolumns.MSG_CONTENT + " text)";
+                DBcolumns.MSG_CONTENT + " text," +
+                DBcolumns.MSG_TYPE + ")";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
         }
@@ -158,7 +164,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建好友关系数据表
         /// </summary>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>成功？</returns>
         public bool createRelationTable(string userId)
         {
             
@@ -175,7 +182,8 @@ namespace MinChatServer.db.dao
         /// <summary>
         /// 创建个人分组数据表
         /// </summary>
-        /// <returns></returns>
+        /// <param name="userId">用户ID</param>
+        /// <returns>成功？</returns>
         public bool createMgroupTable(string userId)
         {
             string cmdString = "CREATE TABLE IF NOT EXISTS " +
