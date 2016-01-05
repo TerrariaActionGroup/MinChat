@@ -56,7 +56,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.lbl_userName = new CCWin.SkinControl.SkinLabel();
-            this.skinButton1 = new CCWin.SkinControl.SkinButton();
+            this.btn_search = new CCWin.SkinControl.SkinButton();
             this.chatTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -386,7 +386,7 @@
             this.chatListBox1.Location = new System.Drawing.Point(3, 3);
             this.chatListBox1.Name = "chatListBox1";
             this.chatListBox1.SelectSubItem = null;
-            this.chatListBox1.Size = new System.Drawing.Size(266, 428);
+            this.chatListBox1.Size = new System.Drawing.Size(266, 395);
             this.chatListBox1.SubItemMenu = null;
             this.chatListBox1.TabIndex = 1;
             // 
@@ -451,7 +451,7 @@
             this.tabPage2.Location = new System.Drawing.Point(0, 36);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(272, 434);
+            this.tabPage2.Size = new System.Drawing.Size(272, 401);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "会话";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -460,7 +460,7 @@
             // 
             this.tabPage3.Location = new System.Drawing.Point(0, 36);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(272, 434);
+            this.tabPage3.Size = new System.Drawing.Size(272, 401);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "群/讨论组";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -477,21 +477,22 @@
             this.lbl_userName.TabIndex = 1;
             this.lbl_userName.Text = "userName";
             // 
-            // skinButton1
+            // btn_search
             // 
-            this.skinButton1.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.skinButton1.DownBack = null;
-            this.skinButton1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.skinButton1.Location = new System.Drawing.Point(198, 497);
-            this.skinButton1.MouseBack = null;
-            this.skinButton1.Name = "skinButton1";
-            this.skinButton1.NormlBack = null;
-            this.skinButton1.Size = new System.Drawing.Size(75, 23);
-            this.skinButton1.TabIndex = 2;
-            this.skinButton1.Text = "查找";
-            this.skinButton1.UseVisualStyleBackColor = false;
+            this.btn_search.BackColor = System.Drawing.Color.Transparent;
+            this.btn_search.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btn_search.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_search.DownBack = null;
+            this.btn_search.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_search.Location = new System.Drawing.Point(198, 497);
+            this.btn_search.MouseBack = null;
+            this.btn_search.Name = "btn_search";
+            this.btn_search.NormlBack = null;
+            this.btn_search.Size = new System.Drawing.Size(75, 23);
+            this.btn_search.TabIndex = 2;
+            this.btn_search.Text = "查找";
+            this.btn_search.UseVisualStyleBackColor = false;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // Form_main
             // 
@@ -511,7 +512,7 @@
             this.CloseNormlBack = ((System.Drawing.Image)(resources.GetObject("$this.CloseNormlBack")));
             this.ControlBoxOffset = new System.Drawing.Point(0, 0);
             this.ControlBoxSpace = 0;
-            this.Controls.Add(this.skinButton1);
+            this.Controls.Add(this.btn_search);
             this.Controls.Add(this.lbl_userName);
             this.Controls.Add(this.chatTab);
             this.DropBack = false;
@@ -547,7 +548,7 @@
         private CCWin.SkinControl.SkinLabel lbl_userName;
         private System.Windows.Forms.TabPage tabPage1;
         private CCWin.SkinControl.ChatListBox chatListBox1;
-        private CCWin.SkinControl.SkinButton skinButton1;
+        private CCWin.SkinControl.SkinButton btn_search;
 
     }
 }

@@ -30,7 +30,7 @@
         {
             this.Btn_search = new CCWin.SkinControl.SkinButton();
             this.searchId = new CCWin.SkinControl.SkinTextBox();
-            this.ListBox = new CCWin.SkinControl.ChatListBox();
+            this.searchList = new CCWin.SkinControl.ChatListBox();
             this.SuspendLayout();
             // 
             // Btn_search
@@ -92,31 +92,30 @@
             this.searchId.WaterText = "";
             this.searchId.WordWrap = true;
             // 
-            // ListBox
+            // searchList
             // 
-            this.ListBox.BackColor = System.Drawing.Color.White;
-            this.ListBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ListBox.ForeColor = System.Drawing.Color.Black;
-            this.ListBox.FriendsMobile = true;
-            this.ListBox.ListSubItemMenu = null;
-            this.ListBox.Location = new System.Drawing.Point(7, 133);
-            this.ListBox.Name = "ListBox";
-            this.ListBox.SelectSubItem = null;
-            this.ListBox.Size = new System.Drawing.Size(623, 277);
-            this.ListBox.SubItemMenu = null;
-            this.ListBox.TabIndex = 2;
-            this.ListBox.Text = "chatListBox1";
+            this.searchList.BackColor = System.Drawing.Color.White;
+            this.searchList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.searchList.ForeColor = System.Drawing.Color.Black;
+            this.searchList.FriendsMobile = true;
+            this.searchList.ListSubItemMenu = null;
+            this.searchList.Location = new System.Drawing.Point(7, 133);
+            this.searchList.Name = "searchList";
+            this.searchList.SelectSubItem = null;
+            this.searchList.Size = new System.Drawing.Size(623, 277);
+            this.searchList.SubItemMenu = null;
+            this.searchList.TabIndex = 2;
             // 
             // Form_Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 417);
-            this.Controls.Add(this.ListBox);
+            this.Controls.Add(this.searchList);
             this.Controls.Add(this.searchId);
             this.Controls.Add(this.Btn_search);
             this.Name = "Form_Search";
-            this.Text = "Form_Search";
+            this.Text = "查找好友";
             this.ResumeLayout(false);
 
         }
@@ -125,7 +124,7 @@
 
         private CCWin.SkinControl.SkinButton Btn_search;
         private CCWin.SkinControl.SkinTextBox searchId;
-        private CCWin.SkinControl.ChatListBox ListBox;
+        private CCWin.SkinControl.ChatListBox searchList;
 
     }
 }

@@ -119,13 +119,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ClientSize = new System.Drawing.Size(568, 510);
+            this.ClientSize = new System.Drawing.Size(569, 510);
             this.ControlBoxSpace = 0;
             this.Controls.Add(this.chatBoxSend);
             this.Controls.Add(this.chatBox_history);
             this.Controls.Add(this.pnl_Tool2);
             this.Controls.Add(this.pnl_Tool);
             this.InnerBorderColor = System.Drawing.Color.Maroon;
+            this.MinimumSize = new System.Drawing.Size(568, 510);
             this.Name = "Form_Chat";
             this.ShowBorder = false;
             this.ShowDrawIcon = false;

@@ -23,6 +23,7 @@ namespace MinChat.Forms
         #region 变量
         public ChatListSubItem myInfo;//客户端用户的个人信息
         IRapidPassiveEngine rapidPassiveEngine;// 客户端引擎
+        Form_Search form_search;
         #endregion     
         #region 窗口构造函数
         public Form_main()
@@ -213,5 +214,26 @@ namespace MinChat.Forms
             }
         }
         #endregion
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            if(form_search!=null)
+            {
+                if (form_search.IsDisposed)
+                {
+                    form_search = new Form_Search(rapidPassiveEngine, myInfo);
+                    form_search.Show();
+                }
+                else
+                {
+                    form_search.Activate();
+                }
+            }
+            else 
+            {
+                form_search = new Form_Search(rapidPassiveEngine,myInfo);
+                form_search.Show();
+            }
+        }
     }
 }

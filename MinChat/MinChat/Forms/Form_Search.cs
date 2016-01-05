@@ -5,6 +5,7 @@ using ESPlus.Rapid;
 using MinChat.Communications;
 using MinChat.Forms.DerivedClass;
 using MinChat.Settings;
+using MinChat.Works.util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,14 +30,14 @@ namespace MinChat.Forms
         /// 客户端引擎
         /// </summary>
         IRapidPassiveEngine rapidPassiveEngine;
-        
-        CallbackHandler ReceiveUserList = new CallbackHandler(diaplayUser);//实例化收到消息时回调方法的委托
+        CallbackHandler ReceiveUserList;
         #endregion
         
         public Form_Search(IRapidPassiveEngine rapidPassiveEngine, ChatListSubItem myInfo)
         {
             this.myInfo = myInfo;
             this.rapidPassiveEngine = rapidPassiveEngine;
+            this.ReceiveUserList = new CallbackHandler(diaplayUser);//实例化收到消息时回调方法的委托
             InitializeComponent();
         }
 
@@ -48,19 +49,38 @@ namespace MinChat.Forms
         }
         
         //返回消息时回调的方法
-        public static void diaplayUser(Exception ee, byte[] response, object tag)
+        private void diaplayUser(Exception ee, byte[] response, object tag)
         {
-            //string info = System.Text.Encoding.UTF8.GetString(response);
+            //反序列化返回的消息生成list
+            ObjSerial<List<string>> se = new ObjSerial<List<string>>();
+            List<string> list=se.deserializeBytes(response);
 
-            //ChatListItem gp = new ChatListItem();//新建一个组
-            //gp.Text = "查询结果";
-            ////获取在线用户的ID
-            //List<string> list = ;
-            //foreach (string user in list)
-            //{
-            //    string[] userinfo = Regex.Split(user, Constant.SPLIT, RegexOptions.IgnoreCase);
-            //}
-            //chatListBox_contacts.Items.Add(gp);//添加到listBox中
+            ChatListItem gp = new ChatListItem();//新建一个组
+            gp.Text = "查询结果";
+            
+            ChatListSubItemExtend user = new ChatListSubItemExtend();
+            //获取在线用户的ID
+            foreach (string srtings in list)
+            {
+                //string的形式：
+                //ID卍昵称卍性别卍生日卍地址卍注册时间
+                string[] userInfo = Regex.Split(srtings, Constant.SPLIT, RegexOptions.IgnoreCase);
+                user.ID = Convert.ToUInt32(userInfo[0]);
+                user.NicName = userInfo[1];
+                if(userInfo[2]=="1")
+                {
+                    user.Sex = ChatListSubItemExtend.UserSex.Man;
+                }
+                else if(userInfo[2]=="0")
+                {
+                    user.Sex = ChatListSubItemExtend.UserSex.Women;
+                }
+                user.Birth = userInfo[3];
+                user.Address = userInfo[4];
+                user.RegistrationDate = userInfo[5];
+                gp.SubItems.Add(user);
+            }
+            this.searchList.Items.Add(gp);
         }
         
     }
