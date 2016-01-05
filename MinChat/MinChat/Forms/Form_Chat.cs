@@ -70,7 +70,25 @@ namespace MinChat.Forms
             }
         }
         #endregion
+        #region 调整窗口大小时
+        private void Form_Chat_Resize(object sender, EventArgs e)
+        {
+            pnl_Tool2.Top=this.Height-pnl_Tool2.Height;
+            pnl_Tool2.Width=this.Width;
 
+            chatBoxSend.Left=5;
+            chatBoxSend.Top = this.Height-(chatBoxSend.Height+pnl_Tool2.Height);
+            chatBoxSend.Width=this.Width-5;
+
+            pnl_Tool.Top=this.Height-(pnl_Tool.Height+chatBoxSend.Height+pnl_Tool2.Height);
+            pnl_Tool.Width=this.Width;
+
+            chatBox_history.Left = 5;
+            chatBox_history.Top = this.CaptionHeight + 4;
+            chatBox_history.Width = this.Width-5;
+            chatBox_history.Height = pnl_Tool.Top - chatBox_history.Top;
+        }
+        #endregion
         #region 显示消息封装
         private void AppendChatBoxContent(Msg msg)
         {
@@ -120,7 +138,6 @@ namespace MinChat.Forms
             }
         }
         #endregion
-
         #region 发送图片封装
         /// <summary>
         /// 发送图片消息
@@ -139,7 +156,6 @@ namespace MinChat.Forms
             this.rapidPassiveEngine.CustomizeOutter.SendBlob(destUserID, Constant.MSGIMG, blob, 2048);
         }
         #endregion
-
         #region 发送文本
         /// <summary>
         /// 发送文本消息
@@ -158,9 +174,11 @@ namespace MinChat.Forms
                 string date = DateTime.Now.ToString();
                 string sendName = myInfo.NicName;
                 string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
+                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, Constant.MSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
+
                 string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
                 Msg aMsg = new Msg(msgs,1,1);
-                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, Constant.MSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
+                
                 //将内容更新到上方面板
                 this.AppendChatBoxContent(aMsg);
                 //存入数据库
@@ -232,5 +250,6 @@ namespace MinChat.Forms
             }
         }
         #endregion
+
     }
 }

@@ -43,13 +43,30 @@ namespace MinChat.Forms
             //加载分组
             ChatListItem gp = new ChatListItem();//new一个分组
             gp.Text = "TestList";
+            ChatListSubItemExtend people = new ChatListSubItemExtend();
+            if(myInfo.ID==10086)
+            {
+                people.Sex = ChatListSubItemExtend.UserSex.Man;
+                people.ID = 10010;
+                people.NicName = "联通";
+                people.DisplayName="联不通";
+            }
+            else if(myInfo.ID==10010)
+            {
+                people.Sex = ChatListSubItemExtend.UserSex.Man;
+                people.ID = 10010;
+                people.NicName = "移动";
+                people.DisplayName="移不动";
+            }
+            gp.SubItems.Add(people);
+
             //获取在线用户的ID
             List<string> list=rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
             foreach(string friendId in list)
             {
                 if (friendId != myInfo.ID.ToString() && chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId)).Length==0)
                 {
-                    ChatListSubItemSex contact = new ChatListSubItemSex();
+                    ChatListSubItemExtend contact = new ChatListSubItemExtend();
                     contact.ID = Convert.ToUInt32(friendId);
                     contact.NicName = friendId;
                     //contact.Sex = ChatListSubItemSex.UserSex.Man;//性别
@@ -59,11 +76,11 @@ namespace MinChat.Forms
             chatListBox_contacts.Items.Add(gp);//添加到listBox中
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
-            //预订断线事件
+            //预订断线处理事件
             this.rapidPassiveEngine.ConnectionInterrupted += new CbGeneric(rapidPassiveEngine_ConnectionInterrupted); 
-            //好友下线事件
+            //好友下线处理事件
             this.rapidPassiveEngine.FriendsOutter.FriendOffline += new CbGeneric<string>(FriendOffline);
-            //好友上线事件
+            //好友上线处理事件
             this.rapidPassiveEngine.FriendsOutter.FriendConnected += new CbGeneric<string>(FriendConnected);
 
         }
