@@ -11,6 +11,7 @@ namespace MinChatServer.db.dao
 {
     class DBManager : DBHelper
     {
+        #region
         /// <summary>
         /// 私有方法，打开数据库执行除select以外的操作
         /// </summary>
@@ -40,6 +41,7 @@ namespace MinChatServer.db.dao
             }
             return dbManager;
         }
+        #endregion
 
         #region
         /// <summary>
@@ -174,7 +176,8 @@ namespace MinChatServer.db.dao
                 DBcolumns.RELATION_ID + " integer PRIMARY KEY AUTOINCREMENT," +
                 DBcolumns.RELATION_USER_ID + " varchar(20)," +
                 DBcolumns.FGROUP_ID + " integer," +
-                DBcolumns.RELATION_TIME + " date)";
+                DBcolumns.RELATION_TIME + " date,"+
+                DBcolumns.REMARK + "varchar(40))";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
         }
