@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace MinChatWeb.webForm {
+namespace MinChatWeb {
     
     
     public partial class Register {

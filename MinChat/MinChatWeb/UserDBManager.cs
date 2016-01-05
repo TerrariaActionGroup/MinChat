@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using MinChatServer.db.bean;
-using System.Data.SQLite;
 
-namespace MinChatServer.db.dao
+namespace MinChatWeb
 {
-
     class UserDBManager
     {
         /// <summary>
@@ -74,7 +71,7 @@ namespace MinChatServer.db.dao
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             Int64 x = (Int64)cmd.ExecuteScalar();
             conn.Close();
-            return x + 10000; 
+            return x + 10000;
         }
 
         /// <summary>
@@ -90,6 +87,5 @@ namespace MinChatServer.db.dao
             ExecuteNonQuery(cmdString, Constant.globalDbPath + "global.db");
             return true;
         }
-
     }
 }

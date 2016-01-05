@@ -227,7 +227,8 @@ namespace MinChatServer.db.dao
         /// <param name="userId">用户ID</param>
         /// <param name="msg">消息</param>
         /// <returns>成功？</returns>
-        public bool addMsg(string userId, string msg)
+
+        public bool addMsg(string userId, string msg, int type)
         {
             string cmdString = "INSERT INTO " +
                 DBcolumns.TABLE_MSG + "(" +
@@ -257,7 +258,7 @@ namespace MinChatServer.db.dao
         /// 得到一个人所有未读消息
         /// </summary>
         /// <param name="userId">用户ID</param>
-        /// <returns>消息列表</returns>
+        /// <returns>（类型号 + Constant.SPLIT + 内容)</returns>
         public List<string> queryMsgs(string userId)
         {
             List<string> msg = new List<string>();

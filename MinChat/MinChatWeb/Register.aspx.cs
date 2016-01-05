@@ -1,19 +1,14 @@
-﻿using MinChatServer.db.bean;
-using MinChatServer.db.dao;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace MinChatWeb.webForm
+namespace MinChatWeb
 {
     public partial class Register : System.Web.UI.Page
     {
-        public static string dataPath = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.RequestType.ToUpper() == "POST")
@@ -49,6 +44,7 @@ namespace MinChatWeb.webForm
                 dbManager.createMgroupTable(user.UserId);
                 dbManager.createGroupTable(user.UserId);
             }
+
         }
     }
 }

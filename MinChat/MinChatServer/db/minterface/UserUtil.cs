@@ -73,8 +73,9 @@ namespace MinChatServer.db.minterface
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="msg"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
-        bool addMsg(string userId, string msg);
+        bool addMsg(string userId, string msg, int type);
 
         /// <summary>
         /// 删除一个人的未读消息

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinChat", "MinChat\MinChat.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinChatServer", "MinChatServer\MinChatServer.csproj", "{FD160E03-A121-4884-A453-C10EBCC7438D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinChatWeb", "MinChatWeb\MinChatWeb\MinChatWeb.csproj", "{C51E100B-C26F-4015-AA47-682F01C4418A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinChatWeb", "MinChatWeb\MinChatWeb.csproj", "{52905E4B-021D-456A-A6CE-00C7C4E630AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{FD160E03-A121-4884-A453-C10EBCC7438D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD160E03-A121-4884-A453-C10EBCC7438D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD160E03-A121-4884-A453-C10EBCC7438D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C51E100B-C26F-4015-AA47-682F01C4418A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C51E100B-C26F-4015-AA47-682F01C4418A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C51E100B-C26F-4015-AA47-682F01C4418A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C51E100B-C26F-4015-AA47-682F01C4418A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52905E4B-021D-456A-A6CE-00C7C4E630AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52905E4B-021D-456A-A6CE-00C7C4E630AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52905E4B-021D-456A-A6CE-00C7C4E630AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52905E4B-021D-456A-A6CE-00C7C4E630AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
