@@ -62,6 +62,7 @@ namespace MinChatServer.db
         public static String RELATION_USER_ID = "relation_user_id";    //对方
         public static String FGROUP_ID = "fgroup_id";                  //用户自定义分组
         public static String RELATION_TIME = "relationTime";           //添加好友时间            
+        public static string REMARK = "remark";
 
 
         /**

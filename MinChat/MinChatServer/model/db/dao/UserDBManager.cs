@@ -154,6 +154,7 @@ namespace MinChatServer.db.dao
                 u.Birthday = dr.GetString(5);
                 u.Address = dr.GetString(6);
                 u.Time = dr.GetString(7);
+                u.Remark = "";
                 conn.Close();
                 return u;
             }
