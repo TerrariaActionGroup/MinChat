@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MinChat.Works.util
 {
-    class ObjSerial
+    class ObjSerial<T>
     {
         /// <summary>
         /// 序列化对象
@@ -21,9 +21,9 @@ namespace MinChat.Works.util
             return data;
         }
 
-        public static List<string> deserializeBytes(byte[] info)
+        public T deserializeBytes(byte[] info)
         {
-            return (List<string>)ESBasic.Helpers.SerializeHelper.DeserializeBytes(info, 0, info.Length);
+            return (T)ESBasic.Helpers.SerializeHelper.DeserializeBytes(info, 0, info.Length);
         }
     }
 }
