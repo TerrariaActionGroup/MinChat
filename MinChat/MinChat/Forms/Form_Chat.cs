@@ -250,6 +250,5 @@ namespace MinChat.Forms
             }
         }
         #endregion
-
     }
 }
