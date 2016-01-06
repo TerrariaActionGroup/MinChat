@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MinChat.Works.db;
+using MinChat.Communications.bean;
 
 namespace MinChat
 {
