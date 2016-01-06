@@ -31,6 +31,7 @@
             this.Btn_search = new CCWin.SkinControl.SkinButton();
             this.searchId = new CCWin.SkinControl.SkinTextBox();
             this.searchList = new CCWin.SkinControl.ChatListBox();
+            this.btn_add = new CCWin.SkinControl.SkinButton();
             this.SuspendLayout();
             // 
             // Btn_search
@@ -102,15 +103,33 @@
             this.searchList.Location = new System.Drawing.Point(7, 133);
             this.searchList.Name = "searchList";
             this.searchList.SelectSubItem = null;
-            this.searchList.Size = new System.Drawing.Size(623, 277);
+            this.searchList.Size = new System.Drawing.Size(623, 242);
             this.searchList.SubItemMenu = null;
             this.searchList.TabIndex = 2;
+            // 
+            // btn_add
+            // 
+            this.btn_add.BackColor = System.Drawing.Color.White;
+            this.btn_add.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btn_add.DownBack = null;
+            this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_add.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_add.Location = new System.Drawing.Point(503, 381);
+            this.btn_add.MouseBack = null;
+            this.btn_add.Name = "btn_add";
+            this.btn_add.NormlBack = null;
+            this.btn_add.Size = new System.Drawing.Size(111, 29);
+            this.btn_add.TabIndex = 3;
+            this.btn_add.Text = "加为好友";
+            this.btn_add.UseVisualStyleBackColor = false;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // Form_Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 417);
+            this.Controls.Add(this.btn_add);
             this.Controls.Add(this.searchList);
             this.Controls.Add(this.searchId);
             this.Controls.Add(this.Btn_search);
@@ -125,6 +144,7 @@
         private CCWin.SkinControl.SkinButton Btn_search;
         private CCWin.SkinControl.SkinTextBox searchId;
         private CCWin.SkinControl.ChatListBox searchList;
+        private CCWin.SkinControl.SkinButton btn_add;
 
     }
 }

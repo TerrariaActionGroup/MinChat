@@ -70,6 +70,7 @@
     <Compile Include="Communications\bean\Friend.cs" />
     <Compile Include="Communications\bean\Mgroup.cs" />
     <Compile Include="Forms\DerivedClass\ChatListSubItemExtend.cs" />
+    <Compile Include="Forms\DerivedClass\hide.cs" />
     <Compile Include="Forms\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>

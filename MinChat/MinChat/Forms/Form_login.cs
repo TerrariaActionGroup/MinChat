@@ -59,15 +59,16 @@ namespace MinChat.Forms
 
             if (logonResult == LogonResult.Failed)
             {
-                MessageBox.Show("用户名或密码错误！");
+                lbl_error.Text="用户名或密码错误！";
                 return;
             }
 
             if (logonResult == LogonResult.HadLoggedOn)
             {
-                MessageBox.Show("已经在其它地方登陆！");
+                lbl_error.Text="已经在其它地方登陆！";
                 return;
             }
+            tray.Visible = false;
             this.DialogResult = DialogResult.OK; 
         }
         #endregion

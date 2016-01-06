@@ -51,13 +51,14 @@ namespace MinChat.Forms
         //返回消息时回调的方法
         private void diaplayUser(Exception ee, byte[] response, object tag)
         {
+            searchList.Items.Clear();
             //反序列化返回的消息生成list
             ObjSerial<List<string>> se = new ObjSerial<List<string>>();
             List<string> list=se.deserializeBytes(response);
 
             ChatListItem gp = new ChatListItem();//新建一个组
             gp.Text = "查询结果";
-            
+            gp.IsOpen = true;
             ChatListSubItemExtend user = new ChatListSubItemExtend();
             //获取在线用户的ID
             foreach (string srtings in list)
@@ -81,6 +82,14 @@ namespace MinChat.Forms
                 gp.SubItems.Add(user);
             }
             this.searchList.Items.Add(gp);
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            if(searchList.SelectSubItem!=null)
+            {
+                //searchList.SelectSubItem.ID;
+            }
         }
         
     }

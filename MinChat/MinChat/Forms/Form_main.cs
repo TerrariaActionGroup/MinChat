@@ -35,46 +35,49 @@ namespace MinChat.Forms
         #region 初始化窗口时
         public void InitMain(IRapidPassiveEngine rapidPassiveEngine)
         {
+            tray.Visible = true;        //显示托盘
+            this.rapidPassiveEngine = rapidPassiveEngine; //传入引擎
+            this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
+            hide hide1 = new hide(this, timer1);  //吸附窗口边缘
             if (this.myInfo == null)
             {
                 this.myInfo = new ChatListSubItem();
             }
-            this.rapidPassiveEngine = rapidPassiveEngine;
-            this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
+            
             //加载分组
-            ChatListItem gp = new ChatListItem();//new一个分组
-            gp.Text = "TestList";
-            ChatListSubItemExtend people = new ChatListSubItemExtend();
-            if(myInfo.ID==10086)
-            {
-                people.Sex = ChatListSubItemExtend.UserSex.Man;
-                people.ID = 10010;
-                people.NicName = "联通";
-                people.DisplayName="联不通";
-            }
-            else if(myInfo.ID==10010)
-            {
-                people.Sex = ChatListSubItemExtend.UserSex.Man;
-                people.ID = 10010;
-                people.NicName = "移动";
-                people.DisplayName="移不动";
-            }
-            gp.SubItems.Add(people);
+            //ChatListItem gp = new ChatListItem();//new一个分组
+            //gp.Text = "TestList";
+            //ChatListSubItemExtend people = new ChatListSubItemExtend();
+            //if(myInfo.ID==10086)
+            //{
+            //    people.Sex = ChatListSubItemExtend.UserSex.Man;
+            //    people.ID = 10010;
+            //    people.NicName = "联通";
+            //    people.DisplayName="联不通";
+            //}
+            //else if(myInfo.ID==10010)
+            //{
+            //    people.Sex = ChatListSubItemExtend.UserSex.Man;
+            //    people.ID = 10010;
+            //    people.NicName = "移动";
+            //    people.DisplayName="移不动";
+            //}
+            //gp.SubItems.Add(people);
 
             //获取在线用户的ID
-            List<string> list=rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
-            foreach(string friendId in list)
-            {
-                if (friendId != myInfo.ID.ToString() && chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId)).Length==0)
-                {
-                    ChatListSubItemExtend contact = new ChatListSubItemExtend();
-                    contact.ID = Convert.ToUInt32(friendId);
-                    contact.NicName = friendId;
-                    //contact.Sex = ChatListSubItemSex.UserSex.Man;//性别
-                    gp.SubItems.Add(contact);
-                }
-            }
-            chatListBox_contacts.Items.Add(gp);//添加到listBox中
+            //List<string> list=rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
+            //foreach(string friendId in list)
+            //{
+            //    if (friendId != myInfo.ID.ToString() && chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId)).Length==0)
+            //    {
+            //        ChatListSubItemExtend contact = new ChatListSubItemExtend();
+            //        contact.ID = Convert.ToUInt32(friendId);
+            //        contact.NicName = friendId;
+            //        //contact.Sex = ChatListSubItemSex.UserSex.Man;//性别
+            //        gp.SubItems.Add(contact);
+            //    }
+            //}
+            //chatListBox_contacts.Items.Add(gp);//添加到listBox中
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
             //预订断线处理事件
@@ -83,18 +86,24 @@ namespace MinChat.Forms
             this.rapidPassiveEngine.FriendsOutter.FriendOffline += new CbGeneric<string>(FriendOffline);
             //好友上线处理事件
             this.rapidPassiveEngine.FriendsOutter.FriendConnected += new CbGeneric<string>(FriendConnected);
-
         }
-
         #endregion
         #region 处理好友上下线
         void FriendOffline(string friendId)
         {
-            //chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.OffLine;
+            ChatListSubItem[] list= chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId));
+            if (list.Length > 0)
+            {
+                list[0].Status = ChatListSubItem.UserStatus.OffLine;
+            }
         }
         void FriendConnected(string friendId)
         {
-            //chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId))[0].Status = ChatListSubItem.UserStatus.Online;
+            ChatListSubItem[] list = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId));
+            if (list.Length > 0)
+            {
+                list[0].Status = ChatListSubItem.UserStatus.Online;
+            }
         }
         #endregion
         #region 处理掉线
@@ -214,9 +223,16 @@ namespace MinChat.Forms
             }
         }
         #endregion
-
+        #region 查找好友按钮
         private void btn_search_Click(object sender, EventArgs e)
         {
+            //int i = 0;
+            //foreach (Image img in imageList.Images)
+            //{
+            //    img.Save(i+".png");
+            //    i++;
+            //}
+
             if(form_search!=null)
             {
                 if (form_search.IsDisposed)
@@ -235,5 +251,27 @@ namespace MinChat.Forms
                 form_search.Show();
             }
         }
+        #endregion
+        #region 托盘菜单事件
+        /// <summary>
+        /// 托盘图标双击显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolShowMain_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolExit_Click(object sender, EventArgs e)
+        {
+            //this.Close();
+        }
+        #endregion
     }
 }
