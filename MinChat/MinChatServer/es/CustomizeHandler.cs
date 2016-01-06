@@ -44,6 +44,7 @@ namespace MinChatServer.es
         /// </summary> 
         public void HandleInformation(string sourceUserID, int informationType, byte[] info)
         {
+            string friendID;
             switch (informationType)
             {
                 case Constant.MSG_OFFLINEMSGTEXT:   //离线文本消息.解析：接收者ID SPLIT 消息内容（不拆分）
@@ -60,22 +61,6 @@ namespace MinChatServer.es
                     userDBManager.addMsg(msgs2[0], msgs2[1], Constant.MSG_OFFLINEMSGIMG);
                     break;
 
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// 处理来自客户端的同步调用请求。
-        /// </summary>       
-        public byte[] HandleQuery(string sourceUserID, int informationType, byte[] info)
-        {
-            string friendID;
-            User user;
-            string userData;
-
-            switch (informationType)
-            {
                 case Constant.MSG_ADDFRIEND_APPLY:    //申请添加好友。解析：另一方ID
                     friendID = System.Text.Encoding.UTF8.GetString(info);
                     byte[] applyUserData = null;
@@ -97,6 +82,22 @@ namespace MinChatServer.es
                     userDBManager.addFriend(sourceUserID, friendID);
                     break;
 
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 处理来自客户端的同步调用请求。
+        /// </summary>       
+        public byte[] HandleQuery(string sourceUserID, int informationType, byte[] info)
+        {
+            string friendID;
+            User user;
+            string userData;
+
+            switch (informationType)
+            {
                 case Constant.MSG_QUERYUSER:   //查找好友
                     friendID = System.Text.Encoding.UTF8.GetString(info);
                     user = userDBManager.queryUser(friendID);
