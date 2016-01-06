@@ -15,7 +15,8 @@ namespace MinChatServer.db.bean
         public static string userAvatarPath = ".\\data\\avatar\\";
 
         //客户端发给服务器的消息类型
-        public const int MSG_ADDFRIEND = 0;       //添加好友,同步请求
+        public const int MSG_ADDFRIEND_APPLY = 0; //申请添加好友,同步请求
+        public const int MSG_ADDFRIEND_AGREE = 13;//同意添加好友
         public const int MSG_DELFRIEND = 10;      //删除好友,同步请求
         public const int MSG_ADDMGROUP = 12;      //新建分组
         public const int MSG_DELMGROUP = 3;       //删除分组

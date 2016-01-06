@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using MinChatServer.db.dao;
 using MinChat.Works.util;
 using System.Windows.Forms;
+using ESFramework.Server.UserManagement;
+using ESPlus.Rapid;
 
 namespace MinChatServer.es
 {
@@ -18,11 +20,23 @@ namespace MinChatServer.es
         GroupDBManager groupDBManager = null;
         UserDBManager userDBManager = null;
 
-        public CustomizeHandler()
+        //引擎对象以及在线用户管理器
+        private IRapidServerEngine engin = null;
+        //在线用户管理器。
+        private IUserManager userManager;
+        public IUserManager UserManager
+        {
+            set { userManager = value; }
+        }
+
+
+        public CustomizeHandler(IRapidServerEngine serverEngine)
         {
             //初始化时获得操纵数据库对象,保证不为空
             groupDBManager = GroupDBManager.getInstance();
             userDBManager = UserDBManager.getInstance();
+            //获得引擎
+            this.engin = serverEngine;
         }
 
         /// <summary>
@@ -57,26 +71,41 @@ namespace MinChatServer.es
         public byte[] HandleQuery(string sourceUserID, int informationType, byte[] info)
         {
             string friendID;
+            User user;
+            string userData;
+
             switch (informationType)
             {
-                case Constant.MSG_ADDFRIEND:    //添加好友。解析：另一方ID
+                case Constant.MSG_ADDFRIEND_APPLY:    //申请添加好友。解析：另一方ID
+                    friendID = System.Text.Encoding.UTF8.GetString(info);
+                    byte[] applyUserData = null;
+                    User apply_user = userDBManager.queryUser(sourceUserID);
+                    string data = User.UserData2String(apply_user);
+                    applyUserData = System.Text.Encoding.UTF8.GetBytes(data);
+                    if (userManager.IsUserOnLine(friendID) == true)     //如果申请的用户在线,直接发送
+                    {
+                        this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_APPLY, applyUserData);
+                    }
+                    else
+                    {
+                        userDBManager.addMsg(friendID, data, Constant.MSG_ADDFRIEND_APPLY);
+                    }
+                    break;
+
+                case Constant.MSG_ADDFRIEND_AGREE:     //同意添加好友。解析：另一方ID
                     friendID = System.Text.Encoding.UTF8.GetString(info);
                     userDBManager.addFriend(sourceUserID, friendID);
                     break;
 
-                case Constant.MSG_DELFRIEND:    //删除好友。解析：另一方ID
-                    friendID = System.Text.Encoding.UTF8.GetString(info);
-                    userDBManager.deleteFriend(sourceUserID, friendID);
-                    break;
-
                 case Constant.MSG_QUERYUSER:   //查找好友
                     friendID = System.Text.Encoding.UTF8.GetString(info);
-                    User user = userDBManager.queryUser(friendID);
-                    string userData = User.UserData2String(user);
+
+                    user = userDBManager.queryUser(friendID);
+                    userData = User.UserData2String(user);
                     
-                    List<string> data = new List<string>();
-                    data.Add(userData);
-                    return ObjSerial.serializeObject(data);
+                    List<string> query_data = new List<string>();
+                    query_data.Add(userData);
+                    return ObjSerial.serializeObject(query_data);
                     break;
 
                 default:

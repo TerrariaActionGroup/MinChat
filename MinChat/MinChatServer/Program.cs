@@ -50,15 +50,17 @@ namespace MinChatServer
             GroupManager groupManager = new GroupManager();
             RapidServerEngine.GroupManager = groupManager;
 
-            //设置基础管理器
+            //设置基础管理器和消息管理器
             BasicHandler basicHandler = new BasicHandler();
+            CustomizeHandler customizeHandler = new CustomizeHandler(RapidServerEngine);
 
             //初始化服务端引擎
-            RapidServerEngine.Initialize(4530, new CustomizeHandler(), basicHandler);
+            RapidServerEngine.Initialize(4530, customizeHandler, basicHandler);
             //RapidServerEngine初始化成功后，其UserManager属性才可用。
             friendManager.UserManager = RapidServerEngine.UserManager; 
             groupManager.UserManager = RapidServerEngine.UserManager;
             basicHandler.UserManager = RapidServerEngine.UserManager;
+            customizeHandler.UserManager = RapidServerEngine.UserManager;
 
             //基础功能初始化
             basicHandler.InitBasicFunction(RapidServerEngine);
