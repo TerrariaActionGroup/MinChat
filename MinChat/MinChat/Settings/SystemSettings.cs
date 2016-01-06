@@ -11,7 +11,7 @@ namespace MinChat.Settings
     class SystemSettings
     {
         //配置文件路径
-        private static string SystemSettingsFilePath = "SystemSettings.dat";
+        private static string SystemSettingsFilePath = ".//SystemSettings.dat";
 
         #region
         //账号
@@ -44,6 +44,30 @@ namespace MinChat.Settings
         {
             get { return autoLogin; }
             set { autoLogin = value; }
+        }
+
+        //是否在其他窗口前端
+        private bool frontOfOther = true;
+        public bool FrontOfOther
+        {
+            get { return frontOfOther; }
+            set { frontOfOther = value; }
+        }
+
+        //好友上线提醒
+        private bool friendOnlineAlarm = true;
+        public bool FriendOnlineAlarm
+        {
+            get { return friendOnlineAlarm; }
+            set { friendOnlineAlarm = value; }
+        }
+
+        //文件保存路径
+        private string filePath;
+        public string FilePath
+        {
+            get { return filePath; }
+            set { filePath = value; }
         }
 
         #endregion
