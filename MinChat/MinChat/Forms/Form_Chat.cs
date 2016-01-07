@@ -46,22 +46,30 @@ namespace MinChat.Forms
         /// </summary>
         IRapidPassiveEngine rapidPassiveEngine;
 
+        MsgDB msgDB;
         #endregion
         #region 窗口构造函数
         public Form_Chat(IRapidPassiveEngine rapidPassiveEngine, ChatListSubItem contactInfo, ChatListSubItem myInfo, Form_main main)
         {
-            main.Receive += new Form_main.ReceiveEventHandler(ChatHandleReceive);//注册收到信息时的事件处理程序ChatHandleReceive
+            //注册收到信息时的事件处理程序ChatHandleReceive
+            main.Receive += new Form_main.ReceiveEventHandler(ChatHandleReceive);
+            
+            //传入变量
             this.contactInfo = contactInfo;
             this.myInfo = myInfo;
             this.rapidPassiveEngine = rapidPassiveEngine;
+            
             InitializeComponent();
         }
         #endregion
         #region 载入窗口时
         private void Form_Chat_Load(object sender, EventArgs e)
         {
-            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
-            List<Msg> msgs = db.readMsg(contactInfo.ID.ToString(), myInfo.ID.ToString());
+            //连接数据库
+            msgDB = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+
+            //取出聊天记录
+            List<Msg> msgs = msgDB.readMsg(contactInfo.ID.ToString(), myInfo.ID.ToString());
             ChatBoxContent content = new ChatBoxContent();
             foreach (Msg msg in msgs)
             {
@@ -147,8 +155,11 @@ namespace MinChat.Forms
         /// <param name="destUserID">目的ID</param>
         public void SendImage(Image img,string imgId,string destUserID)
         {
-            byte[] blob = ImageUtil.customizeImg(imgId, img);//根据ID和img生成byte数组
-            CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);//通过委托异步调用
+            //根据ID和img生成byte数组
+            byte[] blob = ImageUtil.customizeImg(imgId, img);
+            
+            //通过委托异步调用
+            CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);
             cb.BeginInvoke(blob, destUserID, null, null);
         }
         private void SendBlobThread(byte[] blob, string destUserID)
@@ -165,8 +176,7 @@ namespace MinChat.Forms
             chatBoxSend.Text = chatBoxSend.Text.TrimEnd('\n');
             if (chatBoxSend.Text != "" && chatBoxSend.Text != "\n")
             {
-                //发送信息
-                //取出收到的消息,.接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                //消息格式：接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                 string split = Constant.SPLIT;
                 string receiveId = contactInfo.ID.ToString();
                 string sendId = myInfo.ID.ToString();
@@ -174,24 +184,27 @@ namespace MinChat.Forms
                 string date = DateTime.Now.ToString();
                 string sendName = myInfo.NicName;
                 string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
+
+                //发送在线消息
                 if (contactInfo.Status == CCWin.SkinControl.ChatListSubItem.UserStatus.Online)
                 {
                     this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, Constant.MSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
                 }
+                //发送离线消息，拼接多了一个receiveId
                 else if (contactInfo.Status == CCWin.SkinControl.ChatListSubItem.UserStatus.OffLine)
                 {
                     msg = receiveId + split + msg;
                     this.rapidPassiveEngine.CustomizeOutter.Send(Constant.MSG_OFFLINEMSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
                 }
-
-                string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
+                
+                //存入数据库
+                string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName};
                 Msg aMsg = new Msg(msgs,1,1);
+                msgDB.addMsg(aMsg);
                 
                 //将内容更新到上方面板
                 this.AppendChatBoxContent(aMsg);
-                //存入数据库
-                MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
-                db.addMsg(aMsg);
+                
 
             }
             //清空发送输入框
@@ -200,28 +213,34 @@ namespace MinChat.Forms
         }
         #endregion
         #region 发送图片
-        void imgProcessing()//发送前处理图片
+        /// <summary>
+        /// 发送前处理图片
+        /// </summary>
+        void imgProcessing()
         {
             string stamp = timeUtil.GetTimeStamp();
-            int imgNum=0;//图片序号
+            
+            //图片序号
+            int imgNum=0;
+
             //缓存剪贴板中现有内容
             RichTextBox clipboardTmp = new RichTextBox();
             clipboardTmp.Paste();
 
             for (int i = 0; i < chatBoxSend.TextLength; i++)
             {
-                chatBoxSend.Select(i, 1);                                   //依次选中
-                RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;   //获取当前选中 内容的类型
-                if (rt == RichTextBoxSelectionTypes.Object)                 //图片是object
+                chatBoxSend.Select(i, 1);                                           //依次选中
+                RichTextBoxSelectionTypes rt = chatBoxSend.SelectionType;           //获取当前选中 内容的类型
+                if (rt == RichTextBoxSelectionTypes.Object)                         //图片是object
                 {
-                    chatBoxSend.Copy();                                     //复制到剪贴板
-                    Image img = Clipboard.GetImage();                       //从剪贴板中建立Img对象
-                    string serialNumber = string.Format("{0}{1:d6}", stamp,imgNum);//格式化生成图片序列号
+                    chatBoxSend.Copy();                                             //复制到剪贴板
+                    Image img = Clipboard.GetImage();                               //从剪贴板中建立Img对象
+                    string serialNumber = string.Format("{0}{1:d6}", stamp,imgNum); //格式化生成图片序列号
                     if (img != null)
                     {
-                        ImageUtil.ImgSave(serialNumber, img);//存储图片，并加入后缀
+                        ImageUtil.ImgSave(serialNumber, img);                       //存储图片，并加入后缀
                         img.Tag=serialNumber;
-                        SendImage(img, serialNumber, contactInfo.ID.ToString());//发送图片
+                        SendImage(img, serialNumber, contactInfo.ID.ToString());    //发送图片
                         img.Dispose();
                     }
                     chatBoxSend.SelectedText = "<img>" + serialNumber + "</img>";

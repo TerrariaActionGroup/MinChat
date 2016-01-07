@@ -7,6 +7,7 @@ namespace MinChat.Communications.bean
 {
     class SysMsg
     {
+        
         private int type;
         public int Type
         {

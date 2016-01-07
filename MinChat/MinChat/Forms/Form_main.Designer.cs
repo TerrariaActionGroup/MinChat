@@ -50,6 +50,7 @@
             this.btn_setting = new CCWin.SkinControl.SkinButton();
             this.btn_systemMsg = new CCWin.SkinControl.SkinButton();
             this.btn_search = new CCWin.SkinControl.SkinButton();
+            this.skinButton1 = new CCWin.SkinControl.SkinButton();
             this.skinTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -317,6 +318,27 @@
             this.btn_search.UseVisualStyleBackColor = false;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
+            // skinButton1
+            // 
+            this.skinButton1.BackColor = System.Drawing.Color.Transparent;
+            this.skinButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.skinButton1.DownBack = ((System.Drawing.Image)(resources.GetObject("skinButton1.DownBack")));
+            this.skinButton1.DrawType = CCWin.SkinControl.DrawStyle.Img;
+            this.skinButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.skinButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinButton1.ForeColor = System.Drawing.Color.Black;
+            this.skinButton1.Location = new System.Drawing.Point(221, 496);
+            this.skinButton1.MouseBack = ((System.Drawing.Image)(resources.GetObject("skinButton1.MouseBack")));
+            this.skinButton1.Name = "skinButton1";
+            this.skinButton1.NormlBack = ((System.Drawing.Image)(resources.GetObject("skinButton1.NormlBack")));
+            this.skinButton1.Size = new System.Drawing.Size(52, 24);
+            this.skinButton1.TabIndex = 8;
+            this.skinButton1.TabStop = false;
+            this.skinButton1.Text = "查找";
+            this.skinButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.skinButton1.UseVisualStyleBackColor = false;
+            this.skinButton1.Click += new System.EventHandler(this.skinButton1_Click);
+            // 
             // Form_main
             // 
             this.AllowDrop = true;
@@ -335,6 +357,7 @@
             this.CloseNormlBack = ((System.Drawing.Image)(resources.GetObject("$this.CloseNormlBack")));
             this.ControlBoxOffset = new System.Drawing.Point(0, 0);
             this.ControlBoxSpace = 0;
+            this.Controls.Add(this.skinButton1);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.btn_systemMsg);
             this.Controls.Add(this.btn_setting);
@@ -388,6 +411,7 @@
         private CCWin.SkinControl.SkinButton btn_setting;
         private CCWin.SkinControl.SkinButton btn_systemMsg;
         private CCWin.SkinControl.SkinButton btn_search;
+        private CCWin.SkinControl.SkinButton skinButton1;
 
     }
 }
