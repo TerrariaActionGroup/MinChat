@@ -178,7 +178,6 @@ namespace MinChat.Forms
                         db.addMsg(msg);
                         break;
                     case Constant.MSGIMG://处理图片
-
                         MsgImg msgimg = ImageUtil.bytesToIdImg(info);
                         ImageUtil.ImgSave(msgimg.Id, msgimg.Img);//存储图片
                         break;
@@ -196,6 +195,29 @@ namespace MinChat.Forms
                         db.addMsg(systemMsg);
                         //SystemMsgUtil.putMsg("10000");
                         //this.timer_tray.Enabled = true;    //托盘闪烁
+                        break;
+                    case Constant.MSG_ADDFRIEND_AGREE:
+                        //ID卍昵称卍性别卍生日卍地址卍注册时间
+                        string userInfo= System.Text.Encoding.UTF8.GetString(info);
+                        string[] userInfos = Regex.Split(userInfo, Constant.SPLIT, RegexOptions.IgnoreCase);
+                        
+                        //把消息存进数据库
+                        //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                        string[] systemMsgsADDFRIEND_AGREE = { myInfo.ID.ToString(), "10000", userInfos[0]+"同意加你为好友", " ", "10000" };
+                        Msg systemMsgADDFRIEND_AGREE = new Msg(systemMsgsADDFRIEND_AGREE, 0, 0);
+                        db.addMsg(systemMsgADDFRIEND_AGREE);
+                        
+                        //把好友存进数据库
+                        Friend fr=new Friend();
+                        fr.UserId=userInfos[0];
+                        fr.UserName=userInfos[1];
+                        fr.Sex=Convert.ToInt32(userInfos[2]);
+                        fr.Birthday=userInfos[3];
+                        fr.Address=userInfos[4];
+                        fr.Time=userInfos[5];
+
+                        FriendDB Fdb = FriendDB.OpenDB(myInfo.ID.ToString());
+                        Fdb.addFriend(fr);
                         break;
                 }
             }
@@ -255,6 +277,11 @@ namespace MinChat.Forms
         }
         #endregion
         #region 各种按钮
+        private void btn_systemMsg_Click(object sender, EventArgs e)
+        {
+            Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
+            form_systemMsg.Show();
+        }
         private void btn_search_Click(object sender, EventArgs e)
         {
             if(form_search!=null)
@@ -318,11 +345,5 @@ namespace MinChat.Forms
             }
         }
         #endregion   
-
-        private void btn_systemMsg_Click(object sender, EventArgs e)
-        {
-            Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
-            form_systemMsg.Show();
-        }
     }
 }
