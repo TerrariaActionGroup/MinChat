@@ -59,5 +59,35 @@ namespace MinChat.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon crab {
+            get {
+                object obj = ResourceManager.GetObject("crab", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon systemMsg {
+            get {
+                object obj = ResourceManager.GetObject("systemMsg", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon trans {
+            get {
+                object obj = ResourceManager.GetObject("trans", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

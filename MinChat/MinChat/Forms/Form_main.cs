@@ -11,6 +11,7 @@ using MinChat.Settings;
 using MinChat.Works.db;
 using MinChat.Works.utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -24,7 +25,7 @@ namespace MinChat.Forms
         public ChatListSubItem myInfo;//客户端用户的个人信息
         IRapidPassiveEngine rapidPassiveEngine;// 客户端引擎
         Form_Search form_search;
-        //Msg unreadMsg;//未读消息序列
+        Form_setting form_setting;
         #endregion     
         #region 窗口构造函数
         public Form_main()
@@ -175,7 +176,6 @@ namespace MinChat.Forms
                         string[] systemMsgs = { receiveId, "10000", " ", " ", "10000" };
                         Msg systemMsg = new Msg(systemMsgs, 0, 0);
                         db.addMsg(systemMsg);
-                        this.timer_Adsorption.Enabled = true;//托盘闪烁
                         break;
                 }
             }
@@ -237,14 +237,6 @@ namespace MinChat.Forms
         #region 查找好友按钮
         private void btn_search_Click(object sender, EventArgs e)
         {
-            this.timer_tray.Enabled = true;
-            //int i = 0;
-            //foreach (Image img in imageList.Images)
-            //{
-            //    img.Save(i+".png");
-            //    i++;
-            //}
-
             if(form_search!=null)
             {
                 if (form_search.IsDisposed)
@@ -264,11 +256,12 @@ namespace MinChat.Forms
             }
         }
         #endregion
-        
         #region 托盘
         private int action;
-
-        private Icon[] flashSystemMsg = { new Icon(@"systemMsg.ico"), new Icon(@"trans.ico") };
+        Icon icon_normal = Properties.Resources.crab;
+        Icon icon_trans = Properties.Resources.trans;
+        Icon icon_systemMsg = Properties.Resources.systemMsg;
+        private Icon[] flashSystemMsg = { Properties.Resources.systemMsg,Properties.Resources.trans};
 
         private void timer_tray_Tick(object sender, EventArgs e)
         {
@@ -276,10 +269,32 @@ namespace MinChat.Forms
         }
         private void tray_Click(object sender, EventArgs e)
         {
-            //this.timer_tray.Enabled = false;    //计时器停止
-            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
-            List<Msg> msgs = db.readSystemMsg();
+            this.timer_tray.Enabled = false;    //计时器停止
+            tray.Icon = icon_normal;
+            //Form_SystemMsg form_systemMsg = new Form_SystemMsg();
+            //form_systemMsg.Show();
         }
         #endregion
+
+        private void btn_setting_Click(object sender, EventArgs e)
+        {
+            if (form_setting != null)
+            {
+                if (form_setting.IsDisposed)
+                {
+                    form_setting = new Form_setting();
+                    form_setting.Show();
+                }
+                else
+                {
+                    form_setting.Activate();
+                }
+            }
+            else
+            {
+                form_setting = new Form_setting();
+                form_setting.Show();
+            }
+        }
     }
 }

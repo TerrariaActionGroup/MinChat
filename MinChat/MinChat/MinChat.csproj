@@ -185,6 +185,8 @@
     <Content Include="Resources\Forms_Img\Checkbox_Uncheck_hover.png" />
     <Content Include="Resources\Forms_Img\Checkbox_Uncheck_normal.png" />
     <Content Include="Resources\Forms_Img\crab.ico" />
+    <None Include="Resources\Forms_Img\trans.ico" />
+    <None Include="Resources\Forms_Img\systemMsg.ico" />
     <Content Include="Resources\Forms_Img\TBox_Down_Hover.png" />
     <Content Include="Resources\Forms_Img\TBox_Down_normal.png" />
     <Content Include="Resources\Forms_Img\TBox_Up_Hover.png" />
