@@ -27,6 +27,12 @@ namespace MinChat.Forms
         IRapidPassiveEngine rapidPassiveEngine;// 客户端引擎
         Form_Search form_search;
         Form_setting form_setting;
+
+        private int action;
+        Icon icon_normal = Properties.Resources.crab;
+        Icon icon_trans = Properties.Resources.trans;
+        Icon icon_systemMsg = Properties.Resources.systemMsg;
+        private Icon[] flashSystemMsg = { Properties.Resources.systemMsg, Properties.Resources.trans };
         #endregion     
         #region 窗口构造函数
         public Form_main()
@@ -188,8 +194,8 @@ namespace MinChat.Forms
                         string[] systemMsgs = { myInfo.ID.ToString(), "10000",infostr," ", "10000" };
                         Msg systemMsg = new Msg(systemMsgs, 0, 0);
                         db.addMsg(systemMsg);
-                        SystemMsgUtil.putMsg("10000");
-                        this.timer_tray.Enabled = true;    //托盘闪烁
+                        //SystemMsgUtil.putMsg("10000");
+                        //this.timer_tray.Enabled = true;    //托盘闪烁
                         break;
                 }
             }
@@ -291,12 +297,6 @@ namespace MinChat.Forms
         }
         #endregion
         #region 托盘
-        private int action;
-        Icon icon_normal = Properties.Resources.crab;
-        Icon icon_trans = Properties.Resources.trans;
-        Icon icon_systemMsg = Properties.Resources.systemMsg;
-
-        private Icon[] flashSystemMsg = { Properties.Resources.systemMsg,Properties.Resources.trans};
 
         private void timer_tray_Tick(object sender, EventArgs e)
         {
@@ -310,8 +310,8 @@ namespace MinChat.Forms
                 //string msgId = SystemMsgUtil.getNewestMsg();
                 //if (msgId == "10000")
                 //{
-                    Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
-                    form_systemMsg.Show();
+                    //Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
+                    //form_systemMsg.Show();
                 //}
                 //this.timer_tray.Enabled = false;    //计时器停止
                 //tray.Icon = icon_normal;
@@ -321,7 +321,8 @@ namespace MinChat.Forms
 
         private void btn_systemMsg_Click(object sender, EventArgs e)
         {
-            this.timer_tray.Enabled = true; 
+            Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
+            form_systemMsg.Show();
         }
     }
 }

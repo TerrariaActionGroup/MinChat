@@ -32,12 +32,18 @@ namespace MinChat.Forms
         {
             MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
             Msg systemMsg=db.readSystemMsg();
-
-            //ID卍昵称卍性别卍生日卍地址卍注册时间
-            string[] userInfo = Regex.Split(systemMsg.Content, Constant.SPLIT, RegexOptions.IgnoreCase);
-
-            lbl_userInfo.Text = userInfo[0] + "\n" + userInfo[1];
-            lbl_userName.Text = userInfo[1] + " 请求加您为好友";
+            if(systemMsg!=null)
+            { 
+                //ID卍昵称卍性别卍生日卍地址卍注册时间
+                string[] userInfo = Regex.Split(systemMsg.Content, Constant.SPLIT, RegexOptions.IgnoreCase);
+                soucerUserId = userInfo[0];
+                lbl_userInfo.Text = userInfo[0] + "\n" + userInfo[1];
+                lbl_userName.Text = userInfo[1] + " 请求加您为好友";
+            }
+            else 
+            {
+                
+            }
         }
 
         private void btn_yes_Click(object sender, EventArgs e)
