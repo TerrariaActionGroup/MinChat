@@ -33,11 +33,11 @@ namespace MinChat.Works.db
             }
             if (!System.IO.File.Exists(dbPath))
             {
-                System.IO.File.Create(dbPath);
+                SQLiteConnection.CreateFile(dbPath);
             }
             conn = new SQLiteConnection("Data Source=" + dbPath);
-            string cmdString = @"CREATE TABLE IF NOT EXISTS friend(userId varchar(20) PRIMARY KEY, userName varchar(40), sex integer, age integer, birthday date, remark varchar(40),
-address varchar(100), time date, mGroupId integer);";
+            string cmdString = @"CREATE TABLE IF NOT EXISTS friend(userId varchar(20) PRIMARY KEY, userName varchar(40), sex integer, age integer, birthday varchar(40), remark varchar(40),
+address varchar(100), time varchar(40), mGroupId integer);";
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString,conn);
             conn.Open();
             cmdCreateTable.ExecuteNonQuery();
@@ -95,33 +95,31 @@ address varchar(100), time date, mGroupId integer);";
             conn.Open();
             return true;
         }
-        public List<string> queryFriends()
+        public List<Friend> queryFriends()
         {
-            string cmdString = "SELECT * FROM friend",temp;
-            List<string> ls = new List<string>();
+            string cmdString = "SELECT * FROM friend";
+            List<Friend> ls = new List<Friend>();
             conn.Open();
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
             {
-                temp = dr.GetString(0);
-                temp += Constant.SPLIT;
-                temp += dr.GetString(1);
-                temp += Constant.SPLIT;
-                temp += dr.GetInt32(2);
-                temp += Constant.SPLIT;
-                temp += dr.GetString(4);
-                temp += Constant.SPLIT;
-                temp += dr.GetString(6);
-                temp += Constant.SPLIT;
-                temp += dr.GetString(7);
-                temp += Constant.SPLIT;
-                temp += dr.GetString(5);
-                ls.Add(temp);
+                Friend fr=new Friend();
+                fr.UserId = dr[0].ToString();
+                fr.UserName = dr[1].ToString();
+                fr.Sex =Convert.ToInt32(dr[2]);
+                fr.Age = Convert.ToInt32(dr[3]);
+                fr.Birthday = dr[4].ToString();
+                fr.Remark = dr[5].ToString();
+                fr.Address = dr[6].ToString();
+                fr.Time = dr[7].ToString();
+                fr.MGroupId = Convert.ToInt32(dr[8]);
+                ls.Add(fr);
             }
             conn.Close();
             return ls;
         }
+       
     }
 }
