@@ -1,6 +1,9 @@
 ﻿using CCWin;
+using CCWin.SkinControl;
 using ESPlus.Rapid;
+using MinChat.Communications;
 using MinChat.Settings;
+using MinChat.Works.db;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,26 +17,30 @@ namespace MinChat.Forms
 {
     public partial class Form_SystemMsg : Skin_Mac
     {
-        string userId;
+        string soucerUserId;
+        ChatListSubItem myInfo;
         IRapidPassiveEngine rapidPassiveEngine;
-        public Form_SystemMsg(IRapidPassiveEngine rapidPassiveEngine,string id)
-        {   
-            userId = id;
+        public Form_SystemMsg(IRapidPassiveEngine rapidPassiveEngine, ChatListSubItem myInfo)
+        {
+            this.myInfo = myInfo;
             this.rapidPassiveEngine = rapidPassiveEngine;
             InitializeComponent();
         }
 
         private void Form_SystemMsg_Load(object sender, EventArgs e)
         {
-            lbl_userInfo.Text = userId;
-            lbl_userName.Text = userId + " 请求加您为好友";
+            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+            Msg systemMsg=db.readSystemMsg();
+            soucerUserId = systemMsg.FromUserId;
+            lbl_userInfo.Text = systemMsg.FromUserId + "\n" + systemMsg.FromUserName;
+            lbl_userName.Text = systemMsg.FromUserName+ " 请求加您为好友";
         }
 
         private void btn_yes_Click(object sender, EventArgs e)
         {
             if(radioBtn_agree.Checked==true)
             {
-                rapidPassiveEngine.CustomizeOutter.Send(Constant.MSG_ADDFRIEND_AGREE, System.Text.Encoding.UTF8.GetBytes(userId));
+                rapidPassiveEngine.CustomizeOutter.Send(Constant.MSG_ADDFRIEND_AGREE, System.Text.Encoding.UTF8.GetBytes(soucerUserId));
                 this.Close();
             }
             else//拒绝
