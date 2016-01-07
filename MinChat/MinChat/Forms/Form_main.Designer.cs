@@ -95,6 +95,7 @@
             this.chatListBox_contacts.Size = new System.Drawing.Size(280, 345);
             this.chatListBox_contacts.SubItemMenu = null;
             this.chatListBox_contacts.TabIndex = 4;
+            this.chatListBox_contacts.DoubleClickSubItem += new CCWin.SkinControl.ChatListBox.ChatListEventHandler(this.chatListBox_DoubleClickSubItem);
             // 
             // chatListBox1
             // 
@@ -293,6 +294,7 @@
             this.btn_systemMsg.TabIndex = 6;
             this.btn_systemMsg.TabStop = false;
             this.btn_systemMsg.UseVisualStyleBackColor = false;
+            this.btn_systemMsg.Click += new System.EventHandler(this.btn_systemMsg_Click);
             // 
             // btn_search
             // 

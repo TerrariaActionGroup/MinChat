@@ -47,6 +47,7 @@ namespace MinChat.Forms
                 this.myInfo = new ChatListSubItem();
             }
             this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
+            lbl_userName.Text = myInfo.ID.ToString();
             MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
             
             //加载分组
@@ -175,11 +176,16 @@ namespace MinChat.Forms
                         MsgImg msgimg = ImageUtil.bytesToIdImg(info);
                         ImageUtil.ImgSave(msgimg.Id, msgimg.Img);//存储图片
                         break;
+                }
+            }
+            else//来自服务器的消息
+            {
+                switch (informationType)
+                {
                     case Constant.MSG_ADDFRIEND_APPLY:
-
+                        string infostr = System.Text.Encoding.UTF8.GetString(info);
                         //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
-                        string receiveId = System.Text.Encoding.UTF8.GetString(info);
-                        string[] systemMsgs = { receiveId, "10000", " ", " ", "10000" };
+                        string[] systemMsgs = { myInfo.ID.ToString(), "10000",infostr," ", "10000" };
                         Msg systemMsg = new Msg(systemMsgs, 0, 0);
                         db.addMsg(systemMsg);
                         SystemMsgUtil.putMsg("10000");
@@ -289,6 +295,7 @@ namespace MinChat.Forms
         Icon icon_normal = Properties.Resources.crab;
         Icon icon_trans = Properties.Resources.trans;
         Icon icon_systemMsg = Properties.Resources.systemMsg;
+
         private Icon[] flashSystemMsg = { Properties.Resources.systemMsg,Properties.Resources.trans};
 
         private void timer_tray_Tick(object sender, EventArgs e)
@@ -299,17 +306,22 @@ namespace MinChat.Forms
         {
             if (this.timer_tray.Enabled == true)
             {
-                
-                string msgId = SystemMsgUtil.getNewestMsg();
-                if(msgId=="10000")
-                {
-                    Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine,myInfo);
+
+                //string msgId = SystemMsgUtil.getNewestMsg();
+                //if (msgId == "10000")
+                //{
+                    Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
                     form_systemMsg.Show();
-                }
-                this.timer_tray.Enabled = false;    //计时器停止
-                tray.Icon = icon_normal;
+                //}
+                //this.timer_tray.Enabled = false;    //计时器停止
+                //tray.Icon = icon_normal;
             }
         }
         #endregion   
+
+        private void btn_systemMsg_Click(object sender, EventArgs e)
+        {
+            this.timer_tray.Enabled = true; 
+        }
     }
 }
