@@ -31,6 +31,26 @@ namespace MinChat.Works.util
         }
 
         /// <summary>
+        /// 获得最新的系统消息
+        /// </summary>
+        /// <returns></returns>
+        public static string getNewestMsg()
+        {
+            if (friendAlarms.Count > 0)
+            {
+                return getMsgUserId();
+            }
+            else if(systemAlarms > 0)
+            {
+                return "10000";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// 获得用户发来消息队列中的消息
         /// </summary>
         /// <returns></returns>

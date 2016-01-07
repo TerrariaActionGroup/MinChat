@@ -234,10 +234,11 @@ namespace MinChatServer.db.dao
             string cmdString = "INSERT INTO " +
                 DBcolumns.TABLE_MSG + "(" +
                 DBcolumns.MSG_TO + "," +
-                DBcolumns.MSG_CONTENT + ") VALUES(\'" +
+                DBcolumns.MSG_CONTENT + "," +
+                DBcolumns.MSG_TYPE + ") VALUES(\'" +
                 //msgId + ",\'" +
                 userId + "\',\'" +
-                msg + "\'" +
+                msg + "\'," +
                 type + ")";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;

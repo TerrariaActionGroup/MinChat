@@ -56,6 +56,7 @@ namespace MinChat.Works.db
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
+            conn.Close();
         }
         #endregion
         #region 读消息
@@ -66,15 +67,18 @@ namespace MinChat.Works.db
         /// <returns>是否成功</returns>
         public bool readMsg(int sessionId)
         {
-            string cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND sessionId = " + sessionId + ");";
+            string cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND sessionId = " + sessionId + ")";
+            conn.Open();
             SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
             sqlReadMsg.ExecuteNonQuery();
             sqlReadMsg.Dispose();
+            conn.Close();
             return true;
         }
         public List<Msg> readMsg(string senderId, string receiverId)//读取两者之间的所有消息
         {
             string cmdString = "SELECT * FROM msg where senderId =" + senderId + " and receiverId=" + receiverId + " or senderId = " + receiverId + " and receiverId=" + senderId + ";";
+            conn.Open();
             SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader result = sqlReadMsg.ExecuteReader();
             List<Msg> a = new List<Msg>();
@@ -138,9 +142,11 @@ namespace MinChat.Works.db
                 "'" + m.Bak5 + "'" + "," +
                 "'" + m.Bak6 + "'" +
                 ");";
+            conn.Open();
             SQLiteCommand sqlAddMsg = new SQLiteCommand(cmdString, conn);
             sqlAddMsg.ExecuteNonQuery();
             sqlAddMsg.Dispose();
+            conn.Close();
             return true;
         }
         #endregion
@@ -152,35 +158,25 @@ namespace MinChat.Works.db
         /// <returns>是否成功</returns>
         public bool deleteMsg(int sessionId)
         {
-            string cmdString = "DELETE FROM msg WHERE sessionId = " + sessionId + ");";
+            string cmdString = "DELETE FROM msg WHERE sessionId = " + sessionId + ")";
+            conn.Open();
             SQLiteCommand sqlDeleteMsg = new SQLiteCommand(cmdString, conn);
             sqlDeleteMsg.ExecuteNonQuery();
             sqlDeleteMsg.Dispose();
+            conn.Close();
             return true;
         }
         public bool deleteMsg(string senderId)
         {
-            string cmdString = "DELETE FROM msg WHERE senderId = " + senderId + ");";
+            string cmdString = "DELETE FROM msg WHERE senderId = " + senderId + ")";
+            conn.Open();
             SQLiteCommand sqlDeleteMsg = new SQLiteCommand(cmdString, conn);
             sqlDeleteMsg.ExecuteNonQuery();
             sqlDeleteMsg.Dispose();
+            conn.Close();
             return true;
         }
         #endregion
-        #region 关闭数据库
-        /// <summary>
-        /// 关闭数据库连接，务必调用
-        /// </summary>
-        public void Close()
-        {
-            if (null != uniqueInstance && null != conn)
-            {
-                conn.Close();
-                conn = null;
-                uniqueInstance = null;
-            }
-           
-        }
-        #endregion
+     
     }
 }
