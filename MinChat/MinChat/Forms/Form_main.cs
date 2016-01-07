@@ -55,41 +55,7 @@ namespace MinChat.Forms
             this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
             lbl_userName.Text = myInfo.ID.ToString();
             MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
-            
-            ////加载分组
-            //ChatListItem gp = new ChatListItem();//new一个分组
-            //gp.Text = "TestList";
-            //ChatListSubItemExtend people = new ChatListSubItemExtend();
-            //if (myInfo.ID == 10001)
-            //{
-            //    people.Sex = ChatListSubItemExtend.UserSex.Man;
-            //    people.ID = 10002;
-            //    people.NicName = "联通";
-            //    people.DisplayName = "10002";
-            //}
-            //else if (myInfo.ID == 10002)
-            //{
-            //    people.Sex = ChatListSubItemExtend.UserSex.Man;
-            //    people.ID = 10001;
-            //    people.NicName = "移动";
-            //    people.DisplayName = "10001";
-            //}
-            //gp.SubItems.Add(people);
-
-            //获取在线用户的ID
-            //List<string> list=rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
-            //foreach(string friendId in list)
-            //{
-            //    if (friendId != myInfo.ID.ToString() && chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId)).Length==0)
-            //    {
-            //        ChatListSubItemExtend contact = new ChatListSubItemExtend();
-            //        contact.ID = Convert.ToUInt32(friendId);
-            //        contact.NicName = friendId;
-            //        //contact.Sex = ChatListSubItemSex.UserSex.Man;//性别
-            //        gp.SubItems.Add(contact);
-            //    }
-            //}
-            //chatListBox_contacts.Items.Add(gp);//添加到listBox中
+            displayFriend();
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
             //预订断线处理事件
@@ -98,6 +64,22 @@ namespace MinChat.Forms
             this.rapidPassiveEngine.FriendsOutter.FriendOffline += new CbGeneric<string>(FriendOffline);
             //好友上线处理事件
             this.rapidPassiveEngine.FriendsOutter.FriendConnected += new CbGeneric<string>(FriendConnected);
+        }
+        #endregion
+        #region 加载好友列表
+        void displayFriend()
+        {
+            this.chatListBox_contacts.Items[0].SubItems.Clear();
+            FriendDB frDB = FriendDB.OpenDB(myInfo.ID.ToString());
+            List<Friend> frList = frDB.queryFriends();
+            foreach (Friend fr in frList)
+            {
+                ChatListSubItem people = new ChatListSubItem();
+                people.ID = Convert.ToUInt32(fr.UserId);
+                people.NicName = fr.UserName;
+                people.DisplayName = fr.UserName;
+                this.chatListBox_contacts.Items[0].SubItems.Add(people);
+            }
         }
         #endregion
         #region 处理好友上下线
