@@ -16,6 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MinChat.Forms
@@ -33,7 +34,7 @@ namespace MinChat.Forms
         //窗口
         Form_Search form_search;
         Form_setting form_setting;
-
+        private Form_Error fromError;
         //数据库
         SystemMsgDB sysDB;
         MsgDB msgDB;
@@ -45,6 +46,7 @@ namespace MinChat.Forms
         Icon icon_trans = Properties.Resources.trans;
         Icon icon_systemMsg = Properties.Resources.systemMsg;
         private Icon[] flashSystemMsg = { Properties.Resources.systemMsg, Properties.Resources.trans };
+
 
         #endregion     
 
@@ -144,8 +146,19 @@ namespace MinChat.Forms
         #region 处理掉线
         void rapidPassiveEngine_ConnectionInterrupted()
         {
-            MessageBox.Show("你已掉线");
+            this.fromError =  new Form_Error("你已掉线!");
+            Thread thread = new Thread(threadPro);
+            thread.Start();
+        }
 
+        public void threadPro()
+        {
+            MethodInvoker MethInvo = new MethodInvoker(ShowErrorForm);
+            BeginInvoke(MethInvo);
+        }
+        public void ShowErrorForm()
+        {
+            this.fromError.Show();
         }
         #endregion
 

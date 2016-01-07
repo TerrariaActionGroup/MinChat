@@ -6,220 +6,164 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MinChat官方注册</title>
 <style type="text/css">
-.bg {
-	background-image: url(/image/bg_chs.png);
-	background-repeat: no-repeat;
-	background-position: center top;
-}
 body {
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 22px;
 	background-image: url(/image/body.png);
 	background-repeat: repeat-x;
-	overflow-y: hidden;
+	display: block;
+	height: 90%;
+	width: 90%;
 }
 html {
 	overflow-y: scroll;
 	overflow-x: auto;
-}
-html{
-	display:block;
-}
-form{
-	padding-top:20px;
-}
-body{
-	display:block;
-}
-div{
 	display: block;
 }
-* {
-	padding: 0;
-	margin: 0;
-	list-style:none;
-}
-
-*,body {
-	color:#333;
-}
-
-.contanier{
-	width:956px;
-	margin:auto;
-	background:url(/image/left.png) left bottom no-repeat;
-	position:relative;
-}
-.header{
-	background:url(/image/bg_chs.png) top center no-repeat;
-	height:94px;
-}
-.hide{display:none!important;}
-.right {
-    border-top: solid 1px #80add9;
-    border-bottom: solid 1px #d6d9db;
-    background: url(/image/right_1600.png) right top no-repeat #f8fdff;
-    padding-bottom: 80px;
-    min-height: 530px;
-    _height: 530px;
-    float: left;
-    width: 1000px;
-	padding-left: 250px;
-}
-.haomaTitle{
-	position: relative;
-	width: 604px;
-	height: 80px;
-	margin-left: 63px;
-	border-bottom:1px solid #ddd;
-}
-
-.right .box{
-	margin-right: 3px;
-}
-.box{
-	clear: both;
-	height: auto;
-}
- .nickNameName_ipt_box{
-	z-index: 0;
-}
-.box .ipt_box{
-	float: left;
-	width: 306px;
-	height: 50px;
-	position: relative;
-}
-
-.box .ipt_box input.new_txt{
-	border:none;
-	line-height:18px;
-	font-size:14px;
-	height:34px;
-	_height:17px;
-	width:284px;
-	padding:8px;
-	background:transparent;
-	}
-.box .info{
-	float:left;
-	width:236px;
-	height:40px;
-	height:38px\9;
-	}
-.info table{
-	margin-left:6px;
-	}
-.box .ipt_box .bg_txt{
-	border:none;
-	height:70px;
-	width:300px;
-	background:no-repeat scroll 0 0 transparent;
-	}
-.box_7 .item{
-	height:40px;
-	padding-top:0;
-	height:39px\9\0;
-	padding-top:1px\9\0;
-	_height:38px;
-	_padding-top:2px;
-	}
-.submit {
-	position: relative;
+.Container {
+	position: absolute;
 	visibility: visible;
+	font-style: normal;
+	float: none;
+	left: 58px;
+	top: 117px;
+	width: 303px;
+}
+.main_part {
+	background-color: #FFF;
+	float: left;
+	position: absolute;
+	height: 480px;
+	width: 880px;
+	left: 112px;
+	top: 118px;
+	border-bottom-style: groove;
+	background-image: url(/image/MinChat.jpg);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center;
+}
+.body_frame {
+	width: 990px;
+	height: 623px;
+	position: absolute;
+	left: 145px;
+	top: 12px;
+}
+.header {
+	height: 100px;
+	background-image: url(/image/bg_chs_%E5%89%AF%E6%9C%AC.png);
+	background-repeat: no-repeat;
+	background-position: 20% 0%;
+}
+.copyright {
+	position: absolute;
+	left: 319px;
+	top: 488px;
+}
+.btn {
+	width: 140px;
+	height: 36px;
+	line-height: 18px;
+	font-size: 18px;
+	background: url(/image/btn_bg.png) no-repeat left top;
+	color: #FFF;
+	padding-bottom: 4px
 }
 </style>
-
+<script type="text/javascript">
+<!--
+    function trim(str) {
+        if (!str) return str;
+        for (var begin = 0; begin < str.length; begin++)
+            if (str.charAt(begin) != " ") break;
+        if (begin == str.length) return "";
+        for (var end = str.length - 1; end > begin; end--)
+            if (str.charAt(end) != " ") break;
+        return str.substring(begin, end + 1);
+    }
+    function check_blank(str) {
+        var blank = false;
+        if (str == null || str == "") blank = true;
+        return blank;
+    }
+    function ClickBtn() {
+        var oNick = document.getElementById("nick");
+        var oPassword = document.getElementById("password2");
+        var nickValue = trim(oNick.value);
+        var passwordValue = trim(oPassword.value);
+        if (check_blank(nickValue)) {
+            alert("昵称不能为空!");
+            oNick.focus();
+        }
+        else if (check_blank(passwordValue)) {
+            alert("密码不能为空！");
+            oPassword.focus();
+        }
+        document.getElementById('form1').submit();
+    }
+    //-->
+</script>
 </head>
 
-<body onload="init()">
-   <div class="bg">
-      <div class="container">
-          <div class="header">
-              <a href="zhuce.html" class="logo" target="_self" title="QQzhuce"></a>
-           </div>
-           <div class="content">
-               <div class="right">
-                   <div class="haomaTitle">
-                       <div class="haomaTitle_web-inspect-hid-shortcut_">
-                           <div class="homa-inner" id="hama-inner" >注册账号</div>
-                        		 <br /><br />
-                   				   <form  id="form1" method="post" >
-                         				<div class="box_box_1" style="z-index 0">
-                         					<label class="item" for="nickName">昵称</label> 
-                   						</div>
-                       					<div class="ipt_box">
-                        				   <div id="nickName_bg" class="bgcolor">
-                        				   <input type="text" class="new_txt" id="nickName" name="nickName" tabindex="6" style="z-index:0" maxlength="24" autocomplete="off" />
-                        				   </div>
-                       					</div>
-                 
-                     					<div class="box box_2">
-                         				<label class="item" for="pwd">密码</label>       
-                                        </div>
-                         				<div class="ipt_box">
-                         				<div id="pwd_bg" class="bg_txt">
-                         				<input type="pwd" class="new_txt" id="pwd" name="pwd" maxlength="16"  />
-                         				</div>
-                        				</div>
-                      
-                      					<div class="box box_3">
-                      					<label class="item" for="pwd2">确认密码</label>
-                      					</div>
-                                        
-                                        
-                   					 <div class="ipt_box">
-                   					   <div id="pwd2_bg" class="bg_txt">
-                      					<input type="pwd" class="new_txt" name="pwd2" id="pwd2" maxlength="16" />
-                      					</div>
-                      					</div>
-                                         
-                                       <div class="box box_4">
-                                         <div class="item">性别</div>
-                                         <div class="ipt_box sex_box">
-                                         <input type="radio" value="1" name="sex" checked="checked" />男
-                                         <input type="radio" value="0" name="sex"  />
-                                         女
-                                         </div>
-                                        </div>
-                                     
-                                     <div class ="box box_5">
-                                      <label class="item" for="age">年龄</label>
-                                      </div>
-                                      <div class="ipt_box">
-                                      <div id="age" class="bg_txt">
-                        				<input type="text" class="new_txt" id="age" name="age"   maxlength="24" autocomplete="off" />
-                                        </div>
-                                        </div>
-                        				
-                                      <div class ="box box_6">
-                                      <label class="item" for="birthday">生日</label>
-                                      </div>
-                                      <div class="ipt_box">
-                                      <div id="birthday" class="bg_txt">
-                        				<input type="text" class="new_txt" id="birthday" name="birthday" style="z-index:0" maxlength="24" autocomplete="off" />
-                                        </div>
-                                        </div>
-                                     
-                                      <div class ="box box_7">
-                                      <label class="item" for="addr">地址</label>
-                                      </div>
-                                      <div class="ipt_box">
-                                      <div id="address" class="bg_txt">
-                        				<input type="text" class="new_txt" id="addr" name="addr"  style="z-index:0" maxlength="24" autocomplete="off" />
-                                        </div>
-                                        </div>
-        
-    								<div class="submit"> 
-   										<input type="submit" value="提交注册" title="提交注册" id="submit" />
-                      					</div>
-                                   </form>
-                         </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
-      </div>
+<body>
+<div class="body_frame"> <!--顶层div,用来控制界面相对位置-->
+  <div class="header"> <!--顶层div,用来控制 头部相对位置--> 
+    
+  </div>
+  <div class="main_part" >
+    <p align="center">&nbsp;</p>
+    <div class="Container">
+      <table width="302" border="0" align="center" >
+        <form  id="form1" method="post" >
+          <tr>
+            <td width="285" height="35" align="right"><label class="" for="nick">昵称</label>
+              <input type="text"  class="" id="nick" name="nick" tabindex="2" maxlength="24"  size="18"autocomplete="off" /></td>
+          </tr>
+          <tr>
+            <td height="35" align="right"><label class="" for="password2">密码</label>
+              <input type="password" class="" id="password2" name="password" maxlength="16"  size="18"/></td>
+          </tr>
+          <tr>
+            <td height="35" align="right"><label class="" for="password_again2">确认密码</label>
+              <input type="password" class="" name="pass_again" id="password_again2" maxlength="16" size="18" /></td>
+          </tr>
+          <tr>
+            <td height="35" align="right">生日&nbsp;<input type="date"  name="birthday"/>
+           
+           </td>
+          </tr>
+          <tr>
+          	<td height="35" align="right">地址&nbsp;<input name="addr" type="text" id="addr" style="z-index: 0;" type="text" maxlength="24" autocomplete="off" size="18">
+            </td>
+           </tr>
+          <tr>
+            <td height="35" align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别
+              <input name="sex" id="man" type="radio" value="1" checked ="checked" />
+              <label for="man">男</label>
+              <input name="sex" id="woman" type="radio" value="0" />
+              <label for="woman">女</label></td>
+          </tr>
+          <tr>
+            <td height="35">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="35" align="center"><input type="submit" onClick="ClickBtn()" class="btn" value="提交注册" title="提交注册" /></td>
+          </tr>
+          <tr>
+            <td height="35">&nbsp;</td>
+          </tr>
+        </form>
+      </table>
+    </div>
+    <div class="copyright">
+      <table width="200" border="0">
+        <tr>
+          <td>©2016 MinChat</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 </body>
 </html>
-

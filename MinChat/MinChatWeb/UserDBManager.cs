@@ -71,7 +71,7 @@ namespace MinChatWeb
             SQLiteCommand cmd = new SQLiteCommand(cmdString, conn);
             Int64 x = (Int64)cmd.ExecuteScalar();
             conn.Close();
-            return x + 10000;
+            return x + 10001;
         }
 
         /// <summary>
