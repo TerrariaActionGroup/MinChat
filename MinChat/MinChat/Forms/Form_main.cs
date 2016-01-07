@@ -9,6 +9,7 @@ using MinChat.Communications.bean;
 using MinChat.Forms.DerivedClass;
 using MinChat.Settings;
 using MinChat.Works.db;
+using MinChat.Works.util;
 using MinChat.Works.utils;
 using System;
 using System.Collections;
@@ -46,6 +47,8 @@ namespace MinChat.Forms
                 this.myInfo = new ChatListSubItem();
             }
             this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
+            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+            
             //加载分组
             ChatListItem gp = new ChatListItem();//new一个分组
             gp.Text = "TestList";
@@ -143,12 +146,14 @@ namespace MinChat.Forms
                 switch (informationType)
                 {
                     case Constant.MSGTEXT://处理文本消息
-                        //取出收到的消息,接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+
+                        //文本消息格式：接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                         string message = System.Text.Encoding.UTF8.GetString(info);
                         string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);//得到含有5个元素的数组
                         Msg msg = new Msg(msgs, 0, 0);                                  //消息存在msg对象中
 
-                        ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的用户
+                        ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的subItem
+
                         string windowsName = items[0].NicName + ' ' + items[0].ID;      //聊天窗口的标题
                         IntPtr handle = NativeMethods.FindWindow(null, windowsName);    //查找是否已经存在窗口
                         if (handle != IntPtr.Zero)//聊天窗口已存在
@@ -163,19 +168,22 @@ namespace MinChat.Forms
                             twinkle(chatListBox_contacts, Convert.ToUInt32(sourceUserID));//头像闪烁
                         }
                         //消息存入数据库
-                        
                         db.addMsg(msg);
                         break;
                     case Constant.MSGIMG://处理图片
+
                         MsgImg msgimg = ImageUtil.bytesToIdImg(info);
                         ImageUtil.ImgSave(msgimg.Id, msgimg.Img);//存储图片
                         break;
                     case Constant.MSG_ADDFRIEND_APPLY:
+
                         //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                         string receiveId = System.Text.Encoding.UTF8.GetString(info);
                         string[] systemMsgs = { receiveId, "10000", " ", " ", "10000" };
                         Msg systemMsg = new Msg(systemMsgs, 0, 0);
                         db.addMsg(systemMsg);
+                        SystemMsgUtil.putMsg("10000");
+                        this.timer_tray.Enabled = true;    //托盘闪烁
                         break;
                 }
             }
@@ -234,7 +242,7 @@ namespace MinChat.Forms
             }
         }
         #endregion
-        #region 查找好友按钮
+        #region 各种按钮
         private void btn_search_Click(object sender, EventArgs e)
         {
             if(form_search!=null)
@@ -255,27 +263,6 @@ namespace MinChat.Forms
                 form_search.Show();
             }
         }
-        #endregion
-        #region 托盘
-        private int action;
-        Icon icon_normal = Properties.Resources.crab;
-        Icon icon_trans = Properties.Resources.trans;
-        Icon icon_systemMsg = Properties.Resources.systemMsg;
-        private Icon[] flashSystemMsg = { Properties.Resources.systemMsg,Properties.Resources.trans};
-
-        private void timer_tray_Tick(object sender, EventArgs e)
-        {
-            this.tray.Icon = this.flashSystemMsg[(this.action++ % 2)];
-        }
-        private void tray_Click(object sender, EventArgs e)
-        {
-            this.timer_tray.Enabled = false;    //计时器停止
-            tray.Icon = icon_normal;
-            //Form_SystemMsg form_systemMsg = new Form_SystemMsg();
-            //form_systemMsg.Show();
-        }
-        #endregion
-
         private void btn_setting_Click(object sender, EventArgs e)
         {
             if (form_setting != null)
@@ -296,5 +283,33 @@ namespace MinChat.Forms
                 form_setting.Show();
             }
         }
+        #endregion
+        #region 托盘
+        private int action;
+        Icon icon_normal = Properties.Resources.crab;
+        Icon icon_trans = Properties.Resources.trans;
+        Icon icon_systemMsg = Properties.Resources.systemMsg;
+        private Icon[] flashSystemMsg = { Properties.Resources.systemMsg,Properties.Resources.trans};
+
+        private void timer_tray_Tick(object sender, EventArgs e)
+        {
+            this.tray.Icon = this.flashSystemMsg[(this.action++ % 2)];
+        }
+        private void tray_Click(object sender, EventArgs e)
+        {
+            if (this.timer_tray.Enabled == true)
+            {
+                
+                string msgId = SystemMsgUtil.getNewestMsg();
+                if(msgId=="10000")
+                {
+                    Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine,myInfo);
+                    form_systemMsg.Show();
+                }
+                this.timer_tray.Enabled = false;    //计时器停止
+                tray.Icon = icon_normal;
+            }
+        }
+        #endregion   
     }
 }

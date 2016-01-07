@@ -49,6 +49,22 @@ namespace MinChat.Works.util
                 return null;
             }
         }
+        /// <summary>
+        /// 查看下一条提醒消息
+        /// </summary>
+        /// <returns></returns>
+        public static string checkNext()
+        {
+            if (friendAlarms.Count > 0)
+            {
+                return friendAlarms[0];
+            }
+            else if (systemAlarms > 0)
+            {
+                return "10000";
+            }
+            return null;
+        }
 
         /// <summary>
         /// 查看下一条提醒消息
