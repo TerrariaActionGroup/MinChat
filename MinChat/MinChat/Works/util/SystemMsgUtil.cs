@@ -66,6 +66,8 @@ namespace MinChat.Works.util
             return null;
         }
 
+
+
         /// <summary>
         /// 获得用户发来消息队列中的消息
         /// </summary>

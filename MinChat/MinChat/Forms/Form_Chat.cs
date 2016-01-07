@@ -174,7 +174,15 @@ namespace MinChat.Forms
                 string date = DateTime.Now.ToString();
                 string sendName = myInfo.NicName;
                 string msg = receiveId + split + sendId + split + msgText + split + date + split + sendName;
-                this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, Constant.MSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
+                if (contactInfo.Status == CCWin.SkinControl.ChatListSubItem.UserStatus.Online)
+                {
+                    this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, Constant.MSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
+                }
+                else if (contactInfo.Status == CCWin.SkinControl.ChatListSubItem.UserStatus.OffLine)
+                {
+                    msg = receiveId + split + msg;
+                    this.rapidPassiveEngine.CustomizeOutter.Send(Constant.MSG_OFFLINEMSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
+                }
 
                 string[] msgs = new string[] {receiveId,sendId,msgText,date,sendName };
                 Msg aMsg = new Msg(msgs,1,1);
@@ -184,6 +192,7 @@ namespace MinChat.Forms
                 //存入数据库
                 MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
                 db.addMsg(aMsg);
+
             }
             //清空发送输入框
             this.chatBoxSend.Text = string.Empty;

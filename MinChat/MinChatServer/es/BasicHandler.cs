@@ -76,16 +76,16 @@ namespace MinChatServer.es
                 {
                     //得到：类型号 SPLIT 内容
                     string[] msg = Regex.Split(s, Constant.SPLIT, RegexOptions.IgnoreCase);
-                    int infoType = int.Parse(msg[0]);
+                    int infoType = int.Parse(msg[1]);
                     if (infoType == 2)        //图片消息
                     {
-                        byte[] info = System.Text.Encoding.UTF8.GetBytes(msg[1]);
+                        byte[] info = System.Text.Encoding.UTF8.GetBytes(msg[0]);
                         CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);
                         cb.BeginInvoke(info, userID, null, null);
                     }
                     else                      //文本格式消息，不单纯是文本消息
                     {
-                        byte[] info = System.Text.Encoding.UTF8.GetBytes(msg[1]);
+                        byte[] info = System.Text.Encoding.UTF8.GetBytes(msg[0]);
                         this.engine.CustomizeController.Send(userID, infoType, info);
                     }
                 }
