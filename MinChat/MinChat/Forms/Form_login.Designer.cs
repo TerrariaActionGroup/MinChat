@@ -226,6 +226,7 @@
             this.ckMen.TabStop = false;
             this.ckMen.Text = "记住密码";
             this.ckMen.UseVisualStyleBackColor = false;
+            this.ckMen.CheckedChanged += new System.EventHandler(this.ckMen_CheckedChanged);
             // 
             // tray
             // 
@@ -445,6 +446,7 @@
             this.ShowDrawIcon = false;
             this.Text = "Form_login";
             this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_login_FormClosed);
             this.menu_Tray.ResumeLayout(false);
             this.menu_State.ResumeLayout(false);
             this.ResumeLayout(false);

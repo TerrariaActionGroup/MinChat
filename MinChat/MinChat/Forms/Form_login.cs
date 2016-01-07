@@ -27,20 +27,39 @@ namespace MinChat.Forms
         /// </summary>
         IRapidPassiveEngine engine;
 
+        //配置类
+        private SystemSettings settings;
+
         /// <summary>
         /// 自定义消息处理器
         /// </summary>
         Form_main _main;
-        #endregion     
+        #endregion  
+   
         #region 窗口构造函数
         public Form_login(IRapidPassiveEngine rapidPassiveEngine,Form_main formMain)
         {
             this.engine = rapidPassiveEngine;
             this._main = formMain;
-
+            this.settings = SystemSettings.Singleton;
             InitializeComponent();
+            initTxt();
         }
         #endregion
+
+        /// <summary>
+        /// 初始化账号密码等
+        /// </summary>
+        private void initTxt()
+        {
+            if (this.settings.Remember == true)
+            {
+                this.ckMen.Checked = true;
+                this.txtId.Text = this.settings.UserId;
+                this.txtPwd.Text = this.settings.Password;
+            }
+        }
+
         #region 登陆事件
         /// <summary>
         /// 登陆
@@ -50,6 +69,19 @@ namespace MinChat.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (this.txtId.Text.Trim().Length == 0)
+            {
+                lbl_error.Text = "账号不能为空";
+                return;
+            }
+            if (this.txtPwd.Text.Trim().Length == 0)
+            {
+                lbl_error.Text = "密码不能为空";
+                return;
+            }
+            this.settings.UserId = this.txtId.Text.Trim();
+            this.settings.Password = this.txtPwd.Text.Trim();
+            this.settings.Save();
             login();
         }
         private void login()
@@ -126,6 +158,23 @@ namespace MinChat.Forms
             return logonResult;
         }
         #endregion
+
+        private void ckMen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.ckMen.Checked == true)
+            {
+                settings.Remember = true;
+            }
+            else
+            {
+                settings.Remember = false;
+            }
+        }
+
+        private void Form_login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.settings.Save();
+        }
     }
 }
 

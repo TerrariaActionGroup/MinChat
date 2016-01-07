@@ -117,6 +117,7 @@
     <Compile Include="Works\db\MsgDB.cs" />
     <Compile Include="Works\db\SessionDB.cs" />
     <Compile Include="Works\util\ImageUtil.cs" />
+    <Compile Include="Works\util\SystemMsgUtil.cs" />
     <Compile Include="Works\util\timeUtil.cs" />
     <Compile Include="Works\util\ObjSerial.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
