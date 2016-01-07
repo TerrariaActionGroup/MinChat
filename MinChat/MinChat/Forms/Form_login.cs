@@ -16,6 +16,7 @@ using ESPlus.Rapid;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Application.Basic;
 using MinChat.Settings;
+using MinChat.Works.db;
 
 namespace MinChat.Forms
 {
@@ -86,6 +87,7 @@ namespace MinChat.Forms
         }
         private void login()
         {
+            initDB(this.txtId.Text);
             LogonResult logonResult;
             logonResult = login(this.txtId.Text, this.txtPwd.Text);
 
@@ -101,6 +103,8 @@ namespace MinChat.Forms
                 return;
             }
             tray.Visible = false;
+            //初始化数据库
+            
             this.DialogResult = DialogResult.OK; 
         }
         #endregion
@@ -158,7 +162,14 @@ namespace MinChat.Forms
             return logonResult;
         }
         #endregion
-
+        //初始化数据库
+        void initDB(string ID)
+        {            
+            //建立数据库的链接
+            SystemMsgDB.OpenSysMsgDB(ID);
+            MsgDB.OpenMsgDB(ID);
+            FriendDB.OpenDB(ID);
+        }
         private void ckMen_CheckedChanged(object sender, EventArgs e)
         {
             if (this.ckMen.Checked == true)

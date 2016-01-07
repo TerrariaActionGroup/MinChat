@@ -13,7 +13,7 @@ namespace MinChat.Works.db
         #region 变量
         protected string userId;
         protected SQLiteConnection conn;
-        protected static MsgDB uniqueInstance;
+        public static MsgDB uniqueInstance;
         #endregion
         #region 获取数据库
         /// <summary>

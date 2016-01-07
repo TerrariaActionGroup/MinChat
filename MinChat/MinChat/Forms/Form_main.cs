@@ -24,7 +24,6 @@ namespace MinChat.Forms
     public partial class Form_main : Skin_Mac,ICustomizeHandler
     {        
         #region 变量
-        
         //客户端用户的个人信息
         public ChatListSubItem myInfo;
 
@@ -35,10 +34,6 @@ namespace MinChat.Forms
         Form_Search form_search;
         Form_setting form_setting;
         private Form_Error fromError;
-        //数据库
-        SystemMsgDB sysDB;
-        MsgDB msgDB;
-        FriendDB frDB;
 
         //托盘相关变量
         private int action;
@@ -83,11 +78,6 @@ namespace MinChat.Forms
             //窗口显示用户ID
             lbl_userName.Text = myInfo.ID.ToString();
 
-            //建立数据库的链接
-            this.sysDB =SystemMsgDB.OpenSysMsgDB(myInfo.ID.ToString());
-            this.msgDB = MsgDB.OpenMsgDB(myInfo.ID.ToString());
-            this.frDB = FriendDB.OpenDB(myInfo.ID.ToString());
-
             //载入好友列表
             displayFriend();
 
@@ -110,16 +100,26 @@ namespace MinChat.Forms
         {
             //清空
             this.chatListBox_contacts.Items[0].SubItems.Clear();
-            
+            List<string> OnlineFriends = this.rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
+
             //从数据库读取
-            List<Friend> frList = this.frDB.queryFriends();
+            List<Friend> frList = FriendDB.uniqueInstance.queryFriends();
             foreach (Friend fr in frList)
             {
                 ChatListSubItem people = new ChatListSubItem();
                 people.ID = Convert.ToUInt32(fr.UserId);
                 people.NicName = fr.UserName;
                 people.DisplayName = fr.UserName;
+                people.Status = ChatListSubItem.UserStatus.OffLine;
                 this.chatListBox_contacts.Items[0].SubItems.Add(people);
+            }
+            foreach (string friendId in OnlineFriends)
+            {
+                ChatListSubItem[] list = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(friendId));
+                if (list.Length > 0)
+                {
+                    list[0].Status = ChatListSubItem.UserStatus.Online;
+                }
             }
         }
         #endregion
@@ -191,36 +191,42 @@ namespace MinChat.Forms
                     string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);
                     
                     //消息存在msg对象中
-                    Msg msg = new Msg(msgs, 0, 0);                                  
-
-                    //按照ID查找listbox中的subItem
-                    ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(msgs[1]));
-                    
-                    //聊天窗口的标题
-                    string windowsName = items[0].NicName + ' ' + items[0].ID; 
-                    
-                    //查找是否已经存在窗口
-                    IntPtr handle = NativeMethods.FindWindow(null, windowsName);    
-
-                    //聊天窗口已存在
-                    if (handle != IntPtr.Zero)
+                    Msg msg = new Msg(msgs, 0, 0);
+                    try
                     {
-                        msg.IsReaded = 1;
-                        Form frm = (Form)Form.FromHandle(handle);
+                        //按照ID查找listbox中的subItem
+                        ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(msgs[1]));
 
-                        //激活
-                        frm.Activate();                                             
-                        
-                        //传送消息到聊天窗口
-                        this.OnReceive(msg);                                        
+                        //聊天窗口的标题
+                        string windowsName = items[0].NicName + ' ' + items[0].ID;
+
+                        //查找是否已经存在窗口
+                        IntPtr handle = NativeMethods.FindWindow(null, windowsName);
+
+                        //聊天窗口已存在
+                        if (handle != IntPtr.Zero)
+                        {
+                            msg.IsReaded = 1;
+                            Form frm = (Form)Form.FromHandle(handle);
+
+                            //激活
+                            frm.Activate();
+
+                            //传送消息到聊天窗口
+                            this.OnReceive(msg);
+                        }
+                        else
+                        {
+                            //头像闪烁
+                            twinkle(chatListBox_contacts, Convert.ToUInt32(msgs[1]));
+                        }
+                        //消息存入数据库
+                        MsgDB.uniqueInstance.addMsg(msg);
                     }
-                    else
+                    catch 
                     {
-                        //头像闪烁
-                        twinkle(chatListBox_contacts, Convert.ToUInt32(msgs[1]));
+                        MsgDB.uniqueInstance.addMsg(msg); 
                     }
-                    //消息存入数据库
-                    msgDB.addMsg(msg);
                     break;
                 
                 //处理图片
@@ -235,7 +241,7 @@ namespace MinChat.Forms
                     //info格式:ID卍昵称卍性别卍生日卍地址卍注册时间
                     sysmsg.Content = infostr;
                     sysmsg.Type = Constant.MSG_ADDFRIEND_APPLY;
-                    sysDB.addSystemMsg(sysmsg.Content, sysmsg.Type);//存入数据库
+                    SystemMsgDB.instance.addSystemMsg(sysmsg.Content, sysmsg.Type);//存入数据库
                     break;
                 case Constant.MSG_ADDFRIEND_AGREE:
                     //info格式:ID卍昵称卍性别卍生日卍地址卍注册时间
@@ -247,7 +253,7 @@ namespace MinChat.Forms
                     //把消息存进数据库
                     sysmsg.Content = userInfo;
                     sysmsg.Type = Constant.MSG_ADDFRIEND_AGREE;
-                    sysDB.addSystemMsg(sysmsg.Content, sysmsg.Type);
+                    SystemMsgDB.instance.addSystemMsg(sysmsg.Content, sysmsg.Type);
 
                     //把好友存进数据库
                     Friend fr=new Friend();
@@ -258,7 +264,7 @@ namespace MinChat.Forms
                     fr.Address=userInfos[4];
                     fr.Time=userInfos[5];
 
-                    frDB.addFriend(fr);
+                    FriendDB.uniqueInstance.addFriend(fr);
 
                     //刷新好友列表
                     displayFriend();

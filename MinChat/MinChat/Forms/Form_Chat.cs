@@ -190,10 +190,9 @@ namespace MinChat.Forms
                 {
                     this.rapidPassiveEngine.CustomizeOutter.Send(receiveId, Constant.MSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
                 }
-                //发送离线消息，拼接多了一个receiveId
+                //发送离线消息
                 else if (contactInfo.Status == CCWin.SkinControl.ChatListSubItem.UserStatus.OffLine)
                 {
-                    msg = receiveId + split + msg;
                     this.rapidPassiveEngine.CustomizeOutter.Send(Constant.MSG_OFFLINEMSGTEXT, System.Text.Encoding.UTF8.GetBytes(msg));
                 }
                 

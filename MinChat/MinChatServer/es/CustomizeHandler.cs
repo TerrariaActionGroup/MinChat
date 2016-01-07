@@ -47,11 +47,11 @@ namespace MinChatServer.es
             string friendID;
             switch (informationType)
             {
-                case Constant.MSG_OFFLINEMSGTEXT:   //离线文本消息.解析：接收者ID SPLIT 消息内容（不拆分）
+                case Constant.MSG_OFFLINEMSGTEXT:   //离线文本消息.解析消息内容 //消息格式：接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
                     string message = System.Text.Encoding.UTF8.GetString(info);
                     string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);
                     //插入未读消息
-                    userDBManager.addMsg(msgs[0], msgs[1], Constant.MSG_OFFLINEMSGTEXT);
+                    userDBManager.addMsg(msgs[0], message, Constant.MSG_OFFLINEMSGTEXT);
                     break;
 
                 case Constant.MSG_OFFLINEMSGIMG:    //离线图片消息.解析：接收者ID SPLIT 消息内容（不拆分）
@@ -86,8 +86,17 @@ namespace MinChatServer.es
                     User applyto_user = userDBManager.queryUser(sourceUserID);
                     string dataStr = User.UserData2String(applyto_user);
                     applyUserData = System.Text.Encoding.UTF8.GetBytes(dataStr);
-                    this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_AGREE, applyUserData);
+                    if (userManager.IsUserOnLine(friendID) == true)
+                    {
+                        this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_AGREE, applyUserData);
+                    }
+                    else
+                    {
+                        userDBManager.addMsg(friendID, dataStr, Constant.MSG_ADDFRIEND_AGREE);
+                    }
+
                     break;
+
 
                 default:
                     break;

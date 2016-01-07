@@ -13,7 +13,7 @@ namespace MinChat.Works.db
     {
         protected string userId;
         protected SQLiteConnection conn;
-        protected static FriendDB uniqueInstance;
+        public static FriendDB uniqueInstance;
         public static FriendDB OpenDB(string userId)
         {
             if (null == uniqueInstance)

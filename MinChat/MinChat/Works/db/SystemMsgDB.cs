@@ -10,7 +10,7 @@ namespace MinChat.Works.db
     class SystemMsgDB
     {
         private string userId;
-        private static SystemMsgDB instance = null;
+        public static SystemMsgDB instance = null;
         protected SQLiteConnection conn;
 
         /// <summary>
