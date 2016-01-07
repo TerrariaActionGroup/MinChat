@@ -88,9 +88,9 @@ namespace MinChat.Forms
         {
             if(searchList.SelectSubItem!=null)
             {
-                //this.rapidPassiveEngine.CustomizeOutter.Send(null, Constant.MSG_ADDFRIEND, System.Text.Encoding.UTF8.GetBytes(msg));
-
-                //searchList.SelectSubItem.ID;
+                string id=searchList.SelectSubItem.ID.ToString();
+                this.rapidPassiveEngine.CustomizeOutter.Send(null, Constant.MSG_ADDFRIEND_APPLY, System.Text.Encoding.UTF8.GetBytes(id));
+                MessageBox.Show("yes");
             }
         }
         

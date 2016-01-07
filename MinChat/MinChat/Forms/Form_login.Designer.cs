@@ -117,7 +117,7 @@
             this.txtPwd.MinimumSize = new System.Drawing.Size(28, 28);
             this.txtPwd.MouseBack = ((System.Drawing.Bitmap)(resources.GetObject("txtPwd.MouseBack")));
             this.txtPwd.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.txtPwd.Multiline = false;
+            this.txtPwd.Multiline = true;
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.NormlBack = ((System.Drawing.Bitmap)(resources.GetObject("txtPwd.NormlBack")));
             this.txtPwd.Padding = new System.Windows.Forms.Padding(5);
@@ -131,9 +131,10 @@
             this.txtPwd.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPwd.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
             this.txtPwd.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.txtPwd.SkinTxt.Multiline = true;
             this.txtPwd.SkinTxt.Name = "BaseText";
             this.txtPwd.SkinTxt.PasswordChar = '●';
-            this.txtPwd.SkinTxt.Size = new System.Drawing.Size(184, 18);
+            this.txtPwd.SkinTxt.Size = new System.Drawing.Size(184, 20);
             this.txtPwd.SkinTxt.TabIndex = 1;
             this.txtPwd.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.SkinTxt.WaterText = "密码";

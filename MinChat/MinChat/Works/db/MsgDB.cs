@@ -86,12 +86,30 @@ namespace MinChat.Works.db
             }
             result.Close();
 
-            //cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
-            //sqlReadMsg.ExecuteNonQuery();
+            cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
+            sqlReadMsg.ExecuteNonQuery();
             sqlReadMsg.Dispose();
             return a;
         }
+        public List<Msg> readSystemMsg()//读取未读的系统消息
+        {
+            string cmdString = "SELECT * FROM msg where senderId =10000 and isRead = 0;";
+            SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
+            SQLiteDataReader result = sqlReadMsg.ExecuteReader();
+            List<Msg> a = new List<Msg>();
+            while (result.Read())
+            {
+                string[] msgs = new string[] { result[3].ToString(), result[2].ToString(), result[6].ToString(), result[8].ToString(), result[4].ToString() };
+                Msg aMsg = new Msg(msgs, 1, 1);
+                a.Add(aMsg);
+            }
+            result.Close();
 
+            cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = 10000);";
+            sqlReadMsg.ExecuteNonQuery();
+            sqlReadMsg.Dispose();
+            return a;
+        }
         #endregion
         #region 添加消息
         /// <summary>

@@ -29,24 +29,25 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            CCWin.SkinControl.ChatListItem chatListItem1 = new CCWin.SkinControl.ChatListItem();
             CCWin.SkinControl.ChatListItem chatListItem2 = new CCWin.SkinControl.ChatListItem();
             CCWin.SkinControl.ChatListItem chatListItem3 = new CCWin.SkinControl.ChatListItem();
+            CCWin.SkinControl.ChatListItem chatListItem4 = new CCWin.SkinControl.ChatListItem();
+            CCWin.SkinControl.ChatListItem chatListItem5 = new CCWin.SkinControl.ChatListItem();
             CCWin.SkinControl.Animation animation1 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_main));
-            CCWin.SkinControl.ChatListItem chatListItem4 = new CCWin.SkinControl.ChatListItem();
             this.chatListBox_contacts = new CCWin.SkinControl.ChatListBox();
+            this.chatListBox1 = new CCWin.SkinControl.ChatListBox();
             this.lbl_userName = new CCWin.SkinControl.SkinLabel();
             this.btn_search = new CCWin.SkinControl.SkinButton();
             this.skinTabControl1 = new CCWin.SkinControl.SkinTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.chatListBox1 = new CCWin.SkinControl.ChatListBox();
             this.chatListBox2 = new CCWin.SkinControl.ChatListBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.timer_Adsorption = new System.Windows.Forms.Timer(this.components);
             this.tray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.timer_tray = new System.Windows.Forms.Timer(this.components);
             this.skinTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -61,29 +62,29 @@
             this.chatListBox_contacts.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chatListBox_contacts.ForeColor = System.Drawing.Color.Black;
             this.chatListBox_contacts.FriendsMobile = true;
-            chatListItem1.Bounds = new System.Drawing.Rectangle(0, 1, 280, 25);
-            chatListItem1.IsOpen = true;
-            chatListItem1.IsTwinkleHide = true;
-            chatListItem1.OwnerChatListBox = this.chatListBox_contacts;
-            chatListItem1.Tag = null;
-            chatListItem1.Text = "好友";
-            chatListItem1.TwinkleSubItemNumber = 0;
-            chatListItem2.Bounds = new System.Drawing.Rectangle(0, 27, 280, 25);
-            chatListItem2.IsTwinkleHide = false;
+            chatListItem2.Bounds = new System.Drawing.Rectangle(0, 1, 280, 25);
+            chatListItem2.IsOpen = true;
+            chatListItem2.IsTwinkleHide = true;
             chatListItem2.OwnerChatListBox = this.chatListBox_contacts;
             chatListItem2.Tag = null;
-            chatListItem2.Text = "陌生人";
+            chatListItem2.Text = "好友";
             chatListItem2.TwinkleSubItemNumber = 0;
-            chatListItem3.Bounds = new System.Drawing.Rectangle(0, 53, 280, 25);
+            chatListItem3.Bounds = new System.Drawing.Rectangle(0, 27, 280, 25);
             chatListItem3.IsTwinkleHide = false;
             chatListItem3.OwnerChatListBox = this.chatListBox_contacts;
             chatListItem3.Tag = null;
-            chatListItem3.Text = "黑名单";
+            chatListItem3.Text = "陌生人";
             chatListItem3.TwinkleSubItemNumber = 0;
+            chatListItem4.Bounds = new System.Drawing.Rectangle(0, 53, 280, 25);
+            chatListItem4.IsTwinkleHide = false;
+            chatListItem4.OwnerChatListBox = this.chatListBox_contacts;
+            chatListItem4.Tag = null;
+            chatListItem4.Text = "黑名单";
+            chatListItem4.TwinkleSubItemNumber = 0;
             this.chatListBox_contacts.Items.AddRange(new CCWin.SkinControl.ChatListItem[] {
-            chatListItem1,
             chatListItem2,
-            chatListItem3});
+            chatListItem3,
+            chatListItem4});
             this.chatListBox_contacts.ListSubItemMenu = null;
             this.chatListBox_contacts.Location = new System.Drawing.Point(0, 0);
             this.chatListBox_contacts.Margin = new System.Windows.Forms.Padding(0);
@@ -92,6 +93,32 @@
             this.chatListBox_contacts.Size = new System.Drawing.Size(280, 395);
             this.chatListBox_contacts.SubItemMenu = null;
             this.chatListBox_contacts.TabIndex = 4;
+            // 
+            // chatListBox1
+            // 
+            this.chatListBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.chatListBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chatListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chatListBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chatListBox1.ForeColor = System.Drawing.Color.Black;
+            this.chatListBox1.FriendsMobile = true;
+            this.chatListBox1.IconSizeMode = CCWin.SkinControl.ChatListItemIcon.Small;
+            chatListItem5.Bounds = new System.Drawing.Rectangle(0, 1, 280, 25);
+            chatListItem5.IsTwinkleHide = false;
+            chatListItem5.OwnerChatListBox = this.chatListBox1;
+            chatListItem5.Tag = null;
+            chatListItem5.Text = "我的群组";
+            chatListItem5.TwinkleSubItemNumber = 0;
+            this.chatListBox1.Items.AddRange(new CCWin.SkinControl.ChatListItem[] {
+            chatListItem5});
+            this.chatListBox1.ListSubItemMenu = null;
+            this.chatListBox1.Location = new System.Drawing.Point(0, 0);
+            this.chatListBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.chatListBox1.Name = "chatListBox1";
+            this.chatListBox1.SelectSubItem = null;
+            this.chatListBox1.Size = new System.Drawing.Size(280, 395);
+            this.chatListBox1.SubItemMenu = null;
+            this.chatListBox1.TabIndex = 5;
             // 
             // lbl_userName
             // 
@@ -208,41 +235,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "icon_contacts_normal3X.png");
-            this.imageList.Images.SetKeyName(1, "icon_group_normal3X.png");
-            this.imageList.Images.SetKeyName(2, "icon_last_normal3X.png");
-            this.imageList.Images.SetKeyName(3, "00.png");
-            // 
-            // chatListBox1
-            // 
-            this.chatListBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.chatListBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chatListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chatListBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chatListBox1.ForeColor = System.Drawing.Color.Black;
-            this.chatListBox1.FriendsMobile = true;
-            this.chatListBox1.IconSizeMode = CCWin.SkinControl.ChatListItemIcon.Small;
-            chatListItem4.Bounds = new System.Drawing.Rectangle(0, 1, 280, 25);
-            chatListItem4.IsTwinkleHide = false;
-            chatListItem4.OwnerChatListBox = this.chatListBox1;
-            chatListItem4.Tag = null;
-            chatListItem4.Text = "我的群组";
-            chatListItem4.TwinkleSubItemNumber = 0;
-            this.chatListBox1.Items.AddRange(new CCWin.SkinControl.ChatListItem[] {
-            chatListItem4});
-            this.chatListBox1.ListSubItemMenu = null;
-            this.chatListBox1.Location = new System.Drawing.Point(0, 0);
-            this.chatListBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.chatListBox1.Name = "chatListBox1";
-            this.chatListBox1.SelectSubItem = null;
-            this.chatListBox1.Size = new System.Drawing.Size(280, 395);
-            this.chatListBox1.SubItemMenu = null;
-            this.chatListBox1.TabIndex = 5;
-            // 
             // chatListBox2
             // 
             this.chatListBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -260,11 +252,25 @@
             this.chatListBox2.SubItemMenu = null;
             this.chatListBox2.TabIndex = 5;
             // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "icon_contacts_normal3X.png");
+            this.imageList.Images.SetKeyName(1, "icon_group_normal3X.png");
+            this.imageList.Images.SetKeyName(2, "icon_last_normal3X.png");
+            this.imageList.Images.SetKeyName(3, "00.png");
+            // 
             // tray
             // 
             this.tray.Icon = ((System.Drawing.Icon)(resources.GetObject("tray.Icon")));
             this.tray.Text = "tray";
-            this.tray.Click += new System.EventHandler(this.toolShowMain_Click);
+            this.tray.Click += new System.EventHandler(this.tray_Click);
+            // 
+            // timer_tray
+            // 
+            this.timer_tray.Interval = 500;
+            this.timer_tray.Tick += new System.EventHandler(this.timer_tray_Tick);
             // 
             // Form_main
             // 
@@ -330,8 +336,9 @@
         private System.Windows.Forms.TabPage tabPage3;
         private CCWin.SkinControl.ChatListBox chatListBox1;
         private CCWin.SkinControl.ChatListBox chatListBox2;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer_Adsorption;
         private System.Windows.Forms.NotifyIcon tray;
+        private System.Windows.Forms.Timer timer_tray;
 
     }
 }
