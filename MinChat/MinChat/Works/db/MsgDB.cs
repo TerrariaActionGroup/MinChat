@@ -79,8 +79,8 @@ namespace MinChat.Works.db
         {
             string cmdString = "SELECT * FROM msg where senderId =" + senderId + " and receiverId=" + receiverId + " or senderId = " + receiverId + " and receiverId=" + senderId + ";";
             conn.Open();
-            SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
-            SQLiteDataReader result = sqlReadMsg.ExecuteReader();
+            SQLiteCommand sql = new SQLiteCommand(cmdString, conn);
+            SQLiteDataReader result = sql.ExecuteReader();
             List<Msg> a = new List<Msg>();
             while(result.Read())
             {
@@ -90,18 +90,18 @@ namespace MinChat.Works.db
             }
             result.Close();
 
-            cmdString = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
-            sqlReadMsg.ExecuteNonQuery();
-            sqlReadMsg.Dispose();
+            sql.CommandText = "UPDATE msg SET isRead = 1 WHERE isRead = 0 AND senderId = " + senderId + ");";
+            sql.ExecuteNonQuery();
+            sql.Dispose();
             return a;
         }
         public Msg readSystemMsg()//读取一条未读的系统消息
         {
-            string msgId="-1";
+            string msgId;
             string cmdString = "SELECT * FROM msg where senderId =10000 and isRead = 0 order by msgId desc limit 1;";
             conn.Open();
-            SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
-            SQLiteDataReader result = sqlReadMsg.ExecuteReader();
+            SQLiteCommand sql = new SQLiteCommand(cmdString, conn);
+            SQLiteDataReader result = sql.ExecuteReader();
             Msg a = null;
             if(result.Read())
             {
@@ -109,13 +109,21 @@ namespace MinChat.Works.db
                 msgId=result[0].ToString();
                 Msg aMsg = new Msg(msgs, 1, 1);
                 a=aMsg;
+                result.Close();
+                sql.CommandText = "UPDATE msg SET isRead = 1 WHERE msgId=" + msgId + ";";
+                sql.ExecuteNonQuery();
+                sql.Dispose();
+                conn.Close();
+                return a;
             }
-            result.Close();
-            cmdString = "UPDATE msg SET isRead = 1 WHERE msgId=" + msgId + ";";
-            sqlReadMsg.ExecuteNonQuery();
-            sqlReadMsg.Dispose();
-            conn.Close();
-            return a;
+            else//没有结果
+            {
+                result.Close();
+                sql.Dispose();
+                conn.Close();
+                return null;
+            }
+            
         }
         #endregion
         #region 添加消息
