@@ -19,18 +19,30 @@ namespace MinChat.Works.db
         }
         public SessionDB(string userId)
         {
-            this.userId = userId; 
-            string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/session.db";
-            conn = new SQLiteConnection(dbPath);
+            this.userId = userId;
+            string path = Environment.CurrentDirectory + "\\db\\" + userId;
+            string dbPath = path + "\\session.db";
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            if (!System.IO.File.Exists(dbPath))
+            {
+                System.IO.File.Create(dbPath);
+            }
+            conn = new SQLiteConnection("Data Source=" + dbPath);
+
             string cmdString = @"CREATE TABLE IF NOT EXISTS session(sessionId integer, senderId varchar(20), senderName varchar(40), type integer,
 content text, date time, notReadCount integer,receiverId varchar(20),isDispose integer);";
+            conn.Open();
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
+            conn.Close();
         }
         #region 添加会话
         public bool addSession(Session ss){
-            string cmdString = @"INSERT TO session VALUES (" +
+            string cmdString = @"INSERT INTO session VALUES (" +
                 ss.Id + "," +
                 ss.From + "," +
                 ss.From_user + "," +
@@ -41,9 +53,11 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
                 ss.To + "," +
                 ss.Isdispose + "," +
                 ");";
+            conn.Open();
             SQLiteCommand sqlAddSession = new SQLiteCommand(cmdString, conn);
             sqlAddSession.ExecuteNonQuery();
             sqlAddSession.Dispose();
+            conn.Close();
             return true;
         }
         #endregion
@@ -51,9 +65,11 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
         public bool deleteSession(int sessionId)
         {
             string cmdString = "DELETE FROM session WHERE sessionId = " + sessionId + ";";
+            conn.Open();
             SQLiteCommand sqlDeleteSession = new SQLiteCommand(cmdString, conn);
             sqlDeleteSession.ExecuteNonQuery();
             sqlDeleteSession.Dispose();
+            conn.Close();
             return true;
         }
         #endregion
@@ -62,18 +78,9 @@ content text, date time, notReadCount integer,receiverId varchar(20),isDispose i
         {
             MsgDB msgdb = MsgDB.OpenMsgDB(userId);
             msgdb.readMsg(sessionId);
-            msgdb.Close();
 
             return true;
         }
         #endregion
-        public void Close()
-        {
-            if (null != conn)
-            {
-                conn.Close();
-                conn = null;
-            }
-        }
     }
 }
