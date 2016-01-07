@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MinChat.Works.db;
+using MinChat.Communications.bean;
 
 namespace MinChat
 {
@@ -24,7 +26,7 @@ namespace MinChat
             Form_login loginForm = new Form_login(rapidPassiveEngine, mainForm); //在LoginForm中初始化客户端引擎RapidPassiveEngine
             if (loginForm.ShowDialog() != DialogResult.OK)
             {
-                
+
             }
             else
             {
