@@ -94,7 +94,6 @@ namespace MinChatServer.es
                     {
                         userDBManager.addMsg(friendID, dataStr, Constant.MSG_ADDFRIEND_AGREE);
                     }
-
                     break;
 
 
