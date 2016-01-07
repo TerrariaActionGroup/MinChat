@@ -23,40 +23,46 @@ namespace MinChat.Works.db
         }
         public MGroupDB(string userId)
         {
-            this.userId = userId; 
-
-            string dbPath = Environment.CurrentDirectory + "/db/" + userId + "/mgroup.db";
-            conn = new SQLiteConnection(dbPath);
-            string cmdString = "CREATE TABLE IF NOT EXISTS mgroup(mGroupId integer, mGroupName varchar(40), num integer);";
+            this.userId = userId;
+            string path = Environment.CurrentDirectory + "\\db\\" + userId;
+            string dbPath = path + "\\mgroup.db";
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            if (!System.IO.File.Exists(dbPath))
+            {
+                System.IO.File.Create(dbPath);
+            }
+            conn = new SQLiteConnection("Data Source=" + dbPath);
+            string cmdString = "CREATE TABLE IF NOT EXISTS mgroup(mGroupId integer, mGroupName varchar(40), num integer)";
+            conn.Open();
             SQLiteCommand cmdCreateTable = new SQLiteCommand(cmdString, conn);
             cmdCreateTable.ExecuteNonQuery();
             cmdCreateTable.Dispose();
+            conn.Close();
         }
         public bool addMGroup(MGroup mg){
-            string cmdString = "INSERT TO mgroup VALUES(" +
+            string cmdString = "INSERT INTO mgroup VALUES(" +
                 mg.MGroupId + "," +
                 mg.MGroupName + "," +
                 mg.Num + "," + ");";
+            conn.Open();
             SQLiteCommand cmdAddMGroup = new SQLiteCommand(cmdString, conn);
             cmdAddMGroup.ExecuteNonQuery();
             cmdAddMGroup.Dispose();
+            conn.Close();
             return true;
         }
         public bool deleteMGroup(string mGroupName)
         {
             string cmdString = "DELETE FROM mgroup WHERE mGroupName =" + mGroupName + ";";
+            conn.Open();
             SQLiteCommand sqlDeleteMGroup = new SQLiteCommand(cmdString, conn);
             sqlDeleteMGroup.ExecuteNonQuery();
             sqlDeleteMGroup.Dispose();
+            conn.Close();
             return true;
-        }
-        public void Close()
-        {
-            if (null != conn)
-            {
-                conn.Close();
-                conn = null;
-            }
         }
     }
 }
