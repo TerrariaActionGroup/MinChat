@@ -86,7 +86,15 @@ namespace MinChatServer.es
                     User applyto_user = userDBManager.queryUser(sourceUserID);
                     string dataStr = User.UserData2String(applyto_user);
                     applyUserData = System.Text.Encoding.UTF8.GetBytes(dataStr);
-                    this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_AGREE, applyUserData);
+                    if (userManager.IsUserOnLine(friendID) == true)
+                    {
+                        this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_AGREE, applyUserData);
+                    }
+                    else
+                    {
+                        userDBManager.addMsg(friendID, dataStr, Constant.MSG_ADDFRIEND_AGREE);
+                    }
+                    
                     break;
 
                 default:
