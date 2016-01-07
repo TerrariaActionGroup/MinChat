@@ -89,7 +89,7 @@ namespace MinChat.Forms
             if(searchList.SelectSubItem!=null)
             {
                 string id=searchList.SelectSubItem.ID.ToString();
-                this.rapidPassiveEngine.CustomizeOutter.Send(null, Constant.MSG_ADDFRIEND_APPLY, System.Text.Encoding.UTF8.GetBytes(id));
+                this.rapidPassiveEngine.CustomizeOutter.Send(Constant.MSG_ADDFRIEND_APPLY, System.Text.Encoding.UTF8.GetBytes(id));
                 MessageBox.Show("yes");
             }
         }

@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SystemMsg));
             this.pnlImgTx = new CCWin.SkinControl.SkinPanel();
-            this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
-            this.skinButton1 = new CCWin.SkinControl.SkinButton();
-            this.skinButton2 = new CCWin.SkinControl.SkinButton();
-            this.skinRadioButton1 = new CCWin.SkinControl.SkinRadioButton();
-            this.skinRadioButton2 = new CCWin.SkinControl.SkinRadioButton();
-            this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
-            this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
+            this.lbl_userInfo = new CCWin.SkinControl.SkinLabel();
+            this.btn_yes = new CCWin.SkinControl.SkinButton();
+            this.btn_ignore = new CCWin.SkinControl.SkinButton();
+            this.radioBtn_agree = new CCWin.SkinControl.SkinRadioButton();
+            this.radioBtn_refuse = new CCWin.SkinControl.SkinRadioButton();
+            this.txbBox_Msg = new CCWin.SkinControl.SkinTextBox();
+            this.lbl_userName = new CCWin.SkinControl.SkinLabel();
             this.SuspendLayout();
             // 
             // pnlImgTx
@@ -55,160 +55,160 @@
             this.pnlImgTx.Size = new System.Drawing.Size(80, 80);
             this.pnlImgTx.TabIndex = 14;
             // 
-            // skinLabel1
+            // lbl_userInfo
             // 
-            this.skinLabel1.AutoSize = true;
-            this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel1.BorderColor = System.Drawing.Color.White;
-            this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel1.Location = new System.Drawing.Point(26, 136);
-            this.skinLabel1.Name = "skinLabel1";
-            this.skinLabel1.Size = new System.Drawing.Size(20, 17);
-            this.skinLabel1.TabIndex = 0;
-            this.skinLabel1.Text = "xx";
+            this.lbl_userInfo.AutoSize = true;
+            this.lbl_userInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_userInfo.BorderColor = System.Drawing.Color.White;
+            this.lbl_userInfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_userInfo.Location = new System.Drawing.Point(26, 136);
+            this.lbl_userInfo.Name = "lbl_userInfo";
+            this.lbl_userInfo.Size = new System.Drawing.Size(20, 17);
+            this.lbl_userInfo.TabIndex = 0;
+            this.lbl_userInfo.Text = "xx";
             // 
-            // skinButton1
+            // btn_yes
             // 
-            this.skinButton1.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton1.DownBack = null;
-            this.skinButton1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.skinButton1.Location = new System.Drawing.Point(254, 248);
-            this.skinButton1.MouseBack = null;
-            this.skinButton1.Name = "skinButton1";
-            this.skinButton1.NormlBack = null;
-            this.skinButton1.Size = new System.Drawing.Size(75, 23);
-            this.skinButton1.TabIndex = 15;
-            this.skinButton1.Text = "确定";
-            this.skinButton1.UseVisualStyleBackColor = false;
+            this.btn_yes.BackColor = System.Drawing.Color.Transparent;
+            this.btn_yes.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btn_yes.DownBack = null;
+            this.btn_yes.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_yes.Location = new System.Drawing.Point(254, 248);
+            this.btn_yes.MouseBack = null;
+            this.btn_yes.Name = "btn_yes";
+            this.btn_yes.NormlBack = null;
+            this.btn_yes.Size = new System.Drawing.Size(75, 23);
+            this.btn_yes.TabIndex = 15;
+            this.btn_yes.Text = "确定";
+            this.btn_yes.UseVisualStyleBackColor = false;
+            this.btn_yes.Click += new System.EventHandler(this.btn_yes_Click);
             // 
-            // skinButton2
+            // btn_ignore
             // 
-            this.skinButton2.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton2.DownBack = null;
-            this.skinButton2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.skinButton2.Location = new System.Drawing.Point(335, 248);
-            this.skinButton2.MouseBack = null;
-            this.skinButton2.Name = "skinButton2";
-            this.skinButton2.NormlBack = null;
-            this.skinButton2.Size = new System.Drawing.Size(75, 23);
-            this.skinButton2.TabIndex = 16;
-            this.skinButton2.Text = "忽略";
-            this.skinButton2.UseVisualStyleBackColor = false;
+            this.btn_ignore.BackColor = System.Drawing.Color.Transparent;
+            this.btn_ignore.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.btn_ignore.DownBack = null;
+            this.btn_ignore.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_ignore.Location = new System.Drawing.Point(335, 248);
+            this.btn_ignore.MouseBack = null;
+            this.btn_ignore.Name = "btn_ignore";
+            this.btn_ignore.NormlBack = null;
+            this.btn_ignore.Size = new System.Drawing.Size(75, 23);
+            this.btn_ignore.TabIndex = 16;
+            this.btn_ignore.Text = "忽略";
+            this.btn_ignore.UseVisualStyleBackColor = false;
+            this.btn_ignore.Click += new System.EventHandler(this.btn_ignore_Click);
             // 
-            // skinRadioButton1
+            // radioBtn_agree
             // 
-            this.skinRadioButton1.AutoSize = true;
-            this.skinRadioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.skinRadioButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinRadioButton1.DownBack = null;
-            this.skinRadioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton1.Location = new System.Drawing.Point(165, 132);
-            this.skinRadioButton1.MouseBack = null;
-            this.skinRadioButton1.Name = "skinRadioButton1";
-            this.skinRadioButton1.NormlBack = null;
-            this.skinRadioButton1.SelectedDownBack = null;
-            this.skinRadioButton1.SelectedMouseBack = null;
-            this.skinRadioButton1.SelectedNormlBack = null;
-            this.skinRadioButton1.Size = new System.Drawing.Size(50, 21);
-            this.skinRadioButton1.TabIndex = 17;
-            this.skinRadioButton1.TabStop = true;
-            this.skinRadioButton1.Text = "同意";
-            this.skinRadioButton1.UseVisualStyleBackColor = false;
+            this.radioBtn_agree.AutoSize = true;
+            this.radioBtn_agree.BackColor = System.Drawing.Color.Transparent;
+            this.radioBtn_agree.Checked = true;
+            this.radioBtn_agree.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.radioBtn_agree.DownBack = null;
+            this.radioBtn_agree.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioBtn_agree.Location = new System.Drawing.Point(165, 132);
+            this.radioBtn_agree.MouseBack = null;
+            this.radioBtn_agree.Name = "radioBtn_agree";
+            this.radioBtn_agree.NormlBack = null;
+            this.radioBtn_agree.SelectedDownBack = null;
+            this.radioBtn_agree.SelectedMouseBack = null;
+            this.radioBtn_agree.SelectedNormlBack = null;
+            this.radioBtn_agree.Size = new System.Drawing.Size(50, 21);
+            this.radioBtn_agree.TabIndex = 17;
+            this.radioBtn_agree.TabStop = true;
+            this.radioBtn_agree.Text = "同意";
+            this.radioBtn_agree.UseVisualStyleBackColor = false;
             // 
-            // skinRadioButton2
+            // radioBtn_refuse
             // 
-            this.skinRadioButton2.AutoSize = true;
-            this.skinRadioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.skinRadioButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinRadioButton2.DownBack = null;
-            this.skinRadioButton2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton2.Location = new System.Drawing.Point(165, 153);
-            this.skinRadioButton2.MouseBack = null;
-            this.skinRadioButton2.Name = "skinRadioButton2";
-            this.skinRadioButton2.NormlBack = null;
-            this.skinRadioButton2.SelectedDownBack = null;
-            this.skinRadioButton2.SelectedMouseBack = null;
-            this.skinRadioButton2.SelectedNormlBack = null;
-            this.skinRadioButton2.Size = new System.Drawing.Size(50, 21);
-            this.skinRadioButton2.TabIndex = 18;
-            this.skinRadioButton2.TabStop = true;
-            this.skinRadioButton2.Text = "拒绝";
-            this.skinRadioButton2.UseVisualStyleBackColor = false;
+            this.radioBtn_refuse.AutoSize = true;
+            this.radioBtn_refuse.BackColor = System.Drawing.Color.Transparent;
+            this.radioBtn_refuse.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.radioBtn_refuse.DownBack = null;
+            this.radioBtn_refuse.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioBtn_refuse.Location = new System.Drawing.Point(165, 153);
+            this.radioBtn_refuse.MouseBack = null;
+            this.radioBtn_refuse.Name = "radioBtn_refuse";
+            this.radioBtn_refuse.NormlBack = null;
+            this.radioBtn_refuse.SelectedDownBack = null;
+            this.radioBtn_refuse.SelectedMouseBack = null;
+            this.radioBtn_refuse.SelectedNormlBack = null;
+            this.radioBtn_refuse.Size = new System.Drawing.Size(50, 21);
+            this.radioBtn_refuse.TabIndex = 18;
+            this.radioBtn_refuse.Text = "拒绝";
+            this.radioBtn_refuse.UseVisualStyleBackColor = false;
             // 
-            // skinTextBox1
+            // txbBox_Msg
             // 
-            this.skinTextBox1.BackColor = System.Drawing.Color.Transparent;
-            this.skinTextBox1.DownBack = null;
-            this.skinTextBox1.Icon = null;
-            this.skinTextBox1.IconIsButton = false;
-            this.skinTextBox1.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.skinTextBox1.IsPasswordChat = '\0';
-            this.skinTextBox1.IsSystemPasswordChar = false;
-            this.skinTextBox1.Lines = new string[] {
-        "skinTextBox1"};
-            this.skinTextBox1.Location = new System.Drawing.Point(165, 63);
-            this.skinTextBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.skinTextBox1.MaxLength = 32767;
-            this.skinTextBox1.MinimumSize = new System.Drawing.Size(28, 28);
-            this.skinTextBox1.MouseBack = null;
-            this.skinTextBox1.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.skinTextBox1.Multiline = true;
-            this.skinTextBox1.Name = "skinTextBox1";
-            this.skinTextBox1.NormlBack = null;
-            this.skinTextBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.skinTextBox1.ReadOnly = false;
-            this.skinTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.skinTextBox1.Size = new System.Drawing.Size(201, 64);
-            // 
+            this.txbBox_Msg.BackColor = System.Drawing.Color.Transparent;
+            this.txbBox_Msg.DownBack = null;
+            this.txbBox_Msg.Icon = null;
+            this.txbBox_Msg.IconIsButton = false;
+            this.txbBox_Msg.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.txbBox_Msg.IsPasswordChat = '\0';
+            this.txbBox_Msg.IsSystemPasswordChar = false;
+            this.txbBox_Msg.Lines = new string[0];
+            this.txbBox_Msg.Location = new System.Drawing.Point(165, 63);
+            this.txbBox_Msg.Margin = new System.Windows.Forms.Padding(0);
+            this.txbBox_Msg.MaxLength = 32767;
+            this.txbBox_Msg.MinimumSize = new System.Drawing.Size(28, 28);
+            this.txbBox_Msg.MouseBack = null;
+            this.txbBox_Msg.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.txbBox_Msg.Multiline = true;
+            this.txbBox_Msg.Name = "txbBox_Msg";
+            this.txbBox_Msg.NormlBack = null;
+            this.txbBox_Msg.Padding = new System.Windows.Forms.Padding(5);
+            this.txbBox_Msg.ReadOnly = false;
+            this.txbBox_Msg.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txbBox_Msg.Size = new System.Drawing.Size(201, 64);
             // 
             // 
-            this.skinTextBox1.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.skinTextBox1.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinTextBox1.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.skinTextBox1.SkinTxt.Location = new System.Drawing.Point(5, 5);
-            this.skinTextBox1.SkinTxt.Multiline = true;
-            this.skinTextBox1.SkinTxt.Name = "BaseText";
-            this.skinTextBox1.SkinTxt.Size = new System.Drawing.Size(191, 54);
-            this.skinTextBox1.SkinTxt.TabIndex = 0;
-            this.skinTextBox1.SkinTxt.Text = "skinTextBox1";
-            this.skinTextBox1.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.skinTextBox1.SkinTxt.WaterText = "";
-            this.skinTextBox1.TabIndex = 19;
-            this.skinTextBox1.Text = "skinTextBox1";
-            this.skinTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.skinTextBox1.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.skinTextBox1.WaterText = "";
-            this.skinTextBox1.WordWrap = true;
             // 
-            // skinLabel2
+            this.txbBox_Msg.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txbBox_Msg.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txbBox_Msg.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.txbBox_Msg.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.txbBox_Msg.SkinTxt.Multiline = true;
+            this.txbBox_Msg.SkinTxt.Name = "BaseText";
+            this.txbBox_Msg.SkinTxt.Size = new System.Drawing.Size(191, 54);
+            this.txbBox_Msg.SkinTxt.TabIndex = 0;
+            this.txbBox_Msg.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.txbBox_Msg.SkinTxt.WaterText = "";
+            this.txbBox_Msg.TabIndex = 19;
+            this.txbBox_Msg.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txbBox_Msg.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.txbBox_Msg.WaterText = "";
+            this.txbBox_Msg.WordWrap = true;
             // 
-            this.skinLabel2.AutoSize = true;
-            this.skinLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.skinLabel2.BorderColor = System.Drawing.Color.White;
-            this.skinLabel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel2.Location = new System.Drawing.Point(168, 37);
-            this.skinLabel2.Name = "skinLabel2";
-            this.skinLabel2.Size = new System.Drawing.Size(96, 17);
-            this.skinLabel2.TabIndex = 20;
-            this.skinLabel2.Text = "xx 请求加为好友";
+            // lbl_userName
+            // 
+            this.lbl_userName.AutoSize = true;
+            this.lbl_userName.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_userName.BorderColor = System.Drawing.Color.White;
+            this.lbl_userName.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_userName.Location = new System.Drawing.Point(168, 37);
+            this.lbl_userName.Name = "lbl_userName";
+            this.lbl_userName.Size = new System.Drawing.Size(96, 17);
+            this.lbl_userName.TabIndex = 20;
+            this.lbl_userName.Text = "xx 请求加为好友";
             // 
             // Form_SystemMsg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 278);
-            this.Controls.Add(this.skinLabel2);
-            this.Controls.Add(this.skinTextBox1);
-            this.Controls.Add(this.skinRadioButton2);
-            this.Controls.Add(this.skinRadioButton1);
-            this.Controls.Add(this.skinButton2);
-            this.Controls.Add(this.skinButton1);
-            this.Controls.Add(this.skinLabel1);
+            this.Controls.Add(this.lbl_userName);
+            this.Controls.Add(this.txbBox_Msg);
+            this.Controls.Add(this.radioBtn_refuse);
+            this.Controls.Add(this.radioBtn_agree);
+            this.Controls.Add(this.btn_ignore);
+            this.Controls.Add(this.btn_yes);
+            this.Controls.Add(this.lbl_userInfo);
             this.Controls.Add(this.pnlImgTx);
             this.Name = "Form_SystemMsg";
             this.Text = "Form_SystemMsg";
+            this.Load += new System.EventHandler(this.Form_SystemMsg_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,12 +217,12 @@
         #endregion
 
         private CCWin.SkinControl.SkinPanel pnlImgTx;
-        private CCWin.SkinControl.SkinLabel skinLabel1;
-        private CCWin.SkinControl.SkinButton skinButton1;
-        private CCWin.SkinControl.SkinButton skinButton2;
-        private CCWin.SkinControl.SkinRadioButton skinRadioButton1;
-        private CCWin.SkinControl.SkinRadioButton skinRadioButton2;
-        private CCWin.SkinControl.SkinTextBox skinTextBox1;
-        private CCWin.SkinControl.SkinLabel skinLabel2;
+        private CCWin.SkinControl.SkinLabel lbl_userInfo;
+        private CCWin.SkinControl.SkinButton btn_yes;
+        private CCWin.SkinControl.SkinButton btn_ignore;
+        private CCWin.SkinControl.SkinRadioButton radioBtn_agree;
+        private CCWin.SkinControl.SkinRadioButton radioBtn_refuse;
+        private CCWin.SkinControl.SkinTextBox txbBox_Msg;
+        private CCWin.SkinControl.SkinLabel lbl_userName;
     }
 }

@@ -28,28 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Btn_search = new CCWin.SkinControl.SkinButton();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Search));
             this.searchId = new CCWin.SkinControl.SkinTextBox();
             this.searchList = new CCWin.SkinControl.ChatListBox();
+            this.Btn_search = new CCWin.SkinControl.SkinButton();
             this.btn_add = new CCWin.SkinControl.SkinButton();
             this.SuspendLayout();
-            // 
-            // Btn_search
-            // 
-            this.Btn_search.BackColor = System.Drawing.Color.White;
-            this.Btn_search.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.Btn_search.DownBack = null;
-            this.Btn_search.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Btn_search.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Btn_search.Location = new System.Drawing.Point(400, 64);
-            this.Btn_search.MouseBack = null;
-            this.Btn_search.Name = "Btn_search";
-            this.Btn_search.NormlBack = null;
-            this.Btn_search.Size = new System.Drawing.Size(66, 38);
-            this.Btn_search.TabIndex = 0;
-            this.Btn_search.Text = "查找";
-            this.Btn_search.UseVisualStyleBackColor = false;
-            this.Btn_search.Click += new System.EventHandler(this.Btn_search_Click);
             // 
             // searchId
             // 
@@ -107,19 +91,42 @@
             this.searchList.SubItemMenu = null;
             this.searchList.TabIndex = 2;
             // 
+            // Btn_search
+            // 
+            this.Btn_search.BackColor = System.Drawing.Color.Transparent;
+            this.Btn_search.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.Btn_search.DownBack = ((System.Drawing.Image)(resources.GetObject("Btn_search.DownBack")));
+            this.Btn_search.DrawType = CCWin.SkinControl.DrawStyle.Img;
+            this.Btn_search.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_search.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_search.ForeColor = System.Drawing.Color.White;
+            this.Btn_search.Location = new System.Drawing.Point(390, 68);
+            this.Btn_search.MouseBack = ((System.Drawing.Image)(resources.GetObject("Btn_search.MouseBack")));
+            this.Btn_search.Name = "Btn_search";
+            this.Btn_search.NormlBack = ((System.Drawing.Image)(resources.GetObject("Btn_search.NormlBack")));
+            this.Btn_search.Size = new System.Drawing.Size(59, 30);
+            this.Btn_search.TabIndex = 4;
+            this.Btn_search.TabStop = false;
+            this.Btn_search.Text = "查找";
+            this.Btn_search.UseVisualStyleBackColor = false;
+            this.Btn_search.Click += new System.EventHandler(this.Btn_search_Click);
+            // 
             // btn_add
             // 
-            this.btn_add.BackColor = System.Drawing.Color.White;
+            this.btn_add.BackColor = System.Drawing.Color.Transparent;
             this.btn_add.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.btn_add.DownBack = null;
-            this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btn_add.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_add.Location = new System.Drawing.Point(503, 381);
-            this.btn_add.MouseBack = null;
+            this.btn_add.DownBack = ((System.Drawing.Image)(resources.GetObject("btn_add.DownBack")));
+            this.btn_add.DrawType = CCWin.SkinControl.DrawStyle.Img;
+            this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_add.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_add.ForeColor = System.Drawing.Color.White;
+            this.btn_add.Location = new System.Drawing.Point(538, 381);
+            this.btn_add.MouseBack = ((System.Drawing.Image)(resources.GetObject("btn_add.MouseBack")));
             this.btn_add.Name = "btn_add";
-            this.btn_add.NormlBack = null;
-            this.btn_add.Size = new System.Drawing.Size(111, 29);
-            this.btn_add.TabIndex = 3;
+            this.btn_add.NormlBack = ((System.Drawing.Image)(resources.GetObject("btn_add.NormlBack")));
+            this.btn_add.Size = new System.Drawing.Size(77, 29);
+            this.btn_add.TabIndex = 5;
+            this.btn_add.TabStop = false;
             this.btn_add.Text = "加为好友";
             this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
@@ -130,9 +137,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 417);
             this.Controls.Add(this.btn_add);
+            this.Controls.Add(this.Btn_search);
             this.Controls.Add(this.searchList);
             this.Controls.Add(this.searchId);
-            this.Controls.Add(this.Btn_search);
             this.Name = "Form_Search";
             this.Text = "查找好友";
             this.ResumeLayout(false);
@@ -141,9 +148,9 @@
 
         #endregion
 
-        private CCWin.SkinControl.SkinButton Btn_search;
         private CCWin.SkinControl.SkinTextBox searchId;
         private CCWin.SkinControl.ChatListBox searchList;
+        private CCWin.SkinControl.SkinButton Btn_search;
         private CCWin.SkinControl.SkinButton btn_add;
 
     }
