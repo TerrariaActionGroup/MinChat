@@ -47,24 +47,24 @@ namespace MinChat.Forms
             }
             this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
             //加载分组
-            //ChatListItem gp = new ChatListItem();//new一个分组
-            //gp.Text = "TestList";
-            //ChatListSubItemExtend people = new ChatListSubItemExtend();
-            //if(myInfo.ID==10086)
-            //{
-            //    people.Sex = ChatListSubItemExtend.UserSex.Man;
-            //    people.ID = 10010;
-            //    people.NicName = "联通";
-            //    people.DisplayName="联不通";
-            //}
-            //else if(myInfo.ID==10010)
-            //{
-            //    people.Sex = ChatListSubItemExtend.UserSex.Man;
-            //    people.ID = 10010;
-            //    people.NicName = "移动";
-            //    people.DisplayName="移不动";
-            //}
-            //gp.SubItems.Add(people);
+            ChatListItem gp = new ChatListItem();//new一个分组
+            gp.Text = "TestList";
+            ChatListSubItemExtend people = new ChatListSubItemExtend();
+            if (myInfo.ID == 10001)
+            {
+                people.Sex = ChatListSubItemExtend.UserSex.Man;
+                people.ID = 10002;
+                people.NicName = "联通";
+                people.DisplayName = "10002";
+            }
+            else if (myInfo.ID == 10002)
+            {
+                people.Sex = ChatListSubItemExtend.UserSex.Man;
+                people.ID = 10001;
+                people.NicName = "移动";
+                people.DisplayName = "10001";
+            }
+            gp.SubItems.Add(people);
 
             //获取在线用户的ID
             //List<string> list=rapidPassiveEngine.FriendsOutter.GetAllOnlineFriends();
@@ -79,7 +79,7 @@ namespace MinChat.Forms
             //        gp.SubItems.Add(contact);
             //    }
             //}
-            //chatListBox_contacts.Items.Add(gp);//添加到listBox中
+            chatListBox_contacts.Items.Add(gp);//添加到listBox中
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
             //预订断线处理事件

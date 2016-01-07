@@ -14,7 +14,7 @@ namespace MinChatWeb
             if (Request.RequestType.ToUpper() == "POST")
             {
                 string nickName = Request["nickName"].ToString();
-                string userPwd = Request["pwd"].ToString();
+                string userPwd = Request["password"].ToString();
                 string pwd2 = Request["pwd2"].ToString();
                 string sex = Request["sex"].ToString();
                 string age = Request["age"].ToString();
