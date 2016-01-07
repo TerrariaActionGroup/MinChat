@@ -23,55 +23,94 @@ namespace MinChat.Forms
     public partial class Form_main : Skin_Mac,ICustomizeHandler
     {        
         #region 变量
-        public ChatListSubItem myInfo;//客户端用户的个人信息
-        IRapidPassiveEngine rapidPassiveEngine;// 客户端引擎
+        
+        //客户端用户的个人信息
+        public ChatListSubItem myInfo;
+
+        // 客户端引擎
+        IRapidPassiveEngine rapidPassiveEngine;
+
+        //窗口
         Form_Search form_search;
         Form_setting form_setting;
 
+        //数据库
+        SystemMsgDB sysDB;
+        MsgDB msgDB;
+        FriendDB frDB;
+
+        //托盘相关变量
         private int action;
         Icon icon_normal = Properties.Resources.crab;
         Icon icon_trans = Properties.Resources.trans;
         Icon icon_systemMsg = Properties.Resources.systemMsg;
         private Icon[] flashSystemMsg = { Properties.Resources.systemMsg, Properties.Resources.trans };
+
         #endregion     
+
         #region 窗口构造函数
         public Form_main()
         {
+            //关闭线程限制
             CheckForIllegalCrossThreadCalls = false;
+
+            //初始化窗口控件
             InitializeComponent();
         }
         #endregion
-        #region 初始化窗口时
+
+        #region 初始化窗口
         public void InitMain(IRapidPassiveEngine rapidPassiveEngine)
-        {
-            tray.Visible = true;        //显示托盘
-            this.rapidPassiveEngine = rapidPassiveEngine; //传入引擎
+        {   
+            //显示托盘
+            tray.Visible = true;  
+     
+            //传入通信引擎
+            this.rapidPassiveEngine = rapidPassiveEngine; 
             
-            hide hide1 = new hide(this, timer_Adsorption);  //吸附窗口边缘
+            //吸附窗口边缘
+            hide hide1 = new hide(this, timer_Adsorption);  
+
+            //获取个人信息
             if (this.myInfo == null)
             {
                 this.myInfo = new ChatListSubItem();
             }
             this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
+
+            //窗口显示用户ID
             lbl_userName.Text = myInfo.ID.ToString();
-            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+
+            //建立数据库的链接
+            this.sysDB =SystemMsgDB.OpenSysMsgDB(myInfo.ID.ToString());
+            this.msgDB = MsgDB.OpenMsgDB(myInfo.ID.ToString());
+            this.frDB = FriendDB.OpenDB(myInfo.ID.ToString());
+
+            //载入好友列表
             displayFriend();
+
             //预订接收到广播消息的处理事件
             this.rapidPassiveEngine.GroupOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(GroupOutter_BroadcastReceived);
+            
             //预订断线处理事件
             this.rapidPassiveEngine.ConnectionInterrupted += new CbGeneric(rapidPassiveEngine_ConnectionInterrupted); 
+
             //好友下线处理事件
             this.rapidPassiveEngine.FriendsOutter.FriendOffline += new CbGeneric<string>(FriendOffline);
             //好友上线处理事件
+
             this.rapidPassiveEngine.FriendsOutter.FriendConnected += new CbGeneric<string>(FriendConnected);
         }
         #endregion
+
         #region 加载好友列表
         void displayFriend()
         {
+            //清空
             this.chatListBox_contacts.Items[0].SubItems.Clear();
-            FriendDB frDB = FriendDB.OpenDB(myInfo.ID.ToString());
-            List<Friend> frList = frDB.queryFriends();
+            
+            //从数据库读取
+            List<Friend> frList = this.frDB.queryFriends();
             foreach (Friend fr in frList)
             {
                 ChatListSubItem people = new ChatListSubItem();
@@ -82,6 +121,7 @@ namespace MinChat.Forms
             }
         }
         #endregion
+
         #region 处理好友上下线
         void FriendOffline(string friendId)
         {
@@ -100,6 +140,7 @@ namespace MinChat.Forms
             }
         }
         #endregion
+
         #region 处理掉线
         void rapidPassiveEngine_ConnectionInterrupted()
         {
@@ -107,19 +148,14 @@ namespace MinChat.Forms
 
         }
         #endregion
+
         #region 处理广播消息
         void GroupOutter_BroadcastReceived(string broadcastID, string groupID, int broadcastType, byte[] broadcastContent)
         {
-            // if (broadcastType == InformationTypes.Broadcast)
-            //{
-            //    string broadcastText = System.Text.Encoding.UTF8.GetString(broadcastContent);
-            //    broadcastText += "   这是" + broadcastID + "发送过来的广播消息"; 
-            //    MessageBox.Show(broadcastText);
-            //}
-            MessageBox.Show("xxxxx");
             
         }  
         #endregion
+
         #region 接收消息处理
         /// <summary>
         /// 处理接收到的信息（包括大数据块信息）。
@@ -129,79 +165,91 @@ namespace MinChat.Forms
         /// <param name="info">信息</param>
         public void HandleInformation(string sourceUserID, int informationType, byte[] info) 
         {
-            MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
-            if (sourceUserID != null)
-            {
-                switch (informationType)
-                {
-                    case Constant.MSGTEXT://处理文本消息
+            SysMsg sysmsg = new SysMsg();
+            switch (informationType)
+            {   
+                //文本消息
+                case Constant.MSGTEXT:
 
-                        //文本消息格式：接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
-                        string message = System.Text.Encoding.UTF8.GetString(info);
-                        string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);//得到含有5个元素的数组
-                        Msg msg = new Msg(msgs, 0, 0);                                  //消息存在msg对象中
+                    //文本消息格式：接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
+                    string message = System.Text.Encoding.UTF8.GetString(info);
+                    
+                    //得到含有5个元素的数组
+                    string[] msgs = Regex.Split(message, Constant.SPLIT, RegexOptions.IgnoreCase);
+                    
+                    //消息存在msg对象中
+                    Msg msg = new Msg(msgs, 0, 0);                                  
 
-                        ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(sourceUserID));//按照ID查找listbox中的subItem
+                    //按照ID查找listbox中的subItem
+                    ChatListSubItem[] items = chatListBox_contacts.GetSubItemsById(Convert.ToUInt32(msgs[1]));
+                    
+                    //聊天窗口的标题
+                    string windowsName = items[0].NicName + ' ' + items[0].ID; 
+                    
+                    //查找是否已经存在窗口
+                    IntPtr handle = NativeMethods.FindWindow(null, windowsName);    
 
-                        string windowsName = items[0].NicName + ' ' + items[0].ID;      //聊天窗口的标题
-                        IntPtr handle = NativeMethods.FindWindow(null, windowsName);    //查找是否已经存在窗口
-                        if (handle != IntPtr.Zero)//聊天窗口已存在
-                        {
-                            msg.IsReaded = 1;
-                            Form frm = (Form)Form.FromHandle(handle);
-                            frm.Activate();                                             //激活
-                            this.OnReceive(msg);                                        //传送消息到聊天窗口
-                        }
-                        else
-                        {
-                            twinkle(chatListBox_contacts, Convert.ToUInt32(sourceUserID));//头像闪烁
-                        }
-                        //消息存入数据库
-                        db.addMsg(msg);
-                        break;
-                    case Constant.MSGIMG://处理图片
-                        MsgImg msgimg = ImageUtil.bytesToIdImg(info);
-                        ImageUtil.ImgSave(msgimg.Id, msgimg.Img);//存储图片
-                        break;
-                }
-            }
-            else//来自服务器的消息
-            {
-                switch (informationType)
-                {
-                    case Constant.MSG_ADDFRIEND_APPLY:
-                        string infostr = System.Text.Encoding.UTF8.GetString(info);
-                        //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
-                        string[] systemMsgs = { myInfo.ID.ToString(), "10000",infostr," ", "10000" };
-                        Msg systemMsg = new Msg(systemMsgs, 0, 0);
-                        db.addMsg(systemMsg);
-                        //SystemMsgUtil.putMsg("10000");
-                        //this.timer_tray.Enabled = true;    //托盘闪烁
-                        break;
-                    case Constant.MSG_ADDFRIEND_AGREE:
-                        //ID卍昵称卍性别卍生日卍地址卍注册时间
-                        string userInfo= System.Text.Encoding.UTF8.GetString(info);
-                        string[] userInfos = Regex.Split(userInfo, Constant.SPLIT, RegexOptions.IgnoreCase);
+                    //聊天窗口已存在
+                    if (handle != IntPtr.Zero)
+                    {
+                        msg.IsReaded = 1;
+                        Form frm = (Form)Form.FromHandle(handle);
+
+                        //激活
+                        frm.Activate();                                             
                         
-                        //把消息存进数据库
-                        //接收者ID卍发送者ID卍消息内容卍发送时间卍发送人名字
-                        string[] systemMsgsADDFRIEND_AGREE = { myInfo.ID.ToString(), "10000", userInfos[0]+"同意加你为好友", " ", "10000" };
-                        Msg systemMsgADDFRIEND_AGREE = new Msg(systemMsgsADDFRIEND_AGREE, 0, 0);
-                        db.addMsg(systemMsgADDFRIEND_AGREE);
-                        
-                        //把好友存进数据库
-                        Friend fr=new Friend();
-                        fr.UserId=userInfos[0];
-                        fr.UserName=userInfos[1];
-                        fr.Sex=Convert.ToInt32(userInfos[2]);
-                        fr.Birthday=userInfos[3];
-                        fr.Address=userInfos[4];
-                        fr.Time=userInfos[5];
+                        //传送消息到聊天窗口
+                        this.OnReceive(msg);                                        
+                    }
+                    else
+                    {
+                        //头像闪烁
+                        twinkle(chatListBox_contacts, Convert.ToUInt32(msgs[1]));
+                    }
+                    //消息存入数据库
+                    msgDB.addMsg(msg);
+                    break;
+                
+                //处理图片
+                case Constant.MSGIMG:
+                    MsgImg msgimg = ImageUtil.bytesToIdImg(info);
+                    //存储图片
+                    ImageUtil.ImgSave(msgimg.Id, msgimg.Img);
+                    break;
+                case Constant.MSG_ADDFRIEND_APPLY:
+                    string infostr = System.Text.Encoding.UTF8.GetString(info);
+                    
+                    //info格式:ID卍昵称卍性别卍生日卍地址卍注册时间
+                    sysmsg.Content = infostr;
+                    sysmsg.Type = Constant.MSG_ADDFRIEND_APPLY;
+                    sysDB.addSystemMsg(sysmsg.Content, sysmsg.Type);//存入数据库
+                    break;
+                case Constant.MSG_ADDFRIEND_AGREE:
+                    //info格式:ID卍昵称卍性别卍生日卍地址卍注册时间
+                    string userInfo= System.Text.Encoding.UTF8.GetString(info);
 
-                        FriendDB Fdb = FriendDB.OpenDB(myInfo.ID.ToString());
-                        Fdb.addFriend(fr);
-                        break;
-                }
+                    //分割info
+                    string[] userInfos = Regex.Split(userInfo, Constant.SPLIT, RegexOptions.IgnoreCase);
+                        
+                    //把消息存进数据库
+                    sysmsg.Content = userInfo;
+                    sysmsg.Type = Constant.MSG_ADDFRIEND_AGREE;
+                    sysDB.addSystemMsg(sysmsg.Content, sysmsg.Type);
+
+                    //把好友存进数据库
+                    Friend fr=new Friend();
+                    fr.UserId=userInfos[0];
+                    fr.UserName=userInfos[1];
+                    fr.Sex=Convert.ToInt32(userInfos[2]);
+                    fr.Birthday=userInfos[3];
+                    fr.Address=userInfos[4];
+                    fr.Time=userInfos[5];
+
+                    frDB.addFriend(fr);
+
+                    //刷新好友列表
+                    displayFriend();
+                    break;
             }
         }
 
@@ -217,19 +265,30 @@ namespace MinChat.Forms
             return new byte[1]; 
         }
         #endregion
+
         #region 双击好友弹出对话框
         private void chatListBox_DoubleClickSubItem(object sender, ChatListEventArgs e, MouseEventArgs es)
         {
-            ChatListSubItem contactInfo = e.SelectSubItem;//获取选中的好友
-            contactInfo.IsTwinkle = false; //取消头像闪烁状态
-            string windowsName = contactInfo.NicName + ' ' + contactInfo.ID;//聊天窗口的标题
-            IntPtr handle = NativeMethods.FindWindow(null, windowsName);//查找是否已经存在窗口
-            if (handle != IntPtr.Zero)//窗口已存在
+            //获取选中的好友
+            ChatListSubItem contactInfo = e.SelectSubItem;
+
+            //取消头像闪烁状态
+            contactInfo.IsTwinkle = false; 
+            
+            //聊天窗口的标题
+            string windowsName = contactInfo.NicName + ' ' + contactInfo.ID;
+            
+            //查找是否已经存在窗口
+            IntPtr handle = NativeMethods.FindWindow(null, windowsName);
+            
+            //窗口已存在
+            if (handle != IntPtr.Zero)
             {
+                //激活
                 Form frm = (Form)Form.FromHandle(handle);
-                frm.Activate();//激活
+                frm.Activate();
             }
-            else//窗口不存在
+            else
             {
                 Form_Chat fChat = new Form_Chat(this.rapidPassiveEngine, contactInfo, this.myInfo, this);
                 fChat.Text = contactInfo.NicName + ' ' + contactInfo.ID;
@@ -237,27 +296,38 @@ namespace MinChat.Forms
             }
         }
         #endregion
+
         #region 处理接收消息
+
         //头像闪烁
         private void twinkle(ChatListBox listBox,uint id)
         {
-            ChatListSubItem[] items=listBox.GetSubItemsById(id);//按照ID查找listbox中的用户
-            items[0].IsTwinkle = true;//开启闪烁
+            //按照ID查找listbox中的用户
+            ChatListSubItem[] items=listBox.GetSubItemsById(id);
+            
+            //开启闪烁
+            items[0].IsTwinkle = true;
         }
         #endregion
+
         #region 接收传送消息到chat的委托
-        public delegate void ReceiveEventHandler(object sender, EventArgs e, Msg msg);//声明关于事件的委托
-        public event ReceiveEventHandler Receive;//声明事件
+
+        //声明关于事件的委托
+        public delegate void ReceiveEventHandler(object sender, EventArgs e, Msg msg);
+
+        //声明事件
+        public event ReceiveEventHandler Receive;
+
         //引发事件的函数；
         public void OnReceive(Msg msg)
         {
             if (this.Receive != null)
             {
-                //MessageBox.Show("发出信号");
                 this.Receive(this, new EventArgs(), msg);
             }
         }
         #endregion
+
         #region 各种按钮
         private void btn_systemMsg_Click(object sender, EventArgs e)
         {
@@ -305,6 +375,7 @@ namespace MinChat.Forms
             }
         }
         #endregion
+
         #region 托盘
 
         private void timer_tray_Tick(object sender, EventArgs e)
