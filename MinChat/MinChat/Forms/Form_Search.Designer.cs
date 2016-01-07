@@ -29,53 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Search));
-            this.searchId = new CCWin.SkinControl.SkinTextBox();
             this.searchList = new CCWin.SkinControl.ChatListBox();
             this.Btn_search = new CCWin.SkinControl.SkinButton();
             this.btn_add = new CCWin.SkinControl.SkinButton();
+            this.searchId = new CCWin.SkinControl.SkinTextBox();
             this.SuspendLayout();
-            // 
-            // searchId
-            // 
-            this.searchId.BackColor = System.Drawing.Color.Transparent;
-            this.searchId.DownBack = null;
-            this.searchId.Icon = null;
-            this.searchId.IconIsButton = false;
-            this.searchId.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.searchId.IsPasswordChat = '\0';
-            this.searchId.IsSystemPasswordChar = false;
-            this.searchId.Lines = new string[0];
-            this.searchId.Location = new System.Drawing.Point(114, 64);
-            this.searchId.Margin = new System.Windows.Forms.Padding(0);
-            this.searchId.MaxLength = 32767;
-            this.searchId.MinimumSize = new System.Drawing.Size(28, 28);
-            this.searchId.MouseBack = null;
-            this.searchId.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.searchId.Multiline = true;
-            this.searchId.Name = "searchId";
-            this.searchId.NormlBack = null;
-            this.searchId.Padding = new System.Windows.Forms.Padding(5);
-            this.searchId.ReadOnly = false;
-            this.searchId.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.searchId.Size = new System.Drawing.Size(241, 38);
-            // 
-            // 
-            // 
-            this.searchId.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchId.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchId.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.searchId.SkinTxt.Location = new System.Drawing.Point(5, 5);
-            this.searchId.SkinTxt.Multiline = true;
-            this.searchId.SkinTxt.Name = "BaseText";
-            this.searchId.SkinTxt.Size = new System.Drawing.Size(231, 28);
-            this.searchId.SkinTxt.TabIndex = 0;
-            this.searchId.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.searchId.SkinTxt.WaterText = "";
-            this.searchId.TabIndex = 1;
-            this.searchId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.searchId.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.searchId.WaterText = "";
-            this.searchId.WordWrap = true;
             // 
             // searchList
             // 
@@ -131,15 +89,60 @@
             this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
+            // searchId
+            // 
+            this.searchId.BackColor = System.Drawing.Color.Transparent;
+            this.searchId.DownBack = null;
+            this.searchId.Icon = null;
+            this.searchId.IconIsButton = false;
+            this.searchId.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.searchId.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.searchId.IsPasswordChat = '\0';
+            this.searchId.IsSystemPasswordChar = false;
+            this.searchId.Lines = new string[0];
+            this.searchId.Location = new System.Drawing.Point(161, 68);
+            this.searchId.Margin = new System.Windows.Forms.Padding(0);
+            this.searchId.MaxLength = 32767;
+            this.searchId.MinimumSize = new System.Drawing.Size(28, 28);
+            this.searchId.MouseBack = null;
+            this.searchId.MouseState = CCWin.SkinClass.ControlState.Normal;
+            this.searchId.Multiline = true;
+            this.searchId.Name = "searchId";
+            this.searchId.NormlBack = null;
+            this.searchId.Padding = new System.Windows.Forms.Padding(5);
+            this.searchId.ReadOnly = false;
+            this.searchId.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.searchId.Size = new System.Drawing.Size(194, 30);
+            // 
+            // 
+            // 
+            this.searchId.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.searchId.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchId.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.searchId.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.searchId.SkinTxt.Multiline = true;
+            this.searchId.SkinTxt.Name = "BaseText";
+            this.searchId.SkinTxt.Size = new System.Drawing.Size(184, 20);
+            this.searchId.SkinTxt.TabIndex = 0;
+            this.searchId.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.searchId.SkinTxt.WaterText = "QQ号码";
+            this.searchId.SkinTxt.WordWrap = false;
+            this.searchId.TabIndex = 6;
+            this.searchId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.searchId.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.searchId.WaterText = "QQ号码";
+            this.searchId.WordWrap = false;
+            // 
             // Form_Search
             // 
+            this.AcceptButton = this.Btn_search;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 417);
+            this.Controls.Add(this.searchId);
             this.Controls.Add(this.btn_add);
             this.Controls.Add(this.Btn_search);
             this.Controls.Add(this.searchList);
-            this.Controls.Add(this.searchId);
             this.Name = "Form_Search";
             this.Text = "查找好友";
             this.ResumeLayout(false);
@@ -148,10 +151,10 @@
 
         #endregion
 
-        private CCWin.SkinControl.SkinTextBox searchId;
         private CCWin.SkinControl.ChatListBox searchList;
         private CCWin.SkinControl.SkinButton Btn_search;
         private CCWin.SkinControl.SkinButton btn_add;
+        private CCWin.SkinControl.SkinTextBox searchId;
 
     }
 }

@@ -67,7 +67,8 @@ namespace MinChat.Forms
                 //ID卍昵称卍性别卍生日卍地址卍注册时间
                 string[] userInfo = Regex.Split(srtings, Constant.SPLIT, RegexOptions.IgnoreCase);
                 user.ID = Convert.ToUInt32(userInfo[0]);
-                user.NicName = userInfo[1];
+                user.NicName = "";
+                user.DisplayName = userInfo[1];
                 if(userInfo[2]=="1")
                 {
                     user.Sex = ChatListSubItemExtend.UserSex.Man;
