@@ -255,6 +255,11 @@ namespace MinChat.Forms
         }
         #endregion
         #region 各种按钮
+        private void btn_systemMsg_Click(object sender, EventArgs e)
+        {
+            Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
+            form_systemMsg.Show();
+        }
         private void btn_search_Click(object sender, EventArgs e)
         {
             if(form_search!=null)
@@ -318,11 +323,5 @@ namespace MinChat.Forms
             }
         }
         #endregion   
-
-        private void btn_systemMsg_Click(object sender, EventArgs e)
-        {
-            Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
-            form_systemMsg.Show();
-        }
     }
 }
