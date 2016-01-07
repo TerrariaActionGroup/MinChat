@@ -97,8 +97,9 @@ namespace MinChat.Works.db
         }
         public Msg readSystemMsg()//读取一条未读的系统消息
         {
-            string msgId;
+            string msgId="-1";
             string cmdString = "SELECT * FROM msg where senderId =10000 and isRead = 0 order by msgId desc limit 1;";
+            conn.Open();
             SQLiteCommand sqlReadMsg = new SQLiteCommand(cmdString, conn);
             SQLiteDataReader result = sqlReadMsg.ExecuteReader();
             Msg a = null;
@@ -108,11 +109,12 @@ namespace MinChat.Works.db
                 msgId=result[0].ToString();
                 Msg aMsg = new Msg(msgs, 1, 1);
                 a=aMsg;
-                cmdString = "UPDATE msg SET isRead = 1 WHERE msgId=" + msgId + ";";
-                sqlReadMsg.ExecuteNonQuery();
             }
             result.Close();
+            cmdString = "UPDATE msg SET isRead = 1 WHERE msgId=" + msgId + ";";
+            sqlReadMsg.ExecuteNonQuery();
             sqlReadMsg.Dispose();
+            conn.Close();
             return a;
         }
         #endregion

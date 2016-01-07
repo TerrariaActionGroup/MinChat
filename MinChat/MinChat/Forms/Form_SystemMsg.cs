@@ -11,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MinChat.Forms
@@ -31,9 +32,12 @@ namespace MinChat.Forms
         {
             MsgDB db = MsgDB.OpenMsgDB(myInfo.ID.ToString());
             Msg systemMsg=db.readSystemMsg();
-            soucerUserId = systemMsg.FromUserId;
-            lbl_userInfo.Text = systemMsg.FromUserId + "\n" + systemMsg.FromUserName;
-            lbl_userName.Text = systemMsg.FromUserName+ " 请求加您为好友";
+
+            //ID卍昵称卍性别卍生日卍地址卍注册时间
+            string[] userInfo = Regex.Split(systemMsg.Content, Constant.SPLIT, RegexOptions.IgnoreCase);
+
+            lbl_userInfo.Text = userInfo[0] + "\n" + userInfo[1];
+            lbl_userName.Text = userInfo[1] + " 请求加您为好友";
         }
 
         private void btn_yes_Click(object sender, EventArgs e)
