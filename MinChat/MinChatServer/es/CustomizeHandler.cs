@@ -80,6 +80,11 @@ namespace MinChatServer.es
                 case Constant.MSG_ADDFRIEND_AGREE:     //同意添加好友。解析：另一方ID
                     friendID = System.Text.Encoding.UTF8.GetString(info);
                     userDBManager.addFriend(sourceUserID, friendID);
+                    userDBManager.addFriend(friendID, sourceUserID);
+
+                    //给申请者同意通知
+                    byte[] applyToUser = System.Text.Encoding.UTF8.GetBytes(sourceUserID);
+                    this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_AGREE, applyToUser);
                     break;
 
                 default:
