@@ -13,20 +13,19 @@ namespace MinChatWeb
         {
             if (Request.RequestType.ToUpper() == "POST")
             {
-                string nickName = Request["nickName"].ToString();
+                string nickName = Request["nick"].ToString();
                 string userPwd = Request["password"].ToString();
-                string pwd2 = Request["pwd2"].ToString();
                 string sex = Request["sex"].ToString();
-                string age = Request["age"].ToString();
                 string birthday = Request["birthday"].ToString();
                 string addr = Request["addr"].ToString();
+                string data = nickName + userPwd + sex + birthday + addr;
 
                 //添加用户到数据库
                 CustomizeUser user = new CustomizeUser();
                 user.UserName = nickName;
                 user.UserPwd = userPwd;
                 user.Sex = int.Parse(sex);
-                user.Age = int.Parse(age);
+                user.Age = 0;
                 user.Birthday = birthday;
                 user.Address = addr;
                 user.Time = DateTime.Now.ToString();
@@ -35,6 +34,7 @@ namespace MinChatWeb
                 long newUserId = manager.getNewUserId();
                 user.UserId = newUserId.ToString();
                 manager.addUser(user);
+                Response.Write("<script>alert('"+ user.UserName +", 你的账号是:" + user.UserId +  "');</script>");
 
                 //创建用户数据库以及四张数据表
                 DBManager dbManager = DBManager.getInstance();

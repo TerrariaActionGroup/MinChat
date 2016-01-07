@@ -69,6 +69,7 @@
     <Compile Include="Communications\bean\Session.cs" />
     <Compile Include="Communications\bean\Friend.cs" />
     <Compile Include="Communications\bean\Mgroup.cs" />
+    <Compile Include="Communications\bean\SysMsg.cs" />
     <Compile Include="Forms\DerivedClass\ChatListSubItemExtend.cs" />
     <Compile Include="Forms\DerivedClass\hide.cs" />
     <Compile Include="Forms\Form_Chat.cs">
@@ -76,6 +77,12 @@
     </Compile>
     <Compile Include="Forms\Form_Chat.Designer.cs">
       <DependentUpon>Form_Chat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Error.Designer.cs">
+      <DependentUpon>Form_Error.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form_login.cs">
       <SubType>Form</SubType>
@@ -116,12 +123,16 @@
     <Compile Include="Works\db\MGroupDB.cs" />
     <Compile Include="Works\db\MsgDB.cs" />
     <Compile Include="Works\db\SessionDB.cs" />
+    <Compile Include="Works\db\SystemMsgDB.cs" />
     <Compile Include="Works\util\ImageUtil.cs" />
     <Compile Include="Works\util\SystemMsgUtil.cs" />
     <Compile Include="Works\util\timeUtil.cs" />
     <Compile Include="Works\util\ObjSerial.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
       <DependentUpon>Form_Chat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Error.resx">
+      <DependentUpon>Form_Error.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_login.resx">
       <DependentUpon>Form_login.cs</DependentUpon>
