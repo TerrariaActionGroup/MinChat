@@ -31,11 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_login));
             this.txtId = new CCWin.SkinControl.SkinTextBox();
-            this.skinAlphaWaterTextBox1 = new CCWin.SkinControl.SkinAlphaWaterTextBox();
             this.txtPwd = new CCWin.SkinControl.SkinTextBox();
             this.btnLogin = new CCWin.SkinControl.SkinButton();
             this.pnlImgTx = new CCWin.SkinControl.SkinPanel();
-            this.btnState = new CCWin.SkinControl.SkinButton();
             this.ckAuto = new CCWin.SkinControl.SkinCheckBox();
             this.ckMen = new CCWin.SkinControl.SkinCheckBox();
             this.tray = new System.Windows.Forms.NotifyIcon(this.components);
@@ -53,8 +51,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.隐身ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_Id = new CCWin.SkinControl.SkinContextMenuStrip();
-            this.txtId.SuspendLayout();
-            this.pnlImgTx.SuspendLayout();
+            this.lbl_error = new CCWin.SkinControl.SkinLabel();
             this.menu_Tray.SuspendLayout();
             this.menu_State.SuspendLayout();
             this.SuspendLayout();
@@ -62,24 +59,23 @@
             // txtId
             // 
             this.txtId.BackColor = System.Drawing.Color.Transparent;
-            this.txtId.Controls.Add(this.skinAlphaWaterTextBox1);
             this.txtId.DownBack = null;
             this.txtId.Icon = null;
             this.txtId.IconIsButton = false;
             this.txtId.IconMouseState = CCWin.SkinClass.ControlState.Normal;
+            this.txtId.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.txtId.IsPasswordChat = '\0';
             this.txtId.IsSystemPasswordChar = false;
-            this.txtId.Lines = new string[] {
-        "305562393"};
+            this.txtId.Lines = new string[0];
             this.txtId.Location = new System.Drawing.Point(69, 174);
             this.txtId.Margin = new System.Windows.Forms.Padding(0);
             this.txtId.MaxLength = 32767;
             this.txtId.MinimumSize = new System.Drawing.Size(28, 28);
-            this.txtId.MouseBack = null;
+            this.txtId.MouseBack = ((System.Drawing.Bitmap)(resources.GetObject("txtId.MouseBack")));
             this.txtId.MouseState = CCWin.SkinClass.ControlState.Normal;
             this.txtId.Multiline = true;
             this.txtId.Name = "txtId";
-            this.txtId.NormlBack = null;
+            this.txtId.NormlBack = ((System.Drawing.Bitmap)(resources.GetObject("txtId.NormlBack")));
             this.txtId.Padding = new System.Windows.Forms.Padding(5);
             this.txtId.ReadOnly = false;
             this.txtId.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -95,29 +91,14 @@
             this.txtId.SkinTxt.Name = "BaseText";
             this.txtId.SkinTxt.Size = new System.Drawing.Size(184, 20);
             this.txtId.SkinTxt.TabIndex = 0;
-            this.txtId.SkinTxt.Text = "305562393";
             this.txtId.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.SkinTxt.WaterText = "QQ号码/手机/邮箱";
             this.txtId.SkinTxt.WordWrap = false;
-            this.txtId.TabIndex = 9;
-            this.txtId.Text = "305562393";
+            this.txtId.TabIndex = 1;
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtId.WaterText = "QQ号码/手机/邮箱";
             this.txtId.WordWrap = false;
-            // 
-            // skinAlphaWaterTextBox1
-            // 
-            this.skinAlphaWaterTextBox1.BackAlpha = 10;
-            this.skinAlphaWaterTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.skinAlphaWaterTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.skinAlphaWaterTextBox1.Location = new System.Drawing.Point(65, 9);
-            this.skinAlphaWaterTextBox1.Name = "skinAlphaWaterTextBox1";
-            this.skinAlphaWaterTextBox1.Size = new System.Drawing.Size(100, 14);
-            this.skinAlphaWaterTextBox1.TabIndex = 1;
-            this.skinAlphaWaterTextBox1.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.skinAlphaWaterTextBox1.WaterFont = new System.Drawing.Font("微软雅黑", 8.5F);
-            this.skinAlphaWaterTextBox1.WaterText = "";
             // 
             // txtPwd
             // 
@@ -126,19 +107,19 @@
             this.txtPwd.Icon = null;
             this.txtPwd.IconIsButton = false;
             this.txtPwd.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.txtPwd.IsPasswordChat = '\0';
+            this.txtPwd.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.txtPwd.IsPasswordChat = '●';
             this.txtPwd.IsSystemPasswordChar = false;
-            this.txtPwd.Lines = new string[] {
-        "10000"};
+            this.txtPwd.Lines = new string[0];
             this.txtPwd.Location = new System.Drawing.Point(69, 204);
             this.txtPwd.Margin = new System.Windows.Forms.Padding(0);
             this.txtPwd.MaxLength = 32767;
             this.txtPwd.MinimumSize = new System.Drawing.Size(28, 28);
-            this.txtPwd.MouseBack = null;
+            this.txtPwd.MouseBack = ((System.Drawing.Bitmap)(resources.GetObject("txtPwd.MouseBack")));
             this.txtPwd.MouseState = CCWin.SkinClass.ControlState.Normal;
             this.txtPwd.Multiline = true;
             this.txtPwd.Name = "txtPwd";
-            this.txtPwd.NormlBack = null;
+            this.txtPwd.NormlBack = ((System.Drawing.Bitmap)(resources.GetObject("txtPwd.NormlBack")));
             this.txtPwd.Padding = new System.Windows.Forms.Padding(5);
             this.txtPwd.ReadOnly = false;
             this.txtPwd.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -152,14 +133,13 @@
             this.txtPwd.SkinTxt.Location = new System.Drawing.Point(5, 5);
             this.txtPwd.SkinTxt.Multiline = true;
             this.txtPwd.SkinTxt.Name = "BaseText";
+            this.txtPwd.SkinTxt.PasswordChar = '●';
             this.txtPwd.SkinTxt.Size = new System.Drawing.Size(184, 20);
-            this.txtPwd.SkinTxt.TabIndex = 0;
-            this.txtPwd.SkinTxt.Text = "10000";
+            this.txtPwd.SkinTxt.TabIndex = 1;
             this.txtPwd.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.SkinTxt.WaterText = "密码";
             this.txtPwd.SkinTxt.WordWrap = false;
-            this.txtPwd.TabIndex = 1;
-            this.txtPwd.Text = "10000";
+            this.txtPwd.TabIndex = 2;
             this.txtPwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtPwd.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.txtPwd.WaterText = "密码";
@@ -180,6 +160,7 @@
             this.btnLogin.NormlBack = ((System.Drawing.Image)(resources.GetObject("btnLogin.NormlBack")));
             this.btnLogin.Size = new System.Drawing.Size(194, 30);
             this.btnLogin.TabIndex = 0;
+            this.btnLogin.TabStop = false;
             this.btnLogin.Text = "登 陆";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -188,7 +169,6 @@
             // 
             this.pnlImgTx.BackColor = System.Drawing.Color.Transparent;
             this.pnlImgTx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlImgTx.Controls.Add(this.btnState);
             this.pnlImgTx.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.pnlImgTx.DownBack = null;
             this.pnlImgTx.Location = new System.Drawing.Point(122, 58);
@@ -200,28 +180,6 @@
             this.pnlImgTx.RoundStyle = CCWin.SkinClass.RoundStyle.All;
             this.pnlImgTx.Size = new System.Drawing.Size(80, 80);
             this.pnlImgTx.TabIndex = 13;
-            // 
-            // btnState
-            // 
-            this.btnState.BackColor = System.Drawing.Color.Transparent;
-            this.btnState.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnState.BackRectangle = new System.Drawing.Rectangle(5, 5, 5, 5);
-            this.btnState.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(21)))), ((int)(((byte)(26)))));
-            this.btnState.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.btnState.DownBack = ((System.Drawing.Image)(resources.GetObject("btnState.DownBack")));
-            this.btnState.DrawType = CCWin.SkinControl.DrawStyle.Img;
-            this.btnState.Image = ((System.Drawing.Image)(resources.GetObject("btnState.Image")));
-            this.btnState.ImageSize = new System.Drawing.Size(15, 15);
-            this.btnState.Location = new System.Drawing.Point(62, 62);
-            this.btnState.Margin = new System.Windows.Forms.Padding(0);
-            this.btnState.MouseBack = ((System.Drawing.Image)(resources.GetObject("btnState.MouseBack")));
-            this.btnState.Name = "btnState";
-            this.btnState.NormlBack = null;
-            this.btnState.Palace = true;
-            this.btnState.Size = new System.Drawing.Size(18, 18);
-            this.btnState.TabIndex = 18;
-            this.btnState.Tag = "1";
-            this.btnState.UseVisualStyleBackColor = false;
             // 
             // ckAuto
             // 
@@ -241,7 +199,8 @@
             this.ckAuto.SelectedMouseBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.SelectedMouseBack")));
             this.ckAuto.SelectedNormlBack = ((System.Drawing.Image)(resources.GetObject("ckAuto.SelectedNormlBack")));
             this.ckAuto.Size = new System.Drawing.Size(75, 21);
-            this.ckAuto.TabIndex = 15;
+            this.ckAuto.TabIndex = 4;
+            this.ckAuto.TabStop = false;
             this.ckAuto.Text = "自动登录";
             this.ckAuto.UseVisualStyleBackColor = false;
             // 
@@ -263,9 +222,11 @@
             this.ckMen.SelectedMouseBack = ((System.Drawing.Image)(resources.GetObject("ckMen.SelectedMouseBack")));
             this.ckMen.SelectedNormlBack = ((System.Drawing.Image)(resources.GetObject("ckMen.SelectedNormlBack")));
             this.ckMen.Size = new System.Drawing.Size(75, 21);
-            this.ckMen.TabIndex = 16;
+            this.ckMen.TabIndex = 3;
+            this.ckMen.TabStop = false;
             this.ckMen.Text = "记住密码";
             this.ckMen.UseVisualStyleBackColor = false;
+            this.ckMen.CheckedChanged += new System.EventHandler(this.ckMen_CheckedChanged);
             // 
             // tray
             // 
@@ -432,6 +393,18 @@
             this.menu_Id.TitleRadius = 4;
             this.menu_Id.TitleRadiusStyle = CCWin.SkinClass.RoundStyle.All;
             // 
+            // lbl_error
+            // 
+            this.lbl_error.AutoSize = true;
+            this.lbl_error.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_error.BorderColor = System.Drawing.Color.White;
+            this.lbl_error.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_error.ForeColor = System.Drawing.Color.Red;
+            this.lbl_error.Location = new System.Drawing.Point(119, 147);
+            this.lbl_error.Name = "lbl_error";
+            this.lbl_error.Size = new System.Drawing.Size(0, 17);
+            this.lbl_error.TabIndex = 17;
+            // 
             // Form_login
             // 
             this.AcceptButton = this.btnLogin;
@@ -450,6 +423,7 @@
             this.CloseNormlBack = ((System.Drawing.Image)(resources.GetObject("$this.CloseNormlBack")));
             this.ControlBoxOffset = new System.Drawing.Point(0, 0);
             this.ControlBoxSpace = 0;
+            this.Controls.Add(this.lbl_error);
             this.Controls.Add(this.ckMen);
             this.Controls.Add(this.ckAuto);
             this.Controls.Add(this.pnlImgTx);
@@ -472,9 +446,7 @@
             this.ShowDrawIcon = false;
             this.Text = "Form_login";
             this.TopMost = true;
-            this.txtId.ResumeLayout(false);
-            this.txtId.PerformLayout();
-            this.pnlImgTx.ResumeLayout(false);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_login_FormClosed);
             this.menu_Tray.ResumeLayout(false);
             this.menu_State.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -491,8 +463,6 @@
         private CCWin.SkinControl.SkinCheckBox ckAuto;
         private CCWin.SkinControl.SkinCheckBox ckMen;
         private System.Windows.Forms.NotifyIcon tray;
-        private CCWin.SkinControl.SkinAlphaWaterTextBox skinAlphaWaterTextBox1;
-        private CCWin.SkinControl.SkinButton btnState;
         private CCWin.SkinControl.SkinContextMenuStrip menu_Tray;
         private System.Windows.Forms.ToolStripMenuItem toolShowLogin;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -507,5 +477,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem 隐身ToolStripMenuItem;
         private CCWin.SkinControl.SkinContextMenuStrip menu_Id;
+        private CCWin.SkinControl.SkinLabel lbl_error;
     }
 }

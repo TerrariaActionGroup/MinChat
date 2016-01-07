@@ -100,6 +100,7 @@ namespace MinChatServer.es
             {
                 case Constant.MSG_QUERYUSER:   //查找好友
                     friendID = System.Text.Encoding.UTF8.GetString(info);
+
                     user = userDBManager.queryUser(friendID);
                     userData = User.UserData2String(user);
                     

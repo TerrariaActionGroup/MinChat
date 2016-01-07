@@ -70,6 +70,7 @@
     <Compile Include="Communications\bean\Friend.cs" />
     <Compile Include="Communications\bean\Mgroup.cs" />
     <Compile Include="Forms\DerivedClass\ChatListSubItemExtend.cs" />
+    <Compile Include="Forms\DerivedClass\hide.cs" />
     <Compile Include="Forms\Form_Chat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,17 +89,23 @@
     <Compile Include="Forms\Form_main.Designer.cs">
       <DependentUpon>Form_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_Register.cs">
+    <Compile Include="Forms\Form_setting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_Register.Designer.cs">
-      <DependentUpon>Form_Register.cs</DependentUpon>
+    <Compile Include="Forms\Form_setting.Designer.cs">
+      <DependentUpon>Form_setting.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form_Search.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Form_Search.Designer.cs">
       <DependentUpon>Form_Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_SystemMsg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_SystemMsg.Designer.cs">
+      <DependentUpon>Form_SystemMsg.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +117,7 @@
     <Compile Include="Works\db\MsgDB.cs" />
     <Compile Include="Works\db\SessionDB.cs" />
     <Compile Include="Works\util\ImageUtil.cs" />
+    <Compile Include="Works\util\SystemMsgUtil.cs" />
     <Compile Include="Works\util\timeUtil.cs" />
     <Compile Include="Works\util\ObjSerial.cs" />
     <EmbeddedResource Include="Forms\Form_Chat.resx">
@@ -121,11 +129,14 @@
     <EmbeddedResource Include="Forms\Form_main.resx">
       <DependentUpon>Form_main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form_Register.resx">
-      <DependentUpon>Form_Register.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Form_setting.resx">
+      <DependentUpon>Form_setting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_Search.resx">
       <DependentUpon>Form_Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_SystemMsg.resx">
+      <DependentUpon>Form_SystemMsg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -175,6 +186,8 @@
     <Content Include="Resources\Forms_Img\Checkbox_Uncheck_hover.png" />
     <Content Include="Resources\Forms_Img\Checkbox_Uncheck_normal.png" />
     <Content Include="Resources\Forms_Img\crab.ico" />
+    <None Include="Resources\Forms_Img\trans.ico" />
+    <None Include="Resources\Forms_Img\systemMsg.ico" />
     <Content Include="Resources\Forms_Img\TBox_Down_Hover.png" />
     <Content Include="Resources\Forms_Img\TBox_Down_normal.png" />
     <Content Include="Resources\Forms_Img\TBox_Up_Hover.png" />
