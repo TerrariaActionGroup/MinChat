@@ -4,6 +4,7 @@ using ESPlus.Application.Basic.Server;
 using ESPlus.Rapid;
 using MinChatServer.db.bean;
 using MinChatServer.db.dao;
+using MinChatServer.model.db.bean;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,23 +70,22 @@ namespace MinChatServer.es
             //获得UserID
             string userID = userData.UserID;
             //转发其离线消息
-            List<string> msgs = userDBManager.queryMsgs(userID);
+            List<Msg> msgs = userDBManager.queryMsgs(userID);
             if (msgs.Count > 0)
             {
-                foreach (string s in msgs)
+                foreach (Msg s in msgs)
                 {
                     //得到：类型号 SPLIT 内容
-                    string[] msg = Regex.Split(s, Constant.SPLIT, RegexOptions.IgnoreCase);
-                    int infoType = int.Parse(msg[1]);
+                    int infoType = s.Type;
                     if (infoType == 2)        //图片消息
                     {
-                        byte[] info = System.Text.Encoding.UTF8.GetBytes(msg[0]);
+                        byte[] info = System.Text.Encoding.UTF8.GetBytes(s.Content);
                         CbGeneric<byte[], string> cb = new CbGeneric<byte[], string>(this.SendBlobThread);
                         cb.BeginInvoke(info, userID, null, null);
                     }
                     else                      //文本格式消息，不单纯是文本消息
                     {
-                        byte[] info = System.Text.Encoding.UTF8.GetBytes(msg[0]);
+                        byte[] info = System.Text.Encoding.UTF8.GetBytes(s.Content);
                         this.engine.CustomizeController.Send(userID, infoType, info);
                     }
                 }

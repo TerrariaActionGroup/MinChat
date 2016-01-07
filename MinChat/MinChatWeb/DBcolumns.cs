@@ -51,6 +51,7 @@ namespace MinChatWeb
         public static String MSG_ID = "msg_id";
         public static String MSG_TO = "msg_to";
         public static String MSG_CONTENT = "msg_content";
+        public static string MSG_TYPE = "msg_type";
 
         /**
          *  好友关系表,每个用户一张

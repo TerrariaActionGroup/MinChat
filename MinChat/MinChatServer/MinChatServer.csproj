@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="model\db\bean\Constant.cs" />
     <Compile Include="model\db\bean\Group.cs" />
+    <Compile Include="model\db\bean\Msg.cs" />
     <Compile Include="model\db\bean\User.cs" />
     <Compile Include="model\db\dao\DBManager.cs" />
     <Compile Include="model\db\dao\GroupDBManager.cs" />

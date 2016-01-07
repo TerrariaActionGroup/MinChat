@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MinChatServer.db.minterface;
 using MinChatServer.db.bean;
 using System.Data.SQLite;
+using MinChatServer.model.db.bean;
 
 namespace MinChatServer.db.dao
 {
@@ -262,10 +263,10 @@ namespace MinChatServer.db.dao
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <returns>（类型号 + Constant.SPLIT + 内容)</returns>
-        public List<string> queryMsgs(string userId)
+        public List<Msg> queryMsgs(string userId)
         {
-            List<string> msg = new List<string>();
-            string temp;
+            List<Msg> msg = new List<Msg>();
+            Msg amsg = new Msg();
             string cmdString = "SELECT " +
                 DBcolumns.MSG_CONTENT + "," +
                 DBcolumns.MSG_TYPE + " FROM " +
@@ -276,10 +277,9 @@ namespace MinChatServer.db.dao
             SQLiteDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                temp = dr.GetString(0);
-                temp += Constant.SPLIT;
-                temp += dr.GetInt32(1);
-                msg.Add(temp);
+                amsg.Type = dr.GetInt32(1);
+                amsg.Content = dr.GetString(0);
+                msg.Add(amsg);
             }
             return msg;
         }
