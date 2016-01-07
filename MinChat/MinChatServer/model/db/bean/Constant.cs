@@ -32,5 +32,6 @@ namespace MinChatServer.db.bean
 
         //分隔符
         public static string SPLIT = "卍";
+        public static string TYPESPLIT = "^";
     }
 }

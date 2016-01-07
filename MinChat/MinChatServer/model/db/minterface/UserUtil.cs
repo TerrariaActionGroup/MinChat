@@ -1,4 +1,5 @@
 ﻿using MinChatServer.db.bean;
+using MinChatServer.model.db.bean;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +90,6 @@ namespace MinChatServer.db.minterface
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        List<string> queryMsgs(string userId);
+        List<Msg> queryMsgs(string userId);
     }
 }

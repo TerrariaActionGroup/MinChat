@@ -61,6 +61,7 @@ namespace MinChatWeb
                 DBcolumns.TABLE_MSG + "(" +
                 DBcolumns.MSG_ID + " integer PRIMARY KEY AUTOINCREMENT," +
                 DBcolumns.MSG_TO + " varchar(20)," +
+                DBcolumns.MSG_TYPE + "integer" +
                 DBcolumns.MSG_CONTENT + " text)";
             ExecuteNonQuery(cmdString, Constant.userDbPath + "user" + userId + ".db");
             return true;
