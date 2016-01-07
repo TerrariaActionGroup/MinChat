@@ -50,8 +50,8 @@ namespace MinChat.Forms
                     userInfo = Regex.Split(sysmsg.Content, Constant.SPLIT, RegexOptions.IgnoreCase);
                     
                     txbBox_Msg.Visible = false;
-                    lbl_userInfo.Visible = false;
-                    lbl_userName.Text = "添加" + userInfo[0] + "为好友成功";
+                    lbl_userInfo.Text = userInfo[0];
+                    lbl_userName.Text = "添加" + userInfo[1] + "为好友成功";
                     radioBtn_agree.Visible = false;
                     radioBtn_refuse.Visible = false;
                     btn_yes.Visible = false;
@@ -60,7 +60,13 @@ namespace MinChat.Forms
             }
             else 
             {
-                
+                txbBox_Msg.Visible = false;
+                lbl_userInfo.Visible = false;
+                lbl_userName.Text = "没有未读的系统消息";
+                radioBtn_agree.Visible = false;
+                radioBtn_refuse.Visible = false;
+                btn_yes.Visible = false;
+                btn_ignore.Visible = false;
             }
         }
 
