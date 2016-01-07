@@ -83,8 +83,10 @@ namespace MinChatServer.es
                     userDBManager.addFriend(friendID, sourceUserID);
 
                     //给申请者同意通知
-                    byte[] applyToUser = System.Text.Encoding.UTF8.GetBytes(sourceUserID);
-                    this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_AGREE, applyToUser);
+                    User applyto_user = userDBManager.queryUser(sourceUserID);
+                    string dataStr = User.UserData2String(applyto_user);
+                    applyUserData = System.Text.Encoding.UTF8.GetBytes(dataStr);
+                    this.engin.CustomizeController.Send(friendID, Constant.MSG_ADDFRIEND_AGREE, applyUserData);
                     break;
 
                 default:
