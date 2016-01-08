@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MinChat.Forms.DerivedClass
 {
-    class ChatListSubItemExtend : ChatListSubItem
+    public class ChatListSubItemExtend : ChatListSubItem
     {
         public ChatListSubItemExtend.UserSex Sex { get; set; }
         string birth;

@@ -2,6 +2,7 @@
 using CCWin.SkinControl;
 using CCWin.Win32;
 using ESBasic;
+using ESPlus.Application;
 using ESPlus.Application.CustomizeInfo;
 using ESPlus.Rapid;
 using MinChat.Communications;
@@ -25,8 +26,8 @@ namespace MinChat.Forms
     {        
         #region 变量
         //客户端用户的个人信息
-        public ChatListSubItem myInfo;
-
+        public ChatListSubItemExtend myInfo;
+        CallbackHandler ReceiveMyInfo;
         // 客户端引擎
         IRapidPassiveEngine rapidPassiveEngine;
 
@@ -71,13 +72,14 @@ namespace MinChat.Forms
             //获取个人信息
             if (this.myInfo == null)
             {
-                this.myInfo = new ChatListSubItem();
+                this.myInfo = new ChatListSubItemExtend();
             }
             this.myInfo.ID = Convert.ToUInt32(rapidPassiveEngine.CurrentUserID);
 
             //窗口显示用户ID
-            lbl_userName.Text = myInfo.ID.ToString();
-
+            this.ReceiveMyInfo = new CallbackHandler(diaplayUser);//实例化收到消息时回调方法的委托
+            this.rapidPassiveEngine.CustomizeOutter.Query(null, Constant.MSG_QUERYUSER, System.Text.Encoding.UTF8.GetBytes(myInfo.ID.ToString()), ReceiveMyInfo, new Object());
+            
             //载入好友列表
             displayFriend();
 
@@ -89,6 +91,7 @@ namespace MinChat.Forms
 
             //好友下线处理事件
             this.rapidPassiveEngine.FriendsOutter.FriendOffline += new CbGeneric<string>(FriendOffline);
+
             //好友上线处理事件
 
             this.rapidPassiveEngine.FriendsOutter.FriendConnected += new CbGeneric<string>(FriendConnected);
@@ -418,6 +421,34 @@ namespace MinChat.Forms
         }
         #endregion   
 
+        #region 返回个人资料时回调的方法
+        private void diaplayUser(Exception ee, byte[] response, object tag)
+        {
+            //反序列化返回的消息生成list
+            ObjSerial<List<string>> se = new ObjSerial<List<string>>();
+            List<string> list = se.deserializeBytes(response);
+
+            foreach (string srtings in list)
+            {
+                //string的形式：ID卍昵称卍性别卍生日卍地址卍注册时间
+                string[] userInfo = Regex.Split(srtings, Constant.SPLIT, RegexOptions.IgnoreCase);
+                this.myInfo.NicName = userInfo[1];
+                this.myInfo.DisplayName = userInfo[1];
+                if (userInfo[2] == "1")
+                {
+                    this.myInfo.Sex = ChatListSubItemExtend.UserSex.Man;
+                }
+                else if (userInfo[2] == "0")
+                {
+                    this.myInfo.Sex = ChatListSubItemExtend.UserSex.Women;
+                }
+                this.myInfo.Birth = userInfo[3];
+                this.myInfo.Address = userInfo[4];
+                this.myInfo.RegistrationDate = userInfo[5];
+                lbl_userName.Text =myInfo.NicName +" "+ myInfo.ID.ToString();
+            }
+        }
+        #endregion
         private void skinButton1_Click(object sender, EventArgs e)
         {
             displayFriend();
