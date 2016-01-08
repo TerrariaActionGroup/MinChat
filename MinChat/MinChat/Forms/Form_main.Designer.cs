@@ -334,7 +334,7 @@
             this.skinButton1.Size = new System.Drawing.Size(52, 24);
             this.skinButton1.TabIndex = 8;
             this.skinButton1.TabStop = false;
-            this.skinButton1.Text = "查找";
+            this.skinButton1.Text = "刷新";
             this.skinButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.skinButton1.UseVisualStyleBackColor = false;
             this.skinButton1.Click += new System.EventHandler(this.skinButton1_Click);

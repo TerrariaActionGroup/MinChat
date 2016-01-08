@@ -59,6 +59,12 @@ namespace MinChat.Forms
                 this.txtId.Text = this.settings.UserId;
                 this.txtPwd.Text = this.settings.Password;
             }
+            if (this.settings.AutoLogin == true)
+            {
+                this.ckAuto.Checked = true;
+            //    lbl_error.Text = "正在登录……";
+            //    login();
+            }
         }
 
         #region 登陆事件
@@ -82,11 +88,11 @@ namespace MinChat.Forms
             }
             this.settings.UserId = this.txtId.Text.Trim();
             this.settings.Password = this.txtPwd.Text.Trim();
-            this.settings.Save();
             login();
         }
         private void login()
         {
+            this.settings.Save();
             initDB(this.txtId.Text);
             LogonResult logonResult;
             logonResult = login(this.txtId.Text, this.txtPwd.Text);
@@ -156,7 +162,7 @@ namespace MinChat.Forms
             }
             catch (Exception ee)
             {
-                //MessageBox.Show(string.Format("连接服务器失败。{0}", ee.Message));
+                MessageBox.Show(string.Format("连接服务器失败。{0}", ee.Message));
                 //return;
             }
             return logonResult;
@@ -185,6 +191,18 @@ namespace MinChat.Forms
         private void Form_login_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.settings.Save();
+        }
+
+        private void ckAuto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.ckAuto.Checked == true)
+            {
+                settings.AutoLogin = true;
+            }
+            else
+            {
+                settings.AutoLogin = false;
+            }
         }
     }
 }

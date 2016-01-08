@@ -203,6 +203,7 @@
             this.ckAuto.TabStop = false;
             this.ckAuto.Text = "自动登录";
             this.ckAuto.UseVisualStyleBackColor = false;
+            this.ckAuto.CheckedChanged += new System.EventHandler(this.ckAuto_CheckedChanged);
             // 
             // ckMen
             // 
