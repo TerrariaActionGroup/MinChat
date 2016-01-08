@@ -70,6 +70,7 @@
             this.chatBox_history.Location = new System.Drawing.Point(5, 30);
             this.chatBox_history.Margin = new System.Windows.Forms.Padding(0);
             this.chatBox_history.Name = "chatBox_history";
+            this.chatBox_history.ReadOnly = true;
             this.chatBox_history.Size = new System.Drawing.Size(563, 300);
             this.chatBox_history.TabIndex = 137;
             this.chatBox_history.Text = "";

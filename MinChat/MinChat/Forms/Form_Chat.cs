@@ -122,28 +122,36 @@ namespace MinChat.Forms
         /// </summary>
         void displayPicture()
         {
+            Image img;
+            chatBox_history.ReadOnly = false;
             for (int i = 0; i < chatBox_history.TextLength; i++)
             {
                 chatBox_history.Select(i, 5);
                 if (chatBox_history.SelectedText == "<img>")
                 {
+                    img = Image.FromFile("loadFail.png");
                     chatBox_history.Select(i + 5, 16);
                     string serialNumber = chatBox_history.SelectedText;
-                    try 
-                    { 
-                        Image img = Image.FromFile(serialNumber + ".png"); 
-                        Clipboard.SetImage(img);
-                        chatBox_history.Select(i, 16 + 5 + 6);
-                        chatBox_history.Paste();
+                    try
+                    {
+                        img = Image.FromFile(serialNumber + ".png");
                     }
                     catch
                     {
+                        
+                    }    
+                    Clipboard.SetImage(img);
+                    chatBox_history.Select(i, 16 + 5 + 6);
+                    chatBox_history.Paste();
 
-                    };
+                    
                     
                     
                 }
             }
+            chatBox_history.ReadOnly = true;
+            chatBox_history.SelectionStart = chatBox_history.TextLength;
+            chatBox_history.ScrollToCaret();
         }
         #endregion
         #region 发送图片封装
@@ -274,6 +282,7 @@ namespace MinChat.Forms
             if (Convert.ToUInt32(msg.FromUserId) == contactInfo.ID)
             {
                 this.AppendChatBoxContent(msg);
+                displayPicture();
             }
         }
         #endregion
