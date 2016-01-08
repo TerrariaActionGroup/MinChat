@@ -28,15 +28,15 @@ namespace MinChat.Forms
         public void initSettings(){
             if (this.settings.AutoLogin == true)
             {
-                this.skinRadioButton1.Checked = true;
+                this.skinCheckBox1.Checked = true;
             }
             if (this.settings.FrontOfOther == true)
             {
-                this.skinRadioButton2.Checked = true;
+                this.skinCheckBox2.Checked = true;
             }
             if (this.settings.FriendOnlineAlarm == true)
             {
-                this.skinRadioButton5.Checked = true;
+                this.skinCheckBox3.Checked = true;
             }
             this.skinTextBox1.Text = settings.FilePath;
         }
@@ -55,27 +55,10 @@ namespace MinChat.Forms
             this.settings.Save();
         }
 
-        /// <summary>
-        /// 自动登录选择
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void skinRadioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.skinRadioButton1.Checked == true)
-            {
-                this.settings.AutoLogin = true;
-            }
-            else
-            {
-                this.settings.AutoLogin = false;
-            }
-        }
-
         //保持在其他窗口前端
-        private void skinRadioButton2_CheckedChanged(object sender, EventArgs e)
+        private void skinCheckBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.skinRadioButton2.Checked == true)
+            if (this.skinCheckBox2.Checked == true)
             {
                 this.settings.FrontOfOther = true;
             }
@@ -86,9 +69,9 @@ namespace MinChat.Forms
         }
 
         //好友上线
-        private void skinRadioButton5_CheckedChanged(object sender, EventArgs e)
+        private void skinCheckBox3_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.skinRadioButton5.Checked == true)
+            if (this.skinCheckBox3.Checked == true)
             {
                 this.settings.FriendOnlineAlarm = true;
             }
@@ -106,6 +89,23 @@ namespace MinChat.Forms
             {
                 this.skinTextBox1.Text = fbd.SelectedPath;
                 this.settings.FilePath = fbd.SelectedPath;
+            }
+        }
+
+        /// <summary>
+        /// 自动登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void skinCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.skinCheckBox1.Checked == true)
+            {
+                this.settings.AutoLogin = true;
+            }
+            else
+            {
+                this.settings.AutoLogin = false;
             }
         }
     }

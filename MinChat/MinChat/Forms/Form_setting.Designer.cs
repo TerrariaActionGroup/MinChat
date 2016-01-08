@@ -30,19 +30,19 @@
         {
             this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel2 = new CCWin.SkinControl.SkinLabel();
-            this.skinRadioButton1 = new CCWin.SkinControl.SkinRadioButton();
             this.skinLabel3 = new CCWin.SkinControl.SkinLabel();
-            this.skinRadioButton2 = new CCWin.SkinControl.SkinRadioButton();
             this.skinLabel4 = new CCWin.SkinControl.SkinLabel();
             this.skinRadioButton3 = new CCWin.SkinControl.SkinRadioButton();
             this.skinRadioButton4 = new CCWin.SkinControl.SkinRadioButton();
             this.skinLabel5 = new CCWin.SkinControl.SkinLabel();
-            this.skinRadioButton5 = new CCWin.SkinControl.SkinRadioButton();
             this.skinLabel6 = new CCWin.SkinControl.SkinLabel();
             this.skinLabel7 = new CCWin.SkinControl.SkinLabel();
             this.skinTextBox1 = new CCWin.SkinControl.SkinTextBox();
             this.skinButton1 = new CCWin.SkinControl.SkinButton();
             this.skinButton2 = new CCWin.SkinControl.SkinButton();
+            this.skinCheckBox1 = new CCWin.SkinControl.SkinCheckBox();
+            this.skinCheckBox2 = new CCWin.SkinControl.SkinCheckBox();
+            this.skinCheckBox3 = new CCWin.SkinControl.SkinCheckBox();
             this.SuspendLayout();
             // 
             // skinLabel1
@@ -71,27 +71,6 @@
             this.skinLabel2.TabIndex = 1;
             this.skinLabel2.Text = "登录：";
             // 
-            // skinRadioButton1
-            // 
-            this.skinRadioButton1.AutoSize = true;
-            this.skinRadioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.skinRadioButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinRadioButton1.DownBack = null;
-            this.skinRadioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton1.Location = new System.Drawing.Point(91, 81);
-            this.skinRadioButton1.MouseBack = null;
-            this.skinRadioButton1.Name = "skinRadioButton1";
-            this.skinRadioButton1.NormlBack = null;
-            this.skinRadioButton1.SelectedDownBack = null;
-            this.skinRadioButton1.SelectedMouseBack = null;
-            this.skinRadioButton1.SelectedNormlBack = null;
-            this.skinRadioButton1.Size = new System.Drawing.Size(158, 21);
-            this.skinRadioButton1.TabIndex = 2;
-            this.skinRadioButton1.TabStop = true;
-            this.skinRadioButton1.Text = "启动MinChat时自动登录";
-            this.skinRadioButton1.UseVisualStyleBackColor = false;
-            this.skinRadioButton1.CheckedChanged += new System.EventHandler(this.skinRadioButton1_CheckedChanged);
-            // 
             // skinLabel3
             // 
             this.skinLabel3.AutoSize = true;
@@ -104,26 +83,6 @@
             this.skinLabel3.Size = new System.Drawing.Size(56, 17);
             this.skinLabel3.TabIndex = 3;
             this.skinLabel3.Text = "主面板：";
-            // 
-            // skinRadioButton2
-            // 
-            this.skinRadioButton2.AutoSize = true;
-            this.skinRadioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.skinRadioButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinRadioButton2.DownBack = null;
-            this.skinRadioButton2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton2.Location = new System.Drawing.Point(91, 131);
-            this.skinRadioButton2.MouseBack = null;
-            this.skinRadioButton2.Name = "skinRadioButton2";
-            this.skinRadioButton2.NormlBack = null;
-            this.skinRadioButton2.SelectedDownBack = null;
-            this.skinRadioButton2.SelectedMouseBack = null;
-            this.skinRadioButton2.SelectedNormlBack = null;
-            this.skinRadioButton2.Size = new System.Drawing.Size(158, 21);
-            this.skinRadioButton2.TabIndex = 4;
-            this.skinRadioButton2.Text = "始终保持在其他窗口前端";
-            this.skinRadioButton2.UseVisualStyleBackColor = false;
-            this.skinRadioButton2.CheckedChanged += new System.EventHandler(this.skinRadioButton2_CheckedChanged);
             // 
             // skinLabel4
             // 
@@ -188,27 +147,6 @@
             this.skinLabel5.Size = new System.Drawing.Size(44, 17);
             this.skinLabel5.TabIndex = 8;
             this.skinLabel5.Text = "提醒：";
-            // 
-            // skinRadioButton5
-            // 
-            this.skinRadioButton5.AutoSize = true;
-            this.skinRadioButton5.BackColor = System.Drawing.Color.Transparent;
-            this.skinRadioButton5.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinRadioButton5.DownBack = null;
-            this.skinRadioButton5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinRadioButton5.Location = new System.Drawing.Point(91, 250);
-            this.skinRadioButton5.MouseBack = null;
-            this.skinRadioButton5.Name = "skinRadioButton5";
-            this.skinRadioButton5.NormlBack = null;
-            this.skinRadioButton5.SelectedDownBack = null;
-            this.skinRadioButton5.SelectedMouseBack = null;
-            this.skinRadioButton5.SelectedNormlBack = null;
-            this.skinRadioButton5.Size = new System.Drawing.Size(122, 21);
-            this.skinRadioButton5.TabIndex = 9;
-            this.skinRadioButton5.TabStop = true;
-            this.skinRadioButton5.Text = "关闭好友上线提醒";
-            this.skinRadioButton5.UseVisualStyleBackColor = false;
-            this.skinRadioButton5.CheckedChanged += new System.EventHandler(this.skinRadioButton5_CheckedChanged);
             // 
             // skinLabel6
             // 
@@ -309,6 +247,66 @@
             this.skinButton2.Text = "打开文件夹";
             this.skinButton2.UseVisualStyleBackColor = false;
             // 
+            // skinCheckBox1
+            // 
+            this.skinCheckBox1.AutoSize = true;
+            this.skinCheckBox1.BackColor = System.Drawing.Color.Transparent;
+            this.skinCheckBox1.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.skinCheckBox1.DownBack = null;
+            this.skinCheckBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinCheckBox1.Location = new System.Drawing.Point(91, 83);
+            this.skinCheckBox1.MouseBack = null;
+            this.skinCheckBox1.Name = "skinCheckBox1";
+            this.skinCheckBox1.NormlBack = null;
+            this.skinCheckBox1.SelectedDownBack = null;
+            this.skinCheckBox1.SelectedMouseBack = null;
+            this.skinCheckBox1.SelectedNormlBack = null;
+            this.skinCheckBox1.Size = new System.Drawing.Size(159, 21);
+            this.skinCheckBox1.TabIndex = 14;
+            this.skinCheckBox1.Text = "启动MinChat时自动登录";
+            this.skinCheckBox1.UseVisualStyleBackColor = false;
+            this.skinCheckBox1.CheckedChanged += new System.EventHandler(this.skinCheckBox1_CheckedChanged);
+            // 
+            // skinCheckBox2
+            // 
+            this.skinCheckBox2.AutoSize = true;
+            this.skinCheckBox2.BackColor = System.Drawing.Color.Transparent;
+            this.skinCheckBox2.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.skinCheckBox2.DownBack = null;
+            this.skinCheckBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinCheckBox2.Location = new System.Drawing.Point(91, 127);
+            this.skinCheckBox2.MouseBack = null;
+            this.skinCheckBox2.Name = "skinCheckBox2";
+            this.skinCheckBox2.NormlBack = null;
+            this.skinCheckBox2.SelectedDownBack = null;
+            this.skinCheckBox2.SelectedMouseBack = null;
+            this.skinCheckBox2.SelectedNormlBack = null;
+            this.skinCheckBox2.Size = new System.Drawing.Size(135, 21);
+            this.skinCheckBox2.TabIndex = 15;
+            this.skinCheckBox2.Text = "保持在其他窗口前端";
+            this.skinCheckBox2.UseVisualStyleBackColor = false;
+            this.skinCheckBox2.CheckedChanged += new System.EventHandler(this.skinCheckBox2_CheckedChanged);
+            // 
+            // skinCheckBox3
+            // 
+            this.skinCheckBox3.AutoSize = true;
+            this.skinCheckBox3.BackColor = System.Drawing.Color.Transparent;
+            this.skinCheckBox3.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.skinCheckBox3.DownBack = null;
+            this.skinCheckBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinCheckBox3.Location = new System.Drawing.Point(91, 250);
+            this.skinCheckBox3.MouseBack = null;
+            this.skinCheckBox3.Name = "skinCheckBox3";
+            this.skinCheckBox3.NormlBack = null;
+            this.skinCheckBox3.SelectedDownBack = null;
+            this.skinCheckBox3.SelectedMouseBack = null;
+            this.skinCheckBox3.SelectedNormlBack = null;
+            this.skinCheckBox3.Size = new System.Drawing.Size(123, 21);
+            this.skinCheckBox3.TabIndex = 16;
+            this.skinCheckBox3.Text = "接收好友上线提醒";
+            this.skinCheckBox3.UseVisualStyleBackColor = false;
+            this.skinCheckBox3.CheckedChanged += new System.EventHandler(this.skinCheckBox3_CheckedChanged);
+            // 
             // Form_setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -316,19 +314,19 @@
             this.CaptionBackColorBottom = System.Drawing.Color.White;
             this.CaptionBackColorTop = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(288, 419);
+            this.Controls.Add(this.skinCheckBox3);
+            this.Controls.Add(this.skinCheckBox2);
+            this.Controls.Add(this.skinCheckBox1);
             this.Controls.Add(this.skinButton2);
             this.Controls.Add(this.skinButton1);
             this.Controls.Add(this.skinTextBox1);
             this.Controls.Add(this.skinLabel7);
             this.Controls.Add(this.skinLabel6);
-            this.Controls.Add(this.skinRadioButton5);
             this.Controls.Add(this.skinLabel5);
             this.Controls.Add(this.skinRadioButton4);
             this.Controls.Add(this.skinRadioButton3);
             this.Controls.Add(this.skinLabel4);
-            this.Controls.Add(this.skinRadioButton2);
             this.Controls.Add(this.skinLabel3);
-            this.Controls.Add(this.skinRadioButton1);
             this.Controls.Add(this.skinLabel2);
             this.Controls.Add(this.skinLabel1);
             this.MdiBackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -345,19 +343,19 @@
 
         private CCWin.SkinControl.SkinLabel skinLabel1;
         private CCWin.SkinControl.SkinLabel skinLabel2;
-        private CCWin.SkinControl.SkinRadioButton skinRadioButton1;
         private CCWin.SkinControl.SkinLabel skinLabel3;
-        private CCWin.SkinControl.SkinRadioButton skinRadioButton2;
         private CCWin.SkinControl.SkinLabel skinLabel4;
         private CCWin.SkinControl.SkinRadioButton skinRadioButton3;
         private CCWin.SkinControl.SkinRadioButton skinRadioButton4;
         private CCWin.SkinControl.SkinLabel skinLabel5;
-        private CCWin.SkinControl.SkinRadioButton skinRadioButton5;
         private CCWin.SkinControl.SkinLabel skinLabel6;
         private CCWin.SkinControl.SkinLabel skinLabel7;
         private CCWin.SkinControl.SkinTextBox skinTextBox1;
         private CCWin.SkinControl.SkinButton skinButton1;
         private CCWin.SkinControl.SkinButton skinButton2;
+        private CCWin.SkinControl.SkinCheckBox skinCheckBox1;
+        private CCWin.SkinControl.SkinCheckBox skinCheckBox2;
+        private CCWin.SkinControl.SkinCheckBox skinCheckBox3;
 
     }
 }
