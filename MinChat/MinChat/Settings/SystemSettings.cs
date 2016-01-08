@@ -22,6 +22,14 @@ namespace MinChat.Settings
             set { userId = value; }
         }
 
+        //昵称
+        private string nickName;
+        public string NickName
+        {
+            get { return nickName; }
+            set { nickName = value; }
+        }
+
         //密码
         private string password;
         public string Password
