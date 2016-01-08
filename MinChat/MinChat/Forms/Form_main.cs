@@ -406,18 +406,19 @@ namespace MinChat.Forms
         }
         private void tray_Click(object sender, EventArgs e)
         {
-            if (this.timer_tray.Enabled == true)
-            {
+            this.Show();
+            //if (this.timer_tray.Enabled == true)
+            //{
 
-                //string msgId = SystemMsgUtil.getNewestMsg();
-                //if (msgId == "10000")
-                //{
-                    //Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
-                    //form_systemMsg.Show();
-                //}
-                //this.timer_tray.Enabled = false;    //计时器停止
-                //tray.Icon = icon_normal;
-            }
+            //    //string msgId = SystemMsgUtil.getNewestMsg();
+            //    //if (msgId == "10000")
+            //    //{
+            //        //Form_SystemMsg form_systemMsg = new Form_SystemMsg(rapidPassiveEngine, myInfo);
+            //        //form_systemMsg.Show();
+            //    //}
+            //    //this.timer_tray.Enabled = false;    //计时器停止
+            //    //tray.Icon = icon_normal;
+            //}
         }
         #endregion   
 

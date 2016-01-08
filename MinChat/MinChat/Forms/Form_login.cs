@@ -44,7 +44,7 @@ namespace MinChat.Forms
             this._main = formMain;
             this.settings = SystemSettings.Singleton;
             InitializeComponent();
-            initTxt();
+            //initTxt();
         }
         #endregion
 
@@ -62,8 +62,8 @@ namespace MinChat.Forms
             if (this.settings.AutoLogin == true)
             {
                 this.ckAuto.Checked = true;
-            //    lbl_error.Text = "正在登录……";
-            //    login();
+                lbl_error.Text = "正在登录……";
+                login();
             }
         }
 
@@ -109,8 +109,8 @@ namespace MinChat.Forms
                 return;
             }
             tray.Visible = false;
-            //初始化数据库
             
+            //初始化数据库
             this.DialogResult = DialogResult.OK; 
         }
         #endregion
@@ -203,6 +203,11 @@ namespace MinChat.Forms
             {
                 settings.AutoLogin = false;
             }
+        }
+
+        private void Form_login_Shown(object sender, EventArgs e)
+        {
+            initTxt();
         }
     }
 }

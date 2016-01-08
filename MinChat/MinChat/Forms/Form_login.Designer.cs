@@ -448,6 +448,7 @@
             this.Text = "Form_login";
             this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_login_FormClosed);
+            this.Shown += new System.EventHandler(this.Form_login_Shown);
             this.menu_Tray.ResumeLayout(false);
             this.menu_State.ResumeLayout(false);
             this.ResumeLayout(false);
