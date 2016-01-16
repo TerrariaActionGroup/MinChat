@@ -11,8 +11,8 @@ namespace MinChat.Settings
         //服务器相关
         #region
         //public static string serverIP = "114.215.103.65";
-        //public static string serverIP = "127.0.0.1";
-        public static string serverIP = "10.131.1.56";
+        public static string serverIP = "127.0.0.1";
+        //public static string serverIP = "10.131.1.56";
         public static int serverPort = 4530;
         #endregion
 
