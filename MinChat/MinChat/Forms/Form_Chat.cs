@@ -129,23 +129,19 @@ namespace MinChat.Forms
                 chatBox_history.Select(i, 5);
                 if (chatBox_history.SelectedText == "<img>")
                 {
-                    img = Image.FromFile("loadFail.png");
                     chatBox_history.Select(i + 5, 16);
                     string serialNumber = chatBox_history.SelectedText;
                     try
                     {
                         img = Image.FromFile(serialNumber + ".png");
+                        Clipboard.SetImage(img);
+                        chatBox_history.Select(i, 16 + 5 + 6);
+                        chatBox_history.Paste();
                     }
                     catch
                     {
                         
                     }    
-                    Clipboard.SetImage(img);
-                    chatBox_history.Select(i, 16 + 5 + 6);
-                    chatBox_history.Paste();
-
-                    
-                    
                     
                 }
             }

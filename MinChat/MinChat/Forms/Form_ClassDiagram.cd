@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MinChat.Forms.Form_Chat" Collapsed="true">
+    <Position X="7.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hCAAABIAAiBAAQAAAACAARAaAAACAACCBABBCQAAABA=</HashCode>
+      <FileName>Forms\Form_Chat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MinChat.Forms.Form_Error" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAABAAAAGEAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Form_Error.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MinChat.Forms.Form_login" Collapsed="true">
+    <Position X="1.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>LAAEAB0AACAAAAAMgAiAAAACKECBGAIoIAAKACVAMkA=</HashCode>
+      <FileName>Forms\Form_login.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Form_main" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MinChat.Forms.Form_main" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACDSBICgBCAS4CAJgAGQBQkCESEBAAMQDCCQCgADmgA=</HashCode>
+      <FileName>Forms\Form_main.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Form_setting" />
+      <Property Name="Form_Search" />
+      <Property Name="Form_SystemMsg" />
+      <Property Name="Form_Chat" />
+      <Property Name="Form_Error" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.1" Collapsed="true" />
+  </Class>
+  <Class Name="MinChat.Forms.Form_Search" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAQAAAAACIAAAAAABCAAQASAAAAAAEAAAAFAAIAAAA=</HashCode>
+      <FileName>Forms\Form_Search.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MinChat.Forms.Form_setting" Collapsed="true">
+    <Position X="7.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AOACAAgAAiAQAhACAMG3AAACAACgAAAAAEAAAIAAAIA=</HashCode>
+      <FileName>Forms\Form_setting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MinChat.Forms.Form_SystemMsg" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAACQCCAAAAAAAACACwACEEBkAAAAACAAAEAAAAA=</HashCode>
+      <FileName>Forms\Form_SystemMsg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
