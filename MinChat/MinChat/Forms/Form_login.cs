@@ -48,6 +48,17 @@ namespace MinChat.Forms
         }
         #endregion
 
+        public Form_main Form_main
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// 初始化账号密码等
         /// </summary>
